@@ -1,5 +1,7 @@
-class UserIdentitiesController < ActionController::Base
+class UserIdentitiesController < ApplicationController
   
+  skip_before_filter :user_auth, :only => [:new, :create]
+
   def new
     @user = UserIdentity.new
   end
