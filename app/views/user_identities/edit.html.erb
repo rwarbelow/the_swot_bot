@@ -1,10 +1,9 @@
-<%= render 'shared/error_messages' %>
+<h1>Update your profile</h1>
 
 <div class="form-container">
-  <%= form_for @user, :url => user_identities_path, :html => { :class => "pure-form pure-form-stacked", :id => "sign_up" } do |f| %>
+  <%= form_for @user, :html => { :class => "pure-form pure-form-stacked", :id => "edit" } do |f| %>
 
-    <%= f.label :registration_code %>:
-    <%= f.text_field :registration_code %><br />
+		<%= render 'shared/error_messages' %>
 
     <%= f.label :username %>:
     <%= f.text_field :username %><br />
@@ -18,9 +17,9 @@
     <%= f.label :password %>:
     <%= f.text_field :password %><br />
 
-    <%= f.label :password_confirmation %>:
+    <%= f.label :password_confirmation, "Confirm new password" %>:
     <%= f.text_field :password_confirmation %><br />
 
-    <%= f.submit value="Next" %>
+    <%= f.submit value="Save changes" %>
   <% end %>
 </div>
