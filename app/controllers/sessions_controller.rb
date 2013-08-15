@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
  
+  skip_before_filter :user_auth, :only => [:new, :create]
+
   def new
     @user = UserIdentity.new
   end
@@ -12,7 +14,7 @@ class SessionsController < ApplicationController
   		flash[:notice] = "Successful Login!"
   	else
   		flash[:notice] = "Invalid Login... :("
-  	end
+    end
   	redirect_to root_url
   end
   

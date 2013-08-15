@@ -1,0 +1,29 @@
+<div class="pure-g">
+  <div class="pure-u-1-3"></div>
+  <div class="pure-u-1-6">
+    <h2 class="form-header">SWOT Bot</h2>
+  </div>
+   <div class="pure-u-1-6">
+    <%= image_tag("Robot.png") %>  
+  </div>
+  <div class="pure-u-1-3"></div>
+</div>      
+
+<div class="pure-g">
+  <div class="pure-u-1-3">
+  </div>
+  <div class="pure-u-1-3 form-container">
+    <%= form_for @user, url: login_path, :html => { :class => "pure-form pure-form-stacked", :id => "login" } do |f| %>
+
+      <%= f.text_field :username, placeholder: "username" %>
+     
+      <%= f.text_field :password, placeholder: "password" %>
+
+      <div class="login-button">
+        <%= f.submit value="Log In", :class => "pure-button" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="pure-u-1-3">
+  </div>
+</div>
