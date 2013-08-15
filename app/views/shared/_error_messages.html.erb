@@ -1,0 +1,12 @@
+<% if @errors.any? %>
+<div>
+	<div>
+		This form contains <%= pluralize(@errors.count, "error") %>.
+	</div>
+	<ul>
+		<% @errors.each do |error| %>
+		<li>* <%= error %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
