@@ -1,5 +1,5 @@
 SwotBot::Application.routes.draw do
-  resources :user_identity
+  resources :user_identities
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
