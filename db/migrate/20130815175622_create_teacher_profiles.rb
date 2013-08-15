@@ -4,7 +4,7 @@ class CreateTeacherProfiles < ActiveRecord::Migration
   		t.references :teacher_role
   		t.string :title, :null => false
   		t.string :email, :null => false
-  		t.string :cell_phone_number, :null => false
+  		t.integer :cell_phone_number, :null => false
   		
   		t.timestamps
   	end
