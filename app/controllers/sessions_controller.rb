@@ -1,6 +1,7 @@
 class SessionsController < ActionController::Base
  
   def new
+    @user = UserIdentity.new
   end
 
   def create
