@@ -1,0 +1,15 @@
+<%= form_for @user, :html => { :id => "sign_up" } do |f| %>
+  <%= f.label :username %>:
+  <%= f.text_field :username %><br />
+
+  <%= f.label :email %>:
+  <%= f.text_field :email %><br />
+
+  <%= f.label :password %>:
+  <%= f.text_field :password %><br />
+
+  <%= f.label :password_confirmation %>:
+  <%= f.text_field :password_confirmation %><br />
+
+  <%= f.submit value="Sign up" %>
+<% end %>
