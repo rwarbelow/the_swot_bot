@@ -14,6 +14,10 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'pry'
+  gem 'awesome_print'
 end
 
 group :development do 
@@ -22,11 +26,8 @@ end
 
 group :test do
   gem 'spork', "> 0.9.0.rc" 
-  gem 'pry'
   gem 'capybara'
   gem 'faker'
-  gem 'guard-rspec'
-  gem 'guard-spork'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
   gem 'selenium-webdriver'
