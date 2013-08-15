@@ -1,0 +1,24 @@
+<div class="form-container">
+  <%= form_for @user, url: login_path, :html => { :class => "pure-form pure-form-stacked", :id => "sign_up" } do |f| %>
+
+    <%= f.label :registration_code %>:
+    <%= f.text_field :registration_code %><br />
+
+    <%= f.label :username %>:
+    <%= f.text_field :username %><br />
+
+    <%= f.label :first_name %>:
+    <%= f.text_field :first_name %><br />
+
+    <%= f.label :last_name %>:
+    <%= f.text_field :last_name %><br />
+
+    <%= f.label :password %>:
+    <%= f.text_field :password %><br />
+
+    <%= f.label :password_confirmation %>:
+    <%= f.text_field :password_confirmation %><br />
+
+    <%= f.submit value="Next" %>
+  <% end %>
+</div>
