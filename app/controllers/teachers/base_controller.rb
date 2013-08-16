@@ -1,3 +1,6 @@
 class Teachers::BaseController < ApplicationController
-  before_filter :require_teacher # must be a teacher account
+
+	include TeacherHelper
+
+  before_filter :require_teachers
 end
