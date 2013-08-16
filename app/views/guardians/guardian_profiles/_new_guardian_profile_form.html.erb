@@ -8,11 +8,15 @@
   </div>
     <div class="pure-u-1-3 form-container">
       <%= render 'shared/error_messages' %>
-      <%= form_for @parent_profile, :url => user_identities_path, :html => { :class => "pure-form pure-form-stacked", :id => "sign_up" } do |f| %>
+      <%= form_for @guardian_profile, :url => guardian_profiles_path, :html => { :class => "pure-form pure-form-stacked", :id => "sign_up" } do |f| %>
 
-      <%= f.text_field :address_line_1, placeholder: "address line 1" %>
+      <%= f.text_field :registration_code, placeholder: "registration code" %>
 
-      <%= f.text_field :address_line_2, placeholder: "apt number" %>
+      <%= f.text_field :ccsd_id, placeholder: "Student CCSD ID #" %>
+
+      <%= f.text_field :address_line_1, placeholder: "street address line 1" %>
+
+      <%= f.text_field :address_line_2, placeholder: "apt number (optional)" %>
 
       <%= f.text_field :address_city, placeholder: "city" %>
 
@@ -21,6 +25,8 @@
       <%= f.text_field :address_zip_code, placeholder: "zip code" %>
 
       <%= f.text_field :email, placeholder: "example@email.com" %>
+
+      <%= f.text_field :relationship_to_student, placeholder: "relationship to student change to dropdown" %>
 
       <%= f.text_field :preferred_language, placeholder: "langauge-change to dropdown" %>
 
