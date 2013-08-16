@@ -14,7 +14,6 @@
 ActiveRecord::Schema.define(:version => 20130816013507) do
 
   create_table "guardian_profiles", :force => true do |t|
-    t.integer  "guardian_role_id"
     t.string   "address"
     t.string   "email"
     t.string   "preferred_language", :default => "English", :null => false
@@ -40,23 +39,21 @@ ActiveRecord::Schema.define(:version => 20130816013507) do
   end
 
   create_table "student_profiles", :force => true do |t|
-    t.integer  "student_role_id"
-    t.string   "gender",          :null => false
-    t.date     "birthday",        :null => false
+    t.string   "gender",      :null => false
+    t.date     "birthday",    :null => false
     t.string   "address"
-    t.string   "ccsd_id",         :null => false
-    t.integer  "grade_level",     :null => false
+    t.string   "ccsd_id",     :null => false
+    t.integer  "grade_level", :null => false
     t.string   "email"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "teacher_profiles", :force => true do |t|
-    t.integer  "teacher_role_id"
-    t.string   "title",           :null => false
-    t.string   "email",           :null => false
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.string   "title",      :null => false
+    t.string   "email",      :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "user_identities", :force => true do |t|
