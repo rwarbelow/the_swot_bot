@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130815175651) do
+ActiveRecord::Schema.define(:version => 20130816000758) do
 
   create_table "guardian_profiles", :force => true do |t|
     t.integer  "guardian_role_id"
@@ -31,13 +31,6 @@ ActiveRecord::Schema.define(:version => 20130815175651) do
     t.string   "relationship_to_student", :null => false
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
-  end
-
-  create_table "roles", :force => true do |t|
-    t.integer  "user_identity_id"
-    t.string   "type",             :null => false
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
   end
 
   create_table "student_profiles", :force => true do |t|
@@ -63,12 +56,15 @@ ActiveRecord::Schema.define(:version => 20130815175651) do
   end
 
   create_table "user_identities", :force => true do |t|
-    t.string   "username",        :null => false
-    t.string   "password_digest", :null => false
-    t.string   "first_name",      :null => false
-    t.string   "last_name",       :null => false
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.string   "username",            :null => false
+    t.string   "password_digest",     :null => false
+    t.string   "first_name",          :null => false
+    t.string   "last_name",           :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "student_profile_id"
+    t.integer  "teacher_profile_id"
+    t.integer  "guardian_profile_id"
   end
 
 end
