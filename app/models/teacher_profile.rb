@@ -7,7 +7,6 @@ class TeacherProfile < ActiveRecord::Base
 	
 	validates :title, :presence => true
 	validates :email, :presence => true, :uniqueness => true
-	validates :cell_phone_number, :presence => true, :uniqueness => true 
 
 	has_many :phone_numbers, :as => :phone_numberable	
 	
