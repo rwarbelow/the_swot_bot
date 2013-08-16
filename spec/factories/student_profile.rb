@@ -8,6 +8,5 @@ FactoryGirl.define do
   	f.ccsd_id ((0..9).to_a).shuffle[0,7].join
   	f.grade_level { Faker::Lorem.word }
   	f.email { Faker::Internet.email }
-  	f.cell_phone_number { Faker::PhoneNumber.cell_phone }
   end
 end

@@ -6,7 +6,7 @@ class UserIdentity < ActiveRecord::Base
 	validates :password,                  :presence => { :on => :create }, :length => { :minimum => 6, :allow_blank => false }
 	validates :first_name, 						    :presence => true
 	validates :last_name,  						    :presence => true
-	validates :teacher_profile_id, 			:uniqueness => true, :allow_nil => true  
+	validates :teacher_profile_id, 			:uniqueness => true, :allow_nil => true
 	validates :student_profile_id, 			:uniqueness => true, :allow_nil => true
 	validates :guardian_profile_id, 		:uniqueness => true, :allow_nil => true
 
@@ -17,8 +17,6 @@ class UserIdentity < ActiveRecord::Base
 	belongs_to :guardian_profile
 
 	before_validation :downcase_username
-
-
 
 	private
 
