@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130816013507) do
+ActiveRecord::Schema.define(:version => 20130816170103) do
 
   create_table "guardian_profiles", :force => true do |t|
     t.string   "address"
@@ -39,14 +39,15 @@ ActiveRecord::Schema.define(:version => 20130816013507) do
   end
 
   create_table "student_profiles", :force => true do |t|
-    t.string   "gender",      :null => false
-    t.date     "birthday",    :null => false
+    t.string   "gender",            :null => false
+    t.date     "birthday",          :null => false
     t.string   "address"
-    t.string   "ccsd_id",     :null => false
-    t.integer  "grade_level", :null => false
+    t.string   "ccsd_id",           :null => false
+    t.integer  "grade_level",       :null => false
     t.string   "email"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "registration_code"
   end
 
   create_table "teacher_profiles", :force => true do |t|

@@ -1,5 +1,5 @@
 class UserIdentity < ActiveRecord::Base
-	attr_accessible :username, :password, :password_confirmation, :first_name, :last_name
+	attr_accessible :username, :password, :password_confirmation, :first_name, :last_name, :registration_code
   attr_accessor :registration_code
 
 	validates :username, 							    :presence => true, :uniqueness => true
