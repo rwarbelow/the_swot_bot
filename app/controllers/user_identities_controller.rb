@@ -7,10 +7,30 @@ class UserIdentitiesController < ApplicationController
   end
 
   def create
-    @user = UserIdentity.new(params[:user_identity])
+    puts "*" * 80
+    puts "in the UID controller"
+    puts session[:guardian_profile_id]
+    @user = UserIdentity.new(params[:user_identity])#, :guardian_profile_id => session[:guardian_profile_id],
+                                                     #:student_profile_id  => session[:student_profile_id], 
+                                                     #:teacher_profile_id  => session[:teacher_profile_id])
+    @user.guardian_profile_id = session[:guardian_profile_id]
+    @user.student_profile_id = session[:student_profile_id]
+    @user.teacher_profile_id = session[:teacher_profile_id]
+    session[:user_id] = @user.id
     if @user.save
       session[:user_id] = @user.id
-      redirect_to user_identity_path(@user)
+      if @user.teacher_profile_id != nil
+        redirect_to teacher_profile_path(@user.teacher_profile_id)
+      elsif @user.guardian_profile_id != nil
+        flash[:success] = "WOOO HOO I'm a guardian!"
+        redirect_to guardian_profile_path(@user.guardian_profile_id)
+      elsif @user.student_profile_id != nil
+        redirect_to student_profile_path(@user.student_profile_id)
+      else
+        flash[:errors] = "You have not been assigned a teacher, student, or guardian id. Please see the system administrator."
+        redirect_to user_identity_path(@user)
+      end
+      #redirect_to user_identity_path(@user)
     else
       @errors = @user.errors.full_messages
       flash[:errors] = @errors
