@@ -1,7 +1,6 @@
 class CreateStudentProfiles < ActiveRecord::Migration
   def change
   	create_table :student_profiles do |t|
-  		t.references :student_role
   		t.string :gender, :null => false
   		t.date :birthday, :null => false
   		t.string :address
