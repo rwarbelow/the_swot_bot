@@ -1,0 +1,40 @@
+<div class="pure-g">
+  <div class="pure-u-1-2">
+    <div class="class-list">
+      
+    </div>
+  </div>
+  <div class="pure-u-1-2">
+    <div class="latest-feedback">
+
+<!--       <ul>
+        <li>Class 1</li>
+        <li>Class 2</li>
+        <li>Class 3</li>
+        <li>Class 4</li>
+        <li>Class 5</li>
+        <li>Class 6</li>
+      </ul> -->
+
+    </div>
+  </div>
+</div>
+
+<div class="pure-g">
+  <div class="pure-u-1-2">
+    <div class="communication-panel">
+      
+      <%= form_for(@things) do |f| %>
+        <%= options_from_collection_for_select('STUDENT QUERY GOES HERE' , :id, :first_name) %>    
+      <% end %>
+      
+
+    </div>
+  </div>
+  <div class="pure-u-1-2">
+    <div class="navigation-panel">
+      <%= link_to "Create Class" %>
+      <%= link_to "Create Student" %>
+    </div>
+  </div>
+</div>

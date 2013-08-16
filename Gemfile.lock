@@ -109,6 +109,8 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
+    purecss-rails (0.2.1)
+      railties (>= 3.2.6, < 5)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -206,6 +208,7 @@ DEPENDENCIES
   launchy
   pg
   pry
+  purecss-rails
   rails (= 3.2.13)
   rb-fsevent
   rspec-rails
