@@ -1,12 +1,16 @@
 class StudentProfile < ActiveRecord::Base
+	include IdentityProfile
+
+	attr_accessible :gender, :birthday, :address, :ccsd_id, :grade_level, :email
+
 	validates :gender, :presence => true
 	validates :birthday, :presence => true
 	validates :ccsd_id, :presence => true, :uniqueness => true
 	validates :grade_level, :presence => true
 
-	belongs_to :student_role
-	has_many :student_guardian_relationships
-	has_many :parent_profiles, through: :student_guardian_relationships
-	has_many :student_profile_courses
-	has_many :courses, through: :student_profile_courses
+	has_many :guardianships
+	has_many :guardian_profiles, :through => :guardianships
+	has_many :phone_numbers, :as => :phone_numberable
+
+  attr_accessible :gender, :birthday, :ccsd_id, :grade_level
 end
