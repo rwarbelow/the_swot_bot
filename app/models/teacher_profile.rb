@@ -1,6 +1,8 @@
 class TeacherProfile < ActiveRecord::Base
 	include IdentityProfile
 
+	attr_accessible :title, :email
+
 	before_validation :downcase_email
 	
 	validates :title, :presence => true

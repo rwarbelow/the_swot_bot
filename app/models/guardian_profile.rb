@@ -1,6 +1,8 @@
 class GuardianProfile < ActiveRecord::Base
 	include IdentityProfile
-	
+
+	attr_accessible :address, :email, :preferred_language
+
 	validates :preferred_language, :presence => true
 
   has_many :guardianships

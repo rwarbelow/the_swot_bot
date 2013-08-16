@@ -1,6 +1,8 @@
 class StudentProfile < ActiveRecord::Base
 	include IdentityProfile
 
+	attr_accessible :gender, :birthday, :address, :ccsd_id, :grade_level, :email
+
 	validates :gender, :presence => true
 	validates :birthday, :presence => true
 	validates :ccsd_id, :presence => true, :uniqueness => true
