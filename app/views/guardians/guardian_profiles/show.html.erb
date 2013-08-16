@@ -1,0 +1,7 @@
+<h2>Here are your students!</h2>
+
+<% current_user.guardian_profile.student_profiles.each do |student|  %>
+<%= student.first_name %>
+<%= student.last_name %>
+<% end %>
+
