@@ -1,13 +1,13 @@
 class TeacherProfile < ActiveRecord::Base
+	include IdentityProfile
+
 	before_validation :downcase_email
 	
 	validates :title, :presence => true
 	validates :email, :presence => true, :uniqueness => true
 	validates :cell_phone_number, :presence => true, :uniqueness => true 
 
-	has_many :student_profiles_courses, through: :courses
-	has_one :teacher_profile
-	
+	has_many :phone_numbers, :as => :phone_numberable	
 	
 	private
 
