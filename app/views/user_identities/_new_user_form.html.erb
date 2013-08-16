@@ -16,8 +16,6 @@
       <%= render 'shared/error_messages' %>
       <%= form_for @user, :url => user_identities_path, :html => { :class => "pure-form pure-form-stacked", :id => "sign_up" } do |f| %>
 
-      <%= f.text_field :registration_code, placeholder: "registration code" %>
-
       <%= f.text_field :username, placeholder: "username" %>
      
       <%= f.text_field :first_name, placeholder: "first name" %>
