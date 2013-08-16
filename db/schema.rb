@@ -11,7 +11,56 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130815023816) do
+ActiveRecord::Schema.define(:version => 20130815175651) do
+
+  create_table "guardian_profiles", :force => true do |t|
+    t.integer  "guardian_role_id"
+    t.string   "address"
+    t.string   "email"
+    t.integer  "cell_phone_number"
+    t.integer  "home_phone_number"
+    t.integer  "work_phone_number"
+    t.string   "preferred_language", :default => "English", :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+  end
+
+  create_table "guardianships", :force => true do |t|
+    t.integer  "student_profile_id"
+    t.integer  "guardian_profile_id"
+    t.string   "relationship_to_student", :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  create_table "roles", :force => true do |t|
+    t.integer  "user_identity_id"
+    t.string   "type",             :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "student_profiles", :force => true do |t|
+    t.integer  "student_role_id"
+    t.string   "gender",            :null => false
+    t.date     "birthday",          :null => false
+    t.string   "address"
+    t.integer  "ccsd_id",           :null => false
+    t.integer  "grade_level",       :null => false
+    t.string   "email"
+    t.integer  "cell_phone_number"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "teacher_profiles", :force => true do |t|
+    t.integer  "teacher_role_id"
+    t.string   "title",             :null => false
+    t.string   "email",             :null => false
+    t.integer  "cell_phone_number", :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "user_identities", :force => true do |t|
     t.string   "username",        :null => false
