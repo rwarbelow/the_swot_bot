@@ -15,4 +15,6 @@ describe UserIdentity do
 	it { should belong_to(:teacher_profile) }
 	it { should belong_to(:student_profile) }
 	it { should belong_to(:guardian_profile) }
+	it { should have_many(:sent_messages) }
+	it { should have_many(:received_messages) }
 end
