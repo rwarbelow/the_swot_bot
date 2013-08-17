@@ -3,7 +3,9 @@ SwotBot::Application.routes.draw do
   resources :user_identities
  
   scope "students" do
-    resources :student_profiles, module: 'students'
+    resources :student_profiles, module: 'students' do
+      resources :reports
+    end
   end
   
   scope "teachers" do
@@ -13,6 +15,8 @@ SwotBot::Application.routes.draw do
   scope "guardians" do
     resources :guardian_profiles, module: 'guardians'
   end
+
+  
 
   get '/live_class', to: 'live#classroom'
   get '/error', to: 'home#909error', as: :error
