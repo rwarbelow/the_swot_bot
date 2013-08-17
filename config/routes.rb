@@ -13,11 +13,13 @@ SwotBot::Application.routes.draw do
   end
   
   scope "guardians" do
-    resources :guardian_profiles, module: 'guardians'
+    resources :guardian_profiles, module: 'guardians' do
+      resources :guardianships
+    end
   end
 
   
-
+  post '/guardians/guardian_profiles/:guardian_profile_id/add_student', to: 'guardians/guardian_profiles#add_student', as: :add_student
   get '/live_class', to: 'live#classroom'
   get '/error', to: 'home#909error', as: :error
   get '/login', to: 'sessions#new'
