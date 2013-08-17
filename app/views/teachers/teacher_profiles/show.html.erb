@@ -1,40 +1,33 @@
-<div class="pure-g">
-  <div class="pure-u-1-2">
-    <div class="class-list">
-      
-    </div>
-  </div>
-  <div class="pure-u-1-2">
-    <div class="latest-feedback">
+<!-- TODO   - all comments below
+            - figure out positioning issues -->
 
-<!--       <ul>
-        <li>Class 1</li>
-        <li>Class 2</li>
-        <li>Class 3</li>
-        <li>Class 4</li>
-        <li>Class 5</li>
-        <li>Class 6</li>
-      </ul> -->
+<!-- need to make this dynamic according to tacher name -->
 
-    </div>
+<h2 class="chalk center">Dashboard for This Teacher</h2>
+<div class="t-panel-classes panel-center">
+  <div class="button-container">
+    <ul>
+      <!-- examples only - will be replaced via iteration -->
+      <li><%= link_to "Class 1", root_path, :class => "pure-button chalk-dark"%></li>
+      <li><%= link_to "Class 2", root_path, :class => "pure-button chalk-dark"%></li>
+      <li><%= link_to "Class 3", root_path, :class => "pure-button chalk-dark"%></li>
+      <li><%= link_to "Class 4", root_path, :class => "pure-button chalk-dark"%></li>
+      <li><%= link_to "Class 5", root_path, :class => "pure-button chalk-dark"%></li>
+      <li><%= link_to "Class 6", root_path, :class => "pure-button chalk-dark"%></li>
+    </ul>
   </div>
 </div>
 
-<div class="pure-g">
-  <div class="pure-u-1-2">
-    <div class="communication-panel">
-      
-      <%= form_for(@things) do |f| %>
-        <%= options_from_collection_for_select('STUDENT QUERY GOES HERE' , :id, :first_name) %>    
-      <% end %>
-      
-
-    </div>
-  </div>
-  <div class="pure-u-1-2">
-    <div class="navigation-panel">
-      <%= link_to "Create Class" %>
-      <%= link_to "Create Student" %>
-    </div>
+<div class="t-panel-nav panel-center">
+  <div class="pure-menu pure-menu-open">
+    <ul>
+      <li class="visible-during-closed"></li>
+      <!-- need to hook these up -->
+      <li><%= link_to "Create Class" %></li>
+      <li><%= link_to "Edit Class" %></li>
+      <li><%= link_to "Create Student" %></li>
+      <li><%= link_to "Send Message" %></li>
+      <li><%= link_to "View Recent Feedback" %></li>
+    </ul>
   </div>
 </div>
