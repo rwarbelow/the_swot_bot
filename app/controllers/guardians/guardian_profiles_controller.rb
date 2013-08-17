@@ -30,12 +30,18 @@ class Guardians::GuardianProfilesController < Guardians::BaseController
 
   def edit
     @guardian_profile = GuardianProfile.find(params[:id])
+    if @guardian_profile && @guardian_profile.id == current_user.guardian_profile.id
+      render 'guardian/guardian_profile/edit'
+    else
+      redirect_to error_url
+    end
   end
 
   def update
+    @guardian_profile = GuardianProfile.find(params[:id])
     if @guardian_profile.update_attributes(params[:guardian_profile])
       flash[:success] = "Profile updated"
-      redirect_to guardian_profile_path
+      redirect_to guardian_profile_path(@guardian_profile)
     else
       @errors = @guardian_profile.errors.full_messages
       render 'edit'
