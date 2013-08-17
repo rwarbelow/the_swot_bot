@@ -25,6 +25,7 @@ class Guardians::GuardianProfilesController < Guardians::BaseController
       end
     else
       flash[:errors] = "Registration code or Student ID invalid."
+      render 'new'
     end
   end
 
