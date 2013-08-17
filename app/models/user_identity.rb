@@ -15,6 +15,8 @@ class UserIdentity < ActiveRecord::Base
 	belongs_to :teacher_profile
 	belongs_to :student_profile
 	belongs_to :guardian_profile
+	has_many 	 :sent_messages, :class_name => "Message", :foreign_key => "author_id" 
+	has_many 	 :received_messages, :class_name => "Message", :foreign_key => "target_id" 
 
 	before_validation :downcase_username
 
