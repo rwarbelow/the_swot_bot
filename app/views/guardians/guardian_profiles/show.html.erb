@@ -1,8 +1,13 @@
-<h2>Here are your students!</h2>
+<h2>This is a Guardian</h2>
 
-<% current_user.guardian_profile.student_profiles.each do |student|  %>
-<%= student.first_name %>
-<%= student.last_name %>
+<%= @guardian_profile.first_name %>
+<%= @guardian_profile.last_name %>
+
+<h3>Here are all the Students for this guardian</h3>
+<ul>
+<% @guardian_profile.student_profiles.each do |student| %>
+  <li><%= [student.first_name, student.last_name].join(' ') %></li>
+</ul>
 <% end %>
 
-<%= link_to "Edit", controller: "profiles", action: "show", id: @profile %>
+<%= link_to "Edit", edit_guardian_profile_path(@guardian_profile) %>
