@@ -1,6 +1,6 @@
 class Guardians::BaseController < ApplicationController
 
-  include GuardianHelper
+  include GuardiansHelper
 
   before_filter :require_guardians
 end
