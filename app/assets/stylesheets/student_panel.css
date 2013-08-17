@@ -1,0 +1,15 @@
+.s-panel-classes a{
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  height: 30px;
+  font-size: 1.5em;
+  padding-top: 20px;
+}
+
+.s-profile-container {
+  background-color: blue;
+  padding: 20px;
+}
