@@ -2,7 +2,7 @@ SwotBot::Application.routes.draw do
   
   resources :user_identities
  
-  scope module: "students" do
+  scope "students" do
     resources :student_profiles, module: 'students'
   end
   
