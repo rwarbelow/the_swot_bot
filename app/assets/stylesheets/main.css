@@ -1,3 +1,11 @@
+body {
+  color: #eee;
+}
+
+a {
+  color: #aaa;
+}
+
 .chalk {
   font-family: 'Patrick Hand SC', cursive;
   color: #FFF;
