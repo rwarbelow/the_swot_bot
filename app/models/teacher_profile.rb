@@ -9,7 +9,7 @@ class TeacherProfile < ActiveRecord::Base
 	validates :email, :presence => true, :uniqueness => true
 
 	has_many :phone_numbers, :as => :phone_numberable
-	
+	has_many :courses
 	private
 
 	def downcase_email
