@@ -5,4 +5,13 @@ class Students::StudentProfilesController < Students::BaseController
 
   def show
   end
+
+  def edit
+    @student_profile = StudentProfile.find(params[:id])
+    if @student_profile && @student_profile.id == current_user.student_profile.id
+      render 'students/student_profiles/edit'
+    else
+      redirect_to error_url
+    end
+  end
 end
