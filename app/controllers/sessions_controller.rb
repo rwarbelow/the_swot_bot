@@ -8,9 +8,11 @@ class SessionsController < ApplicationController
 
   def create
   	user = UserIdentity.where(:username => params[:user_identity][:username]).first
-
   	if user && user.authenticate(params[:user_identity][:password])
   		session[:id] = user.id
+      session[:guardian_profile_id] = user.guardian_profile_id
+      session[:teacher_profile_id] = user.teacher_profile_id
+      session[:student_profile_id] = user.student_profile_id
   		flash[:notice] = "Successful Login!"
   	else
   		flash[:notice] = "Invalid Login... :("
