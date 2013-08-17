@@ -1,0 +1,46 @@
+.live-view-container {
+  display: inline-block;
+}
+
+.student-icon {
+  border: 1px solid #ededed;
+  cursor: pointer;
+  width: 80px;
+  height: 80px;
+  padding: 10px;
+  margin-bottom: 10px;
+  float: left;
+}
+
+.active {
+  border: 1px solid #0066cc;
+  background: #eeeeee;
+}
+
+.icon-container {
+  width: 700px;
+  float: left;
+}
+
+.submit-button-container {
+  width: 60px;
+  float: right;
+}
+
+.submit-button, .other-button {
+  border: 1px solid #ededed;
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.other-function-container {
+  width: 50%;
+}
+.other-function {
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+}
