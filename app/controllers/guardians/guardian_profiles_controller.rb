@@ -55,6 +55,7 @@ class Guardians::GuardianProfilesController < Guardians::BaseController
   end
 
   def show
+    @guardian_profile = GuardianProfile.find(params[:id])
   end
 
 end
