@@ -30,9 +30,10 @@ class UserIdentitiesController < ApplicationController
   end
 
   def update
+    @user = UserIdentity.find(params[:id])
     if @user.update_attributes(params[:user_identity])
       flash[:success] = "Profile updated"
-      redirect_to user_identity_path
+      redirect_to profile_path
     else
       @errors = @user.errors.full_messages
       render 'edit'
@@ -58,7 +59,7 @@ class UserIdentitiesController < ApplicationController
     elsif @user.student_profile_id != nil
       student_profile_path(@user.student_profile_id)
     else
-      raise "Missing profile_id."
+      raise "Missing profile_id"
     end
   end
 end

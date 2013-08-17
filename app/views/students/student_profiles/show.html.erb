@@ -1,6 +1,23 @@
 <div class="s-profile-container pure-g-r">
-  <h2 class="chalk">Student Name Goes Here</h2>
+<li><%= link_to "Logout", logout_path, :method => "delete" %></li>
 
+  <h2 class="chalk">Welcome, <%= @student_profile.first_name %></h2>
+  <ul>
+    <li>First Name: <%= @student_profile.first_name %> </li>
+    <li>Last Name: <%= @student_profile.last_name %> </li>
+    <li>Username: <%= @student_profile.username %> </li>
+    <li>Birthday: <%= @student_profile.birthday %> </li>
+    <li>Gender: <%= @student_profile.gender %> </li>
+    <li>Address: <%= @student_profile.address %> </li>
+    <li>Email: <%= @student_profile.email %> </li>
+    <li>Guardians: <% @student_profile.guardian_profiles.each do |guardian| %> 
+      <%= guardian.first_name %> <%= guardian.last_name %>
+      <% end %></li>
+    <li>CCSD ID: <%= @student_profile.ccsd_id %> </li>
+    <li>Grade Level: <%= @student_profile.grade_level %> </li>
+    <li>Guardian Registration Code: <%= @student_profile.registration_code %> </li>
+  </ul>
+  <%= link_to "Edit My Information", edit_student_profile_path(@student_profile) %>
   <div class="pure-g-r">
     <div class="pure-u-1-2 s-panel-classes">
       <%= render 'shared/class_list' %>
