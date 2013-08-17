@@ -3,18 +3,22 @@
 }
 
 .student-icon {
-  border: 1px solid #ededed;
+  border: 3px solid #ededed;
   cursor: pointer;
-  width: 80px;
-  height: 80px;
-  padding: 10px;
+  width: 70px;
+  height: 70px;
+  padding: 6px;
   margin-bottom: 10px;
+  margin-left: 10px;
   float: left;
 }
 
 .active {
-  border: 1px solid #0066cc;
-  background: #eeeeee;
+  width: 70px;
+  height: 70px;
+  padding: 6px;
+  border: 3px solid #66FF00;
+  background-color: gray;
 }
 
 .icon-container {
@@ -25,6 +29,7 @@
 .submit-button-container {
   width: 60px;
   float: right;
+  font-size: 2.4em;
 }
 
 .submit-button, .other-button {
@@ -32,15 +37,44 @@
   cursor: pointer;
   width: 60px;
   height: 60px;
-  padding: 10px;
+  padding: 4px;
   margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
+  line-height: 60px;
+}
+
+.red {
+  background-color: #C80000;
+  opacity: 0.5;
+}
+
+.initials {
+  font-size: 2.4em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.full-name {
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.green {
+  background-color: #00FF00;
+  opacity: 0.5;
 }
 
 .other-function-container {
-  width: 50%;
+  width: auto;
 }
+
 .other-function {
-  width: 100%;
+  width: 40%;
   height: 50px;
   margin-top: 20px;
+}
+
+.positives, .negatives {
+  float: left;
 }

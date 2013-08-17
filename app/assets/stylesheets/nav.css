@@ -1,6 +1,7 @@
 .nav {
   position: relative;
-  margin: 20px 0;
+  margin-left: -36px;
+  /*margin: 20px 0;*/
 }
 .nav ul {
   margin: 0;
@@ -19,28 +20,27 @@
 .nav a {
   padding: 3px 12px;
   text-decoration: none;
-  color: darkgray;
   font-size: 1.3em;
   line-height: 100%;
 }
 .nav a:hover {
-  color: #000;
+  color: gray;
 }
 .nav .current a {
-  background: #999;
-  color: #fff;
+  background: #CCC;
+  color: gray;
   border-radius: 5px;
 }
 
 /*ipad*/
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1024px) {
   .nav {
     position: relative;
     min-height: 40px;
   } 
 
   .nav-title {
-    color: gray;
+    color: #A9A9A9;
   }
 
     /* center nav */
@@ -49,32 +49,36 @@
   }
 
   .nav ul {
-    width: 180px;
+    width: 1024px;
     padding: 5px 0;
     position: absolute;
     top: 0;
     left: 0;
     border: solid 1px #aaa;
-    background-color: #FFF;
+    background-color: black;
     border-radius: 5px;
     box-shadow: 0 1px 2px rgba(0,0,0,.3);
+    margin-top: 0px;
+    z-index: 2;
   }
+
   .nav li {
     display: none; /* hide all <li> items */
     margin: 0;
+
   }
   .nav .current {
     display: block; /* show only current <li> item */
- 
+    text-align: center;
   }
   .nav a {
     display: block;
     padding: 5px 5px 5px 32px;
-    text-align: left;
+    text-align: center;
   }
   .nav .current a {
     background: none;
-    color: #666;
+    color: darkgray;
   }
 
   /* on nav hover */
@@ -88,7 +92,7 @@
     margin: 0 0 5px;
   }
   .nav ul:hover .current {
-    background: url(images/icon-check.png) no-repeat 10px 7px;
+    background: url(asset_path, "Untitled.png") no-repeat 10px 7px;
   }
 
   /* right nav */
