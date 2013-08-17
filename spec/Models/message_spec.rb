@@ -7,4 +7,5 @@ describe Message do
  
   it { should belong_to(:author) }
   it { should belong_to(:target) }
+  it { should have_one(:reading) }
 end
