@@ -4,7 +4,7 @@ body {
 }
 
 a {
-  color: #aaa;
+  color: #fff;
 }
 
 
@@ -45,18 +45,19 @@ img.bg {
 }
 
 header {
-  margin-bottom: 10%;
-  font-family: 'Patrick Hand SC', cursive;
-
+  height: 50px;
+  margin-top: 0px;
+  position: static;
 }
 
 header a {
   font-size: 1.5em;
   text-decoration: none;
+
 }
 
 header a:visited {
-  color: #FFF;
+
 }
 
 header a:hover {
