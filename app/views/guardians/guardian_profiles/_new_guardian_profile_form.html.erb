@@ -10,21 +10,39 @@
       <%= render 'shared/error_messages' %>
       <%= form_for @guardian_profile, :url => guardian_profiles_path, :html => { :class => "pure-form pure-form-stacked", :id => "sign_up" } do |f| %>
 
-      <%= f.text_field :registration_code, placeholder: "registration code" %>
+      <%= f.label :registration_code, "SWOTBot Registration Code" %>
 
-      <%= f.text_field :ccsd_id, placeholder: "Student CCSD ID #" %>
+      <%= f.text_field :registration_code, placeholder: "xxxxxxxx" %>
 
-      <%= f.text_field :address_line_1, placeholder: "street address line 1" %>
+      <%= f.label :ccsd_id, "CCSD ID" %>
 
-      <%= f.text_field :address_line_2, placeholder: "apt number (optional)" %>
+      <%= f.text_field :ccsd_id %>
 
-      <%= f.text_field :address_city, placeholder: "city" %>
+      <%= f.label :ccsd_id, "Street Address" %>
 
-      <%= f.text_field :address_state, placeholder: "state" %>
+      <%= f.text_field :address_line_1 %>
+
+      <%= f.label :ccsd_id, "Apartment Number (optional)" %>
+
+      <%= f.text_field :address_line_2 %>
+
+      <%= f.label :ccsd_id, "City" %>
+
+      <%= f.text_field :address_city %>
+
+      <%= f.label :ccsd_id, "State" %>
+
+      <%= f.text_field :address_state %>
+
+      <%= f.label :ccsd_id, "Zip Code" %>
 
       <%= f.text_field :address_zip_code, placeholder: "zip code" %>
 
+      <%= f.label :ccsd_id, "Email Address" %>
+
       <%= f.text_field :email, placeholder: "example@email.com" %>
+
+      <%= f.label :ccsd_id, "Relationship to Student" %>
 
       <%= f.select :relationship_to_student, [['Mom','mom'],
       ['Dad','dad'],
@@ -37,18 +55,11 @@
       ['Uncle', 'uncle'],
       ['Other', 'other']] %>
 
-      <%= f.select :preferred_language, [['English','event'],
-      ['Dad','dad'],
-      ['Step-mom', 'step-mom'],
-      ['Step-dad', 'step-dad'],
-      ['Grandma','grandma'],
-      ['Grandpa', 'grandpa'],
-      ['Sibling', 'sibling'],
-      ['Aunt', 'aunt'],
-      ['Uncle', 'uncle'],
-      ['Other', 'other']] %>
+      <%= f.label :ccsd_id, "Preferred Language" %>
 
-      <%= f.text_field :preferred_language, placeholder: "langauge-change to dropdown" %>
+      <%= f.select :preferred_language, [['English','English'],
+      ['Spanish','Spanish'],
+      ['Other', 'Other']] %>
 
       <div class="next-button">
         <%= f.submit value="Next", :class => "pure-button" %>
