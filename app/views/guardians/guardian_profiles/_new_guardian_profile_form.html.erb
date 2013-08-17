@@ -26,7 +26,27 @@
 
       <%= f.text_field :email, placeholder: "example@email.com" %>
 
-      <%= f.text_field :relationship_to_student, placeholder: "relationship to student change to dropdown" %>
+      <%= f.select :relationship_to_student, [['Mom','mom'],
+      ['Dad','dad'],
+      ['Step-mom', 'step-mom'],
+      ['Step-dad', 'step-dad'],
+      ['Grandma','grandma'],
+      ['Grandpa', 'grandpa'],
+      ['Sibling', 'sibling'],
+      ['Aunt', 'aunt'],
+      ['Uncle', 'uncle'],
+      ['Other', 'other']] %>
+
+      <%= f.select :preferred_language, [['English','event'],
+      ['Dad','dad'],
+      ['Step-mom', 'step-mom'],
+      ['Step-dad', 'step-dad'],
+      ['Grandma','grandma'],
+      ['Grandpa', 'grandpa'],
+      ['Sibling', 'sibling'],
+      ['Aunt', 'aunt'],
+      ['Uncle', 'uncle'],
+      ['Other', 'other']] %>
 
       <%= f.text_field :preferred_language, placeholder: "langauge-change to dropdown" %>
 
