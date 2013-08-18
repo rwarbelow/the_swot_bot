@@ -48,18 +48,5 @@ class UserIdentitiesController < ApplicationController
 
   def show
   end
-  
-  private
 
-  def profile_path
-    if @user.teacher_profile_id != nil
-      teacher_profile_path(@user.teacher_profile_id)
-    elsif @user.guardian_profile_id != nil
-      guardian_profile_path(@user.guardian_profile_id)
-    elsif @user.student_profile_id != nil
-      student_profile_path(@user.student_profile_id)
-    else
-      raise "Missing profile_id"
-    end
-  end
 end

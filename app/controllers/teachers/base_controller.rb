@@ -1,6 +1,9 @@
 class Teachers::BaseController < ApplicationController
 
-  include TeachersHelper
+  def enrolled_or_teaching
+    return true if current_student? and current_student.enrolled_in?(@course)
+    return true if current_teacher? and current_teacher.teaching?(@course)
 
-  before_filter :require_teacher
+    redirect_to root_path and return false
+  end
 end

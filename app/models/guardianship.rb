@@ -6,6 +6,6 @@ class Guardianship < ActiveRecord::Base
   validates :guardian_profile_id, :presence => true, :uniqueness => { :scope => :student_profile_id }
   validates :relationship_to_student, :presence => true
   
-  belongs_to :student, :class_name => "StudentProfile", :foreign_key => "student_profile_id"
-  belongs_to :guardian, :class_name => "GuardianProfile", :foreign_key => "guardian_profile_id"
+  belongs_to :student_profile
+  belongs_to :guardian_profile
 end

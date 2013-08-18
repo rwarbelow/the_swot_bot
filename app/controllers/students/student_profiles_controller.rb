@@ -1,8 +1,6 @@
 require 'pry'
 class Students::StudentProfilesController < Students::BaseController
 
-  skip_before_filter :require_student, :only => [:new, :create]
-
   def show
     @student_profile = StudentProfile.find(params[:id])
   end

@@ -22,18 +22,18 @@ class UserIdentity < ActiveRecord::Base
   
 	delegate 	:gender, :birthday, :address, :ccsd_id, 
 						:grade_level, :email, :registration_code, 
-						:title, :preferred_language, 
+						:title, :preferred_language, :guardian_profiles,
 						:to => :profile
 
 	def profile
-		if session_user_type == :TeacherProfile
+		if self.teacher?
 			teacher_profile
-		elsif session_user_type == :StudentProfile
+		elsif self.student?
 			student_profile
-		elsif session_user_type == :GuardianProfile
+		elsif self.guardian?
 			guardian_profile
 		else
-			raise "WE'RE FUCKED"
+			raise "No profile type"
 		end
 	end
 
@@ -47,17 +47,6 @@ class UserIdentity < ActiveRecord::Base
 
 	def guardian?
 		!!guardian_profile_id
-	end
-
-	def has_one_profile?
-		profiles = []
-		profiles << self.teacher_profile
-  	profiles << self.student_profile
-  	profiles << self.guardian_profile
-
-  	profiles.compact!
-  	
-  	profiles.length == 1 ? profiles.first : false
 	end
 
 	private

@@ -14,14 +14,14 @@ class StudentProfile < ActiveRecord::Base
 
 	has_one  :user_identity
 	has_many :guardianships
-	has_many :guardians, :through => :guardianships, :class_name => "GuardianProfile", :foreign_key => "guardian_profile_id"
+	has_many :guardian_profiles, :through => :guardianships
 	has_many :phone_numbers, :as => :phone_numberable
 	has_many :enrollments
 	has_many :courses, :through => :enrollments
-	has_many :teachers, :through => :courses, :class_name => "TeacherProfile", :foreign_key => "teacher_profile_id"
+	has_many :teacher_profiles, :through => :courses
 	has_many :assignments, :through => :submissions
 	has_many :submissions
-	has_many :actions, :through => :enrollments, :class_name => "StudentActions"
+	has_many :student_actions, :through => :enrollments
   attr_accessible :gender, :birthday, :ccsd_id, :grade_level
   
   protected
