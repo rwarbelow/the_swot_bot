@@ -11,10 +11,10 @@ $(document).ready(function() {
 
   $('.submit-button').click(function() {
     clicked = $('.active').text();
-    submit_action = $(this).attr('id');
+    submit_param = $(this).attr('id');
     
     data = clicked //but do something to it to separate?
-    url = ('/live_class/' + submit_action);
+    url = ('/live_class/' + submit_param);
 
     console.log(clicked); 
     console.log(url);
@@ -33,8 +33,8 @@ $(document).ready(function() {
       $('.other-function-container').hide();
       $('.grid-container').show();
       
-      submit_action = $(this).attr('id');
-      url = ('/live_class/' + submit_action);
+      submit_param = $(this).attr('id');
+      url = ('/live_class/' + submit_param);
       
       console.log(clicked);
       console.log(url);

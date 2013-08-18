@@ -65,7 +65,7 @@
   .nav li {
     display: none; /* hide all <li> items */
     margin: 0;
-
+    border-top: 1px solid lightgray;
   }
   .nav .current {
     display: block; /* show only current <li> item */
