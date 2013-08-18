@@ -35,30 +35,6 @@ ActiveRecord::Schema.define(:version => 20130818005959) do
     t.datetime "updated_at",         :null => false
   end
 
-  create_table "event_categories", :force => true do |t|
-    t.integer  "event_type_id"
-    t.string   "name"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  create_table "event_types", :force => true do |t|
-    t.integer  "event_category_id"
-    t.string   "name"
-    t.string   "value"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-  end
-
-  create_table "events", :force => true do |t|
-    t.integer  "enrollment_id"
-    t.integer  "event_type_id"
-    t.string   "comment"
-    t.date     "date",          :default => '2013-08-17', :null => false
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
-  end
-
   create_table "guardian_profiles", :force => true do |t|
     t.string   "address"
     t.string   "email"
@@ -95,6 +71,30 @@ ActiveRecord::Schema.define(:version => 20130818005959) do
   create_table "readings", :force => true do |t|
     t.integer  "message_id"
     t.datetime "created_at"
+  end
+
+  create_table "student_action_categories", :force => true do |t|
+    t.integer  "student_action_type_id"
+    t.string   "name"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  create_table "student_action_types", :force => true do |t|
+    t.integer  "student_action_category_id"
+    t.string   "name"
+    t.string   "value"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "student_actions", :force => true do |t|
+    t.integer  "enrollment_id"
+    t.integer  "student_action_type_id"
+    t.string   "comment"
+    t.date     "date",                   :default => '2013-08-17', :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
   end
 
   create_table "student_profiles", :force => true do |t|
