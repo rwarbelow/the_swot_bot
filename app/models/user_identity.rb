@@ -37,6 +37,18 @@ class UserIdentity < ActiveRecord::Base
 		end
 	end
 
+	def student?
+		!!student_profile_id
+	end
+
+	def teacher?
+		!!teacher_profile_id
+	end
+
+	def guardian?
+		!!guardian_profile_id
+	end
+
 	def has_one_profile?
 		profiles = []
 		profiles << self.teacher_profile
@@ -46,10 +58,6 @@ class UserIdentity < ActiveRecord::Base
   	profiles.compact!
   	
   	profiles.length == 1 ? profiles.first : false
-	end
-
-	def profile_type
-		
 	end
 
 	private

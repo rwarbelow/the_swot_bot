@@ -11,13 +11,22 @@ class SessionsController < ApplicationController
   	if @user && @user.authenticate(params[:user_identity][:password])
   		session[:user_id]   = @user.id
 
-      # if user only has one profile, set it to that type, 
-      # else redirect to another screen to let user chooose
-      if user_profile = @user.has_one_profile?
-        session[:session_user_type] = user_profile.class.to_s.to_sym
+      if @user.student?
+        redirect_to :student_homepage_path
+      elsif @user.guardian?
+        redirect_to :guardian_homepage_path
+      elsif @user.teacher?
+        redirect_to :teacher_homepage_path
       else
-        # redirect_to choose_login_type_path
+        raise RuntimeError, "User Identity #{@user.id} has no profile"
       end
+      # # if user only has one profile, set it to that type, 
+      # # else redirect to another screen to let user chooose
+      # if user_profile = @user.has_one_profile?
+      #   session[:session_user_type] = user_profile.class.to_s.to_sym
+      # else
+      #   # redirect_to choose_login_type_path
+      # end
       
   		flash[:notice] = "Successful Login!"
       redirect_to profile_path
