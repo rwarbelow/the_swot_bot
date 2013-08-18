@@ -9,10 +9,15 @@ class TeacherProfile < ActiveRecord::Base
 	validates :email, :presence => true, :uniqueness => true
 
 	has_many :phone_numbers, :as => :phone_numberable
-	has_many :classes, :class_name => "Course"
-	has_many :enrollments, :through => :classes
+	has_many :courses
+	has_many :enrollments, :through => :courses
 	has_many :students, :through => :enrollments, :class_name => "StudentProfile", :foreign_key => "student_profile_id"
-	has_many :assignments, :through => :classes
+	has_many :assignments, :through => :courses
+
+
+	def teaching? course
+		courses.find(course)
+	end
 
 	private
 
