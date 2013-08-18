@@ -5,5 +5,5 @@ class Enrollment < ActiveRecord::Base
 
 	belongs_to :course
 	belongs_to :student, :class_name => "StudentProfile", :foreign_key => "student_profile_id"
-	has_many 	 :events
+	has_many 	 :student_actions
 end

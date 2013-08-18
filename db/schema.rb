@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130817223131) do
+ActiveRecord::Schema.define(:version => 20130818005959) do
+
+  create_table "assignments", :force => true do |t|
+    t.integer  "course_id"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+  end
 
   create_table "courses", :force => true do |t|
     t.integer  "teacher_profile_id"
@@ -26,30 +33,6 @@ ActiveRecord::Schema.define(:version => 20130817223131) do
     t.integer  "course_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-  end
-
-  create_table "event_categories", :force => true do |t|
-    t.integer  "event_type_id"
-    t.string   "name"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  create_table "event_types", :force => true do |t|
-    t.integer  "event_category_id"
-    t.string   "name"
-    t.string   "value"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-  end
-
-  create_table "events", :force => true do |t|
-    t.integer  "enrollment_id"
-    t.integer  "event_type_id"
-    t.string   "comment"
-    t.date     "date",          :default => '2013-08-17', :null => false
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
   end
 
   create_table "guardian_profiles", :force => true do |t|
@@ -85,6 +68,35 @@ ActiveRecord::Schema.define(:version => 20130817223131) do
     t.datetime "updated_at",            :null => false
   end
 
+  create_table "readings", :force => true do |t|
+    t.integer  "message_id"
+    t.datetime "created_at"
+  end
+
+  create_table "student_action_categories", :force => true do |t|
+    t.integer  "student_action_type_id"
+    t.string   "name"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  create_table "student_action_types", :force => true do |t|
+    t.integer  "student_action_category_id"
+    t.string   "name"
+    t.string   "value"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "student_actions", :force => true do |t|
+    t.integer  "enrollment_id"
+    t.integer  "student_action_type_id"
+    t.string   "comment"
+    t.date     "date",                   :default => '2013-08-17', :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
+  end
+
   create_table "student_profiles", :force => true do |t|
     t.string   "gender",            :null => false
     t.date     "birthday",          :null => false
@@ -101,6 +113,13 @@ ActiveRecord::Schema.define(:version => 20130817223131) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "submissions", :force => true do |t|
+    t.integer  "student_profile_id",                :null => false
+    t.integer  "assignment_id",                     :null => false
+    t.integer  "score",              :default => 0, :null => false
+    t.datetime "created_at"
   end
 
   create_table "teacher_profiles", :force => true do |t|
