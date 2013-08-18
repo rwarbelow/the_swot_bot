@@ -1,7 +1,7 @@
 class Guardians::GuardianProfilesController < Guardians::BaseController
   
   skip_before_filter :user_auth, :only => [:new, :create]
-  skip_before_filter :require_guardians, :only => [:new, :create]
+  skip_before_filter :require_guardian, :only => [:new, :create]
 
   def new
     @guardian_profile = GuardianProfile.new

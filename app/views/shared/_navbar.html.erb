@@ -5,7 +5,7 @@
         <li class="current chalk-dark"><span class="nav-title">_____</span></li>
         <!-- need to hook these up -->
         <li><%= link_to "View Dashboard", teacher_profile_path(current_user.teacher_profile_id) %></li>
-        <li><%= link_to "Create Class", root_path %></li>
+        <li><%= link_to "Create Class", new_teacher_profile_course_path(current_user.teacher_profile_id) %></li>
         <li><%= link_to "Edit Class", root_path %></li>
         <li><%= link_to "Create Student", root_path %></li>
         <li><%= link_to "Send Message", root_path %></li>

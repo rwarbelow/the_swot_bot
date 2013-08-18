@@ -1,5 +1,5 @@
 module TeachersHelper
-  def require_teachers
-    redirect_to error_url unless current_user && current_user.teacher_profile_id != nil
+  def require_teacher
+    redirect_to error_url unless current_user.session_user_type == :TeacherProfile
   end
 end

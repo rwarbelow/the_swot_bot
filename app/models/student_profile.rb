@@ -23,7 +23,7 @@ class StudentProfile < ActiveRecord::Base
 	has_many :submissions
 	has_many :actions, :through => :enrollments, :class_name => "StudentActions"
   attr_accessible :gender, :birthday, :ccsd_id, :grade_level
-
+  
   protected
 
   def generate_registration_code

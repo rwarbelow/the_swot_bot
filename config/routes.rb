@@ -2,19 +2,29 @@ SwotBot::Application.routes.draw do
   
   resources :user_identities
  
-  scope "students" do
-    resources :student_profiles, module: 'students' do
-      resources :reports
+  scope :constraints => lambda{ |req| req.session[:session_user_type] == :StudentProfile } do
+    scope module: "students" do
+      resources :student_profiles do
+        resource :courses, :only => [:index, :show]
+      end
+      root :to => "dashboard#index"
+    end
+  end
+
+  scope :constraints => lambda{ |req| req.session[:session_user_type] == :TeacherProfile } do
+    scope module: "teachers" do
+      resources :teacher_profiles do
+        resources :courses
+      end
     end
   end
   
-  scope "teachers" do
-    resources :teacher_profiles, module: 'teachers'
-  end
-  
-  scope "guardians" do
-    resources :guardian_profiles, module: 'guardians' do
-      resources :guardianships
+  scope :constraints => lambda{ |req| req.session[:session_user_type] == :GuardianProfile } do
+    scope module: "guardians" do
+      resources :guardian_profiles do
+        # post :add_student, :on => :member
+        resources :guardianships
+      end
     end
   end
 

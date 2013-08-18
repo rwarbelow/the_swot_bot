@@ -9,10 +9,16 @@ class SessionsController < ApplicationController
   def create
   	@user = UserIdentity.where(:username => params[:user_identity][:username]).first
   	if @user && @user.authenticate(params[:user_identity][:password])
-  		session[:user_id] = @user.id
-      session[:guardian_profile_id] = @user.guardian_profile_id
-      session[:teacher_profile_id] = @user.teacher_profile_id
-      session[:student_profile_id] = @user.student_profile_id
+  		session[:user_id]   = @user.id
+
+      # if user only has one profile, set it to that type, 
+      # else redirect to another screen to let user chooose
+      if user_profile = @user.has_one_profile?
+        session[:session_user_type] = user_profile.class.to_s.to_sym
+      else
+        # redirect_to choose_login_type_path
+      end
+      
   		flash[:notice] = "Successful Login!"
       redirect_to profile_path
   	else
