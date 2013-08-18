@@ -25,7 +25,7 @@ SwotBot::Application.routes.draw do
 
   namespace :guardians do
     resources :guardian_profiles do
-      post '/add_student', :to => 'add#student'
+      resources :guardianships, :only => [:index, :new, :create, :destroy]
     end
     root :to => "dashboard#index"
   end
