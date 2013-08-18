@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(:version => 20130818005959) do
     t.integer  "enrollment_id"
     t.integer  "student_action_type_id"
     t.string   "comment"
-    t.date     "date",                   :default => '2013-08-17', :null => false
+    t.date     "date",                   :default => '2013-08-18', :null => false
     t.datetime "created_at",                                       :null => false
     t.datetime "updated_at",                                       :null => false
   end
