@@ -6,7 +6,8 @@ class GuardianProfile < ActiveRecord::Base
 
 	validates :preferred_language, :presence => true
 
+	has_one  :user_identity
   has_many :guardianships
-  has_many :student_profiles, through: :guardianships
+  has_many :students, :through => :guardianships, :class_name => "StudentProfile", :foreign_key => "student_profile_id"
   has_many :phone_numbers, :as => :phone_numberable
 end
