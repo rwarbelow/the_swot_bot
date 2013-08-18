@@ -21,6 +21,7 @@ SwotBot::Application.routes.draw do
   
   post '/guardians/guardian_profiles/:guardian_profile_id/add_student', to: 'guardians/guardian_profiles#add_student', as: :add_student
   get '/live_class', to: 'live#classroom'
+  post '/live_class', to: 'students/student_actions#create'
   get '/error', to: 'home#909error', as: :error
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
