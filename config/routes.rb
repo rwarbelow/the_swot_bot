@@ -16,6 +16,7 @@ SwotBot::Application.routes.draw do
       resources :teacher_profiles do
         resources :courses
       end
+      root :to => "dashboard#index"
     end
   end
   
@@ -25,6 +26,7 @@ SwotBot::Application.routes.draw do
         # post :add_student, :on => :member
         resources :guardianships
       end
+      root :to => "dashboard#index"
     end
   end
 
