@@ -3,7 +3,7 @@
 }
 
 .student-icon {
-  /*border: 3px solid #ededed;*/
+  border: 3px solid #ededed;
   background-color: #F2F5E4;
   cursor: pointer;
   width: 75px;
@@ -18,7 +18,7 @@
   width: 75px;
   height: 75px;
   padding: 6px;
-  /*border: 3px solid #66FF00;*/
+  border: 3px solid #66FF00;
   background-color: #00FF00;
   opacity: 0.4;
 }
