@@ -2,24 +2,36 @@ SwotBot::Application.routes.draw do
   
   resources :user_identities
  
-  scope "students" do
-    resources :student_profiles, module: 'students' do
-      resources :reports
+
+  namespace :students do
+    resources :student_profiles
+    resources :courses, :only => [:index, :show] do
+      resources :assignments
     end
-  end
-  
-  scope "teachers" do
-    resources :teacher_profiles, module: 'teachers'
-  end
-  
-  scope "guardians" do
-    resources :guardian_profiles, module: 'guardians' do
-      resources :guardianships
-    end
+    resources :submissions
+    resources :grades
+    root :to => "dashboard#index"
   end
 
+  namespace :teachers do
+    resources :teacher_profiles
+    resources :courses do
+      post :finals
+    end
+    resources :grades
+    root :to => "dashboard#index"
+  end
+
+
+  namespace :guardians do
+    resources :guardian_profiles do
+      resources :guardianships, :only => [:index, :new, :create, :destroy]
+    end
+    root :to => "dashboard#index"
+  end
+
+  resources :messages
   
-  post '/guardians/guardian_profiles/:guardian_profile_id/add_student', to: 'guardians/guardian_profiles#add_student', as: :add_student
   get '/live_class', to: 'live#classroom'
   post '/live_class', to: 'students/student_actions#create'
   get '/error', to: 'home#909error', as: :error
@@ -27,5 +39,5 @@ SwotBot::Application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  root to: 'home#index'
+  root :to => 'home#index'
 end

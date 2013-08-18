@@ -1,7 +1,7 @@
-class Teachers::TeacherProfilesController < Teachers::BaseController
-  
+ class Teachers::CoursesController < Teachers::BaseController
+
   def new
-    @teacher_profile = TeacherProfile.new
+    @course = Course.new
   end
 
   def create

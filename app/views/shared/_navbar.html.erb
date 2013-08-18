@@ -1,40 +1,39 @@
 <% if current_user %>
-  <% if current_user.teacher_profile_id %>
-    <nav class="nav">
-      <ul>
-        <li class="current chalk-dark"><span class="nav-title">_____</span></li>
-        <!-- need to hook these up -->
-        <li><%= link_to "View Dashboard", teacher_profile_path(current_user.teacher_profile_id) %></li>
-        <li><%= link_to "Create Class", root_path %></li>
-        <li><%= link_to "Edit Class", root_path %></li>
-        <li><%= link_to "Create Student", root_path %></li>
-        <li><%= link_to "Send Message", root_path %></li>
-        <li><%= link_to "View Recent Feedback", root_path %></li>
-        <!-- <li><%= link_to "View all students" %></li> -->
-        <!-- <li><%= link_to "View all teachers" %></li> -->
-        <!-- <li><%= link_to "View all guardians" %></li> -->
-        <li><%= link_to "Logout", logout_path, :method => "delete" %></li>
-      </ul>
-    </nav>
-  <% elsif current_user.guardian_profile_id %>
-    <nav class="nav">
-      <ul>
-        <li class="current chalk-dark"><span class="nav-title">_____</span></li>
-        <!-- need to hook these up -->
-        <li><%= link_to "View Dashboard", guardian_profile_path(current_user.guardian_profile_id) %></li>
-        <li><%= link_to "Send Message", root_path %></li>
-        <li><%= link_to "Logout", logout_path, :method => "delete" %></li>
-      </ul>
-    </nav>
-  <% elsif current_user.student_profile_id %>
-    <nav class="nav">
-      <ul>
-        <li class="current chalk-dark"><span class="nav-title">_____</span></li>
-        <!-- need to hook these up -->
-        <li><%= link_to "View Dashboard", student_profile_path(current_user.student_profile_id) %></li>
-        <li><%= link_to "Send Message", root_path %></li>
-        <li><%= link_to "Logout", logout_path, :method => "delete" %></li>
-      </ul>
-    </nav>
-  <% end %>
+<nav class="nav">
+  <ul>
+    <% if current_student? %>
+      <li class="current chalk-dark"><span class="nav-title">_____</span></li>
+      <!-- need to hook these up -->
+      <li><%= link_to "Student Dashboard", students_student_profile_path(current_student) %></li>
+    <% end %>
+
+    <% if current_teacher? %>
+      <li class="current chalk-dark"><span class="nav-title">_____</span></li>
+      <!-- need to hook these up -->
+      <li><%= link_to "Teacher Dashboard", teachers_teacher_profile_path(current_teacher) %></li>
+      <li><%= link_to "Create Class", new_teachers_course_path(current_teacher) %></li>
+      <% current_teacher.courses.each do |course| %>
+        <ul>
+          <li><%= link_to course.name, teachers_course_path(course) %> (<% link_to 'edit', edit_teachers_course_path(course) %>, <%= link_to 'student view', students_course_path(course) %>)
+        </ul>
+      <% end %>
+      <li><%= link_to "Edit Class", root_path %></li>
+      <li><%= link_to "Create Student", root_path %></li>
+      <li><%= link_to "View Recent Feedback", root_path %></li>
+      <!-- <li><%= link_to "View all students" %></li> -->
+      <!-- <li><%= link_to "View all teachers" %></li> -->
+      <!-- <li><%= link_to "View all guardians" %></li> -->
+    <% end %>
+
+    <% if current_user.guardian? %>    
+      <li class="current chalk-dark"><span class="nav-title">_____</span></li>
+      <!-- need to hook these up -->
+      <li><%= link_to "Guardian Dashboard", guardians_guardian_profile_path(current_user.guardian_profile_id) %></li>
+    <% end %>
+
+    <li><hr></li>
+    <li><%= link_to "Send Message", root_path %></li>
+    <li><%= link_to "Logout", logout_path, :method => "delete" %></li>
+  </ul>
+</nav>
 <% end %>
