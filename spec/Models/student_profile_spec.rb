@@ -14,7 +14,7 @@ describe StudentProfile do
 
 	it { should have_one(:user_identity) }
 	it { should have_many(:guardianships) }
-	it { should have_many(:guardian_profiles) }
+	it { should have_many(:guardians) }
 	it { should have_many(:teachers) }
 	it { should have_many(:classes) }
 	it { should have_many(:assignments) }
