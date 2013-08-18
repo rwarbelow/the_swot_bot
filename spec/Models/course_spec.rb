@@ -7,6 +7,7 @@ describe Course do
  
   it { should have_many(:enrollments) }
   it { should have_many(:students) }
+  it { should have_many(:assignments) }
  
   it { should belong_to(:teacher) }
   it { should belong_to(:subject) }
