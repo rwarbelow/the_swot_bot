@@ -12,6 +12,7 @@
   margin-bottom: 10px;
   margin-left: 10px;
   float: left;
+  border-radius: 6px;
 }
 
 .active {
@@ -42,6 +43,7 @@
   width: 200px;
   margin-bottom: 6px;
   margin-left: -40px;
+  transition: all 0.5s ease;
 }
 
 .initials {
@@ -74,9 +76,9 @@
   float: left;
 }
 
-.positives {
-
+.red {
+  background-color: red;
 }
-.negatives {
- 
+.green {
+  background-color: green;
 }
