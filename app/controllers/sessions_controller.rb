@@ -16,15 +16,16 @@ class SessionsController < ApplicationController
   		flash[:notice] = "Successful Login!"
       redirect_to profile_path
   	else
-  		flash[:notice] = "Invalid Login... :("
-      redirect_to root_url
+      @user = UserIdentity.new
+  		flash[:errors] = "Invalid Login... :("
+      render 'sessions/new'
     end
   end
   
   def destroy
   	session.clear
   	flash[:notice] = "Logout Successful."
-  	redirect_to root_url
+  	redirect_to login_path
   end
 
   def profile_path
