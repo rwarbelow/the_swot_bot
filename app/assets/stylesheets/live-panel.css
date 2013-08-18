@@ -3,10 +3,11 @@
 }
 
 .student-icon {
-  border: 3px solid #ededed;
+  /*border: 3px solid #ededed;*/
+  background-color: #F2F5E4;
   cursor: pointer;
-  width: 70px;
-  height: 70px;
+  width: 75px;
+  height: 75px;
   padding: 6px;
   margin-bottom: 10px;
   margin-left: 10px;
@@ -14,11 +15,12 @@
 }
 
 .active {
-  width: 70px;
-  height: 70px;
+  width: 75px;
+  height: 75px;
   padding: 6px;
-  border: 3px solid #66FF00;
-  background-color: gray;
+  /*border: 3px solid #66FF00;*/
+  background-color: #00FF00;
+  opacity: 0.4;
 }
 
 .icon-container {
@@ -27,26 +29,19 @@
 }
 
 .submit-button-container {
-  width: 60px;
+  width: 220px;
   float: right;
   font-size: 2.4em;
 }
 
 .submit-button, .other-button {
-  border: 1px solid #ededed;
   cursor: pointer;
-  width: 60px;
   height: 60px;
-  padding: 4px;
-  margin-bottom: 10px;
   text-align: center;
   font-weight: bold;
-  line-height: 60px;
-}
-
-.red {
-  background-color: #C80000;
-  opacity: 0.5;
+  width: 200px;
+  margin-bottom: 6px;
+  margin-left: -40px;
 }
 
 .initials {
@@ -60,9 +55,9 @@
   text-align: center;
 }
 
-.green {
-  background-color: #00FF00;
-  opacity: 0.5;
+.red-list {
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .other-function-container {
@@ -77,4 +72,11 @@
 
 .positives, .negatives {
   float: left;
+}
+
+.positives {
+
+}
+.negatives {
+ 
 }
