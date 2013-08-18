@@ -1,8 +1,8 @@
-class CreateEvents < ActiveRecord::Migration
+class CreateStudentActions < ActiveRecord::Migration
 	def change
-		create_table :events do |t|
+		create_table :student_actions do |t|
 			t.references :enrollment
-			t.references :event_type
+			t.references :student_action_type
 			t.string	:comment
 			t.date 		:date, :null => false, :default => Date.today
 			
