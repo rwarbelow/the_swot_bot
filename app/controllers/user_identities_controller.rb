@@ -1,7 +1,5 @@
 class UserIdentitiesController < ApplicationController
 
-  skip_before_filter :user_auth, :only => [:new, :create]
-
   def new
     if session[:guardian_profile_id] == nil
       redirect_to root_url
