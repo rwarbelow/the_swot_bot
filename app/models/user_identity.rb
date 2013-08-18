@@ -37,6 +37,8 @@ class UserIdentity < ActiveRecord::Base
 		end
 	end
 
+	##custom validation for student? || teacher? || guardian?
+
 	def student?
 		!!student_profile_id
 	end
