@@ -17,8 +17,8 @@ class StudentProfile < ActiveRecord::Base
 	has_many :guardians, :through => :guardianships, :class_name => "GuardianProfile", :foreign_key => "guardian_profile_id"
 	has_many :phone_numbers, :as => :phone_numberable
 	has_many :enrollments
-	has_many :classes, :through => :enrollments, :class_name => "Course", :foreign_key => "course_id"
-	has_many :teachers, :through => :classes, :class_name => "TeacherProfile", :foreign_key => "teacher_profile_id"
+	has_many :courses, :through => :enrollments
+	has_many :teachers, :through => :courses, :class_name => "TeacherProfile", :foreign_key => "teacher_profile_id"
 	has_many :assignments, :through => :submissions
 	has_many :submissions
 	has_many :actions, :through => :enrollments, :class_name => "StudentActions"
@@ -31,6 +31,10 @@ class StudentProfile < ActiveRecord::Base
       random_token = SecureRandom.hex(4)
       break random_token unless StudentProfile.where(registration_code: random_token).exists?
     end
+  end
+
+  def enrolled_in? course
+    courses.find(course.id)
   end
 
 end
