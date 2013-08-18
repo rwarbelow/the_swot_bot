@@ -5,4 +5,5 @@ class Message < ActiveRecord::Base
 
 	belongs_to :author, :class_name => "UserIdentity"
 	belongs_to :target, :class_name => "UserIdentity"
+	has_one		 :reading
 end
