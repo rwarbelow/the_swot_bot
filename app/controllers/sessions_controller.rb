@@ -3,16 +3,16 @@ class SessionsController < ApplicationController
   skip_before_filter :user_auth, :only => [:new, :create]
 
   def new
-    @user = UserIdentity.new
+    @user = Identity.new
   end
 
   def create
-  	@user = UserIdentity.where(:username => params[:user_identity][:username]).first
-  	if @user && @user.authenticate(params[:user_identity][:password])
+  	@user = Identity.where(:username => params[:identity][:username]).first
+  	if @user && @user.authenticate(params[:identity][:password])
   		session[:user_id] = @user.id
       redirect_to profile_path
     else
-      @user = UserIdentity.new
+      @user = Identity.new
       flash[:errors] = "Invalid Login, sorry..."
       render 'sessions/new'
     end

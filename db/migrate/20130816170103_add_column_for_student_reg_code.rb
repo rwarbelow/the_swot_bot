@@ -1,9 +1,9 @@
 class AddColumnForStudentRegCode < ActiveRecord::Migration
   def up
-    add_column :student_profiles, :registration_code, :string
+    add_column :students, :registration_code, :string
   end
 
   def down
-    remove_column :student_profiles, :registration_code, :string
+    remove_column :students, :registration_code, :string
   end
 end

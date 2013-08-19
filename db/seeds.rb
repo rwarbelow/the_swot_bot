@@ -1,19 +1,19 @@
 gender = ["male", "female"]
-ccsd_no = 2222222
+ccsd_no = 3333333
 
 1.times do 
 
   200.times do 
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
-    student = StudentProfile.create!(
+    student = Student.create!(
       :gender => gender.sample,
       :birthday => "1985-05-05",
       :ccsd_id => ccsd_no += 1,
       :grade_level => 7,
       :email => Faker::Internet.email)
 
-    student.build_user_identity(
+    student.build_identity(
       :password => 'password',
       :first_name => first_name,
       :last_name => last_name,
@@ -25,13 +25,13 @@ ccsd_no = 2222222
   200.times do 
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
-    guardian = GuardianProfile.create!(preferred_language: "English")
+    guardian = Guardian.create!(preferred_language: "English")
 
-    guardian.build_user_identity(
+    guardian.build_identity(
       :password => 'password',
       :first_name => first_name,
       :last_name => last_name,
-      :guardian_profile_id => guardian.id,
+      :guardian_id => guardian.id,
       :username => "#{first_name}#{last_name}")
     guardian.save
     p "Guardian Created: #{guardian.username}" 
@@ -39,8 +39,8 @@ ccsd_no = 2222222
 
   200.times do |i|
     guardianship = Guardianship.create!(
-      :student_profile_id => i + 1,
-      :guardian_profile_id => i + 1,
+      :student_id => i + 1,
+      :guardian_id => i + 1,
       :relationship_to_student => 'Parent')
     p "guardianship created"
   end
@@ -57,23 +57,23 @@ end
 10.times do 
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
-  teacher = TeacherProfile.create!(
+  teacher = Teacher.create!(
     :title => Faker::Lorem.words(num = 1),
     :email => Faker::Internet.email)
 
-  teacher.build_user_identity(
+  teacher.build_identity(
     :password => 'password',
     :first_name => first_name,
     :last_name => last_name,
     :username => "#{first_name}#{last_name}",
-    :teacher_profile_id => teacher.id)
+    :teacher_id => teacher.id)
   teacher.save
     p "Teacher Created: #{teacher.username}" 
 
 
   7.times do |i|
     Course.create!(
-      teacher_profile_id: teacher.id,
+      teacher_id: teacher.id,
       period: i + 1,
       subject_id: (1..70).to_a.sample
     )
