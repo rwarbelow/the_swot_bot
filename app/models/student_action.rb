@@ -2,7 +2,6 @@ class StudentAction < ActiveRecord::Base
   attr_accessible :enrollment_id, :student_action_type_id, :comment, :date
 
 	validates :enrollment_id, :presence => true
-	validates :student_action_type_id, :presence => true
 	validates :date, 			 :presence => true
 	validates :student_action_type_id, :presence => true
 

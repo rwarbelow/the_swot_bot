@@ -24,14 +24,4 @@ class Students::ProfilesController < Students::BaseController
       render 'edit'
     end
   end
-
-  def new
-    @student = Student.new
-  end
-
-  def create
-  end
-  
-
-
 end

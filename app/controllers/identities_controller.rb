@@ -1,20 +1,22 @@
 class IdentitiesController < ApplicationController
 
   def new
-    if session[:guardian_id] == nil
-      redirect_to root_url
-    else
       @user = Identity.new
-    end
   end
 
   def create
-    @user = Identity.new(params[:identity].merge({:guardian_id => session[:guardian_id],
-     :student_id  => session[:student_id], 
-     :teacher_id  => session[:teacher_id]}))
+    @user = Identity.new(params[:identity].merge({:guardian_id => session[:new_guardian_id],
+     :student_id  => session[:new_student_id]}))
     if @user.save
-      session[:user_id] = @user.id
-      redirect_to profile_path
+      session.delete(:new_student_id)
+      session.delete(:new_guardian_id)
+      if current_teacher?
+        flash[:success] = "Student #{@user.first_name} #{@user.last_name} successfully saved."
+        redirect_to profile_path
+      else
+        session[:user_id] = @user.id
+        redirect_to profile_path
+      end
     else
       @errors = @user.errors.full_messages
       flash[:errors] = @errors
