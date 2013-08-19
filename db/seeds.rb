@@ -123,26 +123,3 @@ StudentActionType.create!(student_action_category_id: 2,name: "Sloppy SLANT", va
 StudentActionType.create!(student_action_category_id: 3,name: "Mastered Daily Goal", value: 1)
 StudentActionType.create!(student_action_category_id: 3,name: "Did Not Master Daily Goal", value: -1)
 StudentActionType.create!(student_action_category_id: 3,name: "Participation", value: 1)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
