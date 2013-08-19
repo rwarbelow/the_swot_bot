@@ -3,7 +3,7 @@
   </div>
     <div class="pure-u-1-3 form-container">
       <%= render 'shared/error_messages' %>
-      <%= form_for @user, :url => user_identities_path, :html => { :class => "pure-form pure-form-stacked", :id => "sign_up" } do |f| %>
+      <%= form_for @user, :url => identities_path, :html => { :class => "pure-form pure-form-stacked", :id => "sign_up" } do |f| %>
 
       <%= f.label :username, "Username" %>
 
