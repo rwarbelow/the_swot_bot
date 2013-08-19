@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   	@user = Identity.where(:username => params[:identity][:username]).first
   	if @user && @user.authenticate(params[:identity][:password])
   		session[:user_id] = @user.id
-      redirect_to profile_path
+      redirect_to root_url
     else
       @user = Identity.new
       flash[:errors] = "Invalid Login, sorry..."

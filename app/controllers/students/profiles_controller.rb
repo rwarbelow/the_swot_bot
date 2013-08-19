@@ -1,5 +1,4 @@
-require 'pry'
-class Students::StudentsController < Students::BaseController
+class Students::ProfilesController < Students::BaseController
 
   def show
     @student = Student.find(params[:id])

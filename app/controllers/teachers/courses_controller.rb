@@ -5,10 +5,10 @@
   end
 
   def create
-    @teacher = Teacher.new(params[:teacher])
-    if @teacher.save
-      session[:teacher_id] = @teacher.id
-      redirect_to new_identity_path
+    @course = Course.new(params[:course])
+    @course.teacher_id = current_teacher
+    if @course.save
+      redirect_to teachers_course(@course)
     else
       @errors = @teacher.errors.full_messages
       flash[:errors] = @errors
