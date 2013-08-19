@@ -71,18 +71,20 @@ end
   p "Teacher Created: #{teacher.username}" 
 
   7.times do |i|
-    Course.create!(
+    course = Course.new(
       teacher_id: teacher.id,
       period: i + 1,
-      subject_id: (1..70).to_a.sample
-      )
-    p "Course Created period"
+      subject_id: Subject.all.sample.id)
+      until course.valid?
+        course.subject_id = Subject.all.sample
+      end
+      course.save
+    p "Course Created period #{course.period}"
   end
 end
 
-students = Student.all
-
 6.times do
+  students = Student.all
   students.each do |student|
     enrollment = Enrollment.new(
       :student_id => student.id,
@@ -98,28 +100,44 @@ end
 StudentActionCategory.create!(name: "Attendance")
 StudentActionCategory.create!(name: "Behavior")
 StudentActionCategory.create!(name: "Academics")
-StudentActionType.create!(student_action_category_id: 1,name: "On-Time", value: 1)
-StudentActionType.create!(student_action_category_id: 1,name: "Tardy", value: -1)
-StudentActionType.create!(student_action_category_id: 1,name: "Absent", value: -2)
-StudentActionType.create!(student_action_category_id: 2,name: "Helping Others", value: 1)
-StudentActionType.create!(student_action_category_id: 2,name: "Integrity", value: 1)
-StudentActionType.create!(student_action_category_id: 2,name: "Leadership", value: 1)
-StudentActionType.create!(student_action_category_id: 2,name: "Perserverance", value: 1)
-StudentActionType.create!(student_action_category_id: 2,name: "Problem-Solving", value: 1)
-StudentActionType.create!(student_action_category_id: 2,name: "Resisting Distractions", value: 1)
-StudentActionType.create!(student_action_category_id: 2,name: "Respect to Others", value: 1)
-StudentActionType.create!(student_action_category_id: 2,name: "Team Work", value: 1)
-StudentActionType.create!(student_action_category_id: 2,name: "Working Independently", value: 1)
-StudentActionType.create!(student_action_category_id: 2,name: "Baby-Attack", value: -1)
-StudentActionType.create!(student_action_category_id: 2,name: "Calling Out", value: -1)
-StudentActionType.create!(student_action_category_id: 2,name: "Disrespecting Others", value: -1)
-StudentActionType.create!(student_action_category_id: 2,name: "Distracting Others", value: -1)
-StudentActionType.create!(student_action_category_id: 2,name: "Ignoring Instructions", value: -1)
-StudentActionType.create!(student_action_category_id: 2,name: "Laughing at Others Mistakes", value: -1)
-StudentActionType.create!(student_action_category_id: 2,name: "Not Completing Classwork", value: -1)
-StudentActionType.create!(student_action_category_id: 2,name: "Not Participating", value: -1)
-StudentActionType.create!(student_action_category_id: 2,name: "Side Conversation", value: -1)
-StudentActionType.create!(student_action_category_id: 2,name: "Sloppy SLANT", value: -1)
-StudentActionType.create!(student_action_category_id: 3,name: "Mastered Daily Goal", value: 1)
-StudentActionType.create!(student_action_category_id: 3,name: "Did Not Master Daily Goal", value: -1)
-StudentActionType.create!(student_action_category_id: 3,name: "Participation", value: 1)
+
+#attendance view
+  #attendance actions
+  StudentActionType.create!(student_action_category_id: 1,name: "on-time", value: 1)
+  StudentActionType.create!(student_action_category_id: 1,name: "tardy", value: -1)
+  StudentActionType.create!(student_action_category_id: 1,name: "absent", value: -2)
+
+#daily mastery view
+  StudentActionType.create!(student_action_category_id: 3,name: "mastered-daily-goal", value: 1)
+  StudentActionType.create!(student_action_category_id: 3,name: "incomplete-classwork", value: -1)
+  StudentActionType.create!(student_action_category_id: 3,name: "did-not-master-daily-goal", value: -1)
+
+#live class view
+  #top 3 positive actions
+  StudentActionType.create!(student_action_category_id: 3,name: "high-quality", value: 1)
+  StudentActionType.create!(student_action_category_id: 3,name: "participation", value: 1)
+  StudentActionType.create!(student_action_category_id: 2,name: "resisting-distractions", value: 1)
+  #top 3 negative actions
+  StudentActionType.create!(student_action_category_id: 2,name: "baby-attack", value: -1)
+  StudentActionType.create!(student_action_category_id: 2,name: "causing-distractions", value: -1)
+  StudentActionType.create!(student_action_category_id: 2,name: "sloppy-work", value: -1)
+
+#other behaviors list view
+  #positive behavior actions
+  StudentActionType.create!(student_action_category_id: 2,name: "helping-others", value: 1)
+  StudentActionType.create!(student_action_category_id: 2,name: "integrity", value: 1)
+  StudentActionType.create!(student_action_category_id: 2,name: "leadership", value: 1)
+  StudentActionType.create!(student_action_category_id: 2,name: "perseverance", value: 1)
+  StudentActionType.create!(student_action_category_id: 2,name: "problem-solving", value: 1)
+  StudentActionType.create!(student_action_category_id: 2,name: "respect-to-others", value: 1)
+  StudentActionType.create!(student_action_category_id: 2,name: "team-work", value: 1)
+  StudentActionType.create!(student_action_category_id: 2,name: "working-independently", value: 1)
+  #negative behavior actions
+  StudentActionType.create!(student_action_category_id: 2,name: "calling-out", value: -1)
+  StudentActionType.create!(student_action_category_id: 2,name: "disrespecting-others", value: -1)
+  StudentActionType.create!(student_action_category_id: 2,name: "ignoring-instructions", value: -1)
+  StudentActionType.create!(student_action_category_id: 2,name: "laughing-at-others-mistakes", value: -1)
+  StudentActionType.create!(student_action_category_id: 3,name: "not-participating", value: -1)
+  StudentActionType.create!(student_action_category_id: 2,name: "side-conversations", value: -1)
+  StudentActionType.create!(student_action_category_id: 2,name: "sloppy-slant", value: -1)
+  StudentActionType.create!(student_action_category_id: 2,name: "swearing", value: -1)
