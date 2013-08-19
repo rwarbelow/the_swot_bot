@@ -1,0 +1,51 @@
+<h1><%= @student.first_name %> <%= @student.last_name %></h1>
+
+
+<div>
+  <h3>Assignments</h3>
+  <% @assignments.each do |assignment| %>
+  <table>
+    <thead>
+      <th>Period</th>
+      <th>Subject</th>
+      <th>Assignment</th>
+      <th>Due Date</th>
+      <th>Score</th>
+    </thead>
+    <tr>
+      <td><%= assignment.course.period %></td>
+      <td><%= assignment.course.subject.name %></td>
+      <td><%= assignment.title %></td>
+      <td>DUE</td>
+      <td><%= assignment.submissions.find_by_student_id(@student).score %></td>
+    </tr>
+  </table>
+  <% end %>
+</div>
+
+<div>
+  <h3>Recent Actions</h3>
+  <% @actions.each do |action| %>
+  <table>
+    <thead>
+      <th>Date</th>
+      <th>Period</th>
+      <th>Subject</th>
+      <th>Teacher</th>
+      <th>Action</th>
+      <th>Comments</th>
+    </thead>
+    <tr>
+      <td><%= action.date %></td> 
+      <td><%= action.enrollment.course.period %></td>
+      <td><%= action.enrollment.course.subject.name %></td>
+      <td><%= action.enrollment.course.teacher.last_name %></td>
+      <td><%= action.student_action_type.name %></td>
+      <td><% if action.comment %> 
+        <%= action.student_action_type.name %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+  <% end %>
+</div>
