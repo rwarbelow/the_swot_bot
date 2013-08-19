@@ -4,7 +4,7 @@ class CreateStudentActions < ActiveRecord::Migration
 			t.references :enrollment
 			t.references :student_action_type
 			t.string	:comment
-			t.date 		:date, :null => false, :default => Date.today
+			t.date 		:date, :null => false
 			
 			t.timestamps
 		end

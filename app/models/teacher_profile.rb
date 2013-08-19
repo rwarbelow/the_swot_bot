@@ -14,7 +14,6 @@ class TeacherProfile < ActiveRecord::Base
 	has_many :students, :through => :enrollments, :class_name => "StudentProfile", :foreign_key => "student_profile_id"
 	has_many :assignments, :through => :courses
 
-
 	def teaching? course
 		courses.find(course)
 	end
