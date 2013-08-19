@@ -1,3 +1,4 @@
+require 'pry'
 class Students::ProfilesController < Students::BaseController
 
   def show
@@ -24,14 +25,4 @@ class Students::ProfilesController < Students::BaseController
       render 'edit'
     end
   end
-
-  def new
-    @student = Student.new
-  end
-
-  def create
-  end
-  
-
-
 end
