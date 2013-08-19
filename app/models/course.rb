@@ -8,7 +8,7 @@ class Course < ActiveRecord::Base
 
 	has_many :assignments
 	has_many :enrollments
-	has_many :students, :through => :enrollments, :class_name => "StudentProfile", :foreign_key => "student_profile_id"
+	has_many :student_profiles, :through => :enrollments
 	belongs_to :teacher, :class_name => "TeacherProfile", :foreign_key => "teacher_profile_id"
 	belongs_to :subject
 end
