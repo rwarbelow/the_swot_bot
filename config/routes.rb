@@ -16,6 +16,7 @@ SwotBot::Application.routes.draw do
   namespace 'teachers' do
     resources :profiles
     resources :courses do
+      get '/liveclass', :to => 'live#classroom'
       resources :assignments
       resources :submissions
       resources :grades
