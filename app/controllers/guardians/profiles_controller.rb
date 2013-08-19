@@ -1,4 +1,4 @@
-class Guardians::GuardiansController < Guardians::BaseController
+class Guardians::ProfilesController < Guardians::BaseController
   def new
     @guardian = Guardian.new
   end
@@ -27,8 +27,9 @@ class Guardians::GuardiansController < Guardians::BaseController
 
   def edit
     @guardian = Guardian.find(params[:id])
+    @user = current_user
     if @guardian && @guardian.id == current_user.guardian.id
-      render 'guardians/guardians/edit'
+      render 'edit'
     else
       redirect_to error_url
     end
@@ -38,7 +39,7 @@ class Guardians::GuardiansController < Guardians::BaseController
     @guardian = Guardian.find(params[:id])
     if @guardian.update_attributes(params[:guardian])
       flash[:success] = "Profile updated"
-      redirect_to guardian_path(@guardian)
+      redirect_to guardians_profile_path(@guardian)
     else
       @errors = @guardian.errors.full_messages
       render 'guardians/guardians/edit'
