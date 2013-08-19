@@ -1,0 +1,21 @@
+<div class="grid-container">
+  <div class="icon-container">
+    <ul id="student-icon">
+      <% @students.each do |student| %>
+      <li class="student-icon" id="<%= student.id %>">
+        <div class="initials">
+          <%= student.first_name[0].upcase %><%= student.last_name[0].downcase %>
+        </div>
+        <div class="full-name">
+          <%= student.first_name %> <%= student.last_name %>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!--  <li class="student-icon" id="eric's id">
+  <div class="initials">Ea</div>
+  <div class="full-name">Eric Allen</div>
+</li> -->

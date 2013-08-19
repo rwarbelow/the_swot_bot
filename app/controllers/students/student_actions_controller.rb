@@ -4,8 +4,6 @@ class Students::StudentActionsController < Students::BaseController
   end
 
   def create
-    p "<<<<<<<<<<<<<<<<<<<<<<<<\n"
-    p params
     render :json => "SUCCESS"
   end
 end
