@@ -4,7 +4,8 @@ class Student < ActiveRecord::Base
 
 	before_create :generate_registration_code
 
-	attr_accessible :gender, :birthday, :address, :ccsd_id, :grade_level, :email
+	attr_accessible :gender, :birthday, :address, :ccsd_id, :grade_level, :email, :address_line_1, :address_line_2, :address_city, :address_state, :address_zip_code
+  attr_accessor :address_line_1, :address_line_2, :address_city, :address_state, :address_zip_code
 
 	validates :gender, :presence => true
 	validates :birthday, :presence => true
@@ -22,7 +23,6 @@ class Student < ActiveRecord::Base
 	has_many :assignments, :through => :submissions
 	has_many :submissions
 	has_many :student_actions, :through => :enrollments
-  attr_accessible :gender, :birthday, :ccsd_id, :grade_level
   
   protected
 
