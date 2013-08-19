@@ -14,7 +14,7 @@
       <li><%= link_to "Create Class", controller: "teachers/courses", action: 'new' %></li>
        <%=puts current_teacher%>
       <li><%= link_to "View Classes", teachers_courses_path(current_teacher) %></li>
-      <li><%= link_to "Create Student", new_students_profile_path %></li>
+      <li><%= link_to "Create Student", new_teachers_student_profile_path %></li>
       <li><%= link_to "View Recent Feedback", root_path %></li>
       <!-- <li><%= link_to "View all students" %></li> -->
       <!-- <li><%= link_to "View all teachers" %></li> -->
