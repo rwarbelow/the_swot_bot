@@ -1,4 +1,4 @@
-class Teachers::TeachersController < Teachers::BaseController
+class Teachers::ProfilesController < Teachers::BaseController
   
   def new
     @teacher = Teacher.new

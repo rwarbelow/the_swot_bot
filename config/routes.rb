@@ -3,8 +3,8 @@ SwotBot::Application.routes.draw do
   resources :user_identities
 
 
-  namespace :students do
-    resources :students
+  namespace 'students' do
+    resources :profiles
     resources :courses, :only => [:index, :show] do
       resources :assignments 
       resources :submissions
@@ -13,8 +13,8 @@ SwotBot::Application.routes.draw do
     root :to => "dashboard#index"
   end
 
-  namespace :teachers do
-    resources :teachers
+  namespace 'teachers' do
+    resources :profiles
     resources :courses do
       resources :assignments
       resources :submissions
@@ -24,8 +24,8 @@ SwotBot::Application.routes.draw do
   end
 
 
-  namespace :guardians do
-    resources :guardians do
+  namespace 'guardians' do
+    resources :profiles do
       post '/add_student', :to => 'add#student'
     end
     root :to => "dashboard#index"

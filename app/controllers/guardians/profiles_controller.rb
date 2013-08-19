@@ -1,4 +1,4 @@
-class Guardians::ProfilesController < Guardians::BaseController
+class Guardians::GuardiansController < Guardians::BaseController
   def new
     @guardian = Guardian.new
   end
