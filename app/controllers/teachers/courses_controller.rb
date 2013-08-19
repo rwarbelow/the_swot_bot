@@ -43,5 +43,6 @@
   end
 
   def show
+    @students = Course.find(8).student_profiles
   end
 end
