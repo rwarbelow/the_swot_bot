@@ -68,16 +68,29 @@ end
     :username => "#{first_name}#{last_name}",
     :teacher_id => teacher.id)
   teacher.save
-    p "Teacher Created: #{teacher.username}" 
-
+  p "Teacher Created: #{teacher.username}" 
 
   7.times do |i|
     Course.create!(
       teacher_id: teacher.id,
       period: i + 1,
       subject_id: (1..70).to_a.sample
-    )
+      )
     p "Course Created period"
   end
 end
 
+students = Student.all
+
+6.times do
+  students.each do |student|
+    enrollment = Enrollment.new(
+      :student_id => student.id,
+      :course_id => Course.all.sample.id)
+      until enrollment.valid?
+        enrollment.course = Course.all.sample
+      end
+      enrollment.save
+    p "Enrollment created for #{student.first_name}"
+  end
+end
