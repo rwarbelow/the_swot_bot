@@ -1,4 +1,3 @@
-require 'pry'
 class Students::ProfilesController < Students::BaseController
 
   def show

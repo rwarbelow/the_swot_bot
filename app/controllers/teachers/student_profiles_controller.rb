@@ -45,7 +45,4 @@ class Teachers::StudentProfilesController < Teachers::BaseController
       render 'new'
     end
   end
-
-  def identity
-  end
 end
