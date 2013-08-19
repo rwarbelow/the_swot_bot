@@ -1,7 +1,7 @@
- class Teachers::CoursesController < Teachers::BaseController
-
+class Teachers::TeachersController < Teachers::BaseController
+  
   def new
-    @course = Course.new
+    @teacher = Teacher.new
   end
 
   def create
@@ -43,6 +43,6 @@
   end
 
   def show
-    @students = Course.find(8).students
+    @courses = current_teacher.courses
   end
 end
