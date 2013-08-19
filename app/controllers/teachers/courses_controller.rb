@@ -6,20 +6,21 @@
 
   def create
     @course = Course.new(params[:course])
-    @course.teacher_id = current_teacher
+    @course.teacher_id = current_teacher.id
     if @course.save
-      redirect_to teachers_course(@course)
+      redirect_to teachers_course_path(@course)
     else
-      @errors = @teacher.errors.full_messages
+      @errors = @course.errors.full_messages
       flash[:errors] = @errors
       render 'new'
     end
   end
 
   def edit
-    @teacher = Teacher.find(params[:id])
-    if @teacher && @teacher.id == current_user.teacher.id
-      render 'teachers/teachers/edit'
+    @course = Course.find(params[:id])
+    @teacher = @course.teacher
+    if @course && @teacher.id == current_user.teacher.id
+      render 'teachers/courses/edit'
     else
       redirect_to error_url
     end
@@ -43,6 +44,7 @@
   end
 
   def show
-    @students = Course.find(8).students
+    @course = Course.find(params[:id])
+    @students = @course.students
   end
 end

@@ -25,4 +25,13 @@ class Students::ProfilesController < Students::BaseController
     end
   end
 
+  def new
+    @student = Student.new
+  end
+
+  def create
+  end
+  
+
+
 end
