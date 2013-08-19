@@ -18,31 +18,31 @@
 
       <%= f.text_field :ccsd_id %>
 
-      <%= f.label :ccsd_id, "Street Address" %>
+      <%= f.label :address_line_1, "Street Address" %>
 
       <%= f.text_field :address_line_1 %>
 
-      <%= f.label :ccsd_id, "Apartment Number (optional)" %>
+      <%= f.label :address_line_2, "Apartment Number (optional)" %>
 
       <%= f.text_field :address_line_2 %>
 
-      <%= f.label :ccsd_id, "City" %>
+      <%= f.label :address_city, "City" %>
 
       <%= f.text_field :address_city %>
 
-      <%= f.label :ccsd_id, "State" %>
+      <%= f.label :address_state, "State" %>
 
       <%= f.text_field :address_state %>
 
-      <%= f.label :ccsd_id, "Zip Code" %>
+      <%= f.label :address_zip_code, "Zip Code" %>
 
       <%= f.text_field :address_zip_code, placeholder: "zip code" %>
 
-      <%= f.label :ccsd_id, "Email Address" %>
+      <%= f.label :email, "Email Address" %>
 
       <%= f.text_field :email, placeholder: "example@email.com" %>
 
-      <%= f.label :ccsd_id, "Relationship to Student" %>
+      <%= f.label :relationship_to_student, "Relationship to Student" %>
 
       <%= f.select :relationship_to_student, [['Mom','mom'],
       ['Dad','dad'],
