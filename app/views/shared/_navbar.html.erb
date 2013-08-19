@@ -24,7 +24,7 @@
     <% if current_user.guardian? %>    
       <li class="current chalk-dark"><span class="nav-title">_____</span></li>
       <!-- need to hook these up -->
-      <li><%= link_to "Guardian Dashboard", guardians_profile_path(current_user.guardian_id) %></li>
+      <li><%= link_to "Guardian Dashboard", guardians_root_path %></li>
     <% end %>
 
     <li><hr></li>
