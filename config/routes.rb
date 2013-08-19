@@ -1,6 +1,6 @@
 SwotBot::Application.routes.draw do
 
-  resources :user_identities
+  resources :identities
 
 
   namespace 'students' do
@@ -15,6 +15,10 @@ SwotBot::Application.routes.draw do
 
   namespace 'teachers' do
     resources :profiles
+    resources :student_profiles do
+      get '/identities', :to => 'student_profiles#identity', as: :teacher_student_identity
+    end
+    resources :guardian_profiles
     resources :courses do
       get '/liveclass', :to => 'live#classroom'
       resources :assignments
