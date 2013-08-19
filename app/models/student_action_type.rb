@@ -1,4 +1,6 @@
 class StudentActionType < ActiveRecord::Base
+  attr_accessible :student_action_category_id, :name, :value
+
 	validates :name, :presence => true
 	validates :student_action_category_id, :presence => true
 	validates :value, :presence => true
