@@ -1,4 +1,6 @@
 class Course < ActiveRecord::Base
+  attr_accessible :period, :teacher_profile_id, :subject_id
+
 	validates :teacher_profile_id, :presence => true
 	validates :period, :presence => true 
 	validates :subject_id, :presence => true 

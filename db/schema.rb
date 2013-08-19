@@ -74,10 +74,9 @@ ActiveRecord::Schema.define(:version => 20130818005959) do
   end
 
   create_table "student_action_categories", :force => true do |t|
-    t.integer  "student_action_type_id"
     t.string   "name"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "student_action_types", :force => true do |t|
@@ -92,9 +91,9 @@ ActiveRecord::Schema.define(:version => 20130818005959) do
     t.integer  "enrollment_id"
     t.integer  "student_action_type_id"
     t.string   "comment"
-    t.date     "date",                   :default => '2013-08-18', :null => false
-    t.datetime "created_at",                                       :null => false
-    t.datetime "updated_at",                                       :null => false
+    t.date     "date",                   :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   create_table "student_profiles", :force => true do |t|

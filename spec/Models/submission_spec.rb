@@ -6,6 +6,6 @@ describe Submission do
   it { should validate_presence_of(:score) }
  
   it { should belong_to(:assignment) }
-  it { should belong_to(:student) }
+  it { should belong_to(:student_profile) }
 end
 	
