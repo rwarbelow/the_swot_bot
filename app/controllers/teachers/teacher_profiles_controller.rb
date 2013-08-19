@@ -43,5 +43,6 @@ class Teachers::TeacherProfilesController < Teachers::BaseController
   end
 
   def show
+    @courses = current_teacher.courses
   end
 end

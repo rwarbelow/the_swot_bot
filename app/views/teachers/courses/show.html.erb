@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <th>CCSD ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>More Information</th>
+  </thead>
+  <% @students.each do |student| %>
+  <tr>
+    <td><%= student.ccsd_id %></td>
+    <td><%= student.first_name %></td>
+    <td><%= student.last_name %></td>
+    <td><%= link_to "More", root_path %></td>
+  </tr>
+  <% end %>
+</table>

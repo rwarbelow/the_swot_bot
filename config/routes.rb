@@ -1,31 +1,32 @@
 SwotBot::Application.routes.draw do
-  
+
   resources :user_identities
- 
+
 
   namespace :students do
     resources :student_profiles
     resources :courses, :only => [:index, :show] do
-      resources :assignments
+      resources :assignments 
+      resources :submissions
+      resources :grades
     end
-    resources :submissions
-    resources :grades
     root :to => "dashboard#index"
   end
 
   namespace :teachers do
     resources :teacher_profiles
     resources :courses do
-      post :finals
+      resources :assignments
+      resources :submissions
+      resources :grades
     end
-    resources :grades
     root :to => "dashboard#index"
   end
 
 
   namespace :guardians do
     resources :guardian_profiles do
-      resources :guardianships, :only => [:index, :new, :create, :destroy]
+      post '/add_student', :to => 'add#student'
     end
     root :to => "dashboard#index"
   end
