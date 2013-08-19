@@ -33,6 +33,7 @@ SwotBot::Application.routes.draw do
     resources :profiles do
       post '/add_student', :to => 'add#student'
     end
+    resources :students
     root :to => "dashboard#index"
   end
 
