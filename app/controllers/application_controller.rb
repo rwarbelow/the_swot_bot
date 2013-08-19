@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
 
   def profile_path
     if @user.student?
-      :students_root
+      :student_root
     elsif @user.guardian?
-      :guardians_root
+      :guardian_root
     elsif @user.teacher?
-      :teachers_root
+      :teacher_root
     else
       raise RuntimeError, "User Identity #{@user.id} has no profile"
     end

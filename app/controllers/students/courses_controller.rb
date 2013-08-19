@@ -1,4 +1,4 @@
-class CoursesController < Students::BaseController
+class Students::CoursesController < Students::BaseController
   before_filter :load_course, :only => [:show]
   before_filter :enrolled_or_teaching, :only => [:show]
   before_filter :must_be_a_student, :only => [:index]

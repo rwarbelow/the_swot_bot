@@ -17,7 +17,7 @@
     <li>Grade Level: <%= current_user.grade_level %> </li>
     <li>Guardian Registration Code: <%= current_user.registration_code %> </li>
   </ul>
-  <%= link_to "Edit My Information", edit_student_path(@student) %>
+  <%= link_to "Edit My Information", edit_profile_path(@student) %>
   <div class="pure-g-r">
     <div class="pure-u-1-2 s-panel-classes">
       <%= render 'shared/class_list' %>
