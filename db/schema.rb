@@ -21,21 +21,21 @@ ActiveRecord::Schema.define(:version => 20130818005959) do
   end
 
   create_table "courses", :force => true do |t|
-    t.integer  "teacher_profile_id"
+    t.integer  "teacher_id"
     t.integer  "subject_id"
     t.integer  "period"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "enrollments", :force => true do |t|
-    t.integer  "student_profile_id"
+    t.integer  "student_id"
     t.integer  "course_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  create_table "guardian_profiles", :force => true do |t|
+  create_table "guardians", :force => true do |t|
     t.string   "address"
     t.string   "email"
     t.string   "preferred_language", :default => "English", :null => false
@@ -44,11 +44,23 @@ ActiveRecord::Schema.define(:version => 20130818005959) do
   end
 
   create_table "guardianships", :force => true do |t|
-    t.integer  "student_profile_id"
-    t.integer  "guardian_profile_id"
+    t.integer  "student_id"
+    t.integer  "guardian_id"
     t.string   "relationship_to_student", :null => false
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
+  end
+
+  create_table "identities", :force => true do |t|
+    t.string   "username",        :null => false
+    t.string   "password_digest", :null => false
+    t.string   "first_name",      :null => false
+    t.string   "last_name",       :null => false
+    t.integer  "student_id"
+    t.integer  "teacher_id"
+    t.integer  "guardian_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "messages", :force => true do |t|
@@ -96,7 +108,7 @@ ActiveRecord::Schema.define(:version => 20130818005959) do
     t.datetime "updated_at",             :null => false
   end
 
-  create_table "student_profiles", :force => true do |t|
+  create_table "students", :force => true do |t|
     t.string   "gender",            :null => false
     t.date     "birthday",          :null => false
     t.string   "address"
@@ -115,29 +127,17 @@ ActiveRecord::Schema.define(:version => 20130818005959) do
   end
 
   create_table "submissions", :force => true do |t|
-    t.integer  "student_profile_id",                :null => false
-    t.integer  "assignment_id",                     :null => false
-    t.integer  "score",              :default => 0, :null => false
+    t.integer  "student_id",                   :null => false
+    t.integer  "assignment_id",                :null => false
+    t.integer  "score",         :default => 0, :null => false
     t.datetime "created_at"
   end
 
-  create_table "teacher_profiles", :force => true do |t|
+  create_table "teachers", :force => true do |t|
     t.string   "title",      :null => false
     t.string   "email",      :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "user_identities", :force => true do |t|
-    t.string   "username",            :null => false
-    t.string   "password_digest",     :null => false
-    t.string   "first_name",          :null => false
-    t.string   "last_name",           :null => false
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-    t.integer  "student_profile_id"
-    t.integer  "teacher_profile_id"
-    t.integer  "guardian_profile_id"
   end
 
 end

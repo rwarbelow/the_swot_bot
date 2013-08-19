@@ -4,13 +4,13 @@
     <% if current_student? %>
       <li class="current chalk-dark"><span class="nav-title">_____</span></li>
       <!-- need to hook these up -->
-      <li><%= link_to "Student Dashboard", students_student_profile_path(current_student) %></li>
+      <li><%= link_to "Student Dashboard", students_student_path(current_student) %></li>
     <% end %>
 
     <% if current_teacher? %>
       <li class="current chalk-dark"><span class="nav-title">_____</span></li>
       <!-- need to hook these up -->
-      <li><%= link_to "Teacher Dashboard", teachers_teacher_profile_path(current_teacher) %></li>
+      <li><%= link_to "Teacher Dashboard", teachers_teacher_path(current_teacher) %></li>
       <li><%= link_to "Create Class", new_teachers_course_path(current_teacher) %></li>
       <li><%= link_to "View Classes", teachers_courses_path(current_teacher) %></li>
       <li><%= link_to "Edit Class", root_path %></li>
@@ -24,7 +24,7 @@
     <% if current_user.guardian? %>    
       <li class="current chalk-dark"><span class="nav-title">_____</span></li>
       <!-- need to hook these up -->
-      <li><%= link_to "Guardian Dashboard", guardians_guardian_profile_path(current_user.guardian_profile_id) %></li>
+      <li><%= link_to "Guardian Dashboard", guardians_guardian_path(current_user.guardian_id) %></li>
     <% end %>
 
     <li><hr></li>

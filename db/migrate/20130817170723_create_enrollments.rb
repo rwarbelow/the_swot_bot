@@ -1,7 +1,7 @@
 class CreateEnrollments < ActiveRecord::Migration
   def change
   	create_table :enrollments do |t|
-  		t.references :student_profile
+  		t.references :student
   		t.references :course
 
   		t.timestamps
