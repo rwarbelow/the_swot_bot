@@ -1,11 +1,19 @@
 <h2>Welcome, <%= current_guardian.first_name %> <%= current_guardian.last_name %>!</h2>
 <p><%= link_to "Edit Your Profile", edit_guardians_profile_path(current_guardian) %></p>
 
+<h3>Here are all the Students for this guardian</h3>
+<ul>
+<% current_guardian.students.each do |student| %>
+  <li><%= link_to [student.first_name, student.last_name].join(' '), guardians_student_path(student)%></li>
+</ul>
+<% end %>
+
 <div class="pure-u-1-3 form-container">
   <% if flash[:errors] %>
     <p class="flash-notice"><%= flash[:errors] %></p>
   <% end %>
     <%= form_for Guardianship.new, url: guardians_profile_add_student_path(current_guardian), :html => { :class => "pure-form pure-form-stacked", :id => "login" } do |f| %>
+      <h3>Add student to account</h3>
 
       <%= f.label :registration_code, "SWOTBot Registration Code" %>
 
@@ -15,7 +23,7 @@
 
       <%= f.text_field :ccsd_id %>
 
-      <%= f.label :ccsd_id, "Relationship to Student" %>
+      <%= f.label :relationship_to_student, "Relationship to Student" %>
 
       <%= f.select :relationship_to_student, [['Mom','mom'],
       ['Dad','dad'],
@@ -34,10 +42,26 @@
     <% end %>
   </div>
 
-<h3>Here are all the Students for this guardian</h3>
-<ul>
-<% current_guardian.students.each do |student| %>
-  <li><%= link_to [student.first_name, student.last_name].join(' '), guardians_student_path(student)%></li>
-</ul>
-<% end %>
+  <div class="pure-u-1-3 form-container">
+  <% if flash[:errors] %>
+    <p class="flash-notice"><%= flash[:errors] %></p>
+  <% end %>
+    <%= form_for PhoneNumber.new, url: guardians_profile_add_phone_number_path(current_guardian), :html => { :class => "pure-form pure-form-stacked", :id => "login" } do |f| %>
+    <h3>Add phone number to account</h3>
 
+      <%= f.label :number, "Phone Number" %>
+
+      <%= f.text_field :number, placeholder: "***-***-****" %>
+
+      <%= f.label :kind, "Phone Type" %>
+
+      <%= f.select :kind, [['Cell','cell'],
+      ['Home','home'],
+      ['Work', 'work'],
+      ['Other', 'other']] %>
+
+      <div class="login-button">
+        <%= f.submit value="Add Phone Number", :class => "pure-button" %>
+      </div>
+    <% end %>
+  </div>

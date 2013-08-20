@@ -28,6 +28,7 @@ class Guardians::ProfilesController < Guardians::BaseController
   def edit
     @guardian = Guardian.find(params[:id])
     @user = current_user
+    @phone_numbers = @guardian.phone_numbers
     if @guardian && @guardian.id == current_user.guardian.id
       render 'edit'
     else
@@ -79,5 +80,20 @@ class Guardians::ProfilesController < Guardians::BaseController
       render 'guardians/guardians/show'
     end
   end
+
+  def add_phone_number
+    @phone_number = PhoneNumber.new(params[:phone_number])
+    @phone_number.phone_numberable_id = current_guardian.id
+    @phone_number.phone_numberable_type = "Guardian"
+    @phone_number.save
+    redirect_to guardians_root_path
+  end
+
+  def delete_phone_number
+    @phone_number = PhoneNumber.find(params[:phone_number_id])
+    @phone_number.destroy
+    redirect_to edit_guardians_profile_path(current_guardian)
+  end
+
 
 end

@@ -6,6 +6,28 @@
 </div>      
 
 <div class="pure-g">
+  <div class="pure-u-1-3"></div>
+  <div class="pure-u-1-3 form-container">
+    <strong>Phone Numbers for Account</strong>
+    <% @phone_numbers.each do |phone_number| %>
+      <table>
+        <tr>
+          <td><%= phone_number.number %></td>
+          <td>
+            <%= form_tag guardians_profile_delete_phone_number_path(current_guardian), :method => 'delete' do %>
+              <%= hidden_field_tag :phone_number_id, phone_number.id %>
+              <%= submit_tag "Delete Number" %>
+            <% end %>
+          </td>   
+        </tr>
+      </table>
+    <% end %>
+  </div>
+<div class="pure-u-1-3"></div>
+</div>   
+
+
+<div class="pure-g">
   <div class="pure-u-1-3">
   </div>
     <div class="pure-u-1-3 form-container">
@@ -30,21 +52,28 @@
   </div>
 <div class="pure-u-1-3 form-container">
       <%= render 'shared/error_messages' %>
-      <%= form_for @user, :html => { :class => "pure-form pure-form-stacked", :id => "sign_up" } do |f| %>
+      <%= form_for @user, :html => { :class => "pure-form pure-form-stacked", :id => "edit" } do |f| %>
 
-      <%= f.label :password, "New Password" %>
+    <%= f.label :username %>
+    <%= f.text_field :username %><br />
 
-      <%= f.password_field :password %>
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %><br />
 
-      <%= f.label :password_confirmation, "Enter Password Again" %>
-      
-      <%= f.password_field :password_confirmation %>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %><br />
 
-      <div class="submit-button">
-        <%= f.submit value="Change Password", :class => "pure-button" %>
-      </div>
-    <% end %>
+    <%= f.label :password %>
+    <%= f.password_field :password %><br />
+
+    <%= f.label :password_confirmation, "Confirm new password" %>
+    <%= f.password_field :password_confirmation %><br />
+
+    <%= f.submit value="Save changes" %>
+  <% end %>
   </div>
     <div class="pure-u-1-3">
   </div>
 </div>
+
+
