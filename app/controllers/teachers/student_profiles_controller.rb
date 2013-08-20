@@ -45,4 +45,21 @@ class Teachers::StudentProfilesController < Teachers::BaseController
       render 'new'
     end
   end
+
+  def index
+    if current_user.student?
+      redirect_to students_root_path
+    elsif current_user.guardian?
+      redirect_to guardians_root_path
+    elsif current_user.teacher?
+      if params[:sort]
+        @students = Student.find(:all, :order => params[:sort])
+        params[:sort].clear
+      else
+        @students = Student.all.sort! {|x, y| x.last_name <=> y.last_name}
+      end
+    else
+      redirect_to login_path
+    end
+  end
 end

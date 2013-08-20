@@ -1,0 +1,25 @@
+<h1>All Courses</h1>
+
+<p>Click on table headers to sort</p>
+
+<table>
+  <tr>
+    <th><%= link_to "Period", :sort => "period" %></th>
+    <th><%= link_to "Subject", :sort => "subject_id" %></th>
+    <th><%= link_to "Teacher", :sort => "teacher_id" %></th>
+    <th>Students Enrolled</th>
+  </tr>
+  <% for course in @courses %>
+  <tr>
+      <td><%= course.period %></td>
+      <td style="display: none;"><%= course.subject_id %></td>
+      <td><%= course.subject.name %></td>
+      <td style="display: none;"><%= course.teacher_id %></td>
+      <td><%= course.teacher.last_name %></td>
+      <td><%= course.students.count %></td>
+    </tr>
+  <% end %>
+</table>
+
+
+

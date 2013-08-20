@@ -23,4 +23,5 @@ class Students::ProfilesController < Students::BaseController
       render 'edit'
     end
   end
+
 end

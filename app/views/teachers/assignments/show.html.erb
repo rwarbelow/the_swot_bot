@@ -1,0 +1,31 @@
+<h1><%= @assignment.title %></h1>
+<h3><%= @assignment.description %></h3>
+
+<table>
+  <thead>
+    <th>Due Date</th>
+    <th>Maximum Points</th>
+  </thead>
+  <tr>
+    <td><%= @assignment.due_date %></td>
+    <td><%= @assignment.maximum_points %></td>
+  </tr>
+</table>
+
+<% if flash[:submission_errors] %>
+  <% flash[:submission_errors].each do |error| %>
+  <p><%= error %></p>
+  <% end %>
+<% end %>
+
+<div>
+  <%= form_tag teachers_assignment_submissions_path(@assignment) do %>
+    <% @assignment.course.students.each do |student| %>
+      <%= text_field_tag "scores[]", (student.submissions.where(:assignment_id => @assignment.id).first.points_earned if student.submissions.where(:assignment_id => @assignment.id).length > 0) %>
+      <%= label :student_name, "#{student.first_name} #{student.last_name}, #{student.ccsd_id}" %>
+      <%= hidden_field_tag "students[]", student.id %> 
+      <br>  
+    <% end %>
+    <%= submit_tag "Submit Scores" %>
+  <% end %>
+</div>
