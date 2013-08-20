@@ -1,7 +1,31 @@
 <h1><%= @student.first_name %> <%= @student.last_name %></h1>
 
+<div class="Schedule">
+  <h3>Class Schedule</h3>
+  <table>
+    <thead>
+      <th>Period</th>
+      <th>Subject</th>
+      <th>Teacher</th>
+      <th>Email</th>
+      <th>Cell #</th>
+    </thead>
+    <% @student.courses.order("period ASC").each do |course| %>
+    <tr>
+      <td><%= course.period %></td>
+      <td><%= course.subject.name %></td>
+      <td><%= course.teacher.first_name %> <%= course.teacher.last_name %></td>
+      <td><%= course.teacher.email %></td>
+      <% cellnumbers = course.teacher.phone_numbers.select {|number| number.kind == "cell"} %>
+      <% if cellnumbers.length > 0 %>
+      <td><%= cellnumbers.first.number %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </table>
+</div>
 
-<div>
+<div class="Assignments">
   <h3>Assignments</h3>
   <% @assignments.each do |assignment| %>
   <table>
@@ -23,7 +47,7 @@
   <% end %>
 </div>
 
-<div>
+<div class="Recent Actions">
   <h3>Recent Actions</h3>
   <% @actions.each do |action| %>
   <table>

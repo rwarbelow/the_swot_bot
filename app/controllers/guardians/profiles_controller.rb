@@ -16,11 +16,11 @@ class Guardians::ProfilesController < Guardians::BaseController
         redirect_to new_identity_path
       else
         @errors = @guardian.errors.full_messages
-        flash[:errors] = @errors
+        flash[:guardianship_errors] = @errors
         render 'new'
       end
     else
-      flash[:errors] = "Registration code or Student ID invalid."
+      flash[:guardianship_errors] = "Registration code or Student ID invalid."
       render 'new'
     end
   end
@@ -28,6 +28,7 @@ class Guardians::ProfilesController < Guardians::BaseController
   def edit
     @guardian = Guardian.find(params[:id])
     @user = current_user
+    @phone_numbers = @guardian.phone_numbers
     if @guardian && @guardian.id == current_user.guardian.id
       render 'edit'
     else
@@ -60,24 +61,39 @@ class Guardians::ProfilesController < Guardians::BaseController
   def add_student
     registration_code = params[:guardianship][:registration_code]
     ccsd_id = params[:guardianship][:ccsd_id]
-    @guardian = Guardian.find(params[:guardian_id])
+    @guardian = Guardian.find(params[:profile_id])
     if Student.exists?(:ccsd_id => ccsd_id, :registration_code => registration_code)
       student = Student.where(:registration_code => registration_code, :ccsd_id => ccsd_id).first 
       @guardianship = Guardianship.new(:student_id => student.id, 
                           :guardian_id => @guardian.id, 
                           :relationship_to_student => params[:guardianship][:relationship_to_student])
       if @guardianship.save
-        redirect_to guardian_path(@guardian)
+        redirect_to guardians_root_path(@guardian)
       else
         @errors = @guardianship.errors.full_messages
-        flash[:errors] = @errors
-        render 'show'
+        flash[:guardianship_errors] = @errors
+        render 'guardians/dashboard/index'
       end
     else
       @guardianship = Guardianship.new
-      flash[:errors] = "The registration code and CCSD ID you entered do not match."
-      render 'guardians/guardians/show'
+      flash[:registration_errors] = "The registration code and CCSD ID you entered do not match."
+      render 'guardians/dashboard/index'
     end
   end
+
+  def add_phone_number
+    @phone_number = PhoneNumber.new(params[:phone_number])
+    @phone_number.phone_numberable_id = current_guardian.id
+    @phone_number.phone_numberable_type = "Guardian"
+    @phone_number.save
+    redirect_to guardians_root_path
+  end
+
+  def delete_phone_number
+    @phone_number = PhoneNumber.find(params[:phone_number_id])
+    @phone_number.destroy
+    redirect_to edit_guardians_profile_path(current_guardian)
+  end
+
 
 end
