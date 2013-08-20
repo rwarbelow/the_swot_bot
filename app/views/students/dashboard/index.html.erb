@@ -2,8 +2,6 @@
 hello <%= current_user.first_name %>
 
 <div class="s-profile-container pure-g-r">
-<li><%= link_to "Logout", logout_path, :method => "delete" %></li>
-
   <h2 class="chalk">Welcome, <%= current_user.first_name %></h2>
   <ul>
     <li>First Name: <%= current_user.first_name %> </li>
@@ -20,7 +18,6 @@ hello <%= current_user.first_name %>
     <li>Grade Level: <%= current_user.grade_level %> </li>
     <li>Guardian Registration Code: <%= current_user.registration_code %> </li>
   </ul>
-  <%= link_to "Edit My Information", edit_profile_path(current_student) %>
   <div class="pure-g-r">
     <div class="pure-u-1-2 s-panel-classes">
       <%= render 'shared/class_list' %>

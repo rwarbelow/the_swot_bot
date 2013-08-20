@@ -1,5 +1,5 @@
 <div class="button-container">
-  <ul><% if current_teacher.courses %>
+  <ul><% if current_teacher? %>
     <% current_teacher.courses.each do |course| %>
       <li><%= link_to "#{course.subject.name}, per. #{course.period}", teachers_course_path(course) , :class => "pure-button chalk-dark"%> (<% link_to 'edit', edit_teachers_course_path(course) %><%= link_to 'student view', students_course_path(course) %>)  
       <% end %>
