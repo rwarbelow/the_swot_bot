@@ -25,6 +25,9 @@ SwotBot::Application.routes.draw do
       resources :submissions
       resources :grades
     end
+    resources :reports, :only => [:index, :show] do
+      get '/course_report', to: 'reports#course'
+    end
     root :to => "dashboard#index"
   end
 
