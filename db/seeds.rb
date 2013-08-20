@@ -97,9 +97,9 @@ end
   end
 end
 
-StudentActionCategory.create!(name: "Attendance")
-StudentActionCategory.create!(name: "Behavior")
-StudentActionCategory.create!(name: "Academics")
+StudentActionCategory.create!(name: "Attendance", allow_multiple_entries_per_date: false)
+StudentActionCategory.create!(name: "Behavior", allow_multiple_entries_per_date: true)
+StudentActionCategory.create!(name: "Academics", allow_multiple_entries_per_date: false)
 
 #attendance view
   #attendance actions
