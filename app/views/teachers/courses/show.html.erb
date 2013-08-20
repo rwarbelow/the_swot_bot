@@ -4,6 +4,14 @@
 <%= link_to "Assignments", teachers_course_assignments_path(@course) %>
 
 <%= link_to "Add Students to Course", teachers_course_enrollments_path(@course) %>
+
+<div class="errors">
+  <% if flash[:enrollment_errors] %>
+    <% flash[:enrollment_errors].each do |error| %>
+    <%= error %><p>
+    <% end %>
+  <% end %>
+</div>
 <table>
   <thead>
     <th>CCSD ID</th>

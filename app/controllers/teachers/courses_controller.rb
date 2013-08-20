@@ -47,4 +47,9 @@
     @course = Course.find(params[:id])
     @students = @course.students
   end
+
+  def index
+    @courses = Course.order(params[:sort])
+  end
+
 end
