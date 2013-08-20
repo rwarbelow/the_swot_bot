@@ -1,8 +1,26 @@
 class Teachers::LiveController < Teachers::ApplicationController
 
   def classroom
-    course = Course.find(params[:course_id])
-    p course
-    @students = course.students.all
+    @course = Course.find(params[:course_id])
+    p params[:course_id]
+    @students = @course.students.all
+  end
+
+  def new_action
+  end
+
+  def create_action
+    action = StudentActionType.find_by_name(params[:action_name]) #change in js
+    course_id = params[:course_id]
+    student_ids = params[:student_ids]
+
+    absent_students = params[:absent]
+    tardy_students = params[:tardy]
+    present_students = params[:present]
+
+    save_action(action, student_ids, course_id) if student_ids
+    
+    save_attendance(absent_students, tardy_students, present_students, course_id) if present_students
+    render :json => "SUCCESS!"
   end
 end
