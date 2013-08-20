@@ -1,4 +1,4 @@
-class Teachers::LiveController < Teachers::ApplicationController
+class Teachers::LiveController < Teachers::BaseController
 
   def classroom
     @course = Course.find(params[:course_id])
