@@ -16,11 +16,11 @@ class Guardians::ProfilesController < Guardians::BaseController
         redirect_to new_identity_path
       else
         @errors = @guardian.errors.full_messages
-        flash[:errors] = @errors
+        flash[:guardianship_errors] = @errors
         render 'new'
       end
     else
-      flash[:errors] = "Registration code or Student ID invalid."
+      flash[:guardianship_errors] = "Registration code or Student ID invalid."
       render 'new'
     end
   end
@@ -61,22 +61,22 @@ class Guardians::ProfilesController < Guardians::BaseController
   def add_student
     registration_code = params[:guardianship][:registration_code]
     ccsd_id = params[:guardianship][:ccsd_id]
-    @guardian = Guardian.find(params[:guardian_id])
+    @guardian = Guardian.find(params[:profile_id])
     if Student.exists?(:ccsd_id => ccsd_id, :registration_code => registration_code)
       student = Student.where(:registration_code => registration_code, :ccsd_id => ccsd_id).first 
       @guardianship = Guardianship.new(:student_id => student.id, 
                           :guardian_id => @guardian.id, 
                           :relationship_to_student => params[:guardianship][:relationship_to_student])
       if @guardianship.save
-        redirect_to guardian_path(@guardian)
+        redirect_to guardian_profile_path(@guardian)
       else
         @errors = @guardianship.errors.full_messages
-        flash[:errors] = @errors
-        render 'show'
+        flash[:guardianship_errors] = @errors
+        render 'guardians/dashboard/index'
       end
     else
       @guardianship = Guardianship.new
-      flash[:errors] = "The registration code and CCSD ID you entered do not match."
+      flash[:registration_errors] = "The registration code and CCSD ID you entered do not match."
       render 'guardians/guardians/show'
     end
   end
