@@ -15,7 +15,7 @@
   border-radius: 6px;
 }
 
-.active, .present {
+.active, .on_time {
   width: 75px;
   height: 75px;
   padding: 6px;
