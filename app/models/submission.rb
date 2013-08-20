@@ -3,7 +3,7 @@ class Submission < ActiveRecord::Base
 
 	validates :student_id, :presence => true
 	validates :assignment_id, :presence => true
-	validates :score, :presence => true
+	validates :points_earned, :presence => true
 
 	belongs_to :assignment
 	belongs_to :student  	 
