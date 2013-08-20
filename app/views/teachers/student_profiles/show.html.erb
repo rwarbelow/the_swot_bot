@@ -16,6 +16,7 @@
         <th><%= guardian.guardianships.where(student_id: @student.id).first.relationship_to_student %></th>
         <th></th>
         <th>Username</th>
+        <th>Email Address</th>
         <th>Phone Numbers</th>
       </thead>
 
@@ -23,6 +24,7 @@
         <td><%= guardian.first_name %></td> 
         <td><%= guardian.last_name %></td>
         <td><%= guardian.username %></td>
+        <td><%= guardian.email %></td>
         <% guardian.phone_numbers.each do |number| %>
         <td>
         <table>

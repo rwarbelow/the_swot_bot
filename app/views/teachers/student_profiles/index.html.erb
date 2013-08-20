@@ -1,12 +1,16 @@
+<h1>All Students</h1>
+
+<p>Click on table headers to sort</p>
+
 <table>
   <thead>
     <th>See Student Info</th>
-    <th>Student ID</th>
+    <th><%= link_to "CCSD ID", :sort => "ccsd_id" %></th>
     <th>First Name</th>
-    <th>Last Name</th>
+    <th><%= link_to "Last Name", teachers_student_profiles_path %></th>
     <th>Username</th>
-    <th>Birthday</th>
-    <th>Grade Level</th>
+    <th><%= link_to "Birthday", :sort => "birthday" %></th>
+    <th><%= link_to "Grade", :sort => "grade_level" %></th>
     <th>Registration Code</th>
     <th>Guardian 1</th>
     <th>Guardian 2</th>
@@ -30,4 +34,5 @@
   </tr>
 <% end %>
 </table>
+
 
