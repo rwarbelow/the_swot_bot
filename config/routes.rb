@@ -22,6 +22,7 @@ SwotBot::Application.routes.draw do
     resources :courses do
       get '/liveclass', :to => 'live#classroom'
       resources :assignments
+      resources :enrollments
       resources :submissions
       resources :grades 
     end
