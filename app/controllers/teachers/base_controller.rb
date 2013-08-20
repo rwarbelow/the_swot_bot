@@ -1,11 +1,5 @@
 class Teachers::BaseController < ApplicationController
-
-  def enrolled_or_teaching
-    return true if current_student? and current_student.enrolled_in?(@course)
-    return true if current_teacher? and current_teacher.teaching?(@course)
-
-    redirect_to root_path and return false
-  end
+	before_filter :require_teacher
 
   def save_action(action, student_ids, course_id)
     student_ids.each do |student_id|
@@ -22,4 +16,9 @@ class Teachers::BaseController < ApplicationController
     save_action("tardy", tardy_students, course_id)
     save_action("on-time", present_students, course_id)
   end
+
+	def require_teacher
+	  return true if current_guardian?
+	  redirect_to root_path and return false
+	end
 end
