@@ -37,8 +37,6 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (2.3.2.1)
-      sass (~> 3.2)
     builder (3.0.4)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -114,8 +112,6 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
-    purecss-rails (0.2.1)
-      railties (>= 3.2.6, < 5)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -202,7 +198,6 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   better_errors
   binding_of_caller
-  bootstrap-sass (~> 2.3.2.1)
   capybara
   coffee-rails (~> 3.2.1)
   database_cleaner
@@ -215,7 +210,6 @@ DEPENDENCIES
   launchy
   pg
   pry
-  purecss-rails
   rails (= 3.2.13)
   rb-fsevent
   rspec-rails
