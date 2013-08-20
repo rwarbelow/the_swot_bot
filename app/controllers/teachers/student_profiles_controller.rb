@@ -45,4 +45,16 @@ class Teachers::StudentProfilesController < Teachers::BaseController
       render 'new'
     end
   end
+
+  def index
+    if current_user.student?
+      redirect_to students_root_path
+    elsif current_user.guardian?
+      redirect_to guardians_root_path
+    elsif current_user.teacher?
+      @students = Student.all
+    else
+      redirect_to login_path
+    end
+  end
 end
