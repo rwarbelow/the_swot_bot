@@ -12,6 +12,9 @@
   <% if flash[:guardianship_errors] %>
     <p class="flash-notice"><%= flash[:guardianship_errors] %></p>
   <% end %>
+  <% if flash[:registration_errors] %>
+    <p class="flash-notice"><%= flash[:registration_errors] %></p>
+  <% end %>
     <%= form_for Guardianship.new, url: guardians_profile_add_student_path(current_guardian), :html => { :class => "pure-form pure-form-stacked", :id => "login" } do |f| %>
       <h3>Add student to account</h3>
 

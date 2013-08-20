@@ -68,7 +68,7 @@ class Guardians::ProfilesController < Guardians::BaseController
                           :guardian_id => @guardian.id, 
                           :relationship_to_student => params[:guardianship][:relationship_to_student])
       if @guardianship.save
-        redirect_to guardian_profile_path(@guardian)
+        redirect_to guardians_root_path(@guardian)
       else
         @errors = @guardianship.errors.full_messages
         flash[:guardianship_errors] = @errors
@@ -77,7 +77,7 @@ class Guardians::ProfilesController < Guardians::BaseController
     else
       @guardianship = Guardianship.new
       flash[:registration_errors] = "The registration code and CCSD ID you entered do not match."
-      render 'guardians/guardians/show'
+      render 'guardians/dashboard/index'
     end
   end
 
