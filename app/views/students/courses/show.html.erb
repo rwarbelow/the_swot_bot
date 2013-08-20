@@ -1,0 +1,16 @@
+<h1><%=@course.subject.name%></h1>
+
+<table>
+  <thead>
+    <th>Assignment Title</th>
+    <th>Assignment Description</th>
+    <th>Due</th>
+  </thead>
+  <tr>
+  	<%@course.assignments.each do |assignment|%>
+    <td><%= link_to "assignment.title", students_course_assignment(assignment) %></td>
+    <td><%= assignment.description %></td>
+    <td>due</td>
+    <%end%>
+  </tr>
+</table>

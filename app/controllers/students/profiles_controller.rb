@@ -5,10 +5,10 @@ class Students::ProfilesController < Students::BaseController
   end
 
   def edit
-    @student = Student.find(params[:id])
+    @student = current_student
     @user = @student.identity
     if @student && @student.id == current_user.student.id
-      render 'students/students/edit'
+      render 'edit'
     else
       redirect_to error_url
     end
@@ -18,7 +18,7 @@ class Students::ProfilesController < Students::BaseController
     @student = Student.find(params[:id])
     if @student.update_attributes(params[:student])
       flash[:success] = "Profile updated"
-      redirect_to student_path
+      redirect_to student_root_path
     else
       @errors = @student.errors.full_messages
       render 'edit'

@@ -6,7 +6,7 @@ SwotBot::Application.routes.draw do
   namespace 'students' do
     resources :profiles
     resources :courses, :only => [:index, :show] do
-      resources :assignments 
+      resources :assignments
       resources :submissions
       resources :grades
     end
