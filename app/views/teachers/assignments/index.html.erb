@@ -38,7 +38,7 @@
       <td><%= assignment.title %></td>
       <td><%= assignment.maximum_points %></td>
       <td><%= assignment.description %></td>
-      <td>LINK TO ENTER GRADES</td>
+      <td><%= link_to "Enter Grades", teachers_assignment_path(assignment) %></td>
     </tr>
     <% end %>
   </table>

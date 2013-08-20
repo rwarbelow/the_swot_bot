@@ -2,7 +2,7 @@ class Teachers::AssignmentsController < Teachers::BaseController
 
   def index
     @course = Course.find(params[:course_id])
-    @assignments = @course.assignments
+    @assignments = @course.assignments.sort! { |a,b| a.due_date <=> b.due_date }
   end
 
   def create
@@ -16,6 +16,10 @@ class Teachers::AssignmentsController < Teachers::BaseController
       @assignments = @course.assignments
       render 'teachers/assignments/index'
     end
+  end
+
+  def show
+      @assignment = Assignment.find(params[:id])
   end
 
 end

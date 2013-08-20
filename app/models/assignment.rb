@@ -1,5 +1,5 @@
 class Assignment < ActiveRecord::Base
-  attr_accessible :course_id, :title, :description, :due_date
+  attr_accessible :course_id, :title, :description, :due_date, :maximum_points
 
 	validates :course_id, :presence => true
 	validates :title, :presence => true
@@ -11,7 +11,7 @@ class Assignment < ActiveRecord::Base
 	has_many 	 :submissions
 
 def valid_date
-  errors.add(:due_date, "date cannot be before 8-25-13") if due_date && due_date < Date.parse("2013-08-25")
+  errors.add(:due_date, "Date must be for current school year") if due_date && due_date < Date.parse("2013-08-25")
 end
 
 end

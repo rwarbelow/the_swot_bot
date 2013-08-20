@@ -1,5 +1,5 @@
 class Submission < ActiveRecord::Base
-  attr_accessible :student_id, :assignment_id, :score
+  attr_accessible :student_id, :assignment_id, :points_earned
 
 	validates :student_id, :presence => true
 	validates :assignment_id, :presence => true
