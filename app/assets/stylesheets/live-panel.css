@@ -15,12 +15,30 @@
   border-radius: 6px;
 }
 
-.active {
+.active, .present {
   width: 75px;
   height: 75px;
   padding: 6px;
   border: 3px solid #66FF00;
   background-color: #00FF00;
+  opacity: 0.4;
+}
+
+.tardy {
+  width: 75px;
+  height: 75px;
+  padding: 6px;
+  border: 3px solid yellow;
+  background-color: yellow;
+  opacity: 0.4;
+}
+
+.absent {
+  width: 75px;
+  height: 75px;
+  padding: 6px;
+  border: 3px solid red;
+  background-color: red;
   opacity: 0.4;
 }
 
@@ -58,12 +76,23 @@
 }
 
 .red-list {
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+.green-list {
+  margin-top: 20px;
 }
 
 .other-function-container {
   width: auto;
+}
+
+.attendance-container {
+  
+}
+
+.grid-container {
+  float:left;
 }
 
 .other-function {
