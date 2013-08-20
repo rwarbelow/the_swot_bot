@@ -1,5 +1,5 @@
 class Teachers::ProfilesController < Teachers::BaseController
-  
+  skip_before_filter :require_teacher, :only => [:new, :create]
   def new
     @teacher = Teacher.new
   end
