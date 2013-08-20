@@ -3,7 +3,7 @@ class Teachers::BaseController < ApplicationController
 
   def save_action(action, student_ids, course_id)
     student_ids.each do |student_id|
-      action_name = StudentActionType.find_by_name(action)
+      action_name = StudentActionType.find_by_name(action.to_s)
       student = Student.find(student_id.to_i)
       enrolled = student.enrollments.where(course_id: course_id).first
       new_record = StudentAction.new(date: Date.today, enrollment_id: enrolled.id, student_action_type_id: action_name.id)
@@ -18,7 +18,7 @@ class Teachers::BaseController < ApplicationController
   end
 
 	def require_teacher
-	  return true if current_guardian?
+	  return true if current_teacher?
 	  redirect_to root_path and return false
 	end
 end

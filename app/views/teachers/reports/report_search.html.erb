@@ -1,0 +1,28 @@
+<%= render 'shared/error_messages' %>
+  <% if flash[:errors] %>
+    <%= flash[:errors] %>
+  <% end %>
+
+<h1>Get a student report</h1>
+<%= form_for Search.new, :url => teachers_student_report_path do |f| %>
+  <%= f.label :first_name %>
+  <%- f.text_field :first_name %>
+  <%= f.label :last_name %>
+  <%- f.text_field :last_name %>
+  <%= f.grouped_collection_select :student_name, Student.order(:ccsd_id), :states, :name, :id, :name, include_blank: true %>
+  <%= f.select :subject_id, Subject.all.map { |subject| [ subject.name, subject.id ] } %>
+<%- end %>
+
+#search by week
+#search by student
+
+<h1>Get a course Report</h1>
+<%= form_for Search.new, :url => teachers_course_report_path do |f| %>
+  <%= f.label :name %>
+  <%- f.text_field :name %>
+  <%= f.label :week %>
+  <%= f.select :week  %>
+<%- end %>
+
+#search by week
+#search by course
