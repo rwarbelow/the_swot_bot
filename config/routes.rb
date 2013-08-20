@@ -22,12 +22,18 @@ SwotBot::Application.routes.draw do
     resources :courses do
       get '/liveclass', :to => 'live#classroom'
       resources :assignments
+      resources :enrollments
       resources :submissions
-      resources :grades 
-    end
       get '/student_report', to: 'reports#student_report'
       get '/report_search', to: 'reports#report_search'
       get '/course_report', to: 'reports#course'
+      resources :grades
+    end
+    
+    resources :assignments do
+      resources :submissions
+    end
+    
     root :to => "dashboard#index"
   end
 
