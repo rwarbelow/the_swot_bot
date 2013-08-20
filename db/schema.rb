@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130819233329) do
+ActiveRecord::Schema.define(:version => 20130820152803) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "course_id"
@@ -89,8 +89,9 @@ ActiveRecord::Schema.define(:version => 20130819233329) do
 
   create_table "student_action_categories", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.boolean  "allow_multiple_entries_per_date?"
   end
 
   create_table "student_action_types", :force => true do |t|
