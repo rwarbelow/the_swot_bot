@@ -21,6 +21,5 @@ class Enrollment < ActiveRecord::Base
 
 	def student_courses
 		student.courses
-	end 
-
+	end
 end
