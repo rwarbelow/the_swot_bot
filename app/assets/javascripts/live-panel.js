@@ -7,14 +7,16 @@ $(document).ready(function() {
       $(this).toggleClass('active');
   });
 
-  $('.submit-button').click(function(event) {
+// ==============FRONT PAGE BEHAVIOR ACTIONS=====================
+
+  $('.behavior-container .submit-button').click(function(event) {
     var submit_action = $(this).attr('id'); 
     var data = [];
     var clicked = $('.active').each(function(){
       data.push($(this).attr('id')); // Student ID
     });
 
-    var course_id = $('data').attr('id');
+    var course_id = $('#course-id data').attr('id');
     var url = ('/live_class');
     var dataToSend = {action_name: submit_action,
                   student_ids : data, 
@@ -25,6 +27,7 @@ $(document).ready(function() {
     data = [];
   });
 
+// ==================OTHER BEHAVIOR ACTIONS========================
 
   $('#other').click(function() {
     var clicked = $('.active').text();
@@ -41,7 +44,7 @@ $(document).ready(function() {
       });
      
       var url = ('/live_class');
-      var course_id = $('data').attr('id');
+      var course_id = $('#course-id data').attr('id');
       var dataToSend = { action_name: submit_action,
                    student_ids : data,
                    course_id: course_id }
@@ -55,20 +58,47 @@ $(document).ready(function() {
     });
   });
 
-  $('#attendance').click(function(){
-    $('.behavior-container').hide();
-    $('.attendance-container').show();
-    // todo: get current class attendance from db
-    // instead of setting all the classes to present as below
-    // default attendance should be 'present' in migration
-  
-    $('.attendance-container .student-icon').addClass('present');
-    
-    var currentIcon;
+// ===============ATTENDANCE ACTIONS===================
 
-    function toggleAttendance(){
-      if($(currentIcon).hasClass('present')){
-        $(currentIcon).removeClass('present');
+  $('#attendance').click(function(){
+
+    $('.behavior-container').hide();
+    $('.attendance-container').show().find('.student-icon').addClass('on_time');
+   
+    var course_id = $('#course-id data').attr('id');
+    var get_url = '/teachers/courses/'+course_id+'/liveclass'
+    var on_time;
+    var tardy;
+    var absent;
+    // var currentIcon;
+
+    // get the current attendance from db (json)
+    //set the classes for each icon to the attendance status
+    $.get(get_url, function(response){
+      // console.log(response);
+      on_time = response.on_time
+      tardy = response.tardy
+      absent = response.absent
+      
+      function set_class(status_array, class_name){
+        $.each(status_array, function(i, v){
+          // icon = $('li .attendance-container').find("[data-id='" + v + "']");
+          icon = $(".attendance-container [data-id='" + v + "']");
+          icon.removeClass();
+          icon.addClass('student-icon '+class_name+'')
+        });
+      }
+
+      set_class(on_time, "on_time");
+      set_class(tardy, "tardy");
+      set_class(absent, "absent");
+    }, 'json');
+
+
+    function toggleAttendance(currentIcon){
+      // console.log(currentIcon);
+      if($(currentIcon).hasClass('on_time')){
+        $(currentIcon).removeClass('on_time');
         $(currentIcon).addClass('tardy');
       }
       else if($(currentIcon).hasClass('tardy')){
@@ -77,42 +107,41 @@ $(document).ready(function() {
       }
       else if($(currentIcon).hasClass('absent')){
         $(currentIcon).removeClass('absent');
-        $(currentIcon).addClass('present');
+        $(currentIcon).addClass('on_time');
       }
     }
-
-    $('.student-icon').click(function() {
-      console.log("clicked");
-      currentIcon = this;
-      toggleAttendance();  
+    
+    $('.attendance-container .student-icon').click(function() {
+      // console.log("clicked");
+      toggleAttendance(this);  
     });
 
     $('#submit').click(function(){
       var data = [];
-      var tardy = [];
-      var absent = [];
-      var present = [];
+      var tardy_posts = [];
+      var absent_posts = [];
+      var on_time_posts = [];
 
       var submit_action = $(this).attr('id');
 
       $('.tardy').each(function(){
-        tardy.push($(this).attr('id')); // Student ID
+        tardy_posts.push($(this).data('id')); // Student ID
       });
 
       $('.absent').each(function(){
-        absent.push($(this).attr('id')); // Student ID
+        absent_posts.push($(this).data('id')); // Student ID
       });
 
-      $('.present').each(function(){
-        present.push($(this).attr('id')); // Student ID
+      $('.on_time').each(function(){
+        on_time_posts.push($(this).data('id')); // Student ID
       });
 
-      var course_id = $('data').attr('id');
+      var course_id = $('#course-id data').attr('id');
       url = ('/live_class');
       dataToSend =  {
-                    tardy : tardy,
-                    absent : absent,
-                    present : present,
+                    tardy : tardy_posts,
+                    absent : absent_posts,
+                    on_time : on_time_posts,
                     course_id : course_id
                     }
 
@@ -121,6 +150,9 @@ $(document).ready(function() {
       $('.behavior-container').show();
     });
   });
+
+// =====================MASTERY ACTIONS======================
+
 });
 
 
