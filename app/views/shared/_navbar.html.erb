@@ -4,6 +4,7 @@
     <% if current_student? %>
       <li class="current chalk-dark"><span class="nav-title">_____</span></li>
       <li><%= link_to "Student Dashboard", students_root_path %></li>
+      <li><%= link_to "Student Profile", students_profile_path(current_student) %></li>
       <li><%= link_to "Current Courses", students_courses_path(current_student)%></li>
       <li><%= link_to "Edit My Profile", edit_students_profile_path(current_student)%></li>
     <% end %>
@@ -11,7 +12,8 @@
     <% if current_teacher? %>
       <li class="current chalk-dark"><span class="nav-title">_____</span></li>
       <!-- need to hook these up -->
-      <li><%= link_to "Teacher Dashboard", teachers_profile_path(current_teacher) %></li>
+      <li><%= link_to "Teacher Dashboard", teachers_root_path %></li>
+      <li><%= link_to "Teacher Profile", teachers_profile_path(current_teacher) %></li>
       <li><%= link_to "Create Class", controller: "teachers/courses", action: 'new' %></li>
        <%=puts current_teacher%>
       <li><%= link_to "View Classes", teachers_courses_path(current_teacher) %></li>
@@ -26,6 +28,7 @@
       <li class="current chalk-dark"><span class="nav-title">_____</span></li>
       <!-- need to hook these up -->
       <li><%= link_to "Guardian Dashboard", guardians_root_path %></li>
+      <li><%= link_to "Guardian Profile", guardians_profile_path(current_guardian) %></li>
     <% end %>
     <li><%= link_to "Send Message", root_path %></li>
     <li><%= link_to "Logout", logout_path, :method => "delete" %></li>
