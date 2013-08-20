@@ -1,4 +1,5 @@
 class Guardians::ProfilesController < Guardians::BaseController
+  skip_before_filter :require_guardian, :only => [:new, :create]
   def new
     @guardian = Guardian.new
   end
