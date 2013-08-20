@@ -1,0 +1,22 @@
+<h1>Assignments for <%= @course.subject.name %>, period <%= @course.period %></h1>
+
+<div>
+  <table>
+    <thead>
+      <th>Due Date</th>
+      <th>Title</th>
+      <th>Maximum Points</th>
+      <th>Description</th>
+      <th></th>
+    </thead>
+    <% @assignments.each do |assignment| %>
+    <tr>
+      <td>assignment.due_date</td>
+      <td>assignment.title</td>
+      <td>assignment.maximum_points</td>
+      <td>assignment.description</td>
+      <td>LINK TO ENTER GRADES</td>
+    </tr>
+    <% end %>
+  </table>
+</div>
