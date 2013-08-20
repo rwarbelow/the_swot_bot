@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(:version => 20130819233329) do
 
   create_table "phone_numbers", :force => true do |t|
     t.string   "number"
-    t.string   "type"
+    t.string   "kind"
     t.integer  "phone_numberable_id"
     t.string   "phone_numberable_type"
     t.datetime "created_at",            :null => false
