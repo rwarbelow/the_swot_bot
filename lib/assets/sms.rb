@@ -1,5 +1,5 @@
 #this method recieves a text, takes  the number and the text body "student_id" and verifies if the guardian phone number matches the student id
-#this method returns a studnet object
+#this method returns a student object
 
 class Sms
 

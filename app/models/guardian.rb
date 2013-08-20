@@ -11,7 +11,7 @@ class Guardian < ActiveRecord::Base
   has_many :students, :through => :guardianships
   has_many :phone_numbers, :as => :phone_numberable
 
-  def valid_number?(phone_number)
-  	self.find_by_number(phone_number)
+  def self.valid_number?(phone_number)
+  	find_by_number(phone_number)
   end
 end
