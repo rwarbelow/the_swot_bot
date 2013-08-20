@@ -40,7 +40,7 @@ SwotBot::Application.routes.draw do
   resources :messages
   
   get '/live_class', to: 'live#classroom'
-  post '/live_class', to: 'students/student_actions#create'
+  post '/live_class', to: 'teachers/live#create_action'
   get '/error', to: 'home#909error', as: :error
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
