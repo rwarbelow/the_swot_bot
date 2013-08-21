@@ -46,7 +46,7 @@ ccsd_no = 3333333
   end
 end
 
-subjects = ["English", "Math", "History", "Science", "Juggling", "Sex ed"]
+subjects = ["Reading", "Math", "US History", "Science", "Geography", "Writing"]
 subjects.each do |subject| 
   7.times do |i|
     Subject.create!(:name => "#{subject} 10#{i}")
