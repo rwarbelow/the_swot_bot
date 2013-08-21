@@ -1,14 +1,20 @@
-<div class="button-container">
-	<ul><% if current_teacher? %>
-		<% current_teacher.courses.each do |course| %>
-		<li><%= link_to "#{course.subject.name}, per. #{course.period}", teachers_course_path(course) , :class => "pure-button chalk-dark"%> 
+<div class="class-icon-container">
+	<ul>
+		<% if current_teacher? %>
+			<% current_teacher.courses.each do |course| %>
+				<li>
+					<%= link_to "(#{course.period})  #{course.subject.name}", teachers_course_liveclass_path(course) , :class => "btn btn-large btn-info" %>
+				</li>
 			<% end %>
-			<%end%>
-		</ul>
-		<ul><% if current_student? %>
+		<%end%>
+	</ul>
+	<ul>
+		<% if current_student? %>
 			<% current_student.courses.each do |course| %>
-			<li><%= link_to "#{course.subject.name}, per. #{course.period}", students_course_path(course) , :class => "pure-button chalk-dark"%>
-				<% end %>
-				<%end%>
-			</ul>
-		</div>
+				<li>
+					<%= link_to "#{course.subject.name}, per. #{course.period}", students_course_path(course) , :class => "pure-button chalk-dark"%>
+				</li>
+			<% end %>
+		<%end%>
+	</ul>
+</div>

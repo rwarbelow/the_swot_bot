@@ -6,11 +6,11 @@
   border: 3px solid #ededed;
   background-color: #F2F5E4;
   cursor: pointer;
-  width: 75px;
-  height: 75px;
+  width: 52px;
+  height: 52px;
   padding: 6px;
   margin-bottom: 10px;
-  margin-left: 10px;
+  margin-left: 15px;
   float: left;
   border-radius: 6px;
 }
@@ -43,52 +43,40 @@
 }
 
 .icon-container {
-  width: 700px;
+  width: 550px;
   float: left;
+  margin-top: 20px;
 }
 
 .submit-button-container {
-  width: 220px;
+  width: 180px;
   float: right;
   font-size: 2.4em;
 }
 
-.submit-button, .other-button {
-  cursor: pointer;
-  height: 60px;
-  text-align: center;
-  font-weight: bold;
-  width: 200px;
-  margin-bottom: 6px;
-  margin-left: -40px;
-  transition: all 0.5s ease;
-}
-
 .initials {
-  font-size: 2.4em;
+  font-size: 2.5em;
   text-align: center;
   font-weight: bold;
 }
 
 .full-name {
+  margin-top: 8px;
   font-size: 0.8em;
   text-align: center;
+  line-height: 1.1em;
 }
 
 .red-list {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .green-list {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .other-function-container {
   width: auto;
-}
-
-.attendance-container {
-  
 }
 
 .grid-container {
@@ -105,9 +93,7 @@
   float: left;
 }
 
-.red {
-  background-color: red;
-}
-.green {
-  background-color: green;
+.btn {
+  margin-top: 8px;
+  height: 54px;
 }
