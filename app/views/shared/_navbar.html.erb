@@ -1,37 +1,45 @@
 <% if current_user %>
-<nav class="nav">
-  <ul>
-    <% if current_student? %>
-      <li class="current chalk-dark"><span class="nav-title">_____</span></li>
-      <li><%= link_to "Student Dashboard", students_root_path %></li>
-      <li><%= link_to "Student Profile", students_profile_path(current_student) %></li>
-      <li><%= link_to "Current Courses", students_courses_path(current_student)%></li>
-      <li><%= link_to "Edit My Profile", edit_students_profile_path(current_student)%></li>
-    <% end %>
+  <nav class="nav">
+    <ul>
+      <% if current_student? %>
+        <li><%= link_to "Student Dashboard", students_root_path, :class => "button button-flat" %></li>
+        <li class="divider"></li>
+        <li><%= link_to "Student Profile", students_profile_path(current_student), :class => "button button-flat" %></li>
+        <li class="divider"></li>
+        <li><%= link_to "Current Courses", students_courses_path(current_student), :class => "button button-flat" %></li>
+        <li class="divider"></li>
+        <li><%= link_to "Edit My Profile", edit_students_profile_path(current_student), :class => "button button-flat" %></li>
+      <% end %>
 
-    <% if current_teacher? %>
-      <li class="current chalk-dark"><span class="nav-title">_____</span></li>
-      <!-- need to hook these up -->
-      <li><%= link_to "Teacher Dashboard", teachers_root_path %></li>
-      <li><%= link_to "Teacher Profile", teachers_profile_path(current_teacher) %></li>
-      <li><%= link_to "Create Class", controller: "teachers/courses", action: 'new' %></li>
-       <%=puts current_teacher%>
-      <li><%= link_to "View Classes", teachers_courses_path(current_teacher) %></li>
-      <li><%= link_to "Create Student", new_teachers_student_profile_path %></li>
-      <li><%= link_to "View Recent Feedback", root_path %></li>
-      <!-- <li><%= link_to "View all students" %></li> -->
-      <!-- <li><%= link_to "View all teachers" %></li> -->
-      <!-- <li><%= link_to "View all guardians" %></li> -->
-    <% end %>
+      <% if current_teacher? %>
+        <li class="list-header button">Classes</li>
+        <li><%= link_to "Teacher Dashboard", teachers_root_path, :class => "button button-flat" %></li>
+        <li class="divider"></li>
+        <li><%= link_to "Teacher Profile", teachers_profile_path(current_teacher), :class => "button button-flat" %></li>
+        <li class="divider"></li>
+        <li><%= link_to "Create Class", new_teachers_course_path, :class => "button button-flat" %></li>
+        <li class="divider"></li>
+         <%=puts current_teacher%>
+        <li><%= link_to "View Classes", teachers_courses_path(current_teacher), :class => "button button-flat" %></li>
+        <li class="divider"></li>
+        <li><%= link_to "Create Student", new_teachers_student_profile_path, :class => "button button-flat" %></li>
+        <li class="divider"></li>
+        <li><%= link_to "View Recent Feedback", root_path, :class => "button button-flat" %></li>
+         <li class="divider"></li>
+        <!-- <li><%= link_to "View all students" %></li> -->
+        <!-- <li><%= link_to "View all teachers" %></li> -->
+        <!-- <li><%= link_to "View all guardians" %></li> -->
+      <% end %>
 
-    <% if current_user.guardian? %>
-      <li class="current chalk-dark"><span class="nav-title">_____</span></li>
-      <!-- need to hook these up -->
-      <li><%= link_to "Guardian Dashboard", guardians_root_path %></li>
-      <li><%= link_to "Guardian Profile", guardians_profile_path(current_guardian) %></li>
-    <% end %>
-    <li><%= link_to "Send Message", new_message_path %></li>
-    <li><%= link_to "Logout", logout_path, :method => "delete" %></li>
+      <% if current_user.guardian? %>
+        <li><%= link_to "Guardian Dashboard", guardians_root_path, :class => "button button-flat" %></li>
+        <li class="divider"></li>
+        <li><%= link_to "Guardian Profile", guardians_profile_path(current_guardian), :class => "button button-flat" %></li>
+        <li class="divider"></li>
+      <% end %>
+      <li><%= link_to "Send Message", new_message_path, :class => "button button-flat" %></li>
+      <li class="divider"></li> 
+      <li><%= link_to "Logout", logout_path, :method => "delete", :class => "button button-flat" %></li>
   </ul>
 </nav>
 <% end %>
