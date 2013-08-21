@@ -5,16 +5,12 @@
   <% @assignments.each do |assignment| %>
   <table>
     <thead>
-      <th>Period</th>
-      <th>Subject</th>
       <th>Assignment</th>
       <th>Due Date</th>
       <th>Max Points</th>
       <th>Earned Points</th>
     </thead>
     <tr>
-      <td><%= assignment.course.period %></td>
-      <td><%= assignment.course.subject.name %></td>
       <td><%= assignment.title %></td>
       <td><%= assignment.due_date %></td>
       <td><%= assignment.maximum_points %></td>
@@ -30,16 +26,12 @@
   <table>
     <thead>
       <th>Date</th>
-      <th>Period</th>
-      <th>Subject</th>
       <th>Teacher</th>
       <th>Action</th>
       <th>Comments</th>
     </thead>
     <tr>
       <td><%= action.date %></td> 
-      <td><%= action.enrollment.course.period %></td>
-      <td><%= action.enrollment.course.subject.name %></td>
       <td><%= action.enrollment.course.teacher.last_name %></td>
       <td><%= action.student_action_type.name %></td>
       <td><% if action.comment %> 
