@@ -1,0 +1,19 @@
+.class-create-form-container, 
+.class-index-container, 
+.class-edit-form-container {
+  width: 50%;
+  float: left;
+  margin-left: 100px;
+  margin-top: 50px;
+}
+
+.class-create-form-container .btn,
+.class-edit-form-container .btn {
+  margin-top: 20px;
+  width: 160px;
+}
+
+.class-create-form-container .dk_container,
+.class-edit-form-container .dk_container {
+  margin-right: 20px;
+}
