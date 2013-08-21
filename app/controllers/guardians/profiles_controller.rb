@@ -41,7 +41,7 @@ class Guardians::ProfilesController < Guardians::BaseController
     @guardian = Guardian.find(params[:id])
     if @guardian.update_attributes(params[:guardian])
       flash[:success] = "Profile updated"
-      redirect_to guardians_profile_path(@guardian)
+      redirect_to guardians_root_path
     else
       @errors = @guardian.errors.full_messages
       render 'guardians/guardians/edit'
@@ -64,11 +64,12 @@ class Guardians::ProfilesController < Guardians::BaseController
     ccsd_id = params[:guardianship][:ccsd_id]
     @guardian = Guardian.find(params[:profile_id])
     if Student.exists?(:ccsd_id => ccsd_id, :registration_code => registration_code)
-      student = Student.where(:registration_code => registration_code, :ccsd_id => ccsd_id).first 
+      @student = Student.where(:registration_code => registration_code, :ccsd_id => ccsd_id).first 
       @guardianship = Guardianship.new(:student_id => student.id, 
                           :guardian_id => @guardian.id, 
                           :relationship_to_student => params[:guardianship][:relationship_to_student])
       if @guardianship.save
+        flash[:success] = "#{@student.first_name} added"
         redirect_to guardians_root_path(@guardian)
       else
         @errors = @guardianship.errors.full_messages
@@ -87,14 +88,15 @@ class Guardians::ProfilesController < Guardians::BaseController
     @phone_number.phone_numberable_id = current_guardian.id
     @phone_number.phone_numberable_type = "Guardian"
     @phone_number.save
+    flash[:success] = "#{@phone_number.number} added"
     redirect_to guardians_root_path
   end
 
   def delete_phone_number
     @phone_number = PhoneNumber.find(params[:phone_number_id])
+    number = @phone_number.number
     @phone_number.destroy
+    flash[:success] = "#{number} deleted"
     redirect_to edit_guardians_profile_path(current_guardian)
   end
-
-
 end
