@@ -1,9 +1,11 @@
 <%if current_student = current_user %>
-<h1>Welcome, <%= current_user.first_name %>!</h1>
+<h1><%= current_user.first_name %>'s Information</h1>
+<div>
+  <h4>Guardian Registration Code: <%= current_user.registration_code %></h4>
+</div>
 
 <div>
   <ul>
-    <li><%= link_to "Edit Profile", edit_students_profile_path(current_student) %></li>
     <li>First Name: <%= current_user.first_name %> </li>
     <li>Last Name: <%= current_user.last_name %> </li>
     <li>Username: <%=current_user.username %> </li>
@@ -16,6 +18,5 @@
       <% end %></li>
     <li>CCSD ID: <%= current_user.ccsd_id %> </li>
     <li>Grade Level: <%= current_user.grade_level %> </li>
-    <li>Guardian Registration Code: <%= current_user.registration_code %> </li>
   </ul>
 <% end %>
