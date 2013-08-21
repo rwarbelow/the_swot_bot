@@ -3,66 +3,105 @@
 
 class Sms
 
-	def initialize(phone_number, body)
-		@phone_number = phone_number
-		@body = body
-	end
+	attr_reader :phone_number, :ccsd_id
 
-	def reply_with_student_info
-		if Guardian.valid_number?(phone_number)
-			send_sms_reply
+	def initialize(phone_number, ccsd_id)
+		@phone_number = phone_number
+		@ccsd_id = ccsd_id
+	end
+	# require 'pry'
+	def	initiate_response
+		if guardian = Guardian.valid_number?(phone_number)
+			p "before check student guardian"
+
+			check_student_guardian_relationship(guardian, ccsd_id)
+			p "after check student guardian"
 		else
 			error_reply
 		end
 	end
 
+	def check_student_guardian_relationship(guardian, ccsd_id)
+		if student = guardian.students.find { |student| student.ccsd_id == ccsd_id }
+			collect_student_actions(student)
+		else
+			error_reply
+		end
+	end
+	
+	def collect_student_actions(student)
+		student_actions_array = []
+		student.student_actions.select {|action| action.date == Date.today}.each do |action|
+  		student_actions_array << action.student_action_type_id
+  	end
+  	aggregate_student_behavior_hash(student_actions_array)
+	end
+
+	def aggregate_student_behavior_hash(student_actions_array) 
+		student_actions_hash = Hash.new(0)
+		student_actions_array.each do |n|
+			student_actions_hash[n] +=1
+		end
+		prepare_text_body(student_actions_hash)
+	end
+
+	def prepare_text_body(student_actions_hash)
+		text_body = ""
+		student_actions_hash.each do |key, value|
+    	text_body << "#{StudentActionType.find(key).name}: #{value}"
+		end
+
+		if text_body.length < 160
+			send_sms_reply(text_body)
+		else
+			send_sms_reply("text message too long")
+		end
+	end
+
 	def error_reply
-		TextMessage.sendMessage({to:phone_number,
+		TextMessage.sendMessage({to: phone_number,
 														 message: "We're sorry, but we could not process your request. Please contact your students Teacher."})
 	end
 
-	def send_sms_reply
-	TextMessage.sendMessage({to:phone_number,
-														 message: Student.daily_report})	
+	def send_sms_reply(text_body)
+		# binding.pry
+		TextMessage.sendMessage({to: phone_number,
+														 message: text_body })	
+	end
 end
-
 
 	
-@student_actions_array = []
-@student_actions_hash = Hash.new(0)
+# @student_actions_array = []
 
-def validate_guardian
-	@guardian = Guardian.find_by_number(@phone_number)
-	students = @guardian.students
-	students.any? { |student| student.ccsd_id == @student_id }
-end
+# def validate_guardian
+# 	@guardian = Guardian.find_by_number(@phone_number)
+# 	students = @guardian.students
+# 	students.any? { |student| student.ccsd_id == @student_id }
+# end
 
-def validate_guardian_and_return_student # rename? find student by validating guardian
-	Guardian.find(PhoneNumber.find_by_number(@phone_number).phone_numberable_id).students.select {|student| student.ccsd_id == @student_id}.first
-end
+# def validate_guardian_and_return_student # rename? find student by validating guardian
+# 	Guardian.find(PhoneNumber.find_by_number(@phone_number).phone_numberable_id).students.select {|student| student.ccsd_id == @student_id}.first
+# end
 
-# this returns ALL (even duplicates) student_action_type_ids 
-def student_info_array
-	student = validate_guardian_and_return_student(@phone_number, @student_id)
-	student.student_actions.select {|action| action.date == Date.today}.each do |action|
-		@student_actions_array << action.student_action_type_id
-	end
-end
+# # this returns ALL (even duplicates) student_action_type_ids 
+# def student_info_array
+# 	student = validate_guardian_and_return_student(@phone_number, @student_id)
+# 	student.student_actions.select {|action| action.date == Date.today}.each do |action|
+# 		@student_actions_array << action.student_action_type_id
+# 	end
+# end
 
-# this creates a hash with key-value pairs for student_action_type_id numbers 
-# and the number of times they appeared in the array
-def aggregate_student_behavior_hash 
-	@student_actions_array.each do |n|
-		@studnet_actions_hash[n] +=1
-	end
-end
+# # this creates a hash with key-value pairs for student_action_type_id numbers 
+# # and the number of times they appeared in the array
 
-# this returns things like "incomplete-classwork: 2"
-def list_daily_student_behaviors
-	@student_actions_hash.each do |key, value|
-		p "#{StudentActionType.find(key).name}: #{value}"
-	end
-end
+# # this returns things like "incomplete-classwork: 2"
+# def list_daily_student_behaviors
+# 	@student_actions_hash.each do |key, value|
+# 		p "#{StudentActionType.find(key).name}: #{value}"
+# 	end
+# end
+
+
 
 
 # We recieve a text message from a guardian with a students ccsd_id number

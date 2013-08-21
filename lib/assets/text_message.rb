@@ -1,8 +1,7 @@
 require "net/https"  
-require "json"
+require "json"  
   
-  
-class TextMessage
+class TextMessage  
   
   # This method is used for finding out if the element instance is live  
   def ping  
@@ -68,22 +67,23 @@ class TextMessage
   
   
   # This method is used for sending messages  
-  def sendMessage(hash) 
-  
+  def self.sendMessage(hash)  
+    p hash
   
     json = Hash.new  
     message = Hash.new  
   
     #   Substitute the following  
-    #message[:sender] = "Change this to sender's phone number"                  #This is optional  
-    # message[:recipients] = "Change this to recipient's phone numbers"                   #This is required  
+    # message[:sender] = "+17027124186"                  #This is optional  
+    message[:recipients] = hash[:to]                   #This is required  
   
     #   Or you can use the below two arguments instead of the above two  
-    message[:from] = "702-712-4186"  
-    message[:to] = hash[:to]  
+    #message[:from] = "Change this to sender's phone number"  
+    #message[:to] = "Change this to recipient's phone numbers"  
   
-    message[:subject] = hash[:subject]                              #This is optional  
-    message[:message] = hash[:message]                              #This is requ[:message]
+    # message[:subject] = 'Add a simple subject'                              #This is optional  
+    message[:message] = hash[:message]                                            #This is required  
+  
     #   mimeType can be text/html or text/plain.  
     #   can be omitted. Default is text/plain.  
   
@@ -204,7 +204,7 @@ class TextMessage
   end  
   
   # Private method for attaching parameters to uri  
-  def parameterize(params)  
+  def self.parameterize(params)  
   
     URI.escape(params.collect{|k,v| "#{k}=#{v}"}.join('&'))  
   
@@ -224,7 +224,7 @@ class TextMessage
   
   end  
   
-  private :parameterize, :invokeElement  
+  # private :parameterize, :invokeElement  
   
 end  
   

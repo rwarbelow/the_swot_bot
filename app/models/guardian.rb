@@ -12,6 +12,6 @@ class Guardian < ActiveRecord::Base
   has_many :phone_numbers, :as => :phone_numberable
 
   def self.valid_number?(phone_number)
-  	find_by_number(phone_number)
+  	Guardian.find(PhoneNumber.find_by_number(phone_number))
   end
 end
