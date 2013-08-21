@@ -2,13 +2,16 @@ class Teachers::AssignmentsController < Teachers::BaseController
 
   def index
     @course = Course.find(params[:course_id])
-    @assignments = @course.assignments.sort! { |a,b| a.due_date <=> b.due_date }
+    @assignments = @course.assignments.sort! { |a,b| a.due_date <=> b.due_date } # sort by including an order in the sql query. dont sort in code, this can blow up!
   end
 
   def create
     @course = Course.find(params[:course_id])
+
+    # you could replace the following two lines with the one liner: @assignment = @course.assignments.new(params[:assignment])
     @assignment = Assignment.new(params[:assignment])
     @assignment.course_id = @course.id
+
     if @assignment.save
       redirect_to teachers_course_assignments_path(@course)
     else
@@ -19,7 +22,7 @@ class Teachers::AssignmentsController < Teachers::BaseController
   end
 
   def show
-      @assignment = Assignment.find(params[:id])
+    @assignment = Assignment.find(params[:id])
   end
 
 end

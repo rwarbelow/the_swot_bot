@@ -15,8 +15,8 @@ class Teacher < ActiveRecord::Base
 	has_many :assignments, :through => :courses
 	has_many :announcements
 
-	def teaching? course
-		courses.find(course)
+	def teaching?(course)
+		!!courses.find(course) # ? methods should return a boolean
 	end
 
 	private

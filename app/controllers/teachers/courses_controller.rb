@@ -5,8 +5,8 @@
   end
 
   def create
-    @course = Course.new(params[:course])
-    @course.teacher_id = current_teacher.id
+    @course = current_teacher.courses.new(params[:course])
+
     if @course.save
       redirect_to teachers_course_path(@course)
     else
@@ -17,9 +17,9 @@
   end
 
   def edit
-    @course = Course.find(params[:id])
-    @teacher = @course.teacher
-    if @course && @teacher.id == current_user.teacher.id
+    @course = current_teacher.courses.find(params[:id])
+
+    if @course
       render 'teachers/courses/edit'
     else
       redirect_to error_url
@@ -27,7 +27,9 @@
   end
 
   def update
+    # im confused... why is this controller action handling updating teachers? shouldnt it be updating courses?
     @teacher = Teacher.find(params[:id])
+
     if @teacher.update_attributes(params[:teacher])
       flash[:success] = "Profile updated"
       redirect_to teacher_path(@teacher)

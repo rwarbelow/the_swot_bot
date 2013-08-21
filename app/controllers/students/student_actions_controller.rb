@@ -1,6 +1,5 @@
 class Students::StudentActionsController < Students::BaseController
   def new
-
   end
 
   def create

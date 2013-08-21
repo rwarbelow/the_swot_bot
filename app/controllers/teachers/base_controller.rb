@@ -1,7 +1,7 @@
 class Teachers::BaseController < ApplicationController
 	before_filter :require_teacher
 
-  #TODO: Move this into model & refactor
+  #TODO: Move this into model & refactor +1
   def student_attendance(students)
     on_time, tardy, absent = [], [], []
 
@@ -32,7 +32,7 @@ class Teachers::BaseController < ApplicationController
     attendance
   end
 
-  #TODO: Move this into model
+  #TODO: Move this into model +1
   def save_action(action, student_ids, course_id)
 
     if student_ids
@@ -41,18 +41,18 @@ class Teachers::BaseController < ApplicationController
         action_type = StudentActionType.find_by_name(action.to_s)
         student = Student.find(student_id.to_i)
         enrollment = student.enrollments.find_by_course_id(course_id)
-        
+
         # Idea of what to call when code is moved into the model
-        # student_action = StudentAction.new(enrollment_id: enrollment.id, 
-        #                                    date: Date.today, 
+        # student_action = StudentAction.new(enrollment_id: enrollment.id,
+        #                                    date: Date.today,
         #                                    action_type_id: action_type.id)
         # student_action.save_or_update!
         if !action_type.category.allow_multiple_entries_per_date?
-          # find the preexising database row for the existing action of this 
+          # find the preexising database row for the existing action of this
           # same family and update its action_type_id
           student_action_of_same_family = StudentAction.where(
-                                                          enrollment_id: enrollment.id, 
-                                                          date: Date.today, 
+                                                          enrollment_id: enrollment.id,
+                                                          date: Date.today,
                                                           student_action_type_id: [action_type.category.student_action_types.map(&:id)]
                                                         ).first
 
@@ -61,7 +61,7 @@ class Teachers::BaseController < ApplicationController
             next
           end
         end
-        
+
         student_action = StudentAction.create(enrollment_id: enrollment.id,
                                               date: Date.today,
                                               student_action_type_id: action_type.id)
