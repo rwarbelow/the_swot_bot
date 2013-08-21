@@ -12,8 +12,10 @@ class MessagesController < ApplicationController
   end
 
   def create
+    p params
   	@message = Message.create(:author_id => current_user.id, :target_id => (Identity.find_by_teacher_id(params[:message][:to]).id), :body => params[:message][:body], :subject => params[:message][:subject])
   	if @message.save
+      flash[:message_sent] = "Your message has been delivered to #{Identity.find(@message.target_id).first_name} #{Identity.find(@message.target_id).last_name}!"
       redirect_to messages_path
     else
       flash[:errors] = @message.errors.full_messages
@@ -36,10 +38,12 @@ class MessagesController < ApplicationController
 
   def show_received
     @message = Message.find(params[:id])
+    render '/messages/show_received'
   end
 
   def show_sent
     @message = Message.find(params[:id])
+    render '/messages/show_sent'
   end
 
 end

@@ -51,7 +51,7 @@ SwotBot::Application.routes.draw do
 
   resources :messages
   get '/received_message/:id', :to => 'messages#show_received', :as => 'show_received'
-  get '/sent_message/:id', :to => 'messages#show_received', :as => 'show_sent'
+  get '/sent_message/:id', :to => 'messages#show_sent', :as => 'show_sent'
 
   
   post "/callbacks/cloud_elements", to: "callbacks#cloud_elements"

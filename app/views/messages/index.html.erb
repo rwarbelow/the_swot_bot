@@ -1,3 +1,6 @@
+<% if flash[:message_sent] %>
+<div class="flash"><%= flash[:message_sent] %></div>
+<% end %>
 <div id="tabs">
   <ul>
     <li><a href="#tabs-1">Received Messages</a></li>
