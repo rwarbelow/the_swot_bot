@@ -5,6 +5,7 @@ gem 'rails', '3.2.13'
 gem 'pg'
 gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'faker'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -21,7 +22,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rb-fsevent'
   gem 'growl'
-  gem 'faker'
 end
 
 group :development do 
