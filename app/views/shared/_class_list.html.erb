@@ -12,7 +12,7 @@
 		<% if current_student? %>
 			<% current_student.courses.each do |course| %>
 				<li>
-					<%= link_to "#{course.subject.name}, per. #{course.period}", students_course_path(course) , :class => "pure-button chalk-dark"%>
+					<%= link_to "#{course.subject.name}, per. #{course.period}", students_course_path(course) , :class => "btn btn-large btn-info"%>
 				</li>
 			<% end %>
 		<%end%>
