@@ -50,6 +50,7 @@ SwotBot::Application.routes.draw do
 
   resources :messages
   
+  post "/callbacks/cloud_elements", to: "callbacks#cloud_elements"
   get '/live_class', to: 'live#classroom'
   post '/live_class', to: 'teachers/live#create_action'
   get '/error', to: 'home#909error', as: :error

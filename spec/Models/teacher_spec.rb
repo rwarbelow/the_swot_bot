@@ -16,4 +16,5 @@ describe Teacher do
 	it { should have_many(:students) }
 	it { should have_many(:assignments) }
 	it { should have_many(:phone_numbers) }
+	it { should have_many(:announcements) }
 end
