@@ -92,7 +92,6 @@
     margin: 0 0 5px;
   }
   .nav ul:hover .current {
-    background: url(<%= asset_path, "Untitled.png" %>) no-repeat 10px 7px;
   }
 
   /* right nav */
