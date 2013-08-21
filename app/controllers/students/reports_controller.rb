@@ -1,4 +1,4 @@
-class Teachers::ReportsController < Teachers::BaseController
+class Students::ReportsController < Students::BaseController
   def student_report
   	 @student = Student.first
      @courses = @student.courses
