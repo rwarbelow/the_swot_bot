@@ -9,6 +9,7 @@ SwotBot::Application.routes.draw do
       resources :assignments
       resources :submissions
       resources :grades
+      get '/student_report', to: 'reports#student_report'
     end
     root :to => "dashboard#index"
   end
@@ -37,11 +38,11 @@ SwotBot::Application.routes.draw do
       get '/course_report', to: 'reports#course'
       resources :grades
     end
-    
+
     resources :assignments do
       resources :submissions
     end
-    
+
     root :to => "dashboard#index"
   end
 
@@ -53,6 +54,7 @@ SwotBot::Application.routes.draw do
     end
     resources :students do
       resources :courses
+      get '/student_report', to: 'reports#student_report'
     end
     root :to => "dashboard#index"
   end
@@ -61,7 +63,6 @@ SwotBot::Application.routes.draw do
   get '/received_message/:id', :to => 'messages#show_received', :as => 'show_received'
   get '/sent_message/:id', :to => 'messages#show_sent', :as => 'show_sent'
 
-  
   post "/callbacks/cloud_elements", to: "callbacks#cloud_elements"
   get '/live_class', to: 'live#classroom'
   post '/live_class', to: 'teachers/live#create_action'
