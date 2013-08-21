@@ -1,3 +1,5 @@
+<%= link_to "Back to Course Page", teachers_course_path(@course) %>
+
 <h1>Assignments for <%= @course.subject.name %>, period <%= @course.period %></h1>
 
 <%= form_for Assignment.new, url: teachers_course_assignments_path do |f| %>

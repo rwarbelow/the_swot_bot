@@ -5,7 +5,7 @@ class Assignment < ActiveRecord::Base
 	validates :title, :presence => true
 	validates :maximum_points, :presence => true
 	validates :due_date, :presence => true
-  validate :valid_date
+  # validate :valid_date
 
 	belongs_to :course
 	has_many 	 :submissions
