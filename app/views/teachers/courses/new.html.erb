@@ -18,7 +18,7 @@
 
     <%= f.select :subject_id, Subject.all.map { |subject| [ subject.name, subject.id ] } %>
 
-    <%= f.submit value="Create Class", :class => "btn btn-large btn-block btn-primary" %>
+    <%= f.submit value="Create Class", :class => "btn btn-block btn-large" %>
   
   <% end %>
 </div>
