@@ -13,8 +13,15 @@
       <%= form_for @guardian, url: guardians_profile_path(@guardian), :html => { :class => "pure-form pure-form-stacked", :id => "sign_up" } do |f| %>
 
       <%= f.label :email, "Email Address" %>
-
       <%= f.text_field :email %>
+
+      <%= f.label :address, "Street Address" %>
+      <%= f.text_field :address %>
+
+      <%= f.label :preferred_language, "Preferred Language" %>
+      <%= f.select :preferred_language, [['English','English'],
+      ['Spanish','Spanish'],
+      ['Other', 'Other']] %>
 
       <div class="submit-button">
         <%= f.submit value="Update Email", :class => "pure-button" %>
@@ -53,5 +60,50 @@
     <div class="pure-u-1-3">
   </div>
 </div>
+
+<div class="pure-g">
+  <div class="pure-u-1-3"></div>
+  <div class="pure-u-1-3 form-container">
+    <strong>Phone Numbers for Account</strong>
+    <% current_guardian.phone_numbers.each do |phone_number| %>
+      <table>
+        <tr>
+          <td><%= phone_number.number %></td>
+          <td>
+            <%= form_tag guardians_profile_delete_phone_number_path(current_guardian), :method => 'delete' do %>
+              <%= hidden_field_tag :phone_number_id, phone_number.id %>
+              <%= submit_tag "Delete Number" %>
+            <% end %>
+          </td>   
+        </tr>
+      </table>
+    <% end %>
+  </div>
+<div class="pure-u-1-3"></div>
+</div>   
+
+  <div class="pure-u-1-3 form-container">
+  <% if flash[:phone_number_errors] %>
+    <p class="flash-notice"><%= flash[:errors] %></p>
+  <% end %>
+    <%= form_for PhoneNumber.new, url: guardians_profile_add_phone_number_path(current_guardian), :html => { :class => "pure-form pure-form-stacked", :id => "login" } do |f| %>
+    <h3>Add phone number to account</h3>
+
+      <%= f.label :number, "Phone Number" %>
+
+      <%= f.text_field :number, placeholder: "***-***-****" %>
+
+      <%= f.label :kind, "Phone Type" %>
+
+      <%= f.select :kind, [['Cell','cell'],
+      ['Home','home'],
+      ['Work', 'work'],
+      ['Other', 'other']] %>
+
+      <div class="login-button">
+        <%= f.submit value="Add Phone Number", :class => "pure-button" %>
+      </div>
+    <% end %>
+  </div>
 
 

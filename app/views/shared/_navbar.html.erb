@@ -30,7 +30,7 @@
       <li><%= link_to "Guardian Dashboard", guardians_root_path %></li>
       <li><%= link_to "Guardian Profile", guardians_profile_path(current_guardian) %></li>
     <% end %>
-    <li><%= link_to "Send Message", root_path %></li>
+    <li><%= link_to "Send Message", new_message_path %></li>
     <li><%= link_to "Logout", logout_path, :method => "delete" %></li>
   </ul>
 </nav>

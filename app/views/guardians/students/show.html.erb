@@ -1,7 +1,8 @@
 <h1><%= @student.first_name %> <%= @student.last_name %></h1>
-
-<div class="schedule-grades">
+<div id="accordion">
   <h3>Class Schedule</h3>
+<div class="schedule-grades">
+  
   <table>
     <thead>
       <th>Period</th>
@@ -29,9 +30,9 @@
   </table>
 </div>
 
-
+<h3>Assignments</h3>
 <div class="assignments">
-  <h3>Assignments</h3>
+  
   <% @assignments.each do |assignment| %>
   <table>
     <thead>
@@ -54,8 +55,9 @@
   <% end %>
 </div>
 
+<h3>Recent Actions</h3>
 <div class="recent-actions">
-  <h3>Recent Actions</h3>
+  
   <% @actions.each do |action| %>
   <table>
     <thead>
@@ -79,4 +81,5 @@
     </tr>
   </table>
   <% end %>
+</div>
 </div>
