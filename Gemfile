@@ -21,6 +21,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rb-fsevent'
   gem 'growl'
+  gem 'faker'
 end
 
 group :development do 
@@ -33,7 +34,6 @@ group :test do
   gem 'guard-spork'
   gem 'launchy'
   gem 'capybara'
-  gem 'faker'
   gem 'shoulda-matchers'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
