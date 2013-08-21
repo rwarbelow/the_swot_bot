@@ -12,25 +12,28 @@ class Course < ActiveRecord::Base
 	belongs_to :teacher
 	belongs_to :subject
 
+
 	def calculate_student_percentage(student)
-		total_points = 0
-		earned_points = 0
-		if assignments.length > 0
-			assignments.each do |assignment|
-				student_submissions = assignment.submissions.where(:student_id => student.id)
-				total_points += assignment.maximum_points if assignment.due_date < Date.today
-				if student_submissions.length > 0
-					earned_points += student_submissions.first.points_earned
-				end
-				if student_submissions.length == 0
-					@percentage = "N/A"
-				else
-					@percentage = ((earned_points.to_f / total_points.to_f) * 100).round(1)
+		if self.assignments.length == 0
+			return ""
+		else
+			@total_points = 0
+			@earned_points = 0
+			self.assignments.each do |assignment|
+				if assignment.due_date <= Date.today + 1
+					student_submissions = assignment.submissions.where(:student_id => student.id)
+					@total_points += assignment.maximum_points
+					@earned_points += student_submissions.first.points_earned if student_submissions.length > 0
 				end
 			end
-			@percentage
+			if @earned_points && @total_points
+				earned = @earned_points.to_f
+				total = @total_points.to_f
+				return ((earned / total) * 100).round(1)
+			end
 		end
 	end
+
 
 	def calculate_student_grade(student)
 		if calculate_student_percentage(student)
@@ -50,5 +53,4 @@ class Course < ActiveRecord::Base
 			end
 		end
 	end
-
 end
