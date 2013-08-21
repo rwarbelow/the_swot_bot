@@ -1,2 +1,5 @@
 <%= render 'student_grid' %>
-<button id="submit">Submit</button>
+<div class="attendance-button-container">  
+  <button id="submit" class="btn btn-block btn-large">Submit</button>
+  <%= link_to "Back", teachers_course_liveclass_path, :class => "btn btn-block btn-large" %>
+</div>
