@@ -1,11 +1,13 @@
 <h1><%= @student.first_name %> <%= @student.last_name %></h1>
 
-<div class="Schedule">
+<div class="schedule-grades">
   <h3>Class Schedule</h3>
   <table>
     <thead>
       <th>Period</th>
       <th>Subject</th>
+      <th>Current Percent</th>
+      <th>Current Grade</th>
       <th>Teacher</th>
       <th>Email</th>
       <th>Cell #</th>
@@ -14,6 +16,8 @@
     <tr>
       <td><%= course.period %></td>
       <td><%= course.subject.name %></td>
+      <td><%= course.calculate_student_percentage(@student) %></td>
+      <td><%= course.calculate_student_grade(@student)%></td>
       <td><%= course.teacher.first_name %> <%= course.teacher.last_name %></td>
       <td><%= course.teacher.email %></td>
       <% cellnumbers = course.teacher.phone_numbers.select {|number| number.kind == "cell"} %>
@@ -25,7 +29,8 @@
   </table>
 </div>
 
-<div class="Assignments">
+
+<div class="assignments">
   <h3>Assignments</h3>
   <% @assignments.each do |assignment| %>
   <table>
@@ -34,20 +39,22 @@
       <th>Subject</th>
       <th>Assignment</th>
       <th>Due Date</th>
-      <th>Score</th>
+      <th>Max Points</th>
+      <th>Earned Points</th>
     </thead>
     <tr>
       <td><%= assignment.course.period %></td>
       <td><%= assignment.course.subject.name %></td>
       <td><%= assignment.title %></td>
-      <td>DUE</td>
-      <td><%= assignment.submissions.find_by_student_id(@student).score %></td>
+      <td><%= assignment.due_date %></td>
+      <td><%= assignment.maximum_points %></td>
+      <td><%= assignment.submissions.find_by_student_id(@student).points_earned if assignment.submissions.find_by_student_id(@student) %></td>
     </tr>
   </table>
   <% end %>
 </div>
 
-<div class="Recent Actions">
+<div class="recent-actions">
   <h3>Recent Actions</h3>
   <% @actions.each do |action| %>
   <table>

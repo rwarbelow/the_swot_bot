@@ -1,8 +1,7 @@
-<%if current_student%>
-hello <%= current_user.first_name %>
+<%if current_student = current_user%>
+<h1>Welcome, <%= current_user.first_name %>!</h1>
 
-<div class="s-profile-container pure-g-r">
-  <h2 class="chalk">Welcome, <%= current_user.first_name %></h2>
+<div>
   <ul>
     <li>First Name: <%= current_user.first_name %> </li>
     <li>Last Name: <%= current_user.last_name %> </li>
