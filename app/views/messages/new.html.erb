@@ -1,0 +1,19 @@
+<% if flash[:errors] %>
+	<% flash[:errors].each do |error| %>
+		<%= error %>
+	<% end %>
+<% end %>
+
+<%= form_for @message, url: messages_path, method: "post" do |f| %>
+  <%= f.label :to %>
+  <% teachers_array = Teacher.all.map { |teacher| [teacher.last_name, teacher.id] } %>
+  <%= f.select(:to, teachers_array, {:include_blank => 'Select a teacher'}) %><br />
+
+	<%= f.label :subject %>
+  <%= f.text_field :subject %><br />
+
+  <%= f.label :body %>
+  <%= f.text_area :body %><br />
+
+  <%= f.submit %>
+<% end %>

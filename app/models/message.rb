@@ -1,4 +1,7 @@
 class Message < ActiveRecord::Base
+	attr_accessor :to
+	attr_accessible :author_id, :target_id, :body, :subject
+
 	validates :author_id, :presence => true
 	validates :target_id, :presence => true
 	validates :body, :presence => true
