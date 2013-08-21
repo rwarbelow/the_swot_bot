@@ -5,16 +5,12 @@
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.1/base-min.css">
-    <head>
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-  <script type="text/javascript"></script>
-</head>
-
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript"></script>
   </head>
   <body>
-    <%= image_tag "chalk_board_green.png", class: "bg" %>
+    <%= image_tag "chalk_board_green_light.jpg", class: "bg" %>
     <div class="main-container">
       <%= render 'shared/header' %>
       <%= yield %>
