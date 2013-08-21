@@ -1,6 +1,7 @@
 <% if current_user %>
   <nav class="nav">
     <ul>
+      <li class="list-header button"><%= current_user.first_name %> <%= current_user.last_name %></li>
       <% if current_student? %>
         <li><%= link_to "Student Dashboard", students_root_path, :class => "button button-flat" %></li>
         <li class="divider"></li>
@@ -12,7 +13,6 @@
       <% end %>
 
       <% if current_teacher? %>
-        <li class="list-header button">Classes</li>
         <li><%= link_to "Teacher Dashboard", teachers_root_path, :class => "button button-flat" %></li>
         <li class="divider"></li>
         <li><%= link_to "Teacher Profile", teachers_profile_path(current_teacher), :class => "button button-flat" %></li>
@@ -37,7 +37,7 @@
         <li><%= link_to "Guardian Profile", guardians_profile_path(current_guardian), :class => "button button-flat" %></li>
         <li class="divider"></li>
       <% end %>
-      <li><%= link_to "Send Message", new_message_path, :class => "button button-flat" %></li>
+      <li><%= link_to "Inbox", messages_path, :class => "button button-flat" %></li>
       <li class="divider"></li> 
       <li><%= link_to "Logout", logout_path, :method => "delete", :class => "button button-flat" %></li>
   </ul>
