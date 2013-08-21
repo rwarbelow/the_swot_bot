@@ -1,6 +1,5 @@
 class Student < ActiveRecord::Base
 	include IdentityProfile
-	require 'SecureRandom'
 
 	before_create :generate_registration_code
 
