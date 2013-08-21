@@ -1,24 +1,19 @@
 <%if current_student%>
 <h1>Welcome, <%= current_user.first_name %>!</h1>
 
+<div>
+  <%= render '/shared/inspiration' %>
+</div>
 
-  </ul>
-  <div class="pure-g-r">
-    <div class="pure-u-1-2 s-panel-classes">
-      <%= render 'shared/class_list' %>
-    </div>
-    <div class="pure-u-1-2">
-      <p>Student's Messages Will Go Here</p>
-    </div>
-  </div>
-
-  <div class="pure-g-r">
-    <div class="pure-u-1-2">
-    </div>
-    <div class="pure-u-1-2">
-      <%= render '/shared/inspiration' %>
-    </div>
-  </div>
+<div class="pure-u-1-2">
+  <%= render 'shared/announcements' %>
 </div>
 
 <%end%>
+
+<h1><%= @student.first_name %> <%= @student.last_name %> (<%= @student.ccsd_id %>)</h1>
+<div id="accordion">
+  <h3>Class Schedule</h3>
+<div>
+  <%= render '/shared/schedule_grades' %>
+</div>

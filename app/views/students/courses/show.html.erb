@@ -1,16 +1,45 @@
 <h1><%=@course.subject.name%></h1>
 
-<table>
-  <thead>
-    <th>Assignment Title</th>
-    <th>Assignment Description</th>
-    <th>Due</th>
-  </thead>
-  <tr>
-  	<%@course.assignments.each do |assignment|%>
-    <td><%= link_to "assignment.title", students_course_assignment(assignment) %></td>
-    <td><%= assignment.description %></td>
-    <td>due</td>
-    <%end%>
-  </tr>
-</table>
+<h3>Assignments</h3>
+<div class="assignments">
+  <% @assignments.each do |assignment| %>
+  <table>
+    <thead>
+      <th>Assignment</th>
+      <th>Due Date</th>
+      <th>Max Points</th>
+      <th>Earned Points</th>
+    </thead>
+    <tr>
+      <td><%= assignment.title %></td>
+      <td><%= assignment.due_date %></td>
+      <td><%= assignment.maximum_points %></td>
+      <td><%= assignment.submissions.find_by_student_id(@student).points_earned if assignment.submissions.find_by_student_id(@student) %></td>
+    </tr>
+  </table>
+  <% end %>
+</div>
+
+<h3>Recent Actions</h3>
+<div class="recent-actions">
+  <% @actions.each do |action| %>
+  <table>
+    <thead>
+      <th>Date</th>
+      <th>Teacher</th>
+      <th>Action</th>
+      <th>Comments</th>
+    </thead>
+    <tr>
+      <td><%= action.date %></td> 
+      <td><%= action.enrollment.course.teacher.last_name %></td>
+      <td><%= action.student_action_type.name %></td>
+      <td><% if action.comment %> 
+        <%= action.student_action_type.name %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+  <% end %>
+</div>
+</div>

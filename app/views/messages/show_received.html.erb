@@ -1,3 +1,5 @@
+<%= link_to "Back to Inbox", messages_path %>
+
 <h1><%= @message.subject %></h1>
 <table>
 	<thead>
@@ -17,3 +19,25 @@
         <% end %>
 	</tr>
 </table>
+
+<% if flash[:errors] %>
+	<% flash[:errors].each do |error| %>
+		<%= error %>
+	<% end %>
+<% end %>
+
+<div>
+	<h3>Reply to this message:</h3>
+	<%= form_for Message.new, url: messages_path, method: "post" do |f| %>
+	  <%= hidden_field_tag :target_id, @message.author_id %>
+	  <p>To: <%= Identity.find(@message.author_id).first_name %> <%= Identity.find(@message.author_id).last_name %></p>
+
+	  <%= hidden_field_tag :subject, @message.subject %>
+	  <p>Subject: Re: <%= @message.subject%> </p>
+
+	  <%= f.label :body %>
+	  <%= f.text_area :body %><br />
+
+	  <%= f.submit %>
+	<% end %>
+</div>

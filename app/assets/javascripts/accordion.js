@@ -4,4 +4,8 @@ $(document).ready(function(){
       collapsible: true
     });
   });
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
 });
+

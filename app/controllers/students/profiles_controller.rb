@@ -17,7 +17,7 @@ class Students::ProfilesController < Students::BaseController
     @student = Student.find(params[:id])
     if @student.update_attributes(params[:student])
       flash[:success] = "Profile updated"
-      redirect_to student_root_path
+      redirect_to students_root_path
     else
       @errors = @student.errors.full_messages
       render 'edit'

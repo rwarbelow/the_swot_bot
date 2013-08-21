@@ -1,5 +1,8 @@
-<%if current_student = current_user%>
-<h1>Welcome, <%= current_user.first_name %>!</h1>
+<%if current_student = current_user %>
+<h1><%= current_user.first_name %>'s Information</h1>
+<div>
+  <h4>Guardian Registration Code: <%= current_user.registration_code %></h4>
+</div>
 
 <div>
   <ul>
@@ -15,24 +18,5 @@
       <% end %></li>
     <li>CCSD ID: <%= current_user.ccsd_id %> </li>
     <li>Grade Level: <%= current_user.grade_level %> </li>
-    <li>Guardian Registration Code: <%= current_user.registration_code %> </li>
   </ul>
-  <div class="pure-g-r">
-    <div class="pure-u-1-2 s-panel-classes">
-      <%= render 'shared/class_list' %>
-    </div>
-    <div class="pure-u-1-2">
-      <p>Student's Messages Will Go Here</p>
-    </div>
-  </div>
-
-  <div class="pure-g-r">
-    <div class="pure-u-1-2">
-    </div>
-    <div class="pure-u-1-2">
-      <p>Student's Goals/Inspirations Will Go Here</p>
-    </div>
-  </div>
-</div>
-
-<%end%>
+<% end %>

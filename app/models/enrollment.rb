@@ -1,5 +1,5 @@
 class Enrollment < ActiveRecord::Base
-  attr_accessible :student_id, :course_id
+  attr_accessible :student_id, :course_id, :current_grade
 	validates :student_id, :presence => true
 	validates :course_id, :presence => true
 	validates :student_id, :uniqueness => { :scope => :course_id }
