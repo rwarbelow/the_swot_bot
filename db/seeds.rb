@@ -114,8 +114,8 @@ StudentActionCategory.create!(name: "Academics", allow_multiple_entries_per_date
 
 #live class view
   #top 3 positive actions
-  StudentActionType.create!(student_action_category_id: 3,name: "high-quality", value: 1)
-  StudentActionType.create!(student_action_category_id: 3,name: "participation", value: 1)
+  StudentActionType.create!(student_action_category_id: 2,name: "high-quality", value: 1)
+  StudentActionType.create!(student_action_category_id: 2,name: "participation", value: 1)
   StudentActionType.create!(student_action_category_id: 2,name: "resisting-distractions", value: 1)
   #top 3 negative actions
   StudentActionType.create!(student_action_category_id: 2,name: "baby-attack", value: -1)
@@ -141,3 +141,4 @@ StudentActionCategory.create!(name: "Academics", allow_multiple_entries_per_date
   StudentActionType.create!(student_action_category_id: 2,name: "side-conversations", value: -1)
   StudentActionType.create!(student_action_category_id: 2,name: "sloppy-slant", value: -1)
   StudentActionType.create!(student_action_category_id: 2,name: "swearing", value: -1)
+  StudentActionType.create!(student_action_category_id: 2,name: "missing-assignment", value: -1)
