@@ -12,19 +12,18 @@ class IdentitiesController < ApplicationController
       session.delete(:new_guardian_id)
       if current_teacher?
         flash[:success] = "Student #{@user.first_name} #{@user.last_name} successfully saved."
-        redirect_to profile_path
       else
         session[:user_id] = @user.id
-        redirect_to profile_path
       end
+
+      redirect_to profile_path
     else
       @errors = @user.errors.full_messages
       flash[:errors] = @errors
       render 'new'
     end
   end
-  
-  
+
   def edit
     @user = Identity.find(params[:id])
   end

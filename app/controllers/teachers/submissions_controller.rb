@@ -7,8 +7,9 @@ class Teachers::SubmissionsController < Teachers::BaseController
     errors = []
     @assignment = Assignment.find(params[:assignment_id])
     ids_scores = params[:students].zip(params[:scores])
-    p ids_scores
+    p ids_scores # remove unnecessary debugging code/logging
 
+    # consider a nested model form...
     ids_scores.each do |score|
       submission = Submission.find_or_create_by_assignment_id_and_student_id(@assignment.id, score[0])
       submission.points_earned = score[1]

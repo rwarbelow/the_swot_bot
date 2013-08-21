@@ -2,8 +2,8 @@ class Course < ActiveRecord::Base
   attr_accessible :period, :teacher_id, :subject_id
 
 	validates :teacher_id, :presence => true
-	validates :period, :presence => true 
-	validates :subject_id, :presence => true 
+	validates :period, :presence => true
+	validates :subject_id, :presence => true
 	validates :teacher_id, :uniqueness => { :scope => :period }
 
 	has_many :assignments
@@ -15,7 +15,11 @@ class Course < ActiveRecord::Base
 	def calculate_student_percentage(student)
 		total_points = 0
 		earned_points = 0
-		if assignments.length > 0
+
+		# there are potentially a lot of queries occuring here. so either we should refactor this method
+		# to perform less queries, or think about using memcahed to cache the result
+
+		if assignments.length > 0  # if assignments.any?
 			assignments.each do |assignment|
 				student_submissions = assignment.submissions.where(:student_id => student.id)
 				total_points += assignment.maximum_points if assignment.due_date < Date.today
@@ -43,10 +47,8 @@ class Course < ActiveRecord::Base
 				return "C"
 			when 60..69
 				return "D"
-			when 0..59
-				return "F"
 			else
-				return ""
+				return "F"
 			end
 		end
 	end

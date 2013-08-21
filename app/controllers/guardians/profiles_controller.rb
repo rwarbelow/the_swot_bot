@@ -1,5 +1,6 @@
 class Guardians::ProfilesController < Guardians::BaseController
   skip_before_filter :require_guardian, :only => [:new, :create]
+
   def new
     @guardian = Guardian.new
   end
@@ -7,12 +8,13 @@ class Guardians::ProfilesController < Guardians::BaseController
   def create
     registration_code = params[:guardian][:registration_code]
     ccsd_id = params[:guardian][:ccsd_id]
-    if student = Student.where(:registration_code => registration_code, :ccsd_id => ccsd_id).first 
+    # consider nested model form here
+    if student = Student.where(:registration_code => registration_code, :ccsd_id => ccsd_id).first
       @guardian = Guardian.new(params[:guardian])
       if @guardian.save
         session[:guardian_id] = @guardian.id
-        Guardianship.create(:student_id => student.id, 
-                            :guardian_id => @guardian.id, 
+        Guardianship.create(:student_id => student.id,
+                            :guardian_id => @guardian.id,
                             :relationship_to_student => params[:guardian][:relationship_to_student])
         redirect_to new_identity_path
       else
@@ -64,9 +66,9 @@ class Guardians::ProfilesController < Guardians::BaseController
     ccsd_id = params[:guardianship][:ccsd_id]
     @guardian = Guardian.find(params[:profile_id])
     if Student.exists?(:ccsd_id => ccsd_id, :registration_code => registration_code)
-      student = Student.where(:registration_code => registration_code, :ccsd_id => ccsd_id).first 
-      @guardianship = Guardianship.new(:student_id => student.id, 
-                          :guardian_id => @guardian.id, 
+      student = Student.where(:registration_code => registration_code, :ccsd_id => ccsd_id).first
+      @guardianship = Guardianship.new(:student_id => student.id,
+                          :guardian_id => @guardian.id,
                           :relationship_to_student => params[:guardianship][:relationship_to_student])
       if @guardianship.save
         redirect_to guardians_root_path(@guardian)

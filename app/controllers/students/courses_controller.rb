@@ -12,7 +12,7 @@ class Students::CoursesController < Students::BaseController
   private
 
   def must_be_a_student
-     redirect_to root_path and return false unless current_student
+    redirect_to root_path and return false unless current_student
   end
 
   def load_course

@@ -9,6 +9,13 @@ class Enrollment < ActiveRecord::Base
 	belongs_to :student
 	has_many 	 :student_actions
 
+	# whats the point of this wrapper method?
+	def student_courses
+		student.courses
+	end
+
+	private
+
 	def period_uniqueness
 		return unless self.course_id
 		period = course.period
@@ -17,9 +24,5 @@ class Enrollment < ActiveRecord::Base
 				errors.add(:course_id, "Students can only be enrolled in one course per period")
 			end
 		end
-	end
-
-	def student_courses
-		student.courses
 	end
 end
