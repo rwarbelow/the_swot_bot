@@ -13,6 +13,7 @@ class Teacher < ActiveRecord::Base
 	has_many :enrollments, :through => :courses
 	has_many :students, :through => :enrollments
 	has_many :assignments, :through => :courses
+	has_many :announcements
 
 	def teaching? course
 		courses.find(course)
