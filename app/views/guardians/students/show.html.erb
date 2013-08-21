@@ -1,4 +1,4 @@
-<h1><%= @student.first_name %> <%= @student.last_name %></h1>
+<h1><%= @student.first_name %> <%= @student.last_name %> (<%= @student.ccsd_id %>)</h1>
 <div id="accordion">
   <h3>Class Schedule</h3>
 <div class="schedule-grades">
@@ -16,7 +16,7 @@
     <% @student.courses.order("period ASC").each do |course| %>
     <tr>
       <td><%= course.period %></td>
-      <td><%= course.subject.name %></td>
+      <td><%= link_to course.subject.name, guardians_student_course_path(@student, course)%></td>
       <td><%= course.calculate_student_percentage(@student) %></td>
       <td><%= course.calculate_student_grade(@student)%></td>
       <td><%= course.teacher.first_name %> <%= course.teacher.last_name %></td>
@@ -30,56 +30,3 @@
   </table>
 </div>
 
-<h3>Assignments</h3>
-<div class="assignments">
-  
-  <% @assignments.each do |assignment| %>
-  <table>
-    <thead>
-      <th>Period</th>
-      <th>Subject</th>
-      <th>Assignment</th>
-      <th>Due Date</th>
-      <th>Max Points</th>
-      <th>Earned Points</th>
-    </thead>
-    <tr>
-      <td><%= assignment.course.period %></td>
-      <td><%= assignment.course.subject.name %></td>
-      <td><%= assignment.title %></td>
-      <td><%= assignment.due_date %></td>
-      <td><%= assignment.maximum_points %></td>
-      <td><%= assignment.submissions.find_by_student_id(@student).points_earned if assignment.submissions.find_by_student_id(@student) %></td>
-    </tr>
-  </table>
-  <% end %>
-</div>
-
-<h3>Recent Actions</h3>
-<div class="recent-actions">
-  
-  <% @actions.each do |action| %>
-  <table>
-    <thead>
-      <th>Date</th>
-      <th>Period</th>
-      <th>Subject</th>
-      <th>Teacher</th>
-      <th>Action</th>
-      <th>Comments</th>
-    </thead>
-    <tr>
-      <td><%= action.date %></td> 
-      <td><%= action.enrollment.course.period %></td>
-      <td><%= action.enrollment.course.subject.name %></td>
-      <td><%= action.enrollment.course.teacher.last_name %></td>
-      <td><%= action.student_action_type.name %></td>
-      <td><% if action.comment %> 
-        <%= action.student_action_type.name %>
-        <% end %>
-      </td>
-    </tr>
-  </table>
-  <% end %>
-</div>
-</div>

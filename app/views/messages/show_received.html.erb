@@ -1,0 +1,19 @@
+<h1><%= @message.subject %></h1>
+<table>
+	<thead>
+		<th>Date</th>
+		<th>Time</th>
+		<th>From</th>
+		<th>Message</th>
+	</thead>
+	<tr>
+		<td><%= @message.created_at.strftime("%a, %b %e, %G") %></td>
+		<td><%= @message.created_at.strftime("%r") %></td>
+		<td><%= Identity.find(@message.author_id).first_name %> <%= Identity.find(@message.author_id).last_name %></td>
+		<td><%= @message.body %></td>
+		<td><%= form_tag message_path(@message), :method => 'delete' do %>
+          <%= hidden_field_tag :id, @message.id %>
+          <%= submit_tag "Delete Message" %></td>
+        <% end %>
+	</tr>
+</table>
