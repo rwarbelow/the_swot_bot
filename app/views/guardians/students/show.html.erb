@@ -1,8 +1,11 @@
 <h1><%= @student.first_name %> <%= @student.last_name %> (<%= @student.ccsd_id %>)</h1>
 <div id="accordion">
+
+<%= link_to "Student Report", guardians_student_report_path(:ccsd_id => @student.ccsd_id) %>
+
   <h3>Class Schedule</h3>
 <div class="schedule-grades">
-  
+
   <table>
     <thead>
       <th>Period</th>
@@ -10,7 +13,7 @@
       <th>Current Percent</th>
       <th>Current Grade</th>
       <th>Teacher</th>
-      <th>Email</th>
+       <th>Email</th>
       <th>Cell #</th>
     </thead>
     <% @student.courses.order("period ASC").each do |course| %>
