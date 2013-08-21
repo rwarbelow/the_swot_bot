@@ -37,6 +37,8 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (2.2.2.0)
+      sass (~> 3.2)
     builder (3.0.4)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -68,6 +70,10 @@ GEM
     faker (1.2.0)
       i18n (~> 0.5)
     ffi (1.9.0)
+    flatui-rails (0.0.4)
+      bootstrap-sass (= 2.2.2)
+      railties (>= 3.1)
+      sass-rails (>= 3.2.0)
     formatador (0.2.4)
     growl (1.0.3)
     guard (1.8.2)
@@ -203,6 +209,7 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   faker
+  flatui-rails
   growl
   guard-rspec
   guard-spork
