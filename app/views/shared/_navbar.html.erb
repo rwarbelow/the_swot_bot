@@ -13,14 +13,15 @@
       <% end %>
 
       <% if current_teacher? %>
-        <li><%= link_to "Teacher Dashboard", teachers_root_path, :class => "button button-flat" %></li>
+
+        <li><%= link_to "Dashboard", teachers_root_path, :class => "button button-flat" %></li>
         <li class="divider"></li>
-        <li><%= link_to "Teacher Profile", teachers_profile_path(current_teacher), :class => "button button-flat" %></li>
+        <li><%= link_to "Profile", teachers_profile_path(current_teacher), :class => "button button-flat" %></li>
         <li class="divider"></li>
         <li><%= link_to "Create Class", new_teachers_course_path, :class => "button button-flat" %></li>
         <li class="divider"></li>
          <%=puts current_teacher%>
-        <li><%= link_to "View Classes", teachers_courses_path(current_teacher), :class => "button button-flat" %></li>
+        <li><%= link_to "Classes", teachers_courses_path(current_teacher), :class => "button button-flat" %></li>
         <li class="divider"></li>
         <li><%= link_to "Create Student", new_teachers_student_profile_path, :class => "button button-flat" %></li>
         <li class="divider"></li>

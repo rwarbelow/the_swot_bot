@@ -1,13 +1,12 @@
 <% if flash[:success] %>
 <%= flash[:success] %>
 <% end %>
-<!-- TODO   - all comments below
-            - figure out positioning issues -->
 
-<!-- need to make this dynamic according to tacher name -->
-<h2 class="chalk center">Dashboard for This Teacher</h2>
-<%= link_to "All Enrolled Students", teachers_student_profiles_path %>
-<div class="t-panel-classes panel-center">
+<div class="class-list">
   <%= render '/shared/class_list' %>
 </div>
 
+<div class="page-specific-links">
+  <%= link_to "All Enrolled Students", teachers_student_profiles_path %>
+
+</div>
