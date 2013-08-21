@@ -27,11 +27,19 @@ class Student < ActiveRecord::Base
   protected
 
   def generate_registration_code
-    self.registration_code = loop do
-      random_token = SecureRandom.hex(4)
-      break random_token unless Student.where(registration_code: random_token).exists?
-    end
+  	self.registration_code = loop do
+  		possible = (('A'..'Z').to_a + (0..9).to_a + ('a'..'z').to_a)
+  		random_token = (0...8).map { |n| possible.sample }.join
+  		break random_token unless Student.where(registration_code: random_token).exists?
+  	end
   end
+
+  # def generate_registration_code
+  #   self.registration_code = loop do
+  #     random_token = SecureRandom.hex(4)
+  #     break random_token unless Student.where(registration_code: random_token).exists?
+  #   end
+  # end
 
   def enrolled_in? course
     courses.find(course.id)
