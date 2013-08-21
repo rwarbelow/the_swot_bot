@@ -1,8 +1,9 @@
-<%if current_student = current_user%>
+<%if current_student = current_user %>
 <h1>Welcome, <%= current_user.first_name %>!</h1>
 
 <div>
   <ul>
+    <li><%= link_to "Edit Profile", edit_students_profile_path(current_student) %></li>
     <li>First Name: <%= current_user.first_name %> </li>
     <li>Last Name: <%= current_user.last_name %> </li>
     <li>Username: <%=current_user.username %> </li>
@@ -17,22 +18,4 @@
     <li>Grade Level: <%= current_user.grade_level %> </li>
     <li>Guardian Registration Code: <%= current_user.registration_code %> </li>
   </ul>
-  <div class="pure-g-r">
-    <div class="pure-u-1-2 s-panel-classes">
-      <%= render 'shared/class_list' %>
-    </div>
-    <div class="pure-u-1-2">
-      <p>Student's Messages Will Go Here</p>
-    </div>
-  </div>
-
-  <div class="pure-g-r">
-    <div class="pure-u-1-2">
-    </div>
-    <div class="pure-u-1-2">
-      <p>Student's Goals/Inspirations Will Go Here</p>
-    </div>
-  </div>
-</div>
-
-<%end%>
+<% end %>

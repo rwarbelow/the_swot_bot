@@ -1,3 +1,5 @@
+<%= link_to "Send New Message", new_message_path %>
+
 <h1>Received Messages</h1>
 <% if @received_messages.length > 0 %>
 	<% @received_messages.each do |message| %>
@@ -19,25 +21,22 @@
 <% end %>
 
 
-
 <h1>Sent Messages</h1>
 <% if @sent_messages.length > 0 %>
 	<% @sent_messages.each do |message| %>
 		<table>
 			<thead>
 				<th>Date</th>
-				<th>Time</th>
 				<th>To</th>
-				<th>Message</th>
+				<th>Subject</th>
 			</thead>
 			<tr>
-				<td><%= message.created_at.strftime("%a, %b %e, %G") %></td>
-				<td><%= message.created_at.strftime("%r") %></td>
+				<td><%= message.created_at.strftime("%D") %></td>
 				<td><%= Identity.find(message.target_id).first_name %> <%= Identity.find(message.target_id).last_name %></td>
-				<td><%= message.body %></td>
+				<td><%= link_to (message.subject ? message.subject : "No Subject"), show_sent_path(message) %></td>
 			</tr>
 		</table>
 	<% end %>
 <% else %>
-	<h3>No Sent Messages</h3>
+	<h3>No Sent Mail</h3>
 <% end %>
