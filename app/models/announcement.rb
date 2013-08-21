@@ -1,5 +1,5 @@
 class Announcement < ActiveRecord::Base
-  attr_accessible :course_id, :title, :description
+  attr_accessible :teacher_id, :title, :body, :expiration_date
 
 	validates :teacher_id, :presence => true
 	validates :title, :presence => true
