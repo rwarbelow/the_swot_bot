@@ -34,14 +34,16 @@
       <th>Subject</th>
       <th>Assignment</th>
       <th>Due Date</th>
-      <th>Score</th>
+      <th>Max Points</th>
+      <th>Earned Points</th>
     </thead>
     <tr>
       <td><%= assignment.course.period %></td>
       <td><%= assignment.course.subject.name %></td>
       <td><%= assignment.title %></td>
-      <td>DUE</td>
-      <td><%= assignment.submissions.find_by_student_id(@student).score %></td>
+      <td><%= assignment.due_date %></td>
+      <td><%= assignment.maximum_points %></td>
+      <td><%= assignment.submissions.find_by_student_id(@student).points_earned if assignment.submissions.find_by_student_id(@student) %></td>
     </tr>
   </table>
   <% end %>
