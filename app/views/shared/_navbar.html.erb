@@ -29,7 +29,6 @@
       <% end %>
 
       <% if current_teacher? %>
-<<<<<<< HEAD
 
         <li><%= link_to "Dashboard",
             teachers_root_path, 
@@ -48,17 +47,13 @@
             :id => "classes",
             :class => "#{'current' if current_page?(teachers_courseload_path)} button button-flat" %>
         </li>
-       
-        <li><%= link_to "Create Student",
-            new_teachers_student_profile_path, 
-            :id => "create-student",
-            :class => "sses",
-            :class => "#{'current' if current_page?(new_teachers_student_profile_path)} button button-flat" %>
-        </li>
 
-        <li><%= link_to "Livestream", teachers_livestream_path, :class => "button button-flat" %></li>
+        <li><%= link_to "Livestream", 
+            teachers_livestream_path, 
+            :class => "#{'current' if current_page?(teachers_livestream_path)} button button-flat" %>
+        </li>
       
-        <li><%= link_to "View Recent Feedback",
+        <li><%= link_to "Feedback",
             root_path, 
             :id => "feedback", 
             :class => "#{'current' if current_page?(root_path)} button button-flat" %>
