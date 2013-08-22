@@ -10,7 +10,7 @@ class Teachers::AssignmentsController < Teachers::BaseController
     @assignment = Assignment.new(params[:assignment])
     @assignment.course_id = @course.id
     if @assignment.save
-      redirect_to teachers_course_assignments_path(@course)
+      redirect_to teachers_course_path(@course)
     else
       flash[:assignment_errors] = @assignment.errors.full_messages
       @assignments = @course.assignments
