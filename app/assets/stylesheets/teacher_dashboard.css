@@ -1,15 +1,15 @@
 .class-icon-container {
   /*margin-left: 350px;*/
-  margin-top: 20px;
+  /*margin-top: 20px;*/
 }
 .class-icon-container .btn {
   width: 70%;
   height: 44px;
   float: left;
   margin-right: 12px;
-  margin-top: 10px;
-  line-height: 44px;
+  margin-top: 6px;
   border-radius: 0;
+  line-height: 44px;
   font-size: 1.4em;
 }
 
@@ -31,12 +31,12 @@
   background-color: #3498DB;
   float: left;
   font-size: 2em;
-  margin-top: 10px;
+  margin-top: 6px;
   padding: 12px;
   text-align: center;
   color: white;
   line-height: 44px;
   margin-right: 4px;
   border: 1px solid #3498DB;
-  border-radius: 22px 0px 0px 22px;
+  border-radius: 44px 0px 0px 44px;
 }
