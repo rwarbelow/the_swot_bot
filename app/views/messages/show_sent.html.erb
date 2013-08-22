@@ -6,16 +6,19 @@
 		<th>Date</th>
 		<th>Time</th>
 		<th>To</th>
-		<th>Message</th>
 	</thead>
 	<tr>
 		<td><%= @message.created_at.strftime("%a, %b %e, %G") %></td>
 		<td><%= @message.created_at.strftime("%r") %></td>
 		<td><%= Identity.find(@message.target_id).first_name %> <%= Identity.find(@message.target_id).last_name %></td>
-		<td><%= @message.body %></td>
-		<td><%= form_tag message_path(@message), :method => 'delete' do %>
-          <%= hidden_field_tag :id, @message.id %>
-          <%= submit_tag "Delete Message" %></td>
-        <% end %>
 	</tr>
 </table>
+
+<br>
+<table>
+	<thead>
+		<th>Message</th>
+	</thead>
+	<tr><td><%= @message.body %></td></tr>
+</table>
+<br>

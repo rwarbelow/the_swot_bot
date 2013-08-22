@@ -6,34 +6,31 @@
 		<th>Date</th>
 		<th>Time</th>
 		<th>From</th>
-		<th>Message</th>
 	</thead>
 	<tr>
 		<td><%= @message.created_at.strftime("%a, %b %e, %G") %></td>
 		<td><%= @message.created_at.strftime("%r") %></td>
 		<td><%= Identity.find(@message.author_id).first_name %> <%= Identity.find(@message.author_id).last_name %></td>
-		<td><%= @message.body %></td>
-		<td><%= form_tag message_path(@message), :method => 'delete' do %>
-          <%= hidden_field_tag :id, @message.id %>
-          <%= submit_tag "Delete Message" %></td>
-        <% end %>
 	</tr>
 </table>
-
-<% if flash[:errors] %>
-	<% flash[:errors].each do |error| %>
-		<%= error %>
-	<% end %>
-<% end %>
+<br>
+<table>
+	<thead>
+		<th>Message</th>
+	</thead>
+	<tr><td><%= @message.body %></td></tr>
+</table>
+<br>
 
 <div>
-	<h3>Reply to this message:</h3>
+	<h2>Reply to this message</h2>
 	<%= form_for Message.new, url: messages_path, method: "post" do |f| %>
-	  <%= hidden_field_tag :target_id, @message.author_id %>
-	  <p>To: <%= Identity.find(@message.author_id).first_name %> <%= Identity.find(@message.author_id).last_name %></p>
 
-	  <%= hidden_field_tag :subject, @message.subject %>
+	  <p>To: <%= Identity.find(@message.author_id).first_name %> <%= Identity.find(@message.author_id).last_name %></p>
+	  <%= f.hidden_field(:to, value: @message.author_id) %>
+
 	  <p>Subject: Re: <%= @message.subject%> </p>
+	  <%= f.hidden_field(:subject, value: "Re: #{@message.subject}") %>
 
 	  <%= f.label :body %>
 	  <%= f.text_area :body %><br />
@@ -41,3 +38,5 @@
 	  <%= f.submit %>
 	<% end %>
 </div>
+
+
