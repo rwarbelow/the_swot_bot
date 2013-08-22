@@ -12,15 +12,17 @@ $(document).ready(function() {
   $('.behavior-container .submit-button').click(function(event) {
     var submit_action = $(this).attr('id'); 
     var data = [];
-    var clicked = $('.active').each(function(){
-      data.push($(this).attr('id')); // Student ID
+
+    $('.active').each(function(){
+      data.push($(this).data('id')); // Student ID
     });
 
+    console.log(data);
     var course_id = $('#course-id data').attr('id');
     var url = ('/live_class');
     var dataToSend = {action_name: submit_action,
-                  student_ids : data, 
-                  course_id: course_id}
+                      student_ids : data, 
+                      course_id: course_id}
            
     $.post(url, dataToSend);
     $('.student-icon').removeClass('active');
@@ -36,7 +38,7 @@ $(document).ready(function() {
     $('.other-function-container').show();
 
     $('.other-function').click(function(){
-      var submit_action = $(this).attr('id');
+      var submit_action = $(this).data('id');
       var data = [];
       
       $('.active').each(function(){
