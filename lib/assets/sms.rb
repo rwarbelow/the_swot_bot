@@ -31,8 +31,7 @@ class Sms
 		if student = guardian.students.find { |student| student.ccsd_id == ccsd_id }
 			collect_student_actions(student)
 		else
-			puts "found the error"
-			# error_reply
+			error_reply
 		end
 	end
 	
@@ -58,14 +57,8 @@ class Sms
 		student_actions_hash.each do |student_action_type_id, no_of_occurances|
 			student_action_type = StudentActionType.find(student_action_type_id)
 			if student_action_type.student_action_category_id == 3
-				puts "mastery id #{student_action_type_id}"
-				puts "mastery number of occurances #{no_of_occurances}"
-				puts "mastery value #{student_action_type.value}"
-
 				mastery_score += (no_of_occurances.to_i * student_action_type.value.to_i)
-				puts "mastery score #{mastery_score}"
 				total_occurances += no_of_occurances
-				puts "total_occurances #{total_occurances}"
 			end
 		end 
 		return "#{mastery_score} of #{total_occurances}"
@@ -74,13 +67,9 @@ class Sms
 	def positive(student_actions_hash)
 		positive_score = 0
 		student_actions_hash.each do |student_action_type_id, no_of_occurances|
-			puts "iterating"
 			student_action_type = StudentActionType.find(student_action_type_id)
 			p student_action_type
-			puts "student_action_type category_id is: #{student_action_type.student_action_category_id}" 
-			puts "student_action_type value is: #{student_action_type.value}" 
 			if student_action_type.student_action_category_id == 2 && student_action_type.value == "1"
-				puts "incrementing"
 				positive_score += no_of_occurances
 			end
 		end
@@ -133,13 +122,8 @@ Daily Objectives Masterd
 Missing Assignments
 #{missing_assignments}
 EOS
-		
-		# student_actions_hash.each do |key, value|
-		# 	text_body << "#{StudentActionType.find(key).name}: #{value} "
-		# end
 
-		puts text_body
-		if text_body.length < 1060
+		if text_body.length < 160
 			send_sms_reply(text_body)
 		else
 			send_sms_reply("text message too long")
@@ -148,12 +132,12 @@ EOS
 
 	def error_reply
 		TextMessage.sendMessage({to: twilio_format,
-			message: "We're sorry, but we could not process your request. Please contact your student's Teacher."})
+														 message: "We're sorry, but we could not process your request. Please contact your student's Teacher."})
 	end
 
 	def send_sms_reply(text_body)
 		TextMessage.sendMessage({to: twilio_format,
-			message: text_body })	
+														 message: text_body })	
 	end
 end
 
