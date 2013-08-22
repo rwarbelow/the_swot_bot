@@ -35,26 +35,28 @@ $(document).ready(function() {
     var clicked = $('.active').text();
     
     $('.grid-container').hide();
+    $('.behavior-container').hide();
     $('.other-function-container').show();
 
     $('.other-function').click(function(){
-      var submit_action = $(this).data('id');
+      var submit_action = $(this).attr('id');
       var data = [];
       
       $('.active').each(function(){
-        data.push($(this).attr('id'));
+        data.push($(this).data('id'));
       });
-     
+      console.log(data);
       var url = ('/live_class');
       var course_id = $('#course-id data').attr('id');
-      var dataToSend = { action_name: submit_action,
-                   student_ids : data,
-                   course_id: course_id }
+      var dataToSend = {action_name: submit_action,
+                        student_ids : data,
+                        course_id: course_id }
 
       $.post(url, dataToSend);
 
       $('.other-function-container').hide();
       $('.grid-container').show();
+      $('behavior-container').show();
       $('.student-icon').removeClass('active');
       data = [];
     });
