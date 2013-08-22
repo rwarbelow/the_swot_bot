@@ -1,18 +1,18 @@
 class Sms
 
-	attr_reader :phone_number, :ccsd_id
+	attr_reader :phone_number, :ccsd_id, :twilio_format
 
 	def initialize(phone_number, ccsd_id)
-		@phone_number = phone_number
+		@twilio_format = phone_number
+		@phone_number = phone_number.split('').pop(10).join('')
 		@ccsd_id = ccsd_id
 	end
 
 	def student_name
 		student = Student.find_by_ccsd_id(ccsd_id)
-		student_first_name = student.first_name
 		student_last_initial = student.last_name[0].capitalize	
-		first_name = student_first_name.capitalize
-		@student_name = "#{first_name}.#{student_last_initial}"
+		first_name = student.first_name.capitalize
+		student_name = "#{first_name} #{student_last_initial}."
 	end
 
 	def todays_date
@@ -31,90 +31,115 @@ class Sms
 		if student = guardian.students.find { |student| student.ccsd_id == ccsd_id }
 			collect_student_actions(student)
 		else
-			error_reply
+			puts "found the error"
+			# error_reply
 		end
 	end
 	
 	def collect_student_actions(student)
 		student_actions_array = []
-		value_totals = Hash.new
 		student.student_actions.select {|action| action.date == Date.today}.each do |action|
-			value_totals["positive"]
-  		student_actions_array << action.student_action_type_id
-  	end
-  	aggregate_student_behavior_hash(student_actions_array)
+			student_actions_array << action.student_action_type_id
+		end
+		aggregate_student_behavior_hash(student_actions_array)
 	end
 
 	def aggregate_student_behavior_hash(student_actions_array) 
-		student_actions_hash = Hash.new(0)
+		@student_actions_hash = Hash.new(0)
 		student_actions_array.each do |n|
-			student_actions_hash[n] +=1
+			@student_actions_hash[n] +=1
 		end
-		prepare_text_body(student_actions_hash)
+		prepare_text_body(@student_actions_hash)
 	end
 
-	def mastery
+	def mastery(student_actions_hash)
 		mastery_score = 0
 		total_occurances = 0 
 		student_actions_hash.each do |student_action_type_id, no_of_occurances|
 			student_action_type = StudentActionType.find(student_action_type_id)
-			if student_action_type.student_action_category == 3
-				mastery_score += (no_of_occurances * student_action_type.value)
+			if student_action_type.student_action_category_id == 3
+				puts "mastery id #{student_action_type_id}"
+				puts "mastery number of occurances #{no_of_occurances}"
+				puts "mastery value #{student_action_type.value}"
+
+				mastery_score += (no_of_occurances.to_i * student_action_type.value.to_i)
+				puts "mastery score #{mastery_score}"
 				total_occurances += no_of_occurances
+				puts "total_occurances #{total_occurances}"
 			end
-			mastery_score / total_occurances
-		end
+		end 
+		return "#{mastery_score} of #{total_occurances}"
 	end
 
-	def positive
+	def positive(student_actions_hash)
 		positive_score = 0
 		student_actions_hash.each do |student_action_type_id, no_of_occurances|
+			puts "iterating"
 			student_action_type = StudentActionType.find(student_action_type_id)
-			if student_action_type.student_action_category == 2 && student_action_type.value == 1
-				positive_score =+ no_of_occurances
+			p student_action_type
+			puts "student_action_type category_id is: #{student_action_type.student_action_category_id}" 
+			puts "student_action_type value is: #{student_action_type.value}" 
+			if student_action_type.student_action_category_id == 2 && student_action_type.value == "1"
+				puts "incrementing"
+				positive_score += no_of_occurances
 			end
 		end
+		return positive_score
 	end
 
-	def negative
+	def negative(student_actions_hash)
 		negative_score = 0
 		student_actions_hash.each do |student_action_type_id, no_of_occurances|
 			student_action_type = StudentActionType.find(student_action_type_id)
-			if student_action_type.student_action_category == 2 && student_action_type.value == -1
-				negative_score =+ no_of_occurances
+			if student_action_type.student_action_category_id == 2 && student_action_type.value == "-1"
+				negative_score += no_of_occurances
 			end
 		end
+		return negative_score
 	end
 
-	def missing_assignments
+	def missing_assignments(student_actions_hash)
 		missing_assignments_score = 0
 		student_actions_hash.each do |student_action_type_id, no_of_occurances|
 			student_action_type = StudentActionType.find(student_action_type_id)
-			if student_action_type.student_action_category == 4
+			if student_action_type.student_action_category_id == 4
 				missing_assignments_score += no_of_occurances
 			end
 		end
+		return missing_assignments_score
 	end
 
 	def prepare_text_body(student_actions_hash)
 		on_time = student_actions_hash[1]
 		tardy = student_actions_hash[2]
 		absent = student_actions_hash[3]
-
+		positive = positive(student_actions_hash)
+		negative = negative(student_actions_hash)
+		mastery = mastery(student_actions_hash)
+		missing_assignments = missing_assignments(student_actions_hash)
 		text_body =
 <<-EOS
 #{student_name} #{todays_date}
-Attendance: On-Time:#{on_time}, Tardy: #{tardy}, Absent: #{absent}
-Behavior: Positive: #{postive}, Negative: #{negative}
-Mastery : #{mastery}
-Missing Assignments: #{missing_assignments_score}
+
+Attendance
+On time: #{on_time}, Tardy: #{tardy}, Absent: #{absent}
+
+Behavior
+Positive: #{positive}, Negative: #{negative}
+
+Daily Objectives Masterd
+#{mastery}
+
+Missing Assignments
+#{missing_assignments}
 EOS
 		
-		student_actions_hash.each do |key, value|
-    	text_body << "#{StudentActionType.find(key).name}: #{value} "
-		end
+		# student_actions_hash.each do |key, value|
+		# 	text_body << "#{StudentActionType.find(key).name}: #{value} "
+		# end
 
-		if text_body.length < 160
+		puts text_body
+		if text_body.length < 1060
 			send_sms_reply(text_body)
 		else
 			send_sms_reply("text message too long")
@@ -122,14 +147,14 @@ EOS
 	end
 
 	def error_reply
-		TextMessage.sendMessage({to: phone_number,
-														 message: "We're sorry, but we could not process your request. Please contact your student's Teacher."})
+		TextMessage.sendMessage({to: twilio_format,
+			message: "We're sorry, but we could not process your request. Please contact your student's Teacher."})
 	end
 
 	def send_sms_reply(text_body)
-		TextMessage.sendMessage({to: phone_number,
-														 message: text_body })	
+		TextMessage.sendMessage({to: twilio_format,
+			message: text_body })	
 	end
 end
 
-	
+
