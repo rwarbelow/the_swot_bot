@@ -59,7 +59,7 @@ class Sms
 
 	def send_sms_reply(text_body)
 		TextMessage.sendMessage({to: phone_number,
-														 message: Student.find(3).courses.first.teacher.last_name })	
+														 message: text_body })	
 	end
 end
 
