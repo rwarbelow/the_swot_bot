@@ -28,7 +28,7 @@
   padding: 10px;
 }
 
-.reply-body {
+.reply-body, .new-message-body{
   width: 400px;
   height: 200px;
 }
