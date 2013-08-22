@@ -19,7 +19,7 @@
 
 .nav li {
   margin-right: 20px;
-  width: 100%;
+  width: 99%;
 }
 
 .nav li a{
@@ -27,6 +27,7 @@
   height: 50px;
   line-height: 50px;
   font-size: 1.4em;
+  text-align: right;
 }
 
 .list-header:hover {
