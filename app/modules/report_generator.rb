@@ -1,16 +1,15 @@
 module ReportGenerator
-	def bad_actions
-   bad_actions = ["calling-out",
-                  "disrespecting-others",
-                  "ignoring-instructions",
-                  "laughing-at-others-mistakes",
-                  "not-participating",
-                  "side-conversations",
-                  "sloppy-slant",
-                  "swearing"]
-  end
 
   def new_report(students, password = true)
+       bad_actions = ["calling-out",
+                      "disrespecting-others",
+                      "ignoring-instructions",
+                      "laughing-at-others-mistakes",
+                      "not-participating",
+                      "side-conversations",
+                      "sloppy-slant",
+                      "swearing"]
+
   report = ThinReports::Report.new layout: File.join(Rails.root, 'app', 'reports', 'swot_report.tlf')
     students.each do |student|
       courses = student.courses
@@ -33,18 +32,55 @@ module ReportGenerator
         page.item(:class4).value(courses[4].subject.name)
         page.item(:class5).value(courses[5].subject.name)
 
+        n = 0
+        grade_array.each do |grade|
+          page.item("grade#{n}").value(grade)
+          n += 1
+        end
 
-
-        student_actions_array.each do |array|
-          n = 0
-          array.each do |key,value|
-            report.list("course#{n}").add_row do |row|
-              row.item(:key).value(key) unless key == "missing-assignment"
-              row.item(:val).value(value.count) unless key == "missing-assignment"
-              row.item(:key).style(:color, 'red') if bad_actions.include?(key)
-            end
+        student_actions_array[0].each do |key,value|
+          report.list(:course0).add_row do |row|
+            row.item(:key).value(key)
+            row.item(:val).value(value.count)
+            row.item(:key).style(:color, 'red') if bad_actions.include?(key)
           end
         end
+        student_actions_array[1].each do |key,value|
+          report.list(:course1).add_row do |row|
+            row.item(:key).value(key)
+            row.item(:val).value(value.count)
+            row.item(:key).style(:color, 'red') if bad_actions.include?(key)
+          end
+        end
+        student_actions_array[2].each do |key,value|
+          report.list(:course2).add_row do |row|
+            row.item(:key).value(key)
+            row.item(:val).value(value.count)
+            row.item(:key).style(:color, 'red') if bad_actions.include?(key)
+          end
+        end
+        student_actions_array[3].each do |key,value|
+          report.list(:course3).add_row do |row|
+            row.item(:key).value(key)
+            row.item(:val).value(value.count)
+            row.item(:key).style(:color, 'red') if bad_actions.include?(key)
+          end
+        end
+        student_actions_array[4].each do |key,value|
+          report.list(:course4).add_row do |row|
+            row.item(:key).value(key)
+            row.item(:val).value(value.count)
+            row.item(:key).style(:color, 'red') if bad_actions.include?(key)
+          end
+        end
+        student_actions_array[5].each do |key,value|
+          report.list(:course5).add_row do |row|
+            row.item(:key).value(key)
+            row.item(:val).value(value.count)
+            row.item(:key).style(:color, 'red') if bad_actions.include?(key)
+          end
+        end
+  
       security_settings = {:user_password  => 'student.ccsd_id',
                            :owner_password => :random,
                               :permissions => { :print_document  => true,
