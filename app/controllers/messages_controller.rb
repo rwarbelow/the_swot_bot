@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
   def create
     p "*"*80
     p params
-  	@message = Message.create(:author_id => current_user.id, :target_id => (Identity.find_by_teacher_id(params[:message][:to]).id), :body => params[:message][:body], :subject => params[:message][:subject])
+  	@message = Message.create(:author_id => current_user.id, :target_id => (Identity.find(params[:message][:to]).id), :body => params[:message][:body], :subject => params[:message][:subject])
   	if @message.save
       flash[:message_sent] = "Your message has been delivered to #{Identity.find(@message.target_id).first_name} #{Identity.find(@message.target_id).last_name}!"
       redirect_to messages_path
