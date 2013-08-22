@@ -1,0 +1,24 @@
+.guardian-dashboard-container {
+  width: 40%;
+  float: left;
+  margin-left: 100px;
+  margin-top: 50px;
+}
+
+.guardian-dashboard-announcements {
+  width: 30%;
+  float: right;
+  margin-top: 50px;
+}
+
+.student-list {
+  margin-bottom: 60px;
+}
+
+.dk_container {
+  margin-bottom: 40px;
+}
+
+.add-student-h {
+  margin-bottom: 20px;
+}
