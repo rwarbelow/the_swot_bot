@@ -52,6 +52,10 @@
   font-size: 2.4em;
 }
 
+.submit-button-container {
+  margin-top: 40px;
+}
+
 .attendance-button-container .btn{
   margin-left: 30px;
 }
@@ -79,13 +83,14 @@
 
 .other-function-container {
   width: 800px;
-  margin-top: 50px;
+  margin-top: 70px;
   margin-left: 50px;
   display: inline-block;
 }
 
 .grid-container {
   float:left;
+  margin-top: 30px;
 }
 
 .other-function {
@@ -100,7 +105,7 @@
 }
 
 .positives {
-  margin-right: 100px;
+  margin-right: 40px;
 }
 
 .live-view-container .btn {
