@@ -78,7 +78,10 @@
 }
 
 .other-function-container {
-  width: auto;
+  width: 800px;
+  margin-top: 50px;
+  margin-left: 50px;
+  display: inline-block;
 }
 
 .grid-container {
@@ -93,9 +96,15 @@
 
 .positives, .negatives {
   float: left;
+  width: 300px;
+}
+
+.positives {
+  margin-right: 100px;
 }
 
 .live-view-container .btn {
   margin-top: 8px;
   height: 54px;
+  width: 100%;
 }
