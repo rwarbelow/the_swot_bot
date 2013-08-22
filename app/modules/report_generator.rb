@@ -1,14 +1,21 @@
 module ReportGenerator
 
   def new_report(students, password = true)
-       bad_actions = ["calling-out",
+       bad_actions = ["baby-attack",
+                      "causing-distractions",
+                      "sloppy-work",
+                      "calling-out",
                       "disrespecting-others",
                       "ignoring-instructions",
                       "laughing-at-others-mistakes",
                       "not-participating",
                       "side-conversations",
                       "sloppy-slant",
-                      "swearing"]
+                      "swearing",
+                      "tardy",
+                      "incomplete-classwork",
+                      "did-not-master-daily-goal",
+                      "absent"]
 
   report = ThinReports::Report.new layout: File.join(Rails.root, 'app', 'reports', 'swot_report.tlf')
     students.each do |student|
