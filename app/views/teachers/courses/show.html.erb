@@ -6,27 +6,38 @@
 <%= link_to "Course Roster", teachers_course_roster_path(@course) %>
 
 <div id="collapse" >
-  <h2 class="open">Recent Assignments</h2>
+  <h2 class="open">Assignments for <%= @course.subject.name %> (Period <%= @course.period %>)</h2>
   <div id="assignment-preview-5">
     <table>
       <thead>
         <th>Due Date</th>
         <th>Title</th>
-        <th>Maximum Points</th>
         <th>Description</th>
+        <th>Maximum Points</th>
+        <th>Class Average</th>
         <th></th>
       </thead>
-      <% @course.assignments.take(5).each do |assignment| %>
+      <% @course.assignments.each do |assignment| %>
       <tr>
         <td><%= assignment.due_date %></td>
         <td><%= assignment.title %></td>
-        <td><%= assignment.maximum_points %></td>
         <td><%= assignment.description %></td>
+        <td><%= assignment.maximum_points %></td>
+        <% @classtotal = 0 %>
+        <% @total = assignment.submissions.count %>
+        <% assignment.submissions.each do |submission| %>
+          <% @classtotal += submission.points_earned %>
+        <% end %>
+        <% if @total == 0 %>
+          <td></td>
+        <% else %>
+            <td><%= ((@classtotal) / (@total)) %>%</td>
+        <% end %>
         <td><%= link_to "Enter Grades", teachers_assignment_path(assignment) %></td>
       </tr>
       <% end %>
     </table>
-    <%= link_to "See More", teachers_course_assignments_path(@course) %>
+    <%= link_to "Add Assignment", teachers_course_assignments_path(@course) %>
   </div>
   <h2>Current Grades</h2>
   <div id="student-roster">
@@ -44,7 +55,7 @@
         <td><%= student.first_name %></td>
         <td><%= student.last_name %></td>
         <td><%= @course.calculate_student_percentage(student) %></td>
-        <td><%= @course.calculate_student_percentage(student) %></td>
+        <td><%= @course.calculate_student_grade(student) %></td>
       </tr>
       <% end %>
     </table>
