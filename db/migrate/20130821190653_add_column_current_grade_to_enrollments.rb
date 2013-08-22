@@ -1,9 +1,5 @@
 class AddColumnCurrentGradeToEnrollments < ActiveRecord::Migration
-  def up
+  def change
     add_column :enrollments, :current_grade, :integer
-  end
-
-  def down
-    remove_column :enrollments, :current_grade, :integer
   end
 end
