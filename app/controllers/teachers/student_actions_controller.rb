@@ -5,11 +5,22 @@ class Teachers::StudentActionsController < Teachers::BaseController
   end
 
   def edit
-    @course = Course.find(params[:livestream_id])
     @student_action = StudentAction.find(params[:id])
   end
 
   def update
+    @student_action = StudentAction.find(params[:id])
+    if @student_action.update_attributes(params[:student_action])
+      flash[:success] = "Action updated!"
+      redirect_to teachers_livestream_path
+    else
+      flash[:action_errors] = @student_action.errors.full_messages
+      render 'edit'
+    end
+  end
+
+  def course_history
+    @course = Course.find(params[:id])
   end
 
 end

@@ -1,0 +1,21 @@
+<%= link_to 'Back', :back %>
+<h2>Period <%= @course.period %> <%= @course.subject.name %></h2>
+	  <div>
+		  <table>
+		  	<thead>
+		  		<th></th>
+		  		<th>Date</th>
+		  		<th>Student Name</th>
+		  		<th>Action</th>
+		  		<th>Comment</th>
+		  	</thead>
+	    	<% @course.student_actions.sort! { |a,b| b.date <=> a.date }.each do |action| %>
+			    <tr>
+			    	<td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
+			    	<td><%= action.date.strftime("%b %d, %Y") %></td>
+			      <td><%= action.enrollment.student.first_name %> <%= action.enrollment.student.last_name %></td>
+			      <td><%= action.student_action_type.name %></td>
+			      <td><%= action.comment if action.comment %></td>
+			    </tr>
+  	    <% end %>
+		  </table>
