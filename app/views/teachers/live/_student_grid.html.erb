@@ -1,5 +1,9 @@
 <div class="grid-container">
   <div class="icon-container">
+    <% if flash[:notice] %>
+      <p class="flash-notice"><%= flash[:notice] %></p>
+    <% end %>
+
     <ul id="student-icon-list">
 
       <% @students.each do |student| %>

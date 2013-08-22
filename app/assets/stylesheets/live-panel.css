@@ -1,6 +1,6 @@
 .live-view-container {
   display: inline-block;
-  margin-left: -130px;
+  margin-left: -70px;
 }
 
 .student-icon {
@@ -42,7 +42,8 @@
 .icon-container {
   width: 550px;
   float: left;
-  margin-top: 20px;
+  margin-top: 40px;
+  margin-right: 20px;
 }
 
 .submit-button-container, .attendance-button-container{
