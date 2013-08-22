@@ -22,11 +22,13 @@ SwotBot::Application.routes.draw do
     end
     resources :guardian_profiles
     get '/courseload', :to => 'courses#courseload'
-    get '/livestream', :to => 'livestream#index'
+    get '/livestream', :to => 'student_actions#index'
+    scope 'livestream' do
+      resource :student_actions
+    end
     resources :courses do
       get '/liveclass', :to => 'live#classroom'
-      get '/roster', :to => 'courses#roster
-      '
+      get '/roster', :to => 'courses#roster'
       resources :assignments
       resources :enrollments
       resources :submissions
