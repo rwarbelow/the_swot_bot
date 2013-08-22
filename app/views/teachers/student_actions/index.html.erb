@@ -1,3 +1,4 @@
+<%= link_to 'Back', :back %>
 <div id="collapse" >
 	<% current_teacher.courses.each do |course| %>
 	  <h2>Period <%= course.period %> <%= course.subject.name %></h2>
@@ -15,11 +16,11 @@
 			    	<td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
 			      <td><%= action.enrollment.student.first_name %> <%= action.enrollment.student.last_name %></td>
 			      <td><%= action.student_action_type.name %></td>
-			      <td><% action.student_action_type.name if action.comment %></td>
+			      <td><%= action.comment if action.comment %></td>
 			    </tr>
   	    <% end %>
 		  </table>
-		  <h3><%= (Date.today-1).strftime("%A, %B %e, %Y ") %></h3>
+		  <h3><%= (Date.today-1).strftime("%A, %B %e, %Y") %></h3>
 		  <table>
 		  	<thead>
 		  		<th></th>
@@ -32,11 +33,11 @@
 			    	<td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
 			      <td><%= action.enrollment.student.first_name %> <%= action.enrollment.student.last_name %></td>
 			      <td><%= action.student_action_type.name %></td>
-			      <td><% action.student_action_type.name if action.comment %></td>
+			      <td><%= action.comment if action.comment %></td>
 			    </tr>
   	  	<% end %>
 		  </table>
-		  <h3><%= (Date.today-2).strftime("%A, %B %e, %Y ") %></h3>
+		  <h3><%= (Date.today-2).strftime("%A, %B %e, %Y") %></h3>
 		  <table>
 		  	<thead>
 		  		<th></th>
@@ -49,11 +50,11 @@
 			    	<td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
 			      <td><%= action.enrollment.student.first_name %> <%= action.enrollment.student.last_name %></td>
 			      <td><%= action.student_action_type.name %></td>
-			      <td><% action.student_action_type.name if action.comment %></td>
+			      <td><%= action.comment if action.comment %></td>
 			    </tr>
   	  	<% end %>
 		  </table>
-		  <h3><%= (Date.today-3).strftime("%A, %B %e, %Y ") %></h3>
+		  <h3><%= (Date.today-3).strftime("%A, %B %e, %Y") %></h3>
 		  <table>
 		  	<thead>
 		  		<th></th>
@@ -66,11 +67,11 @@
 			    	<td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
 			      <td><%= action.enrollment.student.first_name %> <%= action.enrollment.student.last_name %></td>
 			      <td><%= action.student_action_type.name %></td>
-			      <td><% action.comment %></td>
+			      <td><%= action.comment %></td>
 			    </tr>
   	  	<% end %>
 		  </table>
-		  <h3><%= (Date.today-4).strftime("%A, %B %e, %Y ") %></h3>
+		  <h3><%= (Date.today-4).strftime("%A, %B %e, %Y") %></h3>
 		  <table>
 		  	<thead>
 		  		<th></th>
@@ -83,7 +84,7 @@
 			    	<td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
 			      <td><%= action.enrollment.student.first_name %> <%= action.enrollment.student.last_name %></td>
 			      <td><%= action.student_action_type.name %></td>
-			      <td><% action.student_action_type.name if action.comment %></td>
+			      <td><%= action.comment if action.comment %></td>
 			    </tr>
   	  	<% end %>
 		  </table>

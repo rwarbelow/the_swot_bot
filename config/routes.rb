@@ -16,7 +16,10 @@ SwotBot::Application.routes.draw do
   namespace 'teachers' do
     get '/weekly_email', to: 'email#weekly_email'
     post '/send_student_email', to: 'email#send_student_email'
-    resources :profiles
+    resources :profiles do
+      post '/add_phone_number', :to => 'profiles#add_phone_number'
+      delete '/delete_phone_number', :to => 'profiles#delete_phone_number'
+    end
     resources :student_profiles do
       get '/identities', :to => 'student_profiles#identity', as: :teacher_student_identity
     end

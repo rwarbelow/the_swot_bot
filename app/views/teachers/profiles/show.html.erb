@@ -1,11 +1,29 @@
-<h3>Send a single email to a guardian</h3>
+<ul>
+    <li><%= link_to "Edit Your Profile", edit_teachers_profile_path(current_teacher) %></li>
+    <li>First name: <%= current_teacher.first_name%></li>
+    <li>Last name: <%= current_teacher.last_name%></li>
+    <li>Username: <%= current_teacher.username%></li>
+    <li>Email: <%= current_teacher.email%></li>
+    <% current_teacher.phone_numbers.each do |number| %>
+    <li><%= number.kind.capitalize%>: <%= number.number%></li>
+    <% end %>
+</ul>
 
-<%= form_tag("/teachers/send_student_email", :method => :post) do  %>
-<%= f.label "Guardian Username" %>
-<%= f.text_field :guardian %>
-<%= f.label "Student CCSD_id" %>
-<%= f.text_field :ccsd_id %>
-<%= f.submit "Send Email" %>
 
-<h3>Weekly email to all guardians that have an email address</h3>
-<%= link_to: "Weekly Email", teachers_weekly_email_path %>
+<h3>Send SWOT Report to Guardian</h3>
+
+<%= form_tag teachers_send_student_email_path, :method => "post" do %>
+
+  <%= label_tag :guardian, "Username of Guardian" %>
+  <%= text_field_tag :guardian, params[:guardian] %>
+
+  <%= label_tag :ccsd_id, "Student CCSD ID" %>
+  <%= password_field_tag :ccsd_id %>
+
+  <%= submit_tag "Send Email" %>
+
+<% end %>
+
+
+<h3>Send all SWOT Report Emails</h3>
+<%= button_to "Send Weekly Email", teachers_weekly_email_path, :method => "post" %>
