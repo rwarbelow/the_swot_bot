@@ -1,10 +1,42 @@
 .class-icon-container {
-  margin-left: 250px;
+  margin-left: 350px;
+  /*margin-top: 50px;*/
 }
 .class-icon-container .btn {
   width: 70%;
   height: 44px;
   float: left;
-  margin-top: 15px;
+  margin-right: 12px;
+  margin-top: 10px;
   line-height: 44px;
+  border-radius: 0;
+  font-size: 1.4em;
+}
+
+.class-list-container {
+  float: left;
+  width: 100%;
+  margin-top: 38px;
+  font-size: 1.4em;
+}
+
+.class-icon {
+  width: 100%;
+  display: inline-block;
+}
+
+.period {
+  height: 44px;
+  width: 44px;
+  background-color: #3498DB;
+  float: left;
+  font-size: 2em;
+  margin-top: 10px;
+  padding: 12px;
+  text-align: center;
+  color: white;
+  line-height: 44px;
+  margin-right: 4px;
+  border: 1px solid #3498DB;
+  border-radius: 22px 0px 0px 22px;
 }
