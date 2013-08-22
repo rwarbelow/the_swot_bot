@@ -29,6 +29,7 @@
       <% end %>
 
       <% if current_teacher? %>
+<<<<<<< HEAD
 
         <li><%= link_to "Dashboard",
             teachers_root_path, 
@@ -42,16 +43,10 @@
              :class => "#{'current' if current_page?(teachers_profile_path(current_teacher))} button button-flat" %>
         </li>
 
-        <li><%= link_to "Create Class", 
-            new_teachers_course_path, 
-            :id => "create-class",
-            :class => "#{'current' if current_page?(new_teachers_course_path)} button button-flat" %>
-        </li>
-
         <li><%= link_to "Classes", 
-            teachers_courses_path(current_teacher), 
+            teachers_courseload_path, 
             :id => "classes",
-            :class => "#{'current' if current_page?(teachers_courses_path(current_teacher))} button button-flat" %>
+            :class => "#{'current' if current_page?(teachers_courseload_path)} button button-flat" %>
         </li>
        
         <li><%= link_to "Create Student",
@@ -60,12 +55,15 @@
             :class => "sses",
             :class => "#{'current' if current_page?(new_teachers_student_profile_path)} button button-flat" %>
         </li>
+
+        <li><%= link_to "Livestream", teachers_livestream_path, :class => "button button-flat" %></li>
       
         <li><%= link_to "View Recent Feedback",
             root_path, 
             :id => "feedback", 
             :class => "#{'current' if current_page?(root_path)} button button-flat" %>
         </li>
+
       <% end %>
 
       <% if current_user.guardian? %>

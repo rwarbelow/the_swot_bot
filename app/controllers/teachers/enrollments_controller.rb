@@ -12,7 +12,7 @@ class Teachers::EnrollmentsController < Teachers::BaseController
       errors << "#{Student.find(student_id).first_name} #{Student.find(student_id).last_name} : #{enrollment.errors.full_messages.first}" unless enrollment.save
     end
     flash[:enrollment_errors] = errors
-    redirect_to teachers_course_path(@course)
+    redirect_to teachers_course_roster_path(@course)
   end
 
 end

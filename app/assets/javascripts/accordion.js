@@ -10,5 +10,8 @@ $(document).ready(function(){
   $(".flash").fadeOut(2000, function () {
   $(this).remove();
   });
+  $("#collapse").collapse({
+  // options...
+});
 });
 

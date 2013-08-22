@@ -8,6 +8,7 @@ class Course < ActiveRecord::Base
 
 	has_many :assignments
 	has_many :enrollments
+	has_many :student_actions, :through => :enrollments
 	has_many :students, :through => :enrollments
 	belongs_to :teacher
 	belongs_to :subject
