@@ -1,7 +1,7 @@
+<div class="nav-container">
 <% if current_user %>
   <nav class="nav">
     <ul>
-      <li class="list-header"><%= current_user.first_name %> <%= current_user.last_name %></li>
       <% if current_student? %>
         <li><%= link_to "Student Dashboard", students_root_path, :class => "button button-flat" %></li>
         <li class="divider"></li>
@@ -44,3 +44,4 @@
   </ul>
 </nav>
 <% end %>
+</div>
