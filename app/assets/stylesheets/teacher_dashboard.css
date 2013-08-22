@@ -40,3 +40,28 @@
   border: 1px solid #3498DB;
   border-radius: 44px 0px 0px 44px;
 }
+
+.teacher-profile-container {
+  margin-top:50px;  
+}
+
+.profile-info {
+  font-size: 1.3em;
+}
+
+.swot-report-actions {
+  margin-top: 40px;
+}
+
+.courseload-container {
+  margin-top: 50px;
+  font-size: 1.2em;
+}
+
+.class-period-td{
+  padding-right: 50px;
+}
+
+.class-name-td {
+  width: 200px;
+}
