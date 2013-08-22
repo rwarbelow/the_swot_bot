@@ -1,5 +1,6 @@
 <div>
   <h2 class="chalk"><%= @student.first_name %> <%= @student.last_name %></h2>
+  <%= link_to "Student Report", teachers_student_report_path(:ccsd_id => @student.ccsd_id) %>
   <ul>
     <li>Username: <%= @student.username %> </li>
     <li>Birthday: <%= @student.birthday %> </li>
