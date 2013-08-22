@@ -7,5 +7,8 @@ $(document).ready(function(){
   $(function() {
     $( "#tabs" ).tabs();
   });
+  $(".flash").fadeOut(2000, function () {
+  $(this).remove();
+  });
 });
 
