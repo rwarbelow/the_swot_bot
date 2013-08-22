@@ -3,7 +3,7 @@ class Enrollment < ActiveRecord::Base
 	validates :student_id, :presence => true
 	validates :course_id, :presence => true
 	validates :student_id, :uniqueness => { :scope => :course_id }
-	validate  :period_uniqueness
+	validate  :period_uniqueness, :on => :create
 
 	belongs_to :course
 	belongs_to :student
