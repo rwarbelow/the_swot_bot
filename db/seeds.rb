@@ -97,9 +97,10 @@ end
   end
 end
 
-StudentActionCategory.create!(name: "Attendance", allow_multiple_entries_per_date: false)
-StudentActionCategory.create!(name: "Behavior", allow_multiple_entries_per_date: true)
-StudentActionCategory.create!(name: "Academics", allow_multiple_entries_per_date: false)
+StudentActionCategory.create!(name: "attendance", allow_multiple_entries_per_date: false)
+StudentActionCategory.create!(name: "behavior", allow_multiple_entries_per_date: true)
+StudentActionCategory.create!(name: "academics", allow_multiple_entries_per_date: false)
+StudentActionCategory.create!(name: "missing-assignments", allow_multiple_entries_per_date: true)
 
 #attendance view
   #attendance actions
@@ -109,8 +110,8 @@ StudentActionCategory.create!(name: "Academics", allow_multiple_entries_per_date
 
 #daily mastery view
   StudentActionType.create!(student_action_category_id: 3,name: "mastered-daily-goal", value: 1)
-  StudentActionType.create!(student_action_category_id: 3,name: "incomplete-classwork", value: -1)
-  StudentActionType.create!(student_action_category_id: 3,name: "did-not-master-daily-goal", value: -1)
+  StudentActionType.create!(student_action_category_id: 3,name: "incomplete-classwork", value: 0)
+  StudentActionType.create!(student_action_category_id: 3,name: "did-not-master-daily-goal", value: 0)
 
 #live class view
   #top 3 positive actions
@@ -141,7 +142,7 @@ StudentActionCategory.create!(name: "Academics", allow_multiple_entries_per_date
   StudentActionType.create!(student_action_category_id: 2,name: "side-conversations", value: -1)
   StudentActionType.create!(student_action_category_id: 2,name: "sloppy-slant", value: -1)
   StudentActionType.create!(student_action_category_id: 2,name: "swearing", value: -1)
-  StudentActionType.create!(student_action_category_id: 2,name: "missing-assignment", value: -1)
+  StudentActionType.create!(student_action_category_id: 4,name: "missing-assignment", value: -1)
 
 #inspirations
   Inspiration.create!(body: "You must be the change you wish to see in the world.", source: "Gandhi")
