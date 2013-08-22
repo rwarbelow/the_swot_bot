@@ -3,45 +3,90 @@
   <nav class="nav">
     <ul>
       <% if current_student? %>
-        <li><%= link_to "Student Dashboard", students_root_path, :class => "button button-flat" %></li>
-        <li class="divider"></li>
-        <li><%= link_to "Student Profile", students_profile_path(current_student), :class => "button button-flat" %></li>
-        <li class="divider"></li>
-        <li><%= link_to "Current Courses", students_courses_path(current_student), :class => "button button-flat" %></li>
-        <li class="divider"></li>
-        <li><%= link_to "Edit My Profile", edit_students_profile_path(current_student), :class => "button button-flat" %></li>
+        <li><%= link_to "Student Dashboard", 
+            students_root_path, 
+            :id => "", 
+            :class => "#{'current' if current_page?(students_root_path)} button button-flat" %>
+        </li>
+
+        <li><%= link_to "Student Profile", 
+            students_profile_path(current_student), 
+            :id => "",
+            :class => "#{'current' if current_page?(students_profile_path(current_student))} button button-flat" %>
+        </li>
+        
+        <li><%= link_to "Current Courses", 
+            students_courses_path(current_student), 
+            :id => "",
+            :class => "#{'current' if current_page?(students_courses_path(current_student))} button button-flat" %>
+        </li>
+      
+        <li><%= link_to "Edit My Profile", 
+            edit_students_profile_path(current_student), 
+            :id => "",
+            :class => "button button-flat" %>
+        </li>
       <% end %>
 
       <% if current_teacher? %>
 
-        <li><%= link_to "Dashboard", teachers_root_path, :class => "button button-flat" %></li>
-        <li class="divider"></li>
-        <li><%= link_to "Profile", teachers_profile_path(current_teacher), :class => "button button-flat" %></li>
-        <li class="divider"></li>
-        <li><%= link_to "Create Class", new_teachers_course_path, :class => "button button-flat" %></li>
-        <li class="divider"></li>
-         <%=puts current_teacher%>
-        <li><%= link_to "Classes", teachers_courses_path(current_teacher), :class => "button button-flat" %></li>
-        <li class="divider"></li>
-        <li><%= link_to "Create Student", new_teachers_student_profile_path, :class => "button button-flat" %></li>
-        <li class="divider"></li>
-        <li><%= link_to "View Recent Feedback", root_path, :class => "button button-flat" %></li>
-         <li class="divider"></li>
-        <!-- <li><%= link_to "View all students" %></li> -->
-        <!-- <li><%= link_to "View all teachers" %></li> -->
-        <!-- <li><%= link_to "View all guardians" %></li> -->
+        <li><%= link_to "Dashboard",
+            teachers_root_path, 
+            :id => "dashboard",
+            :class => "#{'current' if current_page?(teachers_root_path)} button button-flat" %>
+        </li>
+        <li><%= link_to "Profile", 
+            teachers_profile_path(current_teacher),
+             :id => "profile",
+             :class => "#{'current' if current_page?(teachers_profile_path(current_teacher))} button button-flat" %>
+        </li>
+        <li><%= link_to "Create Class", 
+            new_teachers_course_path, 
+            :id => "create-class",
+            :class => "#{'current' if current_page?(new_teachers_course_path)} button button-flat" %>
+        </li>
+
+        <li><%= link_to "Classes", 
+            teachers_courses_path(current_teacher), 
+            :id => "classes",
+            :class => "#{'current' if current_page?(teachers_courses_path(current_teacher))} button button-flat" %>
+        </li>
+       
+        <li><%= link_to "Create Student",
+            new_teachers_student_profile_path, 
+            :id => "create-student",
+            :class => "sses",
+            :class => "#{'current' if current_page?(new_teachers_student_profile_path)} button button-flat" %>
+        </li>
+      
+        <li><%= link_to "View Recent Feedback",
+            root_path, 
+            :id => "feedback", 
+            :class => "#{'current' if current_page?(root_path)} button button-flat" %>
+        </li>
       <% end %>
 
       <% if current_user.guardian? %>
-        <li><%= link_to "Guardian Dashboard", guardians_root_path, :class => "button button-flat" %></li>
-        <li class="divider"></li>
-        <li><%= link_to "Guardian Profile", guardians_profile_path(current_guardian), :class => "button button-flat" %></li>
-        <li class="divider"></li>
+        <li><%= link_to "Guardian Dashboard",
+            guardians_root_path, 
+            :class => "#{'current' if current_page?(guardians_root_path)} button button-flat" %>
+        </li>
+        
+        <li><%= link_to "Guardian Profile", 
+            guardians_profile_path(current_guardian), 
+            :class => "#{'current' if current_page?(guardians_profile_path(current_guardian))} button button-flat" %>
+        </li>
       <% end %>
-      <li class="divider"></li>
-      <li><%= link_to "Inbox", messages_path, :class => "button button-flat" %></li>
-      <li class="divider"></li> 
-      <li><%= link_to "Logout", logout_path, :method => "delete", :class => "button button-flat" %></li>
+
+      <li><%= link_to "Inbox", 
+          messages_path, 
+          :class => "#{'current' if current_page?(messages_path)} button button-flat" %></li>
+
+      
+      <li><%= link_to "Logout", 
+          logout_path, :method => "delete",
+          :class => "#{'current' if current_page?(logout_path)} button button-flat" %>
+      </li>
   </ul>
 </nav>
 <% end %>

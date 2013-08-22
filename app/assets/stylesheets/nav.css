@@ -13,6 +13,10 @@
   padding-right: 50px;
 }
 
+.current {
+  background-color: #FFF;
+}
+
 .nav li {
   margin-right: 20px;
   width: 100%;
@@ -27,5 +31,10 @@
 
 .list-header:hover {
   background-color: #d4d4d4;
+}
+
+body#create-class a#create-class {
+color: lightgray;
+background: #fff;
 }
 
