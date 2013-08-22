@@ -1,84 +1,88 @@
-<% if flash[:message_sent] %>
-<div class="flash"><%= flash[:message_sent] %></div>
-<% end %>
-<div id="tabs">
-  <ul>
-    <li><a href="#tabs-1">Received Messages</a></li>
-    <li><a href="#tabs-2">Sent Messages</a></li>
-    <li><a href="#tabs-3">New Message</a></li>
-  </ul>
-  <div id="tabs-1">
-  	<h3>Inbox</h3>
-    <% if @received_messages.length > 0 %>
-	<% @received_messages.reverse.each do |message| %>
-		<table>
-			<thead>
-				<th>Date</th>
-				<th>Time</th>
-				<th>From</th>
-				<th>Subject</th>
-			</thead>
-			<tr>
-				<td><%= message.created_at.strftime("%D") %></td>
-				<td><%= message.created_at.strftime("%l:%M %p") %></td>
-				<td><%= Identity.find(message.author_id).first_name %> <%= Identity.find(message.author_id).last_name %></td>
-				<td><%= link_to message.subject, show_received_path(message) %></td>
-			</tr>
-		</table>
-	<% end %>
-<% else %>
-	<h3>Inbox Empty</h3>
-<% end %>
+<div class="messages-container">
+  <% if flash[:message_sent] %>
+    <div class="flash"><%= flash[:message_sent] %></div>
+  <% end %>
+
+  <div id="tabs">
+    <div class="message-nav">
+      <ul>
+        <li><a href="#tabs-1">Received Messages</a></li>
+        <li><a href="#tabs-2">Sent Messages</a></li>
+        <li><a href="#tabs-3">New Message</a></li>
+      </ul>
+    </div>
+    <div id="tabs-1">
+    	<h3>Inbox</h3>
+      <% if @received_messages.length > 0 %>
+  	<% @received_messages.reverse.each do |message| %>
+  		<table>
+  			<thead>
+  				<th>Date</th>
+  				<th>Time</th>
+  				<th>From</th>
+  				<th>Subject</th>
+  			</thead>
+  			<tr>
+  				<td><%= message.created_at.strftime("%D") %></td>
+  				<td><%= message.created_at.strftime("%l:%M %p") %></td>
+  				<td><%= Identity.find(message.author_id).first_name %> <%= Identity.find(message.author_id).last_name %></td>
+  				<td><%= link_to message.subject, show_received_path(message) %></td>
+  			</tr>
+  		</table>
+  	<% end %>
+  <% else %>
+  	<h5 class="box-empty">Inbox Empty</h5>
+  <% end %>
+    </div>
+    <div id="tabs-2">
+  	<h3>Outbox</h3>
+      <% if @sent_messages.length > 0 %>
+  	<% @sent_messages.reverse.each do |message| %>
+  		<table>
+  			<thead>
+  				<th>Date</th>
+  				<th>Time</th>
+  				<th>To</th>
+  				<th>Subject</th>
+  			</thead>
+  			<tr>
+  				<td><%= message.created_at.strftime("%D") %></td>
+  				<td><%= message.created_at.strftime("%l:%M %p") %></td>
+  				<td><%= Identity.find(message.target_id).first_name %> <%= Identity.find(message.target_id).last_name %></td>
+  				<td><%= link_to (message.subject ? message.subject : "No Subject"), show_sent_path(message) %></td>
+  			</tr>
+  		</table>
+  	<% end %>
+  <% else %>
+  	<h5 class="box-empty">No Sent Mail</h5>
+  <% end %>
+    </div>
+    <div id="tabs-3">
+      <% if flash[:errors] %>
+  	<% flash[:errors].each do |error| %>
+  		<%= error %>
+  	<% end %>
+  <% end %>
+
+  <%= form_for @message, url: messages_path, method: "post" do |f| %>
+    <%= f.label :to %>
+    <% if current_student? || current_guardian? %>
+  		  <% teachers_array = Teacher.all.map { |recipient| ["#{recipient.first_name} #{recipient.last_name}", recipient.identity.id] } %>
+  		  <%= f.select(:to, teachers_array, {:include_blank => 'Select a teacher'}) %><br />	
+    <% elsif current_teacher? %>
+  	  <% teachers_array = (Teacher.all + Student.all + Guardian.all).sort! {|a, b| a.last_name <=> b.last_name }.map { |recipient| ["#{recipient.first_name} #{recipient.last_name}", recipient.identity.id] } %>
+  		  <%= f.select(:to, teachers_array, {:include_blank => 'Select a recipient'}) %><br />
+  	  <% end %>
+
+  	<%= f.label :subject %>
+    <%= f.text_field :subject %><br />
+
+    <%= f.label :body %>
+    <%= f.text_area :body %><br />
+
+    <%= f.submit %>
+  <% end %>
+
+    </div>
   </div>
-  <div id="tabs-2">
-	<h3>Outbox</h3>
-    <% if @sent_messages.length > 0 %>
-	<% @sent_messages.reverse.each do |message| %>
-		<table>
-			<thead>
-				<th>Date</th>
-				<th>Time</th>
-				<th>To</th>
-				<th>Subject</th>
-			</thead>
-			<tr>
-				<td><%= message.created_at.strftime("%D") %></td>
-				<td><%= message.created_at.strftime("%l:%M %p") %></td>
-				<td><%= Identity.find(message.target_id).first_name %> <%= Identity.find(message.target_id).last_name %></td>
-				<td><%= link_to (message.subject ? message.subject : "No Subject"), show_sent_path(message) %></td>
-			</tr>
-		</table>
-	<% end %>
-<% else %>
-	<h3>No Sent Mail</h3>
-<% end %>
-  </div>
-  <div id="tabs-3">
-    <% if flash[:errors] %>
-	<% flash[:errors].each do |error| %>
-		<%= error %>
-	<% end %>
-<% end %>
-
-<%= form_for @message, url: messages_path, method: "post" do |f| %>
-  <%= f.label :to %>
-  <% if current_student? || current_guardian? %>
-		  <% teachers_array = Teacher.all.map { |recipient| ["#{recipient.first_name} #{recipient.last_name}", recipient.identity.id] } %>
-		  <%= f.select(:to, teachers_array, {:include_blank => 'Select a teacher'}) %><br />	
-  <% elsif current_teacher? %>
-	  <% teachers_array = (Teacher.all + Student.all + Guardian.all).sort! {|a, b| a.last_name <=> b.last_name }.map { |recipient| ["#{recipient.first_name} #{recipient.last_name}", recipient.identity.id] } %>
-		  <%= f.select(:to, teachers_array, {:include_blank => 'Select a recipient'}) %><br />
-	  <% end %>
-
-	<%= f.label :subject %>
-  <%= f.text_field :subject %><br />
-
-  <%= f.label :body %>
-  <%= f.text_area :body %><br />
-
-  <%= f.submit %>
-<% end %>
-
-  </div>
-</div>
- 
+</div> 
