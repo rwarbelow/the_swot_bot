@@ -52,7 +52,6 @@ SwotBot::Application.routes.draw do
       post '/add_phone_number', :to => 'profiles#add_phone_number'
       delete '/delete_phone_number', :to => 'profiles#delete_phone_number'
     end
-  end
   resources :students do
     resources :courses
   end
