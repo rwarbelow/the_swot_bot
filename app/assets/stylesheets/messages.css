@@ -17,3 +17,18 @@
   font-style: italic;
   margin-left: 20px;
 }
+
+.message-body {
+  width: 600px;
+  padding: 10px;
+}
+
+.message-timestamps {
+  width: 400px;
+  padding: 10px;
+}
+
+.reply-body, .new-message-body{
+  width: 400px;
+  height: 200px;
+}

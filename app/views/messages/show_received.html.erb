@@ -7,7 +7,7 @@
 		<th>Time</th>
 		<th>From</th>
 	</thead>
-	<tr>
+	<tr class="message-timestamps">
 		<td><%= @message.created_at.strftime("%a, %b %e, %G") %></td>
 		<td><%= @message.created_at.strftime("%r") %></td>
 		<td><%= Identity.find(@message.author_id).first_name %> <%= Identity.find(@message.author_id).last_name %></td>
@@ -18,7 +18,7 @@
 	<thead>
 		<th>Message</th>
 	</thead>
-	<tr><td><%= @message.body %></td></tr>
+	<tr><td class="message-body"><%= @message.body %></td></tr>
 </table>
 <br>
 
@@ -33,7 +33,7 @@
 	  <%= f.hidden_field(:subject, value: "Re: #{@message.subject}") %>
 
 	  <%= f.label :body %>
-	  <%= f.text_area :body %><br />
+	  <%= f.text_area :body, :class => "reply-body" %><br>
 
 	  <%= f.submit %>
 	<% end %>

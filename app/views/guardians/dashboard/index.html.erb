@@ -1,49 +1,56 @@
 <div class="guardian-dashboard-container">
-  <h2>Welcome, <%= current_guardian.first_name %> <%= current_guardian.last_name %>!</h2>
 
-  <h5>Your registered students</h5>
-  <div class="student-list">
-    <ul>
-      <% current_guardian.students.each do |student| %>
-        <li><%= link_to [student.first_name, student.last_name].join(' '), guardians_student_path(student)%></li>
-      <% end %>
-    </ul>
+  <div class="guardian-index-top">
+    <div class="student-list">
+      <h2>Welcome, <%= current_guardian.first_name %> <%= current_guardian.last_name %>!</h2>
+
+      <h5>Your registered students</h5>
+        <ul>
+          <% current_guardian.students.each do |student| %>
+            <li><%= link_to [student.first_name, student.last_name].join(' '), guardians_student_path(student)%></li>
+          <% end %>
+        </ul>
+    </div>
+
+    <div class="guardian-dashboard-announcements">
+      <%= render 'shared/announcements' %>
+    </div>
   </div>
 
-  <% if flash[:guardianship_errors] %>
-    <p class="flash-notice"><%= flash[:guardianship_errors] %></p>
-  <% end %>
 
-  <% if flash[:registration_errors] %>
-    <p class="flash-notice"><%= flash[:registration_errors] %></p>
-  <% end %>
+  <div class="add-student-container">
+    <% if flash[:guardianship_errors] %>
+      <p class="flash-notice"><%= flash[:guardianship_errors] %></p>
+    <% end %>
 
-  <h3 class="add-student-h">Add student to account</h3>
-  <%= form_for Guardianship.new, url: guardians_profile_add_student_path(current_guardian) do |f| %>
+    <% if flash[:registration_errors] %>
+      <p class="flash-notice"><%= flash[:registration_errors] %></p>
+    <% end %>
 
-      <%= f.label :relationship_to_student, "Your Relationship to Student" %>
+    <h3 class="add-student-h">Add student to account</h3>
+    <%= form_for Guardianship.new, url: guardians_profile_add_student_path(current_guardian) do |f| %>
 
-      <%= f.select :relationship_to_student, [['Mother','mom'],
-                                              ['Father','dad'],
-                                              ['Stepmother', 'step-mom'],
-                                              ['Stepfather', 'step-dad'],
-                                              ['Grandmother','grandma'],
-                                              ['Grandfather', 'grandpa'],
-                                              ['Sibling', 'sibling'],
-                                              ['Aunt', 'aunt'],
-                                              ['Uncle', 'uncle'],
-                                              ['Other', 'other']] %>
-      
-      <%= f.label :registration_code, "SWOTBot Registration Code" %>
-      <%= f.text_field :registration_code, placeholder: "xxxxxxxx" %>
+        <%= f.label :relationship_to_student, "Your Relationship to Student" %>
 
-      <%= f.label :ccsd_id, "CCSD ID" %>
-      <%= f.text_field :ccsd_id %>
+        <%= f.select :relationship_to_student, [['Mother','mom'],
+                                                ['Father','dad'],
+                                                ['Stepmother', 'step-mom'],
+                                                ['Stepfather', 'step-dad'],
+                                                ['Grandmother','grandma'],
+                                                ['Grandfather', 'grandpa'],
+                                                ['Sibling', 'sibling'],
+                                                ['Aunt', 'aunt'],
+                                                ['Uncle', 'uncle'],
+                                                ['Other', 'other']] %>
+        
+        <%= f.label :registration_code, "SWOTBot Registration Code" %>
+        <%= f.text_field :registration_code, placeholder: "xxxxxxxx" %>
 
-    <br>
-    <%= f.submit value="Add Student", :class => "btn btn-large" %>
-  <% end %>
-</div>
-<div class="guardian-dashboard-announcements">
-  <%= render 'shared/announcements' %>
+        <%= f.label :ccsd_id, "CCSD ID" %>
+        <%= f.text_field :ccsd_id %>
+
+      <br>
+      <%= f.submit value="Add Student", :class => "btn btn-large" %>
+    <% end %>
+  </div>
 </div>
