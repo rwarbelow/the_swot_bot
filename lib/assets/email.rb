@@ -1,3 +1,4 @@
+
 require_relative 'cloud_elements_helper'
 require "net/https"  
 require "json"  
@@ -7,7 +8,6 @@ class Email
   extend CloudElementsHelper
   # This method is used for finding out if the element instance is live  
   def ping  
-
     uri = URI.parse('https://console.cloud-elements.com/elements/api-v1/sendgrid/ping')  
 
     uri.query = parameterize(:elementToken => '0967313f714ec4c12971a5adfbf51d1e')  
@@ -24,7 +24,6 @@ class Email
     end  
   end  
   
-  
   # This method is used for finding our the usage of the element  
   def elementUsage  
 
@@ -32,10 +31,10 @@ class Email
 
     args[:elementToken] = '0967313f714ec4c12971a5adfbf51d1e'  
     #args[:days] = "10"                                 # This is optional  
-    #args[:startDate] = "MM-dd-yyyy HH:mm:ss"                           # This is optional  
-    #args[:endDate] = "MM-dd-yyyy HH:mm:ss"                     # This is optional  
+    #args[:startDate] = "MM-dd-yyyy HH:mm:ss"           # This is optional  
+    #args[:endDate] = "MM-dd-yyyy HH:mm:ss"             # This is optional  
     #args[:aggregate] = "10"                            # This is optional  
-    #args[:searchText] = "text"                         #This is optional  
+    #args[:searchText] = "text"                         # This is optional  
 
     uri = URI.parse('https://console.cloud-elements.com/elements/api-v1/sendgrid/elementUsage')  
 
@@ -68,22 +67,22 @@ class Email
     #Email.sendEmail({from: 'eric.justin.allen@gmail.com', to: 'eric.allen.cr@gmail.com', subject: 'This is SWOTBOT', message: "This is a test... Of the SWOT BOT Broadcasting system"})
     #   Substitute the following  
     message[:from] = hash[:from]
-    message[:to] = hash[:to]                       #This is required  
+    message[:to] = hash[:to]                          #This is required  
 
-    message[:subject] = hash[:subject]                          #This is required  
-    message[:message] = hash[:message]                                        #This is required  
+    message[:subject] = hash[:subject]                #This is required  
+    message[:message] = hash[:message]                #This is required  
 
     #   mimeType can be text/html or text/plain.  
     #   can be omitted. Default is text/plain.  
 
-    message[:mimeType] = 'text/html'                                #This is optional  
+    message[:mimeType] = 'text/html'                  #This is optional  
 
     #   refId can be any tracking information that you want  
     #   generally its your reference id for this request.  
     #   Can be omitted.  
     #   Uncomment the Line below to send a reference ID.  
 
-    #message[:refId] = 'Change This'                            #This is optional  
+    #message[:refId] = 'Change This'                   #This is optional  
 
     #   Callback is the url that you wish to be notified at for events  
     #   associated with your message.  
@@ -91,7 +90,7 @@ class Email
 
     #message[:callback] = 'Your Call Back URL if you wish to be notified.'          #This is optional  
 
-    json[:message] = message                                #This is required  
+    json[:message] = message                            #This is required  
     json[:elementToken] = '0967313f714ec4c12971a5adfbf51d1e'  
 
     uri = URI.parse('https://console.cloud-elements.com/elements/api-v1/sendgrid/send')  
@@ -109,7 +108,7 @@ class Email
 
     puts "Response from send invocation - #{response.code} #{response.message}: #{response.body}\n\n"  
 
-    #   Checking for success in the response  
+    # Checking for success in the response  
     if parsedResponse[:success]  
 
       messageId = parsedResponse[:value]  
@@ -148,23 +147,22 @@ class Email
   # This method helps in searching messages based on different arguments  
   def searchMessage  
 
-
     #Substitute the following.  
     args = Hash.new  
 
     #Search based on text in messages  
-    args[:text] = "Add Sample Subjects"                                 #This is optional  
+    args[:text] = "Add Sample Subjects"                      #This is optional  
 
     #Search based on refId passed while sending the messages  
-    args[:refId] = ""                                           #This is optional  
+    args[:refId] = ""                                        #This is optional  
 
     #Search based on startTime and endTime  
-    #args[:startTime] = "MM-dd-yyyy HH:mm:ss"                               #This is optional  
-    #args[:endtime] = "MM-dd-yyyy HH:mm:ss"                             #This is optional  
+    #args[:startTime] = "MM-dd-yyyy HH:mm:ss"                #This is optional  
+    #args[:endtime] = "MM-dd-yyyy HH:mm:ss"                  #This is optional  
 
     #If you need the result in a paginated format use the below arguments  
-    args[:pageNumber] = "1"                                     #This is optional  
-    args[:pageSize] = "10"                                      #This is optional  
+    args[:pageNumber] = "1"                                  #This is optional  
+    args[:pageSize] = "10"                                   #This is optional  
 
     args[:elementToken] = '0967313f714ec4c12971a5adfbf51d1e'  
 
