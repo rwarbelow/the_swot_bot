@@ -3,28 +3,22 @@
   <nav class="nav">
     <ul>
       <% if current_student? %>
-        <li><%= link_to "Student Dashboard", 
+        <li><%= link_to "Dashboard", 
             students_root_path, 
             :id => "", 
             :class => "#{'current' if current_page?(students_root_path)} button button-flat" %>
         </li>
 
-        <li><%= link_to "Student Profile", 
+        <li><%= link_to "Profile", 
             students_profile_path(current_student), 
             :id => "",
             :class => "#{'current' if current_page?(students_profile_path(current_student))} button button-flat" %>
         </li>
         
-        <li><%= link_to "Current Courses", 
+        <li><%= link_to "Classes", 
             students_courses_path(current_student), 
             :id => "",
             :class => "#{'current' if current_page?(students_courses_path(current_student))} button button-flat" %>
-        </li>
-      
-        <li><%= link_to "Edit My Profile", 
-            edit_students_profile_path(current_student), 
-            :id => "",
-            :class => "button button-flat" %>
         </li>
       <% end %>
 
@@ -62,18 +56,18 @@
       <% end %>
 
       <% if current_user.guardian? %>
-        <li><%= link_to "Guardian Dashboard",
+        <li><%= link_to "Dashboard",
             guardians_root_path, 
             :class => "#{'current' if current_page?(guardians_root_path)} button button-flat" %>
         </li>
         
-        <li><%= link_to "Guardian Profile", 
+        <li><%= link_to "Profile", 
             guardians_profile_path(current_guardian), 
             :class => "#{'current' if current_page?(guardians_profile_path(current_guardian))} button button-flat" %>
         </li>
       <% end %>
 
-      <li><%= link_to "Inbox", 
+      <li><%= link_to "Messages", 
           messages_path, 
           :class => "#{'current' if current_page?(messages_path)} button button-flat" %></li>
 

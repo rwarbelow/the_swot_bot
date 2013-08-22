@@ -1,12 +1,14 @@
-<ul>
-    <li><%= link_to "Edit Your Profile", edit_guardians_profile_path(current_guardian) %></li>
-    <li>First name: <%= current_guardian.first_name%></li>
-    <li>Last name: <%= current_guardian.last_name%></li>
-    <li>Username: <%= current_guardian.username%></li>
-    <li>Address: <%= current_guardian.address%></li>
-    <li>Email: <%= current_guardian.email%></li>
-    <li>Preferred language: <%= current_guardian.preferred_language%></li>
-    <% current_guardian.phone_numbers.each do |number| %>
-    <li><%= number.kind.capitalize%>: <%= number.number%></li>
-    <% end %>
-</ul>
+<div class="guardian-profile-container">
+    <ul>
+        <li><%= link_to "Edit Your Profile", edit_guardians_profile_path(current_guardian) %></li>
+        <li>First name: <%= current_guardian.first_name%></li>
+        <li>Last name: <%= current_guardian.last_name%></li>
+        <li>Username: <%= current_guardian.username%></li>
+        <li>Address: <%= current_guardian.address%></li>
+        <li>Email: <%= current_guardian.email%></li>
+        <li>Preferred language: <%= current_guardian.preferred_language%></li>
+        <% current_guardian.phone_numbers.each do |number| %>
+        <li><%= number.kind.capitalize%>: <%= number.number%></li>
+        <% end %>
+    </ul>
+</div>

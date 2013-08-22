@@ -1,17 +1,26 @@
 .guardian-dashboard-container {
-  width: 40%;
+  width: 70%;
   /*float: left;*/
   /*margin-left: 300px;*/
   /*margin-top: 50px;*/
 }
 
+.guardian-index-top {
+  width: 700px;
+}
+
 .guardian-dashboard-announcements {
-  width: 30%;
   float: right;
   margin-top: 50px;
 }
 
+.add-student-container {
+  float: left;
+}
+
 .student-list {
+  margin-top: 50px;
+  float: left;
   margin-bottom: 60px;
 }
 
@@ -22,3 +31,9 @@
 .add-student-h {
   margin-bottom: 20px;
 }
+
+.guardian-profile-container {
+  margin-top: 50px;
+  font-size: 1.3em;
+}
+

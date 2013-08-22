@@ -1,16 +1,13 @@
-.nav-container {
-  height: 100%;
-  width: 180px;
-  position: fixed;
-  margin-left: -25px;
-}
 
 .nav {
   padding-top: 78px;
+  width: 140px;
   height: 100%;
   background-color: #eee;
   float: left;
   padding-right: 50px;
+  position: fixed;
+  padding-bottom: 100%;
 }
 
 .current {
