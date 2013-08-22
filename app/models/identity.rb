@@ -56,4 +56,8 @@ class Identity < ActiveRecord::Base
 	def downcase_username
 		self.username = self.username.downcase if self.username.present?
 	end
+
+	def full_name
+		"#{self.first_name} #{self.last_name}"
+	end
 end

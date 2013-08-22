@@ -26,4 +26,20 @@ module ApplicationHelper
   def current_guardian?
     !!current_guardian
   end
+
+  def start_date
+    if Time.now.wday != 5
+      Date.commercial(Date.today.year, Date.today.cweek-1, 1)
+    else
+      Date.commercial(Date.today.year, Date.today.cweek, 1)
+    end
+  end
+
+  def end_date
+    if Time.now.wday != 5
+      Date.commercial(Date.today.year, Date.today.cweek-1, 5)
+    else
+      Date.commercial(Date.today.year, Date.today.cweek, 5)
+    end
+  end
 end
