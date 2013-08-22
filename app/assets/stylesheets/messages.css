@@ -1,0 +1,19 @@
+.messages-container {
+  margin-top: 50px;
+}
+
+.message-nav li{
+  display: inline;
+  margin-right: 20px;
+  font-size: 1.2em;
+}
+
+.message-nav {
+  margin-bottom: 20px;
+}
+
+.box-empty {
+  color: gray;
+  font-style: italic;
+  margin-left: 20px;
+}
