@@ -1,0 +1,11 @@
+.collapse {
+  float:left;
+  width: 600px;
+}
+
+.close{
+  float: left !important;
+  width: 100%;
+  opacity: 0.8 !important;
+}
+
