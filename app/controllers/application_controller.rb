@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
       student_actions_array = []
       grade_array = []
       courses.each do |course|
-        grade_array << course.enrollments.where(student_id:student.id).
+        grade_array << course.enrollments.where(student_id:student.id).current_grade
         student_actions_array << course.enrollments.where(student_id:student.id).first.student_actions.current_week_report.group_by {|action| action.student_action_type.name}
       end
      report.start_new_page do |page|
