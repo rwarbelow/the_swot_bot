@@ -14,18 +14,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def security_settings
-        security_settings = {
-        :user_password  => 'foo',
-        :owner_password => :random,
-        :permissions => {
-          :print_document  => true,
-          :modify_contents => false,
-          :copy_contents   => true
-        }
-      }
-  end
-
  def bad_actions
    bad_actions = ["calling-out",
                   "disrespecting-others",
@@ -42,7 +30,9 @@ class ApplicationController < ActionController::Base
     students.each do |student|
       courses = student.courses
       student_actions_array = []
+      grade_array = []
       courses.each do |course|
+        grade_array << course.enrollments.where(student_id:student.id).
         student_actions_array << course.enrollments.where(student_id:student.id).first.student_actions.current_week_report.group_by {|action| action.student_action_type.name}
       end
      report.start_new_page do |page|
@@ -58,6 +48,8 @@ class ApplicationController < ActionController::Base
         page.item(:class4).value(courses[4].subject.name)
         page.item(:class5).value(courses[5].subject.name)
 
+
+
         student_actions_array.each do |array|
           n = 0
           array.each do |key,value|
@@ -70,7 +62,7 @@ class ApplicationController < ActionController::Base
         end
       end
     end
-    if password = true
+    if password == true
       security_settings = {:user_password  => 'foo',
                            :owner_password => :random,
                               :permissions => { :print_document  => true,
