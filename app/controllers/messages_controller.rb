@@ -12,6 +12,7 @@ class MessagesController < ApplicationController
   end
 
   def create
+    p "*"*80
     p params
   	@message = Message.create(:author_id => current_user.id, :target_id => (Identity.find_by_teacher_id(params[:message][:to]).id), :body => params[:message][:body], :subject => params[:message][:subject])
   	if @message.save
