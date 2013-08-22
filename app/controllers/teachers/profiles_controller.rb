@@ -18,8 +18,9 @@ class Teachers::ProfilesController < Teachers::BaseController
 
   def edit
     @teacher = Teacher.find(params[:id])
+    @user = Identity.find(current_user.id)
     if @teacher && @teacher.id == current_user.teacher.id
-      render 'teachers/teachers/edit'
+      render 'teachers/profiles/edit'
     else
       redirect_to error_url
     end
@@ -45,4 +46,22 @@ class Teachers::ProfilesController < Teachers::BaseController
   def show
     @courses = current_teacher.courses
   end
+
+    def add_phone_number
+    @phone_number = PhoneNumber.new(params[:phone_number])
+    @phone_number.phone_numberable_id = current_teacher.id
+    @phone_number.phone_numberable_type = "Teacher"
+    @phone_number.save
+    flash[:success] = "#{@phone_number.number} added"
+    redirect_to edit_teachers_profile_path(current_teacher)
+  end
+
+  def delete_phone_number
+    @phone_number = PhoneNumber.find(params[:phone_number_id])
+    number = @phone_number.number
+    @phone_number.destroy
+    flash[:success] = "#{number} deleted"
+    redirect_to edit_teachers_profile_path(current_teacher)
+  end
+
 end
