@@ -3,7 +3,7 @@
   <div class="upper forms">
     <%= render 'shared/error_messages' %>
     <%= form_for @guardian, 
-        url: guardians_profile_path(@guardian), :id => "sign_up" } do |f| %>
+        url: guardians_profile_path(@guardian), :id => "sign_up" do |f| %>
 
       <%= f.label :email, "Email Address" %>
       <%= f.text_field :email %>

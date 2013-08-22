@@ -24,35 +24,29 @@
 
       <% if current_teacher? %>
 
-        <li><%= link_to "Dashboard",
+        <li><%= link_to "Live Class",
             teachers_root_path, 
             :id => "dashboard",
             :class => "#{'current' if current_page?(teachers_root_path)} button button-flat" %>
         </li>
         
-        <li><%= link_to "Profile", 
-            teachers_profile_path(current_teacher),
-             :id => "profile",
-             :class => "#{'current' if current_page?(teachers_profile_path(current_teacher))} button button-flat" %>
+        <li><%= link_to "Action Feed", 
+            teachers_livestream_path, 
+            :class => "#{'current' if current_page?(teachers_livestream_path)} button button-flat" %>
         </li>
 
-        <li><%= link_to "Classes", 
+        <li><%= link_to "Class Info", 
             teachers_courseload_path, 
             :id => "classes",
             :class => "#{'current' if current_page?(teachers_courseload_path)} button button-flat" %>
         </li>
 
-        <li><%= link_to "Livestream", 
-            teachers_livestream_path, 
-            :class => "#{'current' if current_page?(teachers_livestream_path)} button button-flat" %>
-        </li>
-      
-        <li><%= link_to "Feedback",
-            root_path, 
-            :id => "feedback", 
-            :class => "#{'current' if current_page?(root_path)} button button-flat" %>
-        </li>
 
+        <li><%= link_to "Profile", 
+            teachers_profile_path(current_teacher),
+             :id => "profile",
+             :class => "#{'current' if current_page?(teachers_profile_path(current_teacher))} button button-flat" %>
+        </li>
       <% end %>
 
       <% if current_user.guardian? %>
