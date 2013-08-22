@@ -2,9 +2,9 @@
 .class-index-container, 
 .class-edit-form-container {
   width: 50%;
-  float: left;
-  margin-left: 350px;
-  margin-top: 50px;
+  /*float: left;*/
+  /*margin-left: 350px;*/
+  /*margin-top: 50px;*/
 }
 
 .class-create-form-container .btn,
