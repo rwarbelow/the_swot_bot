@@ -1,6 +1,7 @@
-<h1><%= current_user.first_name %> <%= current_user.last_name %>'s Courses</h1>
-<%= link_to "Master Course Schedule", teachers_courses_path(current_teacher) %>
-
+<div class="courseload-container">
+	<h1><%= current_user.first_name %> <%= current_user.last_name %>'s Courses</h1>
+	<%= link_to "Master Course Schedule", teachers_courses_path(current_teacher) %>
+	
 <div>
 	<table>
 		<thead>

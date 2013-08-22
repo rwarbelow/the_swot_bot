@@ -1,29 +1,29 @@
-<ul>
-    <li><%= link_to "Edit Your Profile", edit_teachers_profile_path(current_teacher) %></li>
-    <li>First name: <%= current_teacher.first_name%></li>
-    <li>Last name: <%= current_teacher.last_name%></li>
-    <li>Username: <%= current_teacher.username%></li>
-    <li>Email: <%= current_teacher.email%></li>
-    <% current_teacher.phone_numbers.each do |number| %>
-    <li><%= number.kind.capitalize%>: <%= number.number%></li>
+<div class="teacher-profile-container">
+  <ul>
+      <li><%= link_to "Edit Your Profile", edit_teachers_profile_path(current_teacher) %></li>
+      <li class="profile-info">First name: <%= current_teacher.first_name%></li>
+      <li class="profile-info">Last name: <%= current_teacher.last_name%></li>
+      <li class="profile-info">Username: <%= current_teacher.username%></li>
+      <li class="profile-info">Email: <%= current_teacher.email%></li>
+      <% current_teacher.phone_numbers.each do |number| %>
+      <li class="profile-info"><%= number.kind.capitalize%>: <%= number.number%></li>
+      <% end %>
+  </ul>
+
+  <div class="swot-report-actions">
+    <h3>Send SWOT Report to Guardian</h3>
+
+    <%= form_tag teachers_send_student_email_path, :method => "post" do %>
+
+      <%= label_tag :guardian, "Username of Guardian" %>
+      <%= text_field_tag :guardian, params[:guardian] %>
+
+      <%= label_tag :ccsd_id, "Student CCSD ID" %>
+      <%= password_field_tag :ccsd_id %>
+      <br>
+      <%= submit_tag "Send Single Email", :class => "btn" %>
+
     <% end %>
-</ul>
-
-
-<h3>Send SWOT Report to Guardian</h3>
-
-<%= form_tag teachers_send_student_email_path, :method => "post" do %>
-
-  <%= label_tag :guardian, "Username of Guardian" %>
-  <%= text_field_tag :guardian, params[:guardian] %>
-
-  <%= label_tag :ccsd_id, "Student CCSD ID" %>
-  <%= password_field_tag :ccsd_id %>
-
-  <%= submit_tag "Send Email" %>
-
-<% end %>
-
-
-<h3>Send all SWOT Report Emails</h3>
-<%= button_to "Send Weekly Email", teachers_weekly_email_path, :method => "post" %>
+    <%= button_to "Send Weekly Email", teachers_weekly_email_path, :method => "post", :class => "btn" %>
+  </div>
+</div>
