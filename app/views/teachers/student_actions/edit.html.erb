@@ -1,41 +1,25 @@
+<% if flash[:action_errors] %>
+  <% flash[:action_errors].each do |error| %>
+    <%= error %>
+  <% end %>
+<% end %>
+
 <div>
-  <%= render 'shared/error_messages' %>
-    <%= form_for @guardian, url: guardians_profile_path(@guardian), :html => { :class => "pure-form pure-form-stacked", :id => "sign_up" } do |f| %>
+    <%= form_for @student_action, url: teachers_student_action_path(@student_action) do |f| %>
 
-      <%= f.label :email, "Email Address" %>
-      <%= f.text_field :email %>
+    <%= f.hidden_field(:enrollment_id, value: @student_action.enrollment_id) %>
+    <p>Student: <%= @student_action.enrollment.student.first_name%> <%= @student_action.enrollment.student.last_name%></p>
 
-      <%= f.label :address, "Street Address" %>
-      <%= f.text_field :address %>
+      <%= f.label :date, "Date (YYYY-MM-DD)" %>
+      <%= f.text_field :date %>
 
-      <%= f.label :preferred_language, "Preferred Language" %>
-      <%= f.select :preferred_language, [['English','English'],
-      ['Spanish','Spanish'],
-      ['Other', 'Other']] %>
+      <% action_array = (StudentActionType.all.map { |action| ["#{action.name}", action.id] }) %>
+      <%= f.select(:student_action_type_id, action_array) %>
 
-      <%= f.submit value="Update Email", :class => "pure-button" %>
+      <%= f.label :comment, "Comments" %>
+      <%= f.text_area :comment %>
+
+      <%= f.submit value="Update Record" %>
     <% end %>
   </div>
 
-
-<div>
-	<h2>Reply to this message</h2>
-	<%= form_for Message.new, url: messages_path, method: "post" do |f| %>
-
-	  <p>To: <%= Identity.find(@message.author_id).first_name %> <%= Identity.find(@message.author_id).last_name %></p>
-	  <%= f.hidden_field(:to, value: @message.author_id) %>
-
-	  <p>Subject: Re: <%= @message.subject%> </p>
-	  <%= f.hidden_field(:subject, value: "Re: #{@message.subject}") %>
-
-	  <%= f.label :body %>
-	  <%= f.text_area :body %><br />
-
-	  <%= f.submit %>
-	<% end %>
-</div>
-
-
-
-
-<p><%= @student_action.enrollment.student.first_name %></p>
