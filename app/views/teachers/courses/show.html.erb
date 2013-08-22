@@ -52,8 +52,8 @@
       <% @students.each do |student| %>
       <tr>
         <td><%= student.ccsd_id %></td>
-        <td><%= student.first_name %></td>
-        <td><%= student.last_name %></td>
+        <td><%= link_to student.first_name, teachers_student_profile_path(student) %></td>
+        <td><%= link_to student.last_name, teachers_student_profile_path(student) %></td>
         <td><%= @course.calculate_student_percentage(student) %></td>
         <td><%= @course.calculate_student_grade(student) %></td>
       </tr>
