@@ -21,7 +21,7 @@ class Course < ActiveRecord::Base
 			@total_points = 0
 			@earned_points = 0
 			self.assignments.each do |assignment|
-				if assignment.due_date <= Date.today + 1
+				if assignment.due_date < Date.today
 					student_submissions = assignment.submissions.where(:student_id => student.id)
 					@total_points += assignment.maximum_points
 					@earned_points += student_submissions.first.points_earned if student_submissions.length > 0
