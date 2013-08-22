@@ -25,9 +25,7 @@ class TextMessage
       puts parsedResponse[:errorMsg]  
   
     end  
-  
   end  
-  
   
   # This method is used for finding out the usage of the element  
   def elementsUsage  
@@ -63,7 +61,6 @@ class TextMessage
       puts parsedResponse[:errorMsg]  
   
     end  
-  
   end  
   
   
@@ -136,7 +133,6 @@ class TextMessage
       puts parsedResponse[:errorMsg]  
   
     end  
-  
   end  
   
   #   This method helps to retrieve message details for given messageId  
@@ -160,13 +156,10 @@ class TextMessage
       puts parsedResponse[:errorMsg]  
   
     end  
-  
   end  
-  
   
   # This method helps in searching messages based on different arguments  
   def searchMessage  
-  
   
     #Substitute the following.  
     args = Hash.new  
@@ -201,16 +194,10 @@ class TextMessage
       puts parsedResponse[:errorMsg]  
   
     end  
-  
-  end  
-  
-  # Private method for attaching parameters to uri  
-  # def self.parameterize(params)  
-  
-  #   URI.escape(params.collect{|k,v| "#{k}=#{v}"}.join('&'))  
-  
-  # end  
-  
+  end    
+
+  private
+
   # Private method for making http connection, passing request, and receiving response  
   def invokeElement(uri)  
   
@@ -224,32 +211,4 @@ class TextMessage
     return response, JSON.parse(response.body, :symbolize_names => true)  
   
   end  
-  
-  # private :parameterize, :invokeElement  
-  
 end  
-  
-# twilioTest = TwilioSampleCode.new  
-  
-# begin  
-  
-#   # Checking to see if the messaging is live and active  
-#   twilioTest.ping  
-  
-#   # Sending a message  
-#   messageId = twilioTest.sendMessage  
-  
-#   # Checking message details for the given messageId  
-#   twilioTest.messageDetails(messageId) unless messageId.nil?  
-  
-#   # Search for all messages  
-#   twilioTest.searchMessage  
-  
-#   # Find out element usage  
-#   twilioTest.elementsUsage  
-  
-# rescue  
-  
-#   puts $!.inspect, $@  
-  
-# end  

@@ -1,1 +1,11 @@
+<h3>Send a single email to a guardian</h3>
 
+<%= form_tag("/teachers/send_student_email", :method => :post) do  %>
+<%= f.label "Guardian Username" %>
+<%= f.text_field :guardian %>
+<%= f.label "Student CCSD_id" %>
+<%= f.text_field :ccsd_id %>
+<%= f.submit "Send Email" %>
+
+<h3>Weekly email to all guardians that have an email address</h3>
+<%= link_to: "Weekly Email", teachers_weekly_email_path %>
