@@ -25,6 +25,7 @@ SwotBot::Application.routes.draw do
     get '/livestream', :to => 'student_actions#index'
     scope 'livestream' do
       resources :student_actions
+      get '/course_history/:id', :to => 'student_actions#course_history', as: :course_history_actions
     end
     resources :courses do
       get '/liveclass', :to => 'live#classroom'

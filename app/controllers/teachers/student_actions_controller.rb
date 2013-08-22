@@ -19,4 +19,8 @@ class Teachers::StudentActionsController < Teachers::BaseController
     end
   end
 
+  def course_history
+    @course = Course.find(params[:id])
+  end
+
 end
