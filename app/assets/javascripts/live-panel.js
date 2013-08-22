@@ -56,7 +56,7 @@ $(document).ready(function() {
 
       $('.other-function-container').hide();
       $('.grid-container').show();
-      $('behavior-container').show();
+      $('.behavior-container').show();
       $('.student-icon').removeClass('active');
       data = [];
     });
