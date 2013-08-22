@@ -37,9 +37,6 @@ SwotBot::Application.routes.draw do
       resources :assignments
       resources :enrollments
       resources :submissions
-      get '/student_report', to: 'reports#student_report'
-      get '/report_search', to: 'reports#report_search'
-      get '/course_report', to: 'reports#course'
       resources :grades
     end
 
@@ -47,6 +44,9 @@ SwotBot::Application.routes.draw do
       resources :submissions
     end
 
+    get '/student_report', to: 'reports#student_report'
+    get '/report_search', to: 'reports#report_search'
+    get '/course_report', to: 'reports#course'
     root :to => "dashboard#index"
   end
 
