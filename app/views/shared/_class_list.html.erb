@@ -2,8 +2,9 @@
 	<ul>
 		<% if current_teacher? %>
 			<% current_teacher.courses.each do |course| %>
-				<li>
-					<%= link_to "(#{course.period})  #{course.subject.name}", teachers_course_liveclass_path(course) , :class => "btn btn-large btn-info" %>
+				<li class="class-icon">
+					<span class="period"><%= course.period %></span>
+					<%= link_to "#{course.subject.name}", teachers_course_liveclass_path(course) , :class => "btn btn-large btn-info" %>
 				</li>
 			<% end %>
 		<%end%>
