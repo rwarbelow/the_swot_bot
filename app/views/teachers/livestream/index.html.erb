@@ -1,0 +1,23 @@
+<div id="collapse" >
+	<% current_teacher.courses.each do |course| %>
+	  <h2>Period <%= course.period %> <%= course.subject.name %></h2>
+	  <div>
+		  <h3><%= Date.today.strftime("%A, %B %e, %Y ") %></h3>
+		  <table>
+		  	<thead>
+		  		<th></th>
+		  	</thead>
+	    <% course.student_actions.select{ |a| a.date == Date.today }.each do |action| %>
+		    <tr>
+		      <td><%= action.enrollment.student.first_name %></td>
+		      <td><%= action.student_action_type.name %></td>
+		      <td><% action.student_action_type.name if action.comment %></td>
+		    </tr>
+		    </table>
+	    <% end %>
+	  </div>
+  <% end %>
+</div>
+
+
+

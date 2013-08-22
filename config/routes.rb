@@ -22,9 +22,11 @@ SwotBot::Application.routes.draw do
     end
     resources :guardian_profiles
     get '/courseload', :to => 'courses#courseload'
+    get '/livestream', :to => 'livestream#index'
     resources :courses do
       get '/liveclass', :to => 'live#classroom'
-      get '/roster', :to => 'courses#roster'
+      get '/roster', :to => 'courses#roster
+      '
       resources :assignments
       resources :enrollments
       resources :submissions
