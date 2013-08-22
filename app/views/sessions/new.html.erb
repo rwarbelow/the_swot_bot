@@ -8,6 +8,7 @@
     <%= image_tag("Robot.png") %>  
   </div>
  
+  <div class="login-form">
   <% if flash[:notice] %>
     <p class="flash-notice"><%= flash[:notice] %></p>
   <% end %>
@@ -23,4 +24,5 @@
       <br>  
       <%= f.submit value="Log In", :class => "btn btn-large btn-primary" %>
     <% end %>
+  </div>
 </div>
