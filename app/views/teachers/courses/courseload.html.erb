@@ -1,0 +1,16 @@
+<h1><%= current_user.first_name %> <%= current_user.last_name %>'s Courses</h1>
+
+<div>
+	<table>
+		<thead>
+			<th>Period</th>
+			<th>Subject</th>
+		</thead>
+		<% @courses.each do |course| %>
+		<tr>
+			<td><%= course.period %></td>
+			<td><%= link_to course.subject.name, teachers_course_path(course) %></td>
+		</tr>
+		<% end %>
+	</table>
+</div>

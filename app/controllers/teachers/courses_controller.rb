@@ -52,4 +52,12 @@
     @courses = Course.order(params[:sort])
   end
 
+  def courseload
+    @courses = Course.where(:teacher_id => current_teacher.id)
+  end
+
+  def roster
+    @course = Course.find(params[:course_id])
+    @students = @course.students
+  end
 end
