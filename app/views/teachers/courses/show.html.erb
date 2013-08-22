@@ -1,30 +1,52 @@
 
 <%= link_to "Live Class", teachers_course_liveclass_path(@course) %>
 
-<%= link_to "Assignments", teachers_course_assignments_path(@course) %>
-
 <%= link_to "Add Students to Course", teachers_course_enrollments_path(@course) %>
 
-<div class="errors">
-  <% if flash[:enrollment_errors] %>
-    <% flash[:enrollment_errors].each do |error| %>
-    <%= error %><p>
-    <% end %>
-  <% end %>
+<%= link_to "Course Roster", teachers_course_roster_path(@course) %>
+
+<div id="collapse" >
+  <h2 class="open">Recent Assignments</h2>
+  <div id="assignment-preview-5">
+    <table>
+      <thead>
+        <th>Due Date</th>
+        <th>Title</th>
+        <th>Maximum Points</th>
+        <th>Description</th>
+        <th></th>
+      </thead>
+      <% @course.assignments.take(5).each do |assignment| %>
+      <tr>
+        <td><%= assignment.due_date %></td>
+        <td><%= assignment.title %></td>
+        <td><%= assignment.maximum_points %></td>
+        <td><%= assignment.description %></td>
+        <td><%= link_to "Enter Grades", teachers_assignment_path(assignment) %></td>
+      </tr>
+      <% end %>
+    </table>
+    <%= link_to "See More", teachers_course_assignments_path(@course) %>
+  </div>
+  <h2>Current Grades</h2>
+  <div id="student-roster">
+    <table>
+      <thead>
+        <th>CCSD ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Percent</th>
+        <th>Grade</th>
+      </thead>
+      <% @students.each do |student| %>
+      <tr>
+        <td><%= student.ccsd_id %></td>
+        <td><%= student.first_name %></td>
+        <td><%= student.last_name %></td>
+        <td><%= @course.calculate_student_percentage(student) %></td>
+        <td><%= @course.calculate_student_percentage(student) %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
-<table>
-  <thead>
-    <th>CCSD ID</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>More Information</th>
-  </thead>
-  <% @students.each do |student| %>
-  <tr>
-    <td><%= student.ccsd_id %></td>
-    <td><%= student.first_name %></td>
-    <td><%= student.last_name %></td>
-    <td><%= link_to "More", teachers_student_profile_path(student) %></td>
-  </tr>
-  <% end %>
-</table>
