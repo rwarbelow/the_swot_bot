@@ -35,11 +35,13 @@
             :id => "dashboard",
             :class => "#{'current' if current_page?(teachers_root_path)} button button-flat" %>
         </li>
+        
         <li><%= link_to "Profile", 
             teachers_profile_path(current_teacher),
              :id => "profile",
              :class => "#{'current' if current_page?(teachers_profile_path(current_teacher))} button button-flat" %>
         </li>
+
         <li><%= link_to "Create Class", 
             new_teachers_course_path, 
             :id => "create-class",
