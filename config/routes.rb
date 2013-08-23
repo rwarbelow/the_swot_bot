@@ -56,7 +56,7 @@ SwotBot::Application.routes.draw do
       post '/add_phone_number', :to => 'profiles#add_phone_number'
       delete '/delete_phone_number', :to => 'profiles#delete_phone_number'
     end
-  resources :students do
+  resources :students, only: [:show] do
     resources :courses
   end
   get '/student_report', to: 'reports#student_report'
