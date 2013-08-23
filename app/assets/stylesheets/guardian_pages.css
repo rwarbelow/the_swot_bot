@@ -37,3 +37,14 @@
   font-size: 1.3em;
 }
 
+.guardian-student-action-container {
+  margin-top: 50px;
+}
+
+.guardian-student-action-container tr{
+  width: 600px;
+}
+
+.guardian-student-action-container td{
+  margin-right: 10px;
+}

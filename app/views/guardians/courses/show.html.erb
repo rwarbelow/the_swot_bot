@@ -1,7 +1,7 @@
+<div class="guardian-student-action-container">
 <div class="assignments">
   <h3>Assignments</h3>
   
-  <% @assignments.each do |assignment| %>
   <table>
     <thead>
       <th>Period</th>
@@ -11,6 +11,7 @@
       <th>Max Points</th>
       <th>Earned Points</th>
     </thead>
+  <% @assignments.each do |assignment| %>
     <tr>
       <td><%= assignment.course.period %></td>
       <td><%= assignment.course.subject.name %></td>
@@ -19,14 +20,13 @@
       <td><%= assignment.maximum_points %></td>
       <td><%= assignment.submissions.find_by_student_id(@student).points_earned if assignment.submissions.find_by_student_id(@student) %></td>
     </tr>
-  </table>
   <% end %>
+  </table>
 </div>
 
 <h3>Recent Actions</h3>
 <div class="recent-actions">
   
-  <% @actions.each do |action| %>
   <table>
     <thead>
       <th>Date</th>
@@ -36,6 +36,7 @@
       <th>Action</th>
       <th>Comments</th>
     </thead>
+  <% @actions.each do |action| %>
     <tr>
       <td><%= action.date %></td> 
       <td><%= action.enrollment.course.period %></td>
@@ -47,7 +48,8 @@
         <% end %>
       </td>
     </tr>
-  </table>
   <% end %>
+  </table>
+</div>
 </div>
 </div>
