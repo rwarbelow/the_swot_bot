@@ -1,7 +1,6 @@
 <div class="assignments">
   <h3>Assignments</h3>
   
-  <% @assignments.each do |assignment| %>
   <table>
     <thead>
       <th>Period</th>
@@ -11,6 +10,7 @@
       <th>Max Points</th>
       <th>Earned Points</th>
     </thead>
+  <% @assignments.each do |assignment| %>
     <tr>
       <td><%= assignment.course.period %></td>
       <td><%= assignment.course.subject.name %></td>
@@ -26,7 +26,6 @@
 <h3>Recent Actions</h3>
 <div class="recent-actions">
   
-  <% @actions.each do |action| %>
   <table>
     <thead>
       <th>Date</th>
@@ -36,6 +35,7 @@
       <th>Action</th>
       <th>Comments</th>
     </thead>
+  <% @actions.each do |action| %>
     <tr>
       <td><%= action.date %></td> 
       <td><%= action.enrollment.course.period %></td>
