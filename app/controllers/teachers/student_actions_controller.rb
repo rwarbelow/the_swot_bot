@@ -10,12 +10,12 @@ class Teachers::StudentActionsController < Teachers::BaseController
     errors = []
     @course = Course.find(params[:course_id])
     params[:student_ids].each do |student_id|
-      enrollment = Enrollment.find(:student_id => student_id, :course_id => @course.id)
+      enrollment = Enrollment.find_by_student_id_and_course_id(student_id, @course.id)
       enrollment.student_actions << StudentAction.create(:date => params[:date], :student_action_type_id => params[:student_action], :comment => params[:comment])
       errors << "#{Student.find(student_id).first_name} #{Student.find(student_id).last_name} : #{enrollment.errors.full_messages.first}" unless enrollment.save
     end
     flash[:enrollment_errors] = errors
-    redirect_to teachers_course_roster_path(@course)
+    redirect_to teachers_course_history_actions_path(@course)
   end
 
   def index

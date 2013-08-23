@@ -19,7 +19,7 @@
 		  		<th>Action</th>
 		  		<th>Comment</th>
 		  	</thead>
-	    	<% @course.student_actions.sort! { |a,b| b.date <=> a.date }.each do |action| %>
+	    	<% @course.student_actions.sort! { |a,b| a.date <=> b.date }.each do |action| %>
 			    <tr>
 			    	<td><%= link_to "Delete", teachers_student_action_path(action), :method => "delete" %></td>
 			    	<td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
