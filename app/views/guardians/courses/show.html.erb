@@ -1,3 +1,4 @@
+<div class="guardian-student-action-container">
 <div class="assignments">
   <h3>Assignments</h3>
   
@@ -19,8 +20,8 @@
       <td><%= assignment.maximum_points %></td>
       <td><%= assignment.submissions.find_by_student_id(@student).points_earned if assignment.submissions.find_by_student_id(@student) %></td>
     </tr>
-  </table>
   <% end %>
+  </table>
 </div>
 
 <h3>Recent Actions</h3>
@@ -47,7 +48,8 @@
         <% end %>
       </td>
     </tr>
-  </table>
   <% end %>
+  </table>
+</div>
 </div>
 </div>
