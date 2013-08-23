@@ -1,0 +1,21 @@
+<div>
+	<%= form_tag teachers_student_actions_path, :method => :post do %>
+  <ul>
+  <% for student in @students.sort! { |a,b| a.last_name <=> b.last_name } %>
+      <p><%= check_box_tag "student_ids[]", student.id %>
+      <%= student.first_name %> <%= student.last_name %>, Grade <%= student.grade_level %>, CCSD ID <%= student.ccsd_id %>
+      </p>
+      <% end %>
+    	<%= hidden_field_tag :course_id, @course.id %>
+    	<br>
+    	Choose Action
+    	<%= select_tag "student_action", options_from_collection_for_select(StudentActionType.all, "id", "name") %>
+    	<br>
+    	Optional Comment <br>
+      <%= text_field_tag :comment %> <br>
+      Date <br>
+      <%= text_field_tag :date, "YYYY-MM-DD", value: Date.today %> <br>
+      <%= submit_tag "Add Actions" %>
+  </ul>
+<% end %>
+</div>

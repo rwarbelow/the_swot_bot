@@ -39,7 +39,8 @@ class Guardians::ProfilesController < Guardians::BaseController
 
   def update
     @guardian = Guardian.find(params[:id])
-    if @guardian.update_attributes(params[:guardian])
+    @guardian.update_attributes(params[:guardian])
+    if @guardian.save
       flash[:success] = "Profile updated"
       redirect_to guardians_root_path
     else
