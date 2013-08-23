@@ -22,9 +22,13 @@ module ReportGenerator
       courses = student.courses
       student_actions_array = []
       grade_array = []
+      missing_work_array = []
       courses.each do |course|
         grade_array << course.enrollments.where(student_id:student.id).first.current_grade
         student_actions_array << course.enrollments.where(student_id:student.id).first.student_actions.current_week_report.group_by {|action| action.student_action_type.name}
+        course.enrollments.where(student_id:student.id).first.student_actions.current_week_report.each do |action|
+          missing_work_array << action if action.student_action_type.student_action_category_id == 4
+        end
       end
      report.start_new_page do |page|
         page.item(:student_name).value(student.full_name)
@@ -41,8 +45,14 @@ module ReportGenerator
 
         n = 0
         grade_array.each do |grade|
-          page.item("grade#{n}").value(grade)
+          page.item("grade#{n}").value("#{grade}%")
           n += 1
+        end
+
+        x = 0
+        missing_work_array.each do |missing_work|
+          page.item("mw#{n}").value(missing_work)
+          x += 1
         end
 
         student_actions_array[0].each do |key,value|
@@ -87,7 +97,7 @@ module ReportGenerator
             row.item(:key).style(:color, 'red') if bad_actions.include?(key)
           end
         end
-  
+
       security_settings = {:user_password  => 'student.ccsd_id',
                            :owner_password => :random,
                               :permissions => { :print_document  => true,
