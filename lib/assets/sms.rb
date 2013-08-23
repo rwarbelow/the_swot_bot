@@ -116,7 +116,7 @@ On time: #{on_time}, Tardy: #{tardy}, Absent: #{absent}
 Behavior
 Positive: #{positive}, Negative: #{negative}
 
-Daily Objectives Masterd
+Daily Objectives Mastered
 #{mastery}
 
 Missing Assignments
