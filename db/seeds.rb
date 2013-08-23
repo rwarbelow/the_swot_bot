@@ -138,7 +138,7 @@ StudentActionCategory.create!(name: "missing-assignments", allow_multiple_entrie
   StudentActionType.create!(student_action_category_id: 2,name: "disrespecting-others", value: -1)
   StudentActionType.create!(student_action_category_id: 2,name: "ignoring-instructions", value: -1)
   StudentActionType.create!(student_action_category_id: 2,name: "laughing-at-others-mistakes", value: -1)
-  StudentActionType.create!(student_action_category_id: 2,name: "not-participating", value: -1)
+  StudentActionType.create!(student_action_category_id: 3,name: "not-participating", value: -1)
   StudentActionType.create!(student_action_category_id: 2,name: "side-conversations", value: -1)
   StudentActionType.create!(student_action_category_id: 2,name: "sloppy-slant", value: -1)
   StudentActionType.create!(student_action_category_id: 2,name: "swearing", value: -1)
