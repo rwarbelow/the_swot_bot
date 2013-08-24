@@ -6,7 +6,6 @@ class Teachers::StudentActionsController < Teachers::BaseController
   end
 
   def create
-    p params
     errors = []
     @course = Course.find(params[:course_id])
     params[:student_ids].each do |student_id|

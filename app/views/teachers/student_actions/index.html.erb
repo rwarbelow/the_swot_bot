@@ -7,12 +7,14 @@
 		  <table>
 		  	<thead>
 		  		<th></th>
+		  		<th></th>
 		  		<th>Student Name</th>
 		  		<th>Action</th>
 		  		<th>Comment</th>
 		  	</thead>
 	    	<% course.student_actions.select{ |a| a.date == Date.today.end_of_week }.each do |action| %>
 			    <tr>
+			    	<td><%= link_to "Delete", teachers_student_action_path(action), method: "delete" %></td>
 			    	<td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
 			      <td><%= action.enrollment.student.first_name %> <%= action.enrollment.student.last_name %></td>
 			      <td><%= action.student_action_type.name %></td>
@@ -30,6 +32,7 @@
 		  	</thead>
 	    	<% course.student_actions.select{ |a| a.date == (Date.today-1) }.each do |action| %>
 			    <tr>
+			    	<td><%= link_to "Delete", teachers_student_action_path(action), method: "delete" %></td>
 			    	<td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
 			      <td><%= action.enrollment.student.first_name %> <%= action.enrollment.student.last_name %></td>
 			      <td><%= action.student_action_type.name %></td>
@@ -47,6 +50,7 @@
 		  	</thead>
 	    	<% course.student_actions.select{ |a| a.date == (Date.today-2) }.each do |action| %>
 			    <tr>
+			    	<td><%= link_to "Delete", teachers_student_action_path(action), method: "delete" %></td>
 			    	<td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
 			      <td><%= action.enrollment.student.first_name %> <%= action.enrollment.student.last_name %></td>
 			      <td><%= action.student_action_type.name %></td>
@@ -64,6 +68,7 @@
 		  	</thead>
 	    	<% course.student_actions.select{ |a| a.date == (Date.today-3) }.each do |action| %>
 			    <tr>
+			    	<td><%= link_to "Delete", teachers_student_action_path(action), method: "delete" %></td>
 			    	<td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
 			      <td><%= action.enrollment.student.first_name %> <%= action.enrollment.student.last_name %></td>
 			      <td><%= action.student_action_type.name %></td>
@@ -81,6 +86,7 @@
 		  	</thead>
 	    	<% course.student_actions.select{ |a| a.date == (Date.today-4) }.each do |action| %>
 			    <tr>
+			    	<td><%= link_to "Delete", teachers_student_action_path(action), method: "delete" %></td>
 			    	<td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
 			      <td><%= action.enrollment.student.first_name %> <%= action.enrollment.student.last_name %></td>
 			      <td><%= action.student_action_type.name %></td>
