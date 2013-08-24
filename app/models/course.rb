@@ -2,8 +2,8 @@ class Course < ActiveRecord::Base
   attr_accessible :period, :teacher_id, :subject_id
 
 	validates :teacher_id, :presence => true
-	validates :period, :presence => true 
-	validates :subject_id, :presence => true 
+	validates :period, :presence => true
+	validates :subject_id, :presence => true
 	validates :teacher_id, :uniqueness => { :scope => :period }
 
 	has_many :assignments
@@ -15,43 +15,34 @@ class Course < ActiveRecord::Base
 
 
 	def calculate_student_percentage(student)
-		if self.assignments.length == 0
-			return ""
-		else
-			@total_points = 0
-			@earned_points = 0
-			self.assignments.each do |assignment|
-				if assignment.due_date < Date.today
-					student_submissions = assignment.submissions.where(:student_id => student.id)
-					@total_points += assignment.maximum_points
-					@earned_points += student_submissions.first.points_earned if student_submissions.length > 0
-				end
-			end
-			if @earned_points && @total_points
-				earned = @earned_points.to_f
-				total = @total_points.to_f
-				return ((earned / total) * 100).round(1)
-			end
-		end
+    past_assignments = assignments.includes(:submissions).where('due_date < ?', Date.today).all
+    return 100.0 if past_assignments.empty?
+    total_points = earned_points = 0.0
+    past_assignments.each do |assignment|
+      student_submissions = assignment.submissions.select { |submission| submission.student_id == student.id }
+      total_points += assignment.maximum_points
+      student_submissions.each { |submission| earned_points += submission.points_earned  }
+    end
+    ((earned_points / total_points) * 100).round(1)
 	end
 
 
 	def calculate_student_grade(student)
-		if calculate_student_percentage(student)
-			case calculate_student_percentage(student)
-			when 90..100
-				return "A"
-			when 80..89
-				return "B"
-			when 70..79
-				return "C"
-			when 60..69
-				return "D"
-			when 0..59
-				return "F"
-			else
-				return ""
-			end
-		end
+    percentage = calculate_student_percentage(student)
+    calculate_grade_for percentage
 	end
+
+  def calculate_grade_for(percentage)
+    case percentage
+    when 90...Float::INFINITY then "A"
+    when 80...90              then "B"
+    when 70...80              then "C"
+    when 60...70              then "D"
+    when  0...60              then "F"
+    else
+      raise ArgumentError, "Expected non-negative grade percentage, got #{percentage.inspect}"
+    end
+  end
+
+
 end
