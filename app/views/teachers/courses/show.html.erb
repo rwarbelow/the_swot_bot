@@ -16,9 +16,12 @@
         <th>Maximum Points</th>
         <th>Class Average</th>
         <th></th>
+        <th></th>
+        <th></th>
       </thead>
       <% @course.assignments.each do |assignment| %>
       <tr>
+        
         <td><%= assignment.due_date %></td>
         <td><%= assignment.title %></td>
         <td><%= assignment.description %></td>
@@ -34,6 +37,8 @@
             <td><%= ((@classtotal) / (@total)) %>%</td>
         <% end %>
         <td><%= link_to "Enter Grades", teachers_assignment_path(assignment) %></td>
+        <td><%= link_to "Delete", teachers_assignment_path(assignment), method: "delete" %></td>
+        <td><%= link_to "Edit", edit_teachers_assignment_path(assignment) %></td>
       </tr>
       <% end %>
     </table>
