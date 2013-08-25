@@ -1,7 +1,7 @@
 class Students::DashboardController < Students::BaseController
   def index
   	@student = current_student
-  	@inspiration = Inspiration.all.sample
-  	@announcements = Announcement.all(:conditions => ["expiration_date >= ?", Date.today])
+  	@goals = Goal.all.select{ |goal| goal.student_id == current_student.id && goal.status == "In Progress"}
+  	@completed_goals = Goal.all.select{ |goal| goal.student_id == current_student.id && goal.status == "Complete"}
   end
 end

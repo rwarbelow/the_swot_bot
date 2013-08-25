@@ -21,6 +21,7 @@ class Student < ActiveRecord::Base
 	has_many :teachers, :through => :courses
 	has_many :submissions
 	has_many :student_actions, :through => :enrollments
+	has_many :goals
   
   protected
 

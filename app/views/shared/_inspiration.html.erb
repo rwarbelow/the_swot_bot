@@ -1,4 +1,5 @@
 <div class="inspiration">
+	<% @inspiration = Inspiration.all.sample %>
 <h3><%= @inspiration.body %></h3>
 <p><%= "-#{@inspiration.source}" if @inspiration.source %></p>
 </div>
