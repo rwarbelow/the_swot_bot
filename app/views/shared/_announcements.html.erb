@@ -1,5 +1,6 @@
 <div>
   <h2>Announcements</h2>
+  <% @announcements = Announcement.all(:conditions => ["expiration_date >= ?", Date.today]) %>
   <% if @announcements.any? %>
 	  <% @announcements.each do |announcement| %>
 	    <h4><%= announcement.title %> (Posted on <%= announcement.created_at.strftime('%m-%d-%Y') %>)</h4>

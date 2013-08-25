@@ -1,0 +1,6 @@
+<%= form_for @goal, url: students_goal_path(@goal), method: 'put' do |f| %>
+	<%= f.label "Last updated on: #{@goal.updated_at.strftime("%D")}" %>
+	<%= f.text_area :goal, value: @goal.goal %>
+	<%= f.submit "Update Goal" %>
+<% end %>
+b

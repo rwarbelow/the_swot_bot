@@ -1,0 +1,20 @@
+<div>
+	<h1><%= current_student.first_name %>'s Completed Goals</h1>
+	<p><%= link_to "Back to Dashboard", students_root_path %></p>
+		<table>
+		<thead>
+			<th>Created</th>
+			<th>Goal</th>
+			<th>Completed</th>
+		</thead>
+		<% if @completed_goals.length > 0 %>
+			<% @completed_goals.each do |goal| %>
+				<tr>
+					<td><%= goal.created_at.strftime("%b %d, %Y") %></td>
+					<td><%= goal.goal %></td>
+					<td><%= goal.updated_at.strftime("%b %d, %Y") %></td>
+				</tr>
+			<% end %>
+			<% end %>
+		</table>
+</div>
