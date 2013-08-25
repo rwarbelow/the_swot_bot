@@ -4,16 +4,18 @@ SwotBot::Application.routes.draw do
 
 
   namespace 'students' do
-    resources :profiles
     resources :goals do
       post '/complete', to: 'goals#complete'
     end
     resources :courses, :only => [:index, :show] do
-      resources :assignments
+      resources :assignments, :only => [:show]
       resources :submissions
       resources :grades
       get '/student_report', to: 'reports#student_report'
     end
+    get 'profile',      to: 'profiles#show',   :as => :profile
+    get 'profile/edit', to: 'profiles#edit',   :as => :edit_profile
+    put 'profile',      to: 'profiles#update'
     root :to => "dashboard#index"
   end
 

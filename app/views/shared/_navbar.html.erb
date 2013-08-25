@@ -10,7 +10,7 @@
         </li>
 
         <li><%= link_to "Profile", 
-            students_profile_path(current_student), 
+            students_profile_path, 
             :id => "",
             :class => "#{'current' if current_page?(students_profile_path(current_student))} button button-flat" %>
         </li>
