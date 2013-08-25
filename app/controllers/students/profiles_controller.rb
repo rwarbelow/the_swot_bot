@@ -1,6 +1,6 @@
 class Students::ProfilesController < Students::BaseController
   def show
-    @student = Student.find(params[:id])
+    @student = current_student
   end
 
   def edit
@@ -14,7 +14,7 @@ class Students::ProfilesController < Students::BaseController
   end
 
   def update
-    @student = Student.find(params[:id])
+    @student = current_student
     if @student.update_attributes(params[:student])
       flash[:success] = "Profile updated"
       redirect_to students_root_path

@@ -1,6 +1,6 @@
 <h1><%=@course.subject.name%></h1>
 
-<% if  @course.calculate_student_percentage(current_student).to_i > 0 %>
+<% if @course.calculate_student_percentage(current_student) > 0 %>
   <h1>Current Overall Grade: <%= @course.calculate_student_percentage(current_student) %>% (<%= @course.calculate_student_grade(current_student) %>)</h1>
 <% end %>
 
