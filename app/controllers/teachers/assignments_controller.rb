@@ -6,7 +6,7 @@ class Teachers::AssignmentsController < Teachers::BaseController
   end
 
   def create
-    @course = Course.find(params[:course_id])
+    @course = current_teacher.courses.find(params[:course_id])
     @assignment = Assignment.new(params[:assignment])
     @assignment.course_id = @course.id
     if @assignment.save
@@ -19,7 +19,7 @@ class Teachers::AssignmentsController < Teachers::BaseController
   end
 
   def show
-      @assignment = Assignment.find(params[:id])
+    @assignment = Assignment.find(params[:id])
   end
 
 end

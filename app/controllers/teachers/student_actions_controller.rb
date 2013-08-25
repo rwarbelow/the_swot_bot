@@ -1,13 +1,13 @@
 class Teachers::StudentActionsController < Teachers::BaseController
 
   def new
-    @course = Course.find(params[:course_id])
+    @course = current_teacher.courses.find(params[:course_id])
     @students = @course.students
   end
 
   def create
     errors = []
-    @course = Course.find(params[:course_id])
+    @course = current_teacher.courses.find(params[:course_id])
     params[:student_ids].each do |student_id|
       enrollment = Enrollment.find_by_student_id_and_course_id(student_id, @course.id)
       enrollment.student_actions << StudentAction.create(:date => params[:date], :student_action_type_id => params[:student_action], :comment => params[:comment])
@@ -18,7 +18,7 @@ class Teachers::StudentActionsController < Teachers::BaseController
   end
 
   def index
-    @courses = Course.where(:teacher_id => current_teacher.id)
+    @courses = current_teacher.courses
   end
 
   def edit
@@ -47,5 +47,4 @@ class Teachers::StudentActionsController < Teachers::BaseController
     @action.delete
     redirect_to teachers_course_history_actions_path(@course)
   end
-
 end
