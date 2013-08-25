@@ -1,19 +1,51 @@
-<%if current_student%>
+<%if current_student == current_user.student %>
 <h1>Welcome, <%= current_user.first_name %>!</h1>
+
+<div>
+	<table>
+		<thead>
+			<th>Created On</th>
+			<th>Goal</th>
+		</thead>
+		<% if @goals.length > 0 %>
+			<% @goals.each do |goal| %>
+				<tr>
+					<td><%= goal.created_at.strftime("%b %d") %></td>
+					<td><%= goal.goal %></td>
+					<td><%= button_to "Complete", students_goal_complete_path(goal), :class => "btn" %></td>
+					<td><%= button_to "Edit", edit_students_goal_path(goal), :method => 'get', :class => "btn" %></td>
+					<td><%= button_to "Delete", students_goal_path(goal), :method => "delete", :class => "btn" %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% else %>
+		<p>No Current Goals</p>
+	<% end %>
+		<%= form_for Goal.new, url: students_goals_path do |f| %>
+  	<% if flash[:goal_errors] %>
+    	<% flash[:goal_errors].each do |error| %>
+				<%= error %>
+			<% end %>
+		<% end %>
+  	<%= f.text_field :goal %>
+  	<%= f.submit "Add Goal" %>
+  <% end %>
+  <% if @completed_goals.length > 0 %>
+  <%= link_to "See Completed Goals", students_goals_path %>
+  <% end %>
+  </div>
 
 <div>
   <%= render '/shared/inspiration' %>
 </div>
 
-<div class="pure-u-1-2">
+<div>
   <%= render 'shared/announcements' %>
 </div>
 
-<%end%>
-
-<h1><%= @student.first_name %> <%= @student.last_name %> (<%= @student.ccsd_id %>)</h1>
-<div id="accordion">
-  <h3>Class Schedule</h3>
+<h2><%= @student.first_name %> <%= @student.last_name %> </h2>
 <div>
   <%= render '/shared/schedule_grades' %>
 </div>
+
+<%end%>

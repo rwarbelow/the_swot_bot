@@ -5,6 +5,9 @@ SwotBot::Application.routes.draw do
 
   namespace 'students' do
     resources :profiles
+    resources :goals do
+      post '/complete', to: 'goals#complete'
+    end
     resources :courses, :only => [:index, :show] do
       resources :assignments
       resources :submissions

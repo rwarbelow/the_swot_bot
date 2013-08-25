@@ -11,6 +11,7 @@
     <li>Grade Level: <%= @student.grade_level %> </li>
     <li>Guardian Registration Code: <%= @student.registration_code %> </li>
     <br>
+    <h2>Guardians</h2>
     <% @student.guardians.each do |guardian| %> 
     <table>
       <thead>
@@ -40,10 +41,29 @@
       </tr>
     </table>
     <% end %>
-  </ul>
+  </ul><br>
 
 <h3>Course Schedule</h3>
 <div>
     <%= render '/shared/schedule_grades' %>
 </div>
+  <h3><%= @student.first_name %>'s Goals</h3>
+  <% if @student.goals.length > 0 %>
+    <table>
+    <thead>
+      <th>Created</th>
+      <th>Goal</th>
+      <th>Completed?</th>
+    </thead>
+      <% @student.goals.each do |goal| %>
+        <tr>
+          <td><%= goal.created_at.strftime("%b %d, %Y") %></td>
+          <td><%= goal.goal %></td>
+          <td><%= goal.status == "Completed" ? "Yes" : "No" %></td>
+        </tr>
+        <% end %>
+      <% else %>
+      <p>No goals</p>
+      <% end %>
+    </table>
 
