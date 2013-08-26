@@ -17,17 +17,13 @@ class Teachers::ProfilesController < Teachers::BaseController
   end
 
   def edit
-    @teacher = Teacher.find(params[:id])
-    @user = Identity.find(current_user.id)
-    if @teacher && @teacher.id == current_user.teacher.id
-      render 'teachers/profiles/edit'
-    else
-      redirect_to error_url
-    end
+    @teacher = current_teacher
+    @user = current_user
+    render 'teachers/profiles/edit'
   end
 
   def update
-    @teacher = Teacher.find(params[:id])
+    @teacher = current_teacher
     if @teacher.update_attributes(params[:teacher])
       flash[:success] = "Profile updated"
       redirect_to teacher_path(@teacher)
@@ -38,7 +34,7 @@ class Teachers::ProfilesController < Teachers::BaseController
   end
 
   def destroy
-    Teacher.find(params[:id]).destroy
+    current_teacher.destroy
     flash[:success] = "User account deleted."
     redirect_to root_url
   end
@@ -47,7 +43,7 @@ class Teachers::ProfilesController < Teachers::BaseController
     @courses = current_teacher.courses
   end
 
-    def add_phone_number
+  def add_phone_number
     @phone_number = PhoneNumber.new(params[:phone_number])
     @phone_number.phone_numberable_id = current_teacher.id
     @phone_number.phone_numberable_type = "Teacher"

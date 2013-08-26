@@ -17,7 +17,7 @@
   end
 
   def edit
-    @course = Course.find(params[:id])
+    @course = current_teacher.courses.find(params[:id])
     @teacher = @course.teacher
     if @course && @teacher.id == current_user.teacher.id
       render 'teachers/courses/edit'
@@ -27,7 +27,7 @@
   end
 
   def update
-    @teacher = Teacher.find(params[:id])
+    @teacher = current_teacher
     if @teacher.update_attributes(params[:teacher])
       flash[:success] = "Profile updated"
       redirect_to teacher_path(@teacher)
@@ -38,8 +38,8 @@
   end
 
   def destroy
-    Teacher.find(params[:id]).destroy
-    flash[:success] = "User account deleted."
+    current_teacher.courses.find(params[:id]).destroy
+    flash[:success] = "Course deleted."
     redirect_to root_url
   end
 
@@ -53,7 +53,7 @@
   end
 
   def courseload
-    @courses = Course.where(:teacher_id => current_teacher.id)
+    @courses = current_teacher.courses
   end
 
   def roster

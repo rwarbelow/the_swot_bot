@@ -1,7 +1,7 @@
 class Teachers::LiveController < Teachers::BaseController
 
   def classroom
-    @course = Course.find(params[:course_id])
+    @course = current_teacher.courses.find(params[:course_id])
     @students = @course.students.all
     @attendance = student_attendance(@students)
 
@@ -14,8 +14,6 @@ class Teachers::LiveController < Teachers::BaseController
 
   def create_action
     action = StudentActionType.find_by_name(params[:action_name])
-    puts "\n\n\n\n\n\n\n\n\n\n\n\n\n"
-    p action
     course_id = params[:course_id]
     student_ids = params[:student_ids]
 
