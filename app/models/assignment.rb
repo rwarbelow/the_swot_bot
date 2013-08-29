@@ -5,9 +5,10 @@ class Assignment < ActiveRecord::Base
 	validates :title, :presence => true
 	validates :maximum_points, :presence => true
 	validates :due_date, :presence => true
-  # validate :valid_date
+	validates :category_id, :presence => true
 
 	belongs_to :course
+	belongs_to :assignment_category
 	has_many 	 :submissions
 
 def valid_date
