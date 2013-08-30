@@ -11,6 +11,7 @@
     <table>
       <thead>
         <th>Due Date</th>
+        <th>Category</th>
         <th>Title</th>
         <th>Description</th>
         <th>Maximum Points</th>
@@ -21,8 +22,8 @@
       </thead>
       <% @course.assignments.each do |assignment| %>
       <tr>
-        
         <td><%= assignment.due_date %></td>
+        <td><%= assignment.assignment_category.name %></td>
         <td><%= assignment.title %></td>
         <td><%= assignment.description %></td>
         <td><%= assignment.maximum_points %></td>
@@ -43,6 +44,7 @@
       <% end %>
     </table>
     <%= link_to "Add Assignment", teachers_course_assignments_path(@course) %>
+    <%= link_to "Create New Category", new_teachers_course_assignment_category_path(@course) %>
   </div>
   <h2>Current Grades</h2>
   <div id="student-roster">
