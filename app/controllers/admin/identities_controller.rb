@@ -1,5 +1,4 @@
 class IdentitiesController < ApplicationController
-
   def new
       @user = Identity.new
   end
@@ -23,8 +22,8 @@ class IdentitiesController < ApplicationController
       render 'new'
     end
   end
-  
-  
+
+
   def edit
     @user = Identity.find(params[:id])
   end
@@ -50,3 +49,4 @@ class IdentitiesController < ApplicationController
   end
 
 end
+

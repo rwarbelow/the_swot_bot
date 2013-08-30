@@ -15,13 +15,13 @@ class Identity < ActiveRecord::Base
 	belongs_to :teacher
 	belongs_to :student
 	belongs_to :guardian
-	has_many 	 :sent_messages, :class_name => "Message", :foreign_key => "author_id" 
-	has_many 	 :received_messages, :class_name => "Message", :foreign_key => "target_id" 
+	has_many 	 :sent_messages, :class_name => "Message", :foreign_key => "author_id"
+	has_many 	 :received_messages, :class_name => "Message", :foreign_key => "target_id"
 
 	before_validation :downcase_username
-  
-	delegate 	:gender, :birthday, :address, :ccsd_id, 
-						:grade_level, :email, :registration_code, 
+
+	delegate 	:gender, :birthday, :address, :ccsd_id,
+						:grade_level, :email, :registration_code,
 						:title, :preferred_language, :guardians,
 						:to => :profile
 
