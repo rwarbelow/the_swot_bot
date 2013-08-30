@@ -1,30 +1,5 @@
 class Guardians::ProfilesController < Guardians::BaseController
   skip_before_filter :require_guardian, :only => [:new, :create]
-  def new
-    @guardian = Guardian.new
-  end
-
-  def create
-    registration_code = params[:guardian][:registration_code]
-    ccsd_id = params[:guardian][:ccsd_id]
-    if student = Student.where(:registration_code => registration_code, :ccsd_id => ccsd_id).first 
-      @guardian = Guardian.new(params[:guardian])
-      if @guardian.save
-        session[:guardian_id] = @guardian.id
-        Guardianship.create(:student_id => student.id, 
-                            :guardian_id => @guardian.id, 
-                            :relationship_to_student => params[:guardian][:relationship_to_student])
-        redirect_to new_identity_path
-      else
-        @errors = @guardian.errors.full_messages
-        flash[:guardianship_errors] = @errors
-        render 'new'
-      end
-    else
-      flash[:guardianship_errors] = "Registration code or Student ID invalid."
-      render 'new'
-    end
-  end
 
   def edit
     @guardian = Guardian.find(params[:id])
@@ -65,9 +40,9 @@ class Guardians::ProfilesController < Guardians::BaseController
     ccsd_id = params[:guardianship][:ccsd_id]
     @guardian = Guardian.find(params[:profile_id])
     if Student.exists?(:ccsd_id => ccsd_id, :registration_code => registration_code)
-      @student = Student.where(:registration_code => registration_code, :ccsd_id => ccsd_id).first 
-      @guardianship = Guardianship.new(:student_id => student.id, 
-                          :guardian_id => @guardian.id, 
+      @student = Student.where(:registration_code => registration_code, :ccsd_id => ccsd_id).first
+      @guardianship = Guardianship.new(:student_id => student.id,
+                          :guardian_id => @guardian.id,
                           :relationship_to_student => params[:guardianship][:relationship_to_student])
       if @guardianship.save
         flash[:success] = "#{@student.first_name} added"
