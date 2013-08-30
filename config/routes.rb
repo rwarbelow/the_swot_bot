@@ -1,7 +1,5 @@
 SwotBot::Application.routes.draw do
 
-  resources :identities
-
 
   namespace 'students' do
     resources :goals do
@@ -67,6 +65,13 @@ SwotBot::Application.routes.draw do
   get '/student_report', to: 'reports#student_report'
   root :to => "dashboard#index"
 end
+
+ namespace 'admin' do
+  resources :identities
+  resources :guardian_profiles
+  resources :student_profiles
+  resources :teacher_profiles
+ end
 
 resources :messages
 get '/received_message/:id', :to => 'messages#show_received', :as => 'show_received'
