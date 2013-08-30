@@ -1,9 +1,9 @@
 class AddCategoryIdColumnToAssignments < ActiveRecord::Migration
   def up
-    add_column :assignments, :category_id, :integer
+    add_column :assignments, :assignment_category_id, :integer
   end
 
   def down
-    remove_column :assignments, :category_id, :integer
+    remove_column :assignments, :assignment_category_id, :integer
   end
 end
