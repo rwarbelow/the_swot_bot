@@ -4,5 +4,11 @@ SWOT (Scholars Working OverTime) Bot is a fully functioning student management s
 
 To use run:
 
-* ```bundle install```
-* ```rake db:redo``` which will create, migrate, and seed the database with faker data.
+1 bundle install
+2 rake db:redo, which will create, migrate, and seed the database with faker data.
+3 rails s will start the server on localhost:3000
+
+
+Notable technologies used:
+
+ThinReports: http://www.thinreports.org/
