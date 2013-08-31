@@ -1,0 +1,25 @@
+  <h1>Edit <%= @assignment.title %> (<%= @assignment.course.subject.name %>, period <%= @assignment.course.period %>)</h1>
+
+  <%= form_for @assignment, url: teachers_assignment_path do |f| %>
+  <% if flash[:assignment_errors] %>
+    <% flash[:assignment_errors].each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  <% end %>
+    <%= f.label :title, "Assignment Title"%><br>
+    <%= f.text_field :title %><br />
+
+    <%= f.label :description, "Description (Optional)" %><br>
+    <%= f.text_area :description, cols: 30, rows: 5 %><br>
+
+    <%= f.label :maximum_points, "Maximum Points" %><br>
+    <%= f.text_field :maximum_points %><br>
+
+    <%= f.label :due_date, "Due Date" %><br>
+    <%= f.text_field :due_date, placeholder: "YYYY-MM-DD" %><br>
+
+    <% category_array = @course.assignment_categories.map { |category| ["#{category.name}", category.id] } %>
+        <%= f.select(:assignment_category_id, category_array, {:include_blank => 'Select gradebook category'}) %><br />
+
+    <%= f.submit %>
+  <% end %>
