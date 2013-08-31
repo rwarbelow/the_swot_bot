@@ -10,7 +10,6 @@ describe Guardians::StudentsController do
     end
 
     it 'shows students if related' do
-      puts 'foo'
       FactoryGirl.create :guardianship, guardian: guardian, student: student
       get :show, id: student.id
       response.should be_success
