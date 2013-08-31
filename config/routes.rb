@@ -39,6 +39,7 @@ SwotBot::Application.routes.draw do
       get '/roster', :to => 'courses#roster'
       resources :assignments
       resources :assignment_categories
+      post '/update_categories', :to => 'assignment_categories#update_all'
       resources :enrollments
       resources :submissions
       resources :grades
