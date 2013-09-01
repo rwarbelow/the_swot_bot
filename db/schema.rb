@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(:version => 20130831221043) do
     t.datetime "updated_at",      :null => false
   end
 
+  create_table "assignment_categories", :force => true do |t|
+    t.string   "name"
+    t.float    "weight"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "assignments", :force => true do |t|
     t.integer  "course_id"
     t.string   "title"
@@ -34,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20130831221043) do
     t.datetime "created_at"
     t.date     "due_date",                        :null => false
     t.integer  "maximum_points", :default => 100, :null => false
+    t.integer  "category_id"
   end
 
   create_table "courses", :force => true do |t|

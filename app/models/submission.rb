@@ -6,7 +6,7 @@ class Submission < ActiveRecord::Base
 	validates :points_earned, :presence => true
 
 	belongs_to :assignment
-	belongs_to :student  	 
+	belongs_to :student 
 
   delegate :title, :description, :to => :assignment
 end

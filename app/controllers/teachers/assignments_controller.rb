@@ -18,8 +18,31 @@ class Teachers::AssignmentsController < Teachers::BaseController
     end
   end
 
+  def edit
+    @assignment = Assignment.find(params[:id])
+    @course = @assignment.course
+  end
+
   def show
     @assignment = Assignment.find(params[:id])
+  end
+
+  def update
+    @assignment = Assignment.find(params[:id])
+    @assignment.update_attributes(params[:assignment])
+    if @assignment.save
+      redirect_to teachers_course_path(@assignment.course)
+    else
+      flash[:assignment_errors] = @assignment.errors.full_messages
+      render '/teachers/assignments/edit'
+    end
+  end
+
+  def destroy
+    @assignment = Assignment.find(params[:id])
+    @course = @assignment.course
+    @assignment.delete
+    redirect_to teachers_course_path(@course)
   end
 
 end

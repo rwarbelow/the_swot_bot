@@ -1,0 +1,44 @@
+<h1>Gradebook Categories</h1>
+
+<% if flash[:submission_errors] %>
+  <% flash[:submission_errors].each do |error| %>
+	  <p><%= error %></p>
+  <% end %>
+<% end %>
+
+<% if flash[:error] %>
+  <div class="error"><%= flash[:error] %></div>
+<% else %>
+  <%= link_to "Back", teachers_course_path(@course)%>
+<% end %>
+
+<div class="flash">
+	<% if flash[:success] %>
+	  <%= flash[:success] %>
+	<% end %>
+</div>
+
+<% if @course.assignment_categories.length == 0 %>
+		<p>You have not set up any categories.</p>
+<% else %>
+	<table>
+		<thead>
+			<th>Category</th>
+			<th>Weight</th>
+		</thead>
+		<%= form_tag teachers_course_update_categories_path(@course) do %>
+			<% @course.assignment_categories.sort! { |a, b| a.id <=> b.id }.each do |category| %>
+				<tr>
+					<td><%= text_field_tag "names[]", category.name %></td>
+					<td><%= text_field_tag "weights[]", category.weight %></td>
+					<br>
+					<%= hidden_field_tag "categories[]", category.id %> 
+				</tr>
+			<% end %> 
+			<br>
+	    <tr>
+	    	<td><%= submit_tag "Update Categories" %></td>
+	    </tr>
+		<% end %>
+	</table>
+<% end %>

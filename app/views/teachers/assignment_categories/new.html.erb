@@ -1,0 +1,24 @@
+<div>
+  <%= link_to "Back to Course Page", teachers_course_path(@course) %>
+
+  <h1>Add Gradebook Category for <%= @course.subject.name %>, period <%= @course.period %></h1>
+
+  <%= form_for AssignmentCategory.new, url: teachers_course_assignment_categories_path do |f| %>
+  <% if flash[:assignment_category_errors] %>
+    <% flash[:assignment_category_errors].each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  <% end %>
+    <%= f.label :name, "Category Name"%>
+    <%= f.text_field :name %><br /><br>
+
+    <%= f.label :weight, "Weight (example: 0.20)" %>
+    <%= f.text_field :weight, cols: 30, rows: 5 %><br>
+
+    <%= f.hidden_field(:course_id, value: @course.id) %><br />
+
+    <%= f.submit %>
+  <% end %>
+</div>
+
+
