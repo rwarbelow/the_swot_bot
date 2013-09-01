@@ -1,0 +1,56 @@
+<%= link_to('Back', :back) %>
+
+<h1><%= @student.first_name %> <%= @student.last_name %>: <%=@course.subject.name%></h1>
+
+
+<% if @course.calculate_student_percentage(@student) > 0 %>
+  <h2>Current Overall Grade: <%= ((@student.enrollments.where('course_id = ?', @course.id).first.current_grade) * 100).round(1) %>% (<%= (@student.enrollments.where('course_id = ?', @course.id).first.letter_grade) %>)</h2>
+<% end %>
+
+<h3>Assignments</h3>
+<div class="assignments">
+  <table>
+    <thead>
+      <th>Assignment</th>
+      <th>Due Date</th>
+      <th>Max Points</th>
+      <th>Earned Points</th>
+      <th>Percent</th>
+      <th>Grade</th>
+    </thead>
+    <% @assignments.each do |assignment| %>
+      <tr>
+        <td><%= assignment.title %></td>
+        <td><%= assignment.due_date %></td>
+        <td><%= @max = assignment.maximum_points %></td>
+        <td><%= @earned = assignment.submissions.find_by_student_id(@student.id).points_earned if assignment.submissions.find_by_student_id(@student.id) %></td>
+        <td><%= assignment.calculate_percent(@earned) *100 %>%</td>
+        <td><%= assignment.calculate_grade(@earned) %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<h3>Recent Actions</h3>
+<div class="recent-actions">
+  <% @actions.limit(20).each do |action| %>
+  <table>
+    <thead>
+      <th>Date</th>
+      <th>Teacher</th>
+      <th>Action</th>
+      <th>Comments</th>
+    </thead>
+    <tr>
+      <td><%= action.date %></td> 
+      <td><%= action.enrollment.course.teacher.last_name %></td>
+      <td><%= action.student_action_type.name %></td>
+      <td><% if action.comment %> 
+        <%= action.comment %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+  <% end %>
+</div>
+</div>
