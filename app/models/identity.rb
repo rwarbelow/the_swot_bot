@@ -1,17 +1,19 @@
 class Identity < ActiveRecord::Base
-	attr_accessible :username, :password, :password_confirmation, :first_name, :last_name, :registration_code, :guardian_id, :teacher_id, :student_id
+	attr_accessible :username, :password, :password_confirmation, :first_name, :last_name, :registration_code, :admin_id, :guardian_id, :teacher_id, :student_id
   attr_accessor :registration_code, :session_user_type
 
 	validates :username, 							    :presence => true, :uniqueness => true
 	validates :password,                  :presence => { :on => :create }, :length => { :minimum => 6, :allow_blank => false }
 	validates :first_name, 						    :presence => true
 	validates :last_name,  						    :presence => true
-	validates :teacher_id, 			:uniqueness => true, :allow_nil => true
-	validates :student_id, 			:uniqueness => true, :allow_nil => true
-	validates :guardian_id, 		:uniqueness => true, :allow_nil => true
+	validates :admin_id, 								  :uniqueness => true, :allow_nil => true
+	validates :teacher_id, 								:uniqueness => true, :allow_nil => true
+	validates :student_id, 								:uniqueness => true, :allow_nil => true
+	validates :guardian_id, 							:uniqueness => true, :allow_nil => true
 
 	has_secure_password
 
+	belongs_to :admin
 	belongs_to :teacher
 	belongs_to :student
 	belongs_to :guardian
@@ -26,7 +28,9 @@ class Identity < ActiveRecord::Base
 						:to => :profile
 
 	def profile
-		if self.teacher?
+		if self.admin?
+			admin
+		elsif self.teacher?
 			teacher
 		elsif self.student?
 			student
@@ -38,13 +42,17 @@ class Identity < ActiveRecord::Base
 	end
 
 	##custom validation for student? || teacher? || guardian?
-
-	def student?
-		!!student_id
+	
+	def admin?
+		!!admin_id
 	end
 
 	def teacher?
 		!!teacher_id
+	end
+
+	def student?
+		!!student_id
 	end
 
 	def guardian?
