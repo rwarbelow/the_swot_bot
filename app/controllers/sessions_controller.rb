@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-  	@user = Identity.where(:username => params[:identity][:username]).first
+  	@user = Identity.where(:username => params[:identity][:username].downcase).first
   	if @user && @user.authenticate(params[:identity][:password])
   		session[:user_id] = @user.id
       dashboard

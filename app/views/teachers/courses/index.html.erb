@@ -12,7 +12,7 @@
     <tr>
         <td><%= course.period %></td>
         <td style="display: none;"><%= course.subject_id %></td>
-        <td><%= course.subject.name %></td>
+        <td><%= link_to course.subject.name, teachers_course_path(course)%></td>
         <td style="display: none;"><%= course.teacher_id %></td>
         <td><%= course.teacher.last_name %></td>
         <td><%= course.students.count %></td>
