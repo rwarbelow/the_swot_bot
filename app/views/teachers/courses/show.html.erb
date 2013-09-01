@@ -61,7 +61,7 @@
         <td><%= student.ccsd_id %></td>
         <td><%= link_to student.first_name, teachers_course_student_record_path(@course, student) %></td>
         <td><%= link_to student.last_name, teachers_course_student_record_path(@course, student) %></td>
-        <td><%= (student.enrollments.where('course_id = ?', @course.id).first.current_grade) * 100 %>%</td>
+        <td><%= ((student.enrollments.where('course_id = ?', @course.id).first.current_grade) * 100).round(1)%>%</td>
         <td><%= (student.enrollments.where('course_id = ?', @course.id).first.letter_grade) %></td>
       </tr>
       <% end %>
