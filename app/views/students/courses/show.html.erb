@@ -1,3 +1,5 @@
+<%= link_to "Back", :back %>
+
 <h1><%=@course.subject.name%></h1>
 
 <% if @course.calculate_student_percentage(current_student) > 0 %>
@@ -6,31 +8,33 @@
 
 <h3>Assignments</h3>
 <div class="assignments">
-  <table>
-    <thead>
-      <th>Assignment</th>
-      <th>Due Date</th>
-      <th>Max Points</th>
-      <th>Earned Points</th>
-      <th>Percent</th>
-      <th>Grade</th>
-    </thead>
-    <% @assignments.each do |assignment| %>
-      <tr>
-        <td><%= assignment.title %></td>
-        <td><%= assignment.due_date %></td>
-        <td><%= @max = assignment.maximum_points %></td>
-        <td><%= @earned = assignment.submissions.find_by_student_id(current_student.id).points_earned if assignment.submissions.find_by_student_id(current_student.id) %></td>
-        <td><%= assignment.calculate_percent(@earned) *100 %>%</td>
-        <td><%= assignment.calculate_grade(@earned) %></td>
-      </tr>
-    <% end %>
-  </table>
+  <% if @assignments.length > 0 %>
+    <table>
+      <thead>
+        <th>Assignment</th>
+        <th>Due Date</th>
+        <th>Max Points</th>
+        <th>Earned Points</th>
+        <th>Percent</th>
+        <th>Grade</th>
+      </thead>
+      <% @assignments.each do |assignment| %>
+        <tr>
+          <td><%= assignment.title %></td>
+          <td><%= assignment.due_date %></td>
+          <td><%= @max = assignment.maximum_points %></td>
+          <td><%= @earned = assignment.submissions.find_by_student_id(current_student.id).points_earned if assignment.submissions.find_by_student_id(current_student.id) %></td>
+          <td><%= assignment.calculate_percent(@earned) *100 %>%</td>
+          <td><%= assignment.calculate_grade(@earned) %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
 </div>
 
 <h3>Recent Actions</h3>
 <div class="recent-actions">
-  <% @actions.limit(20).each do |action| %>
+  <% @actions.limit(25).sort!{ |a, b| b.id <=> a.id }.each do |action| %>
   <table>
     <thead>
       <th>Date</th>
