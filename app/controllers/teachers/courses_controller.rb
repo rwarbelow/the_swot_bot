@@ -60,4 +60,9 @@
     @course = Course.find(params[:course_id])
     @students = @course.students
   end
+
+  def student_record
+    @student = Student.find(params[:student_id])
+    @course = Course.find(params[:course_id])
+  end
 end
