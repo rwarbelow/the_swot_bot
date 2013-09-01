@@ -1,7 +1,17 @@
 <%if current_student == current_user.student %>
+<div>
+  <%= render '/shared/inspiration' %>
+</div>
 <h1>Welcome, <%= current_user.first_name %>!</h1>
 
 <div>
+	<h3>Goals</h3>
+	  <% if flash[:goal_completed] %>
+    <div class="flash"><%= flash[:goal_completed] %></div>
+  <% end %>
+    <% if @completed_goals.length > 0 %>
+  <%= link_to "See Completed Goals", students_goals_path %>
+  <% end %>
 	<table>
 		<thead>
 			<th>Created On</th>
@@ -30,14 +40,7 @@
   	<%= f.text_field :goal %>
   	<%= f.submit "Add Goal" %>
   <% end %>
-  <% if @completed_goals.length > 0 %>
-  <%= link_to "See Completed Goals", students_goals_path %>
-  <% end %>
   </div>
-
-<div>
-  <%= render '/shared/inspiration' %>
-</div>
 
 <div>
   <%= render 'shared/announcements' %>
