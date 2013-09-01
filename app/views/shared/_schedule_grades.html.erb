@@ -15,7 +15,7 @@
       <% if current_student? %>
         <td><%= link_to course.subject.name, students_course_path(course)%></td>
       <% elsif current_teacher? %>
-        <td><%= link_to course.subject.name, teachers_course_path(course)%></td>
+        <td><%= link_to course.subject.name, teachers_student_profile_course_overview_path(@student.id, course.id)%></td>
       <% end %>  
       <td><%= ((@student.enrollments.where('course_id = ?', course.id).first.current_grade) * 100).round(1) %>%</td>
       <td><%= (@student.enrollments.where('course_id = ?', course.id).first.letter_grade) %></td>

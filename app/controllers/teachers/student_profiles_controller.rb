@@ -62,4 +62,12 @@ class Teachers::StudentProfilesController < Teachers::BaseController
       redirect_to login_path
     end
   end
+
+  def course_overview
+    @student = Student.find(params[:student_profile_id])
+    @course = Course.find(params[:course_id])
+    @assignments = @course.assignments
+    enrollment = Enrollment.where(:student_id => @student.id, :course_id => params[:course_id]).first
+    @actions = StudentAction.where(:enrollment_id => enrollment.id)
+  end
 end

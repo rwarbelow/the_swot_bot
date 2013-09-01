@@ -1,3 +1,4 @@
+<%= link_to('Back', :back) %>
 <div>
   <h2 class="chalk"><%= @student.first_name %> <%= @student.last_name %></h2>
   <%= link_to "Student Report", teachers_student_report_path(:ccsd_id => @student.ccsd_id) %>
@@ -55,11 +56,11 @@
       <th>Goal</th>
       <th>Completed?</th>
     </thead>
-      <% @student.goals.each do |goal| %>
+      <% @student.goals.sort! { |a, b| b.status <=> a.status }.each do |goal| %>
         <tr>
           <td><%= goal.created_at.strftime("%b %d, %Y") %></td>
           <td><%= goal.goal %></td>
-          <td><%= goal.status == "Completed" ? "Yes" : "No" %></td>
+          <td><%= goal.status == "Complete" ? "Yes" : "No" %></td>
         </tr>
         <% end %>
       <% else %>
