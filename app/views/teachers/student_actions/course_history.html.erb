@@ -1,10 +1,7 @@
 <%= link_to 'Back', :back %>
 <h2>Actions for Period <%= @course.period %> <%= @course.subject.name %></h2>
 <%if @course.teacher_id == current_teacher.id%>
-<h4><%= form_tag new_teachers_student_action_path, :method => 'get' do %>
-            <%= hidden_field_tag :course_id, @course.id %>
-            <%= submit_tag "Add Actions" %>
-           	<% end %> </h4>
+<%= link_to "Add Actions", new_teachers_student_action_path(:course_id => @course.id) %>
 <%end%>
 <% if flash[:delete_confirmation] %>
 	<div class="flash"><%= flash[:delete_confirmation] %></div>
