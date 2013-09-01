@@ -58,6 +58,7 @@ SwotBot::Application.routes.draw do
   end
 
   namespace 'guardians' do
+    post '/update_identity/:identity_id', :to => 'profiles#update_identity'
     resources :profiles do
       post '/add_student', :to => 'profiles#add_student'
       post '/add_phone_number', :to => 'profiles#add_phone_number'
