@@ -1,17 +1,18 @@
+<%= link_to "Course Roster", teachers_course_roster_path(@course) %>
 
 <% if @course.teacher_id == current_teacher.id %>
 <%= link_to "Live Class", teachers_course_liveclass_path(@course) %>
 
 <%= link_to "Add Students to Course", teachers_course_enrollments_path(@course) %>
 
-<%= link_to "Course Roster", teachers_course_roster_path(@course) %>
-
 <%= link_to "Add Assignment", teachers_course_assignments_path(@course) %>
+
+<%= link_to "Gradebook Categories", teachers_course_assignment_categories_path(@course) %>
+
 <%end%>
 <div id="collapse" >
   <h2 class="open">Assignments for <%= @course.subject.name %> (Period <%= @course.period %>)</h2>
   <div id="assignment-preview-5">
-    <%= link_to "Gradebook Categories", teachers_course_assignment_categories_path(@course) %>
     <table>
       <thead>
         <th>Due Date</th>
