@@ -1,9 +1,6 @@
 <%if current_student = current_user %>
 <h1><%= current_user.first_name %>'s Information</h1>
-<div>
-  <h4>Guardian Registration Code: <%= current_user.registration_code %></h4>
-</div>
-
+<%= link_to "Edit Profile", students_edit_profile_path %>
 <div>
   <ul>
     <li>First Name: <%= current_user.first_name %> </li>
