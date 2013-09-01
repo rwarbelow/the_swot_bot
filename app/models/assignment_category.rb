@@ -12,20 +12,24 @@ class AssignmentCategory < ActiveRecord::Base
  		@worth = 0
  		if submissions.where('student_id = ?', student.id).length > 0
 	 		submissions.where('student_id = ?', student.id).each do |submission|
-	 			@worth += (submission.assignment.maximum_points.to_f * weight) if submission.assignment.due_date < Date.today
+	 			@worth += (submission.assignment.maximum_points.to_f) if submission.assignment.due_date < Date.today
  		end
  		end
  		@worth
  	end
 
- 	 	def earned(student)
+ 	def earned(student)
  		@earned = 0
  		if submissions.where('student_id = ?', student.id).length > 0
 	 		submissions.where('student_id = ?', student.id).each do |submission|
-	 			@earned += (submission.points_earned.to_f * weight) if submission.assignment.due_date < Date.today
+	 			@earned += (submission.points_earned.to_f) if submission.assignment.due_date < Date.today
 	 		end
 	 	end
  		@earned
+ 	end
+
+ 	def total(student)
+ 		(earned(student) / worth(student)) * weight
  	end
 
 end
