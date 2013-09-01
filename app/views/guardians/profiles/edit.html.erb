@@ -1,4 +1,42 @@
+<%= link_to "Back to Dashboard", guardians_root_path %>
+
 <h1>Edit your Profile</h1>
+
+<% if current_guardian.phone_numbers.length > 0 %>
+  <strong>Phone Numbers for Account</strong>
+  <% current_guardian.phone_numbers.each do |phone_number| %>
+    <table>
+      <tr>
+        <td><%= phone_number.number %></td>
+        <td>
+          <%= form_tag guardians_profile_delete_phone_number_path(current_guardian), :method => 'delete' do %>
+            <%= hidden_field_tag :phone_number_id, phone_number.id %>
+            <%= submit_tag "Delete Number" %>
+          <% end %>
+        </td>   
+      </tr>
+    </table>
+  <% end %>
+<% end %>
+
+<div class="guardian-add-phone">
+  <% if flash[:phone_number_errors] %>
+    <p class="flash-notice"><%= flash[:errors] %></p>
+  <% end %>
+  <h3>Add phone number to account</h3>
+  <%= form_for PhoneNumber.new, url: guardians_profile_add_phone_number_path(current_guardian), :html => { :id => "login" } do |f| %>
+
+    <%= f.label :number, "Phone Number" %>
+    <%= f.text_field :number, placeholder: "***-***-****" %>
+    <%= f.label :kind, "Phone Type" %>
+    <%= f.select :kind, [ ['Cell','cell'],
+                          ['Home','home'],
+                          ['Work', 'work'],
+                          ['Other', 'other']] %>
+    <%= f.submit value="Add Phone Number", :class => "pure-button" %>
+  <% end %>
+</div>
+
 <div class="guardian-edit-page-container">
   <div class="upper forms">
     <%= render 'shared/error_messages' %>
@@ -19,33 +57,9 @@
         <%= f.submit value="Update Email and Address", :class => "" %>
     <% end %>
 
-    <div class="guardian-add-phone">
-      <% if flash[:phone_number_errors] %>
-        <p class="flash-notice"><%= flash[:errors] %></p>
-      <% end %>
-
-      <h3>Add phone number to account</h3>
-      <%= form_for PhoneNumber.new, url: guardians_profile_add_phone_number_path(current_guardian), :html => { :id => "login" } do |f| %>
-
-        <%= f.label :number, "Phone Number" %>
-
-        <%= f.text_field :number, placeholder: "***-***-****" %>
-
-        <%= f.label :kind, "Phone Type" %>
-
-        <%= f.select :kind, [ ['Cell','cell'],
-                              ['Home','home'],
-                              ['Work', 'work'],
-                              ['Other', 'other']] %>
-
-          <%= f.submit value="Add Phone Number", :class => "pure-button" %>
-      <% end %>
-    </div>
-  </div>
-
   <div class="user">
     <%= render 'shared/error_messages' %>
-    <%= form_for @user, :html => { :class => "pure-form pure-form-stacked", :id => "edit" } do |f| %>
+    <%= form_for @user, url: guardians_path(@user.id), method: "POST" do |f| %>
 
     <%= f.label :username %>
     <%= f.text_field :username %><br />
@@ -64,20 +78,5 @@
 
     <%= f.submit value="Save changes" %>
   <% end %>
-
-    <strong>Phone Numbers for Account</strong>
-    <% current_guardian.phone_numbers.each do |phone_number| %>
-      <table>
-        <tr>
-          <td><%= phone_number.number %></td>
-          <td>
-            <%= form_tag guardians_profile_delete_phone_number_path(current_guardian), :method => 'delete' do %>
-              <%= hidden_field_tag :phone_number_id, phone_number.id %>
-              <%= submit_tag "Delete Number" %>
-            <% end %>
-          </td>   
-        </tr>
-      </table>
-    <% end %>
  
 </div>
