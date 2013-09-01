@@ -8,6 +8,8 @@
 <div id="collapse" >
   <h2 class="open">Assignments for <%= @course.subject.name %> (Period <%= @course.period %>)</h2>
   <div id="assignment-preview-5">
+          <%= link_to "Add Assignment", teachers_course_assignments_path(@course) %>
+    <%= link_to "Gradebook Categories", teachers_course_assignment_categories_path(@course) %>
     <table>
       <thead>
         <th>Due Date</th>
@@ -20,22 +22,22 @@
         <th></th>
         <th></th>
       </thead>
-      <% @course.assignments.each do |assignment| %>
+      <% @course.assignments.sort! { |a, b| a.id <=> b.id }.each do |assignment| %>
       <tr>
         <td><%= assignment.due_date %></td>
         <td><%= assignment.assignment_category.name %></td>
         <td><%= assignment.title %></td>
-        <td><%= assignment.description %></td>
+        <td><%= assignment.description.nil? || assignment.description.length == 0 ? "(empty)" : assignment.description %></td>
         <td><%= assignment.maximum_points %></td>
-        <% @classtotal = 0 %>
-        <% @total = assignment.submissions.count %>
+        <% @class_points_earned = 0 %>
+        <% @num_submissions = assignment.submissions.count %>
         <% assignment.submissions.each do |submission| %>
-          <% @classtotal += submission.points_earned %>
+          <% @class_points_earned += submission.points_earned %>
         <% end %>
-        <% if @total == 0 %>
-          <td></td>
+        <% if @num_submissions == 0 %>
+          <td>N/A</td>
         <% else %>
-            <td><%= ((@classtotal) / (@total)) %>%</td>
+            <td><%= (@class_points_earned.to_f / (@num_submissions.to_f * assignment.maximum_points.to_f)*100).round(1) %>%</td>
         <% end %>
         <td><%= link_to "Enter Grades", teachers_assignment_path(assignment) %></td>
         <td><%= link_to "Delete", teachers_assignment_path(assignment), method: "delete" %></td>
@@ -43,8 +45,6 @@
       </tr>
       <% end %>
     </table>
-    <%= link_to "Add Assignment", teachers_course_assignments_path(@course) %>
-    <%= link_to "Create New Category", new_teachers_course_assignment_category_path(@course) %>
   </div>
   <h2>Current Grades</h2>
   <div id="student-roster">
@@ -56,12 +56,12 @@
         <th>Percent</th>
         <th>Grade</th>
       </thead>
-      <% @students.each do |student| %>
+      <% @students.sort!{ |a, b| a.last_name <=> b.last_name }.each do |student| %>
       <tr>
         <td><%= student.ccsd_id %></td>
         <td><%= link_to student.first_name, teachers_student_profile_path(student) %></td>
         <td><%= link_to student.last_name, teachers_student_profile_path(student) %></td>
-        <td><%= @course.calculate_student_percentage(student) %></td>
+        <td><%= @course.calculate_student_percentage(student)*100 %>%</td>
         <td><%= @course.calculate_student_grade(student) %></td>
       </tr>
       <% end %>
