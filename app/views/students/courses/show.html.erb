@@ -24,8 +24,8 @@
           <td><%= assignment.due_date %></td>
           <td><%= @max = assignment.maximum_points %></td>
           <td><%= @earned = assignment.submissions.find_by_student_id(current_student.id).points_earned if assignment.submissions.find_by_student_id(current_student.id) %></td>
-          <td><%= assignment.calculate_percent(@earned) *100 %>%</td>
-          <td><%= assignment.calculate_grade(@earned) %></td>
+          <td><%= "#{(assignment.calculate_percent(@earned) *100)}%" if assignment.submissions.where('student_id = ?', current_student.id).length > 0%></td>
+          <td><%= assignment.calculate_grade(@earned) if assignment.submissions.where('student_id = ?', current_student.id).length > 0 %></td>
         </tr>
       <% end %>
     </table>
