@@ -13,7 +13,7 @@ SwotBot::Application.routes.draw do
     end
     get 'profile',      to: 'profiles#show',   :as => :profile
     get 'profile/edit', to: 'profiles#edit',   :as => :edit_profile
-    put 'profile',      to: 'profiles#update'
+    put 'profile',      to: 'profiles#update', :as => :update_profile
     root :to => "dashboard#index"
   end
 
@@ -26,6 +26,7 @@ SwotBot::Application.routes.draw do
     end
     resources :student_profiles do
       get '/identities', :to => 'student_profiles#identity', as: :teacher_student_identity
+      get '/course_overview/:course_id', :to => 'student_profiles#course_overview', as: :course_overview
     end
     resources :guardian_profiles
     get '/courseload', :to => 'courses#courseload'
