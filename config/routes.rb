@@ -19,6 +19,7 @@ SwotBot::Application.routes.draw do
 
   namespace 'teachers' do
     get 'daily_summary', to: 'dashboard#daily_summary'
+    get 'scholar_hour', to: 'dashboard#scholar_hour'
     get '/weekly_email', to: 'email#weekly_email'
     post '/send_student_email', to: 'email#send_student_email'
     resources :profiles do
