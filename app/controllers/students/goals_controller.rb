@@ -26,6 +26,7 @@ class Students::GoalsController < Students::BaseController
 
   def complete
     @goal = Goal.find(params[:goal_id])
+    flash[:goal_completed] = "#{@goal.goal} completed!"
     @goal.status = "Complete"
     @goal.save!
     redirect_to students_root_path
