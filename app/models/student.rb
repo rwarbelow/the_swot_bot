@@ -22,6 +22,55 @@ class Student < ActiveRecord::Base
 	has_many :submissions
 	has_many :student_actions, :through => :enrollments
 	has_many :goals
+
+	def collect_student_actions
+		student_actions_array = []
+		self.student_actions.select {|action| action.date == Date.today}.each do |action|
+			student_actions_array << action.student_action_type_id
+		end
+		aggregate_student_behavior_hash(student_actions_array)
+	end
+
+	def aggregate_student_behavior_hash(student_actions_array) 
+		@student_actions_hash = Hash.new(0)
+		student_actions_array.each do |n|
+			@student_actions_hash[n] +=1
+		end
+		@student_actions_hash
+	end
+
+	def positive(student_actions_hash)
+		positive_score = 0
+		student_actions_hash.each do |student_action_type_id, no_of_occurances|
+			student_action_type = StudentActionType.find(student_action_type_id)
+			if student_action_type.student_action_category_id == 2 && student_action_type.value == "1"
+				positive_score += no_of_occurances
+			end
+		end
+		return positive_score
+	end
+
+	def negative(student_actions_hash)
+		negative_score = 0
+		student_actions_hash.each do |student_action_type_id, no_of_occurances|
+			student_action_type = StudentActionType.find(student_action_type_id)
+			if student_action_type.student_action_category_id == 2 && student_action_type.value == "-1"
+				negative_score += no_of_occurances
+			end
+		end
+		return negative_score
+	end
+
+	def missing_assignments(student_actions_hash)
+		missing_assignments_score = 0
+		student_actions_hash.each do |student_action_type_id, no_of_occurances|
+			student_action_type = StudentActionType.find(student_action_type_id)
+			if student_action_type.student_action_category_id == 4
+				missing_assignments_score += no_of_occurances
+			end
+		end
+		return missing_assignments_score
+	end
   
   protected
 

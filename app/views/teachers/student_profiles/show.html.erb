@@ -1,70 +1,95 @@
 <%= link_to('Back', :back) %>
-<div>
-  <h2 class="chalk"><%= @student.first_name %> <%= @student.last_name %></h2>
-  <%= link_to "Student Report", teachers_student_report_path(:ccsd_id => @student.ccsd_id) %>
-  <ul>
-    <li>Username: <%= @student.username %> </li>
-    <li>Birthday: <%= @student.birthday %> </li>
-    <li>Gender: <%= @student.gender %> </li>
-    <li>Address: <%= @student.address %> </li>
-    <li>Email: <%= @student.email %> </li>
-    <li>CCSD ID: <%= @student.ccsd_id %> </li>
-    <li>Grade Level: <%= @student.grade_level %> </li>
-    <li>Guardian Registration Code: <%= @student.registration_code %> </li>
-    <br>
-    <h2>Guardians</h2>
-    <% @student.guardians.each do |guardian| %> 
-    <table>
-      <thead>
-        <th><%= guardian.guardianships.where(student_id: @student.id).first.relationship_to_student %></th>
-        <th></th>
-        <th>Username</th>
-        <th>Email Address</th>
-        <th>Phone Numbers</th>
-      </thead>
+<h2 class="chalk"><%= @student.first_name %> <%= @student.last_name %></h2>
+<%= link_to "Student Report", teachers_student_report_path(:ccsd_id => @student.ccsd_id) %>
+<ul>
+  <li>Username: <%= @student.username %> </li>
+  <li>Birthday: <%= @student.birthday %> </li>
+  <li>Gender: <%= @student.gender %> </li>
+  <li>Address: <%= @student.address %> </li>
+  <li>Email: <%= @student.email %> </li>
+  <li>CCSD ID: <%= @student.ccsd_id %> </li>
+  <li>Grade Level: <%= @student.grade_level %> </li>
+  <li>Guardian Registration Code: <%= @student.registration_code %> </li>
+  <br>
+  <h2>Guardians</h2>
+  <% @student.guardians.each do |guardian| %> 
+  <table>
+    <thead>
+      <th><%= guardian.guardianships.where(student_id: @student.id).first.relationship_to_student %></th>
+      <th></th>
+      <th>Username</th>
+      <th>Email Address</th>
+      <th>Phone Numbers</th>
+    </thead>
 
-      <tr>
-        <td><%= guardian.first_name %></td> 
-        <td><%= guardian.last_name %></td>
-        <td><%= guardian.username %></td>
-        <td><%= guardian.email %></td>
-        <% guardian.phone_numbers.each do |number| %>
-        <td>
-        <table>
-          <tr>
-            <td><%= number.kind %></td>
-            <td><%= number.number %></td>
-          </tr>
-        </table>
-        </td>
-        <br>
-        <% end %>
-      </tr>
-    </table>
-    <% end %>
-  </ul><br>
+    <tr>
+      <td><%= guardian.first_name %></td> 
+      <td><%= guardian.last_name %></td>
+      <td><%= guardian.username %></td>
+      <td><%= guardian.email %></td>
+      <% guardian.phone_numbers.each do |number| %>
+      <td>
+      <table>
+        <tr>
+          <td><%= number.kind %></td>
+          <td><%= number.number %></td>
+        </tr>
+      </table>
+      </td>
+      <br>
+      <% end %>
+    </tr>
+  </table>
+  <% end %>
+</ul><br>
 
 <h3>Course Schedule</h3>
 <div>
-    <%= render '/shared/schedule_grades' %>
+  <%= render '/shared/schedule_grades' %>
 </div>
-  <h3><%= @student.first_name %>'s Goals</h3>
-  <% if @student.goals.length > 0 %>
-    <table>
-    <thead>
-      <th>Created</th>
-      <th>Goal</th>
-      <th>Completed?</th>
-    </thead>
-      <% @student.goals.sort! { |a, b| b.status <=> a.status }.each do |goal| %>
-        <tr>
-          <td><%= goal.created_at.strftime("%b %d, %Y") %></td>
-          <td><%= goal.goal %></td>
-          <td><%= goal.status == "Complete" ? "Yes" : "No" %></td>
-        </tr>
-        <% end %>
-      <% else %>
-      <p>No goals</p>
+<br>
+
+<h3>Today's Actions</h3>
+<table>
+  <thead>
+    <th>Period</th>
+    <th>Course</th>
+    <th>Action</th>
+    <th>Comments</th>
+  </thead>
+  <tr>
+<% @student.student_actions.where(date: Date.today).sort!{ |a, b| b.id <=> a.id }.each do |action| %>
+  <tr>
+    <td><%= action.enrollment.course.period %></td>
+    <td><%= action.enrollment.course.subject.name %></td>
+    <td><%= action.student_action_type.name %></td>
+    <td><%= action.comment %></td>
+  </tr>
+<% end %>
+</tr>
+</table>
+<br>
+
+<h3><%= @student.first_name %>'s Goals</h3>
+<% if @student.goals.length > 0 %>
+  <table>
+  <thead>
+    <th>Created</th>
+    <th>Goal</th>
+    <th>Completed?</th>
+  </thead>
+    <% @student.goals.sort! { |a, b| b.status <=> a.status }.each do |goal| %>
+      <tr>
+        <td><%= goal.created_at.strftime("%b %d, %Y") %></td>
+        <td><%= goal.goal %></td>
+        <td><%= goal.status == "Complete" ? "Yes" : "No" %></td>
+      </tr>
       <% end %>
-    </table>
+    <% else %>
+    <p>No goals</p>
+    <% end %>
+  </table>
+  <br>
+
+
 
