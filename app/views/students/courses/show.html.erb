@@ -1,7 +1,7 @@
 <h1><%=@course.subject.name%></h1>
 
 <% if @course.calculate_student_percentage(current_student) > 0 %>
-  <h1>Current Overall Grade: <%= @course.calculate_student_percentage(current_student) %>% (<%= @course.calculate_student_grade(current_student) %>)</h1>
+  <h1>Current Overall Grade: <%= @course.calculate_student_percentage(current_student) * 100 %>% (<%= @course.calculate_student_grade(current_student) %>)</h1>
 <% end %>
 
 <h3>Assignments</h3>
@@ -21,7 +21,7 @@
         <td><%= assignment.due_date %></td>
         <td><%= @max = assignment.maximum_points %></td>
         <td><%= @earned = assignment.submissions.find_by_student_id(current_student.id).points_earned if assignment.submissions.find_by_student_id(current_student.id) %></td>
-        <td><%= assignment.calculate_percent(@earned) %>%</td>
+        <td><%= assignment.calculate_percent(@earned) *100 %>%</td>
         <td><%= assignment.calculate_grade(@earned) %></td>
       </tr>
     <% end %>
