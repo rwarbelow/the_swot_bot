@@ -1,14 +1,16 @@
-<p><%= link_to "Back to Assignments Page", teachers_course_assignments_path(@assignment) %></p>
+<p><%= link_to "Back to Course Page", teachers_course_path(@assignment.course) %></p>
 <h1><%= @assignment.title %></h1>
 <h3><%= @assignment.description %></h3>
 
 <table>
   <thead>
     <th>Due Date</th>
+    <th>Category</th>
     <th>Maximum Points</th>
   </thead>
   <tr>
     <td><%= @assignment.due_date %></td>
+    <td><%= @assignment.assignment_category.name %></td>
     <td><%= @assignment.maximum_points %></td>
   </tr>
 </table>
@@ -20,13 +22,22 @@
 <% end %>
 
 <div>
+  <table>
+    <thead>
+      <th>Student</th>
+      <th>Points Earned</th>
+      <th></th>
+    </thead>
   <%= form_tag teachers_assignment_submissions_path(@assignment) do %>
-    <% @assignment.course.students.each do |student| %>
-      <%= text_field_tag "scores[]", (student.submissions.where(:assignment_id => @assignment.id).first.points_earned if student.submissions.where(:assignment_id => @assignment.id).length > 0) %>
-      <%= label :student_name, "#{student.first_name} #{student.last_name}, #{student.ccsd_id}" %>
+    <% @assignment.course.students.sort!{ |a, b| a.last_name <=> b.last_name }.each do |student| %>
+    <tr>
+      <td><%= "#{student.first_name} #{student.last_name}, #{student.ccsd_id}" %></td>
+      <td><%= text_field_tag "scores[]", (student.submissions.where(:assignment_id => @assignment.id).first.points_earned if student.submissions.where(:assignment_id => @assignment.id).length > 0) %></td>
       <%= hidden_field_tag "students[]", student.id %> 
+      </tr>
       <br>  
     <% end %>
-    <%= submit_tag "Submit Scores" %>
+    <tr><td><%= submit_tag "Submit Scores" %></td></tr>
   <% end %>
+  </table>
 </div>
