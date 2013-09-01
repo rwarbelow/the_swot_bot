@@ -5,6 +5,7 @@ class Assignment < ActiveRecord::Base
 	validates :title, :presence => true
 	validates :maximum_points, :presence => true
 	validates :due_date, :presence => true
+	validates :valid_date
 	validates :assignment_category_id, :presence => true
 
 	belongs_to :course
