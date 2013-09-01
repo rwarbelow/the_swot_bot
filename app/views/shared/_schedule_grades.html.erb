@@ -17,7 +17,7 @@
       <% elsif current_teacher? %>
         <td><%= link_to course.subject.name, teachers_course_path(course)%></td>
       <% end %>  
-      <td><%= course.calculate_student_percentage(@student) %></td>
+      <td><%= course.calculate_student_percentage(@student) * 100 %>%</td>
       <td><%= course.calculate_student_grade(@student)%></td>
       <td><%= course.teacher.first_name %> <%= course.teacher.last_name %></td>
       <td><%= course.teacher.email %></td>
