@@ -41,12 +41,18 @@
             :class => "#{'current' if current_page?(teachers_courseload_path)} button button-flat" %>
         </li>
 
-
         <li><%= link_to "Profile", 
             teachers_profile_path(current_teacher),
              :id => "profile",
              :class => "#{'current' if current_page?(teachers_profile_path(current_teacher))} button button-flat" %>
         </li>
+
+        <li><%= link_to "Daily Summary",
+            teachers_daily_summary_path,
+            :id => "daily_summary",
+            :class => "#{'current' if current_page?(teachers_daily_summary_path)} button button-flat" %>
+        </li>
+
       <% end %>
 
       <% if current_user.guardian? %>

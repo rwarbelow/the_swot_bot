@@ -1,0 +1,38 @@
+<h1>Action Summary for <%= Date.today.strftime("%D") %></h1>
+<%= link_to "Scholar Hour List", teachers_scholar_hour_path %>
+<br>
+
+<table>
+	<thead>
+		<th>Student ID</th>
+		<th>Student Name</th>
+		<th>Positive</th>
+		<th>Negative</th>
+		<th>Missing Work</th>
+		<th>Tardy</th>
+		<th>Absent</th>
+	</thead>
+	<% Student.all.sort!{ |a, b| a.last_name <=> b.last_name}.each do |student| %>
+	<tr>
+		<td><%= student.ccsd_id %></td>
+		<td><%= link_to "#{student.first_name} #{student.last_name}", teachers_student_profile_path(student) %></td>
+
+		<% @student_actions_hash = student.collect_student_actions %>
+
+		<td><%= student.positive(@student_actions_hash) %></td>
+
+		<% @negatives = student.negative(@student_actions_hash) %>
+		<td class=<%="#{'negative' if @negatives >= 5 }" %>><%= @negatives %>  </td>
+
+		<% @missing_assignments = student.missing_assignments(@student_actions_hash) %>
+		<td class=<%="#{'negative' if @missing_assignments >= 1 }" %>><%= @missing_assignments %>  </td>
+
+		<% @tardy = @student_actions_hash[2] %>
+		<td class=<%="#{'negative' if @tardy >= 1 }" %>><%= @tardy %>  </td>
+
+		<% @absent = @student_actions_hash[3] %>
+		<td class=<%="#{'negative' if @absent >= 1 }" %>><%= @absent %>  </td>
+
+	</tr>
+	<% end %>
+</table>
