@@ -1,7 +1,7 @@
 <h1><%=@course.subject.name%></h1>
 
 <% if @course.calculate_student_percentage(current_student) > 0 %>
-  <h1>Current Overall Grade: <%= @course.calculate_student_percentage(current_student) * 100 %>% (<%= @course.calculate_student_grade(current_student) %>)</h1>
+  <h1>Current Overall Grade: <%= (current_student.enrollments.where('course_id = ?', @course.id).first.current_grade) * 100 %>% (<%= (current_student.enrollments.where('course_id = ?', @course.id).first.letter_grade) %>)</h1>
 <% end %>
 
 <h3>Assignments</h3>
