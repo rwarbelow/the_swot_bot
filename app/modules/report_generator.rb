@@ -23,8 +23,8 @@ module ReportGenerator
       report.start_new_page do |page|
         page.item(:student_name).value(student.full_name)
         page.item(:ccsd_id).value(student.ccsd_id)
-        page.item(:start_date).value(start_date)
-        page.item(:end_date).value(end_date)
+        page.item(:start_date).value(start_date.strftime("%b %e, %Y"))
+        page.item(:end_date).value(end_date.strftime("%b %e, %Y"))
 
         course_actions.each_with_index do |course_data, index|
           page.item("mw#{index}").value(course_data[:missing_work].length)
@@ -59,7 +59,7 @@ module ReportGenerator
     course_actions = []
     missing_work_array = []
     courses.each do |course|
-      grade = course.enrollments.find_by_student_id(student.id).current_grade
+      grade = (course.enrollments.find_by_student_id(student.id).current_grade * 100).round(0)
       actions = course.enrollments.where(student_id:student.id).first.student_actions.group_by {|action| action.student_action_type.name}
       course.enrollments.where(student_id:student.id).first.student_actions.each do |action|
         missing_work_array << action if action.student_action_type.student_action_category_id == 4
