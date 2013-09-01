@@ -43,7 +43,7 @@ class Course < ActiveRecord::Base
     when 0.60...0.70              then "D"
     when 0...0.60                 then "F"
     else
-        "N/A"
+      raise ArgumentError, "Expected non-negative grade percentage, got #{percentage.inspect}"
     end
   end
 
