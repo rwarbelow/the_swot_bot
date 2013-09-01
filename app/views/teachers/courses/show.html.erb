@@ -59,8 +59,8 @@
       <% @students.sort!{ |a, b| a.last_name <=> b.last_name }.each do |student| %>
       <tr>
         <td><%= student.ccsd_id %></td>
-        <td><%= link_to student.first_name, teachers_student_profile_path(student) %></td>
-        <td><%= link_to student.last_name, teachers_student_profile_path(student) %></td>
+        <td><%= link_to student.first_name, teachers_course_student_record_path(@course, student) %></td>
+        <td><%= link_to student.last_name, teachers_course_student_record_path(@course, student) %></td>
         <td><%= @course.calculate_student_percentage(student)*100 %>%</td>
         <td><%= @course.calculate_student_grade(student) %></td>
       </tr>
