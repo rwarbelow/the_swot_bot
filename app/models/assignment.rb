@@ -5,7 +5,7 @@ class Assignment < ActiveRecord::Base
 	validates :title, :presence => true
 	validates :maximum_points, :presence => true
 	validates :due_date, :presence => true
-	validates :valid_date
+	validate :valid_date
 	validates :assignment_category_id, :presence => true
 
 	belongs_to :course
@@ -23,15 +23,15 @@ class Assignment < ActiveRecord::Base
 	def calculate_grade(earned)
 		if calculate_percent(earned)
 			case calculate_percent(earned)
-			when 0.90..1
+			when 0.90...Float::INFINITY
 				return "A"
-			when 0.80..0.899
+			when 0.80...0.90
 				return "B"
-			when 0.70..0.799
+			when 0.70...0.80
 				return "C"
-			when 0.60..0.699
+			when 0.60...0.70
 				return "D"
-			when 0..0.599
+			when 0...0.60
 				return "F"
 			else
 				return ""
