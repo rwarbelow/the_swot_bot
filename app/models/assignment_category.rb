@@ -1,7 +1,31 @@
 class AssignmentCategory < ActiveRecord::Base
-  attr_accessible :name, :weight
+  attr_accessible :name, :weight, :course_id
 	validates :name, :presence => true
 	validates :weight, :presence => true
 
 	has_many :assignments
+	has_many :submissions, :through => :assignments
+	belongs_to :course
+
+
+ 	def worth(student)
+ 		@worth = 0
+ 		if submissions.where('student_id = ?', student.id).length > 0
+	 		submissions.where('student_id = ?', student.id).each do |submission|
+	 			@worth += (submission.assignment.maximum_points.to_f * weight) if submission.assignment.due_date < Date.today
+ 		end
+ 		end
+ 		@worth
+ 	end
+
+ 	 	def earned(student)
+ 		@earned = 0
+ 		if submissions.where('student_id = ?', student.id).length > 0
+	 		submissions.where('student_id = ?', student.id).each do |submission|
+	 			@earned += (submission.points_earned.to_f * weight) if submission.assignment.due_date < Date.today
+	 		end
+	 	end
+ 		@earned
+ 	end
+
 end
