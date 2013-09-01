@@ -2,6 +2,7 @@
 <div>
   <%= render '/shared/inspiration' %>
 </div>
+<br>
 <h1>Welcome, <%= current_user.first_name %>!</h1>
 
 <div>
@@ -12,12 +13,12 @@
     <% if @completed_goals.length > 0 %>
   <%= link_to "See Completed Goals", students_goals_path %>
   <% end %>
+	<% if @goals.length > 0 %>
 	<table>
 		<thead>
 			<th>Created On</th>
 			<th>Goal</th>
 		</thead>
-		<% if @goals.length > 0 %>
 			<% @goals.each do |goal| %>
 				<tr>
 					<td><%= goal.created_at.strftime("%b %d") %></td>
@@ -44,6 +45,30 @@
 
 <div>
   <%= render 'shared/announcements' %>
+</div>
+
+  <div>
+  <h3>Upcoming Due Dates</h3>
+  <% if @assignments.length == 0 %>
+    <p>No upcoming assignments.</p>
+  <% else %>
+    <table>
+      <thead>
+        <th>Period</th>
+        <th>Course</th>
+        <th>Assignment</th>
+        <th>Due Date</th>
+      </thead>
+      <% @assignments.each do |assignment| %>
+      <tr>
+        <td><%= assignment.course.period %></td>
+        <td><%= assignment.course.subject.name %></td>
+        <td><%= assignment.title %></td>
+        <td><%= assignment.due_date %></td>
+      </tr>
+      <% end %>
+    </table>
+  <% end %>
 </div>
 
 <h2><%= @student.first_name %> <%= @student.last_name %> </h2>
