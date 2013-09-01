@@ -20,13 +20,11 @@ class Course < ActiveRecord::Base
       return 1
     else
       @total_earned = 0
-      @total_worth = 0
       active_categories = assignment_categories.select { |category| category.weight > 0 }.select { |category| category.submissions.length > 0 }
       active_categories.each do |category|
-        @total_earned += category.earned(student)
-        @total_worth += category.worth(student)
+        @total_earned += category.total(student)
       end
-      (@total_earned.to_f / @total_worth.to_f).round(2)
+      @total_earned
     end
   end
 
