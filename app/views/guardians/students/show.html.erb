@@ -18,8 +18,8 @@
     <tr>
       <td><%= course.period %></td>
       <td><%= link_to course.subject.name, guardians_student_course_path(@student, course)%></td>
-      <td><%= course.calculate_student_percentage(@student) %></td>
-      <td><%= course.calculate_student_grade(@student)%></td>
+      <td><%= (@student.enrollments.where('course_id = ?', @course.id).first.current_grade) * 100 %>%</td>
+      <td><%= (@student.enrollments.where('course_id = ?', @course.id).first.letter_grade) %></td>
       <td><%= course.teacher.first_name %> <%= course.teacher.last_name %></td>
       <td><%= course.teacher.email %></td>
       <% cellnumbers = course.teacher.phone_numbers.select {|number| number.kind == "cell"} %>
