@@ -1,15 +1,88 @@
-<div class="pure-g">
-  <div class="pure-u-1-3"></div>
-  <div class="pure-u-1-6">
-    <h2 class="form-header">SWOT Bot</h2>
-  </div>
-   <div class="pure-u-1-6">
-    <%= image_tag("Robot.png") %>  
-  </div>
-  <div class="pure-u-1-3"></div>
-</div>    
+  
+  <h1>Create your SWOTBot account.</h1>
+  <br>
+      <div class="error">
+      <% if flash[:errors] %>
+        <% flash[:errors].each do |error| %>
+          <%= error %>
+        <% end %>
+      <% end %>
+      </div>
+      <%= form_tag :action => 'create', :url => guardians_profiles_path, :method => 'POST' %>
+      <table>
+        <tr>
+          <td><%= label :first_name, "First Name" %></td>
+          <td><%= text_field :identity, :first_name, placeholder: "firstname" %></td>
+        </tr>
+        <tr>
+          <td><%= label :last_name, "Last Name" %></td>
+          <td><%= text_field :identity, :last_name, placeholder: "lastname" %></td>
+        </tr>
+        <tr>
+          <td><%= label :registration_code, "SWOTBot Registration Code" %></td>
+          <td><%= text_field :guardian, :registration_code, placeholder: "xxxxxx" %></td>
+        </tr>
+        <tr>
+          <td><%= label :username, "Username" %></td>
+          <td><%= text_field :identity, :username, placeholder: "username" %></td>
+        </tr>
+        <tr>
+          <td><%= label :password, "Password" %></td>
+          <td><%= password_field :identity, :password, placeholder: "********" %></td>
+        </tr>
+        <tr>
+          <td><%= label :password_confirmation, "Confirm Password" %></td>
+          <td><%= password_field :identity, :password_confirmation, placeholder: "********" %></td>
+        </tr>
+        <tr>
+          <td><%= label :ccsd_id, "Student CCSD ID" %></td>
+          <td><%= text_field :guardian, :ccsd_id, placeholder: "1234567" %></td>
+        </tr>
+        <tr>
+          <td><%= label :address_line_1, "Street Address" %></td>
+          <td><%= text_field :guardian, :address_line_1, placeholder: "1139 North Linn Lane" %></td>
+        </tr>
+        <tr>
+          <td><%= label :address_line_2, "Apartment Number (optional)" %></td>
+          <td><%= text_field :guardian, :address_line_2  %></td>
+        </tr>
+        <tr>
+          <td><%= label :address_city, "City" %></td>
+          <td><%= text_field :guardian, :address_city, value: "Las Vegas" %></td>
+        </tr>
+        <tr>
+          <td><%= label :address_state, "State" %></td>
+          <td><%= text_field :guardian, :address_state, value: "Nevada" %></td>
+        </tr>
+        <tr>
+          <td><%= label :address_zip_code, "Zip Code" %></td>
+          <td><%= text_field :guardian, :address_zip_code, placeholder: "99999" %></td>
+        </tr>
+        <tr>
+          <td><%= label :email, "Email Address" %></td>
+          <td><%= text_field :guardian, :email, placeholder: "example@email.com" %></td>
+        </tr>
+        <tr>
+          <td><%= label :relationship_to_student, "Relationship to Student" %></td>
+          <td><%= select :guardian, :relationship_to_student, [['Mom','mom'],
+          ['Dad','dad'],
+          ['Step-mom', 'step-mom'],
+          ['Step-dad', 'step-dad'],
+          ['Grandma','grandma'],
+          ['Grandpa', 'grandpa'],
+          ['Sibling', 'sibling'],
+          ['Aunt', 'aunt'],
+          ['Uncle', 'uncle'],
+          ['Other', 'other']], :style => nil %></td>
+        </tr>
+        <tr>
+          <td><%= label :preferred_language, "Preferred Language" %></td>
+          <td><%= select :guardian, :preferred_language, [['English','English'],
+          ['Spanish','Spanish'],
+          ['Other', 'Other']] %></td>
+        </tr>
+      </table>
 
-<div>
-  <h2>Please fill in your contact information below. You will create your username and password on the next page.</h2>
-  <%= render 'new_guardian_form' %>
-</div>
+      <div class="next-button">
+        <%= submit_tag value="Next", :class => "pure-button" %>
+      </div>

@@ -28,7 +28,7 @@ class Student < ActiveRecord::Base
   def generate_registration_code
   	self.registration_code = loop do
   		possible = (('A'..'Z').to_a + (0..9).to_a + ('a'..'z').to_a)
-  		random_token = (0...8).map { |n| possible.sample }.join
+  		random_token = (0...6).map { |n| possible.sample }.join
   		break random_token unless Student.where(registration_code: random_token).exists?
   	end
   end
