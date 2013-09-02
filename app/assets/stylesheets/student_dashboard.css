@@ -1,0 +1,13 @@
+.inspiration {
+	background-color: rgba(0, 170, 140, 1);
+	color: white;
+	border-radius: 5px;
+	padding: 5px;
+	margin-top: 30px;
+	text-align: center;
+	float: right;
+	width: 350px;
+	height: 120px;
+	line-height: 30px;
+	vertical-align: middle;
+}
