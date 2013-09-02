@@ -27,9 +27,5 @@ class AssignmentCategory < ActiveRecord::Base
 	 	end
  		@earned
  	end
-
- 	def total(student)
- 		(earned(student) / worth(student)) * weight
- 	end
-
+ 	
 end

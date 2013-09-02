@@ -7,9 +7,11 @@
 <% end %>
 
 <% if flash[:error] %>
-  <div class="error"><%= flash[:error] %></div>
+  <div class="error"><h3><%= flash[:error] %></h3></div>
 <% else %>
   <%= link_to "Back", teachers_course_path(@course)%>
+  <br>
+  <br>
 <% end %>
 
 <div class="flash">
@@ -17,6 +19,8 @@
 	  <%= flash[:success] %>
 	<% end %>
 </div>
+Set your gradebook categories below. You may change the names and weights of each category. <br>
+Set the weight to 0 for any category you do not want to use.
 
 <% if @course.assignment_categories.length == 0 %>
 		<p>You have not set up any categories.</p>

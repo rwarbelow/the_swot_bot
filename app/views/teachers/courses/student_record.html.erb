@@ -1,14 +1,13 @@
 <%= link_to('Back', :back) %>
 
-<h1><%= @student.first_name %> <%= @student.last_name %>'s Grades for <%= @course.subject.name %> (<%= (@student.enrollments.where('course_id = ?', @course.id).first.current_grade) * 100 %>%)</h1>
+<h1><%= @student.first_name %> <%= @student.last_name %>'s Grades for <%= @course.subject.name %> (<%= ((@student.enrollments.where('course_id = ?', @course.id).first.current_grade) * 100).round(1) %>%)</h1>
 <%= link_to "See Student Info", teachers_student_profile_path(@student) %>
 <table>
   <thead>
     <th>Due Date</th>
     <th>Category</th>
     <th>Title</th>
-    <th>Maximum Points</th>
-		<th>Earned</th>
+		<th>Score</th>
 		<th>Percent</th>
 		<th>Grade</th>
   </thead>
@@ -17,10 +16,11 @@
     <td><%= assignment.due_date %></td>
     <td><%= assignment.assignment_category.name %></td>
     <td><%= assignment.title %></td>
-    <td><%= assignment.maximum_points %></td>
-    <td><%= assignment.submissions.where('student_id = ?', @student.id).first.points_earned %></td>
-    <td><%= assignment.calculate_percent(assignment.submissions.where('student_id = ?', @student.id).first.points_earned).round(1)*100%>%</td>
-    <td><%= assignment.calculate_grade(assignment.submissions.where('student_id = ?', @student.id).first.points_earned) %></td>
+    <% if assignment.submissions.where('student_id = ?', @student.id).length > 0 %>
+      <td><%= assignment.submissions.where('student_id = ?', @student.id).first.points_earned %> / <%= assignment.maximum_points %></td>
+      <td><%= assignment.calculate_percent(assignment.submissions.where('student_id = ?', @student.id).first.points_earned).round(1)*100%>%</td>
+      <td><%= assignment.calculate_grade(assignment.submissions.where('student_id = ?', @student.id).first.points_earned) %></td>
+    <% end %>
   </tr>
   <% end %>
 </table>

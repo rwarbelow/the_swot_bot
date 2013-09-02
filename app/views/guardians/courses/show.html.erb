@@ -9,8 +9,7 @@
       <thead>
         <th>Assignment</th>
         <th>Due Date</th>
-        <th>Max Points</th>
-        <th>Earned Points</th>
+        <th>Score</th>
         <th>Percent</th>
         <th>Grade</th>
       </thead>
@@ -18,10 +17,11 @@
       <tr>
         <td><%= assignment.title %></td>
         <td><%= assignment.due_date %></td>
-        <td><%= assignment.maximum_points %></td>
-        <td><%= @earned = assignment.submissions.find_by_student_id(@student).points_earned if assignment.submissions.find_by_student_id(@student) %></td>
-        <td><%= "#{(assignment.calculate_percent(@earned) *100)}%" if assignment.submissions.where('student_id = ?', @student.id).length > 0%></td>
-        <td><%= assignment.calculate_grade(@earned) if assignment.submissions.where('student_id = ?', @student.id).length > 0 %></td>
+    <% if assignment.submissions.where('student_id = ?', @student.id).length > 0 %>
+      <td><%= assignment.submissions.where('student_id = ?', @student.id).first.points_earned %> / <%= assignment.maximum_points %></td>
+      <td><%= assignment.calculate_percent(assignment.submissions.where('student_id = ?', @student.id).first.points_earned).round(1)*100%>%</td>
+      <td><%= assignment.calculate_grade(assignment.submissions.where('student_id = ?', @student.id).first.points_earned) %></td>
+    <% end %>
       </tr>
     <% end %>
     </table>
