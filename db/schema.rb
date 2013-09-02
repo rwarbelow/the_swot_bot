@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130831221043) do
+ActiveRecord::Schema.define(:version => 20130901052634) do
 
   create_table "admins", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20130831221043) do
   create_table "assignment_categories", :force => true do |t|
     t.string   "name"
     t.float    "weight"
+    t.integer  "course_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -39,9 +40,9 @@ ActiveRecord::Schema.define(:version => 20130831221043) do
     t.string   "title"
     t.text     "description"
     t.datetime "created_at"
-    t.date     "due_date",                        :null => false
-    t.integer  "maximum_points", :default => 100, :null => false
-    t.integer  "category_id"
+    t.date     "due_date",                                :null => false
+    t.integer  "maximum_points",         :default => 100, :null => false
+    t.integer  "assignment_category_id"
   end
 
   create_table "courses", :force => true do |t|
@@ -57,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20130831221043) do
     t.integer  "course_id"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
-    t.integer  "current_grade", :default => 100
+    t.float    "current_grade", :default => 1.0
   end
 
   create_table "goals", :force => true do |t|
