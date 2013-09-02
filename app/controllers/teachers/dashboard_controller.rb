@@ -5,6 +5,4 @@ class Teachers::DashboardController < Teachers::BaseController
   def daily_summary
   end
 
-  def scholar_hour
-  end
 end

@@ -22,6 +22,7 @@ class Student < ActiveRecord::Base
 	has_many :submissions
 	has_many :student_actions, :through => :enrollments
 	has_many :goals
+	has_many :scholar_hours
 
 	def collect_student_actions
 		student_actions_array = []
