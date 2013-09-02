@@ -1,11 +1,7 @@
 <div class="grid-container">
   <div class="icon-container">
-    <% if flash[:update_success] %>
-      <p class="flash-notice"><%= flash[:update_success] %></p>
-    <% end %>
-
+    
     <ul id="student-icon-list">
-
       <% @students.each do |student| %>
         <li data-id="<%= student.id %>" class="student-icon">
           <div class="initials">

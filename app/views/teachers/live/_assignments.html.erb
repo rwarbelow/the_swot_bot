@@ -1,0 +1,12 @@
+<%= render 'student_grid' %>
+<div class="assignments-due">
+    <%= link_to "Back", teachers_course_liveclass_path, :class => "btn btn-block btn-large back-button-assignments" %>
+  <ul>
+    <% @assignments_due.each do |assignment| %>
+      <li>
+        <data data-assignmentID="<%= assignment.id %>"></data>
+        <button class="btn btn-large btn-block btn-info assignment-button" id="missing-assignment"><%= assignment.title %></button>
+      </li>
+    <% end %>
+  </ul>
+</div>

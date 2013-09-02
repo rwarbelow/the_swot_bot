@@ -75,6 +75,19 @@ class Teachers::BaseController < ApplicationController
     save_action("on-time", present_students, course_id)
   end
 
+  def save_assignments(student_ids, course_id, assignment_id)
+    student_ids.each do |student_id|
+      student = Student.find(student_id)
+      enrollment = student.enrollments.find_by_course_id(course_id)
+      assignment = Assignment.find(assignment_id)
+      StudentAction.create!(enrollment_id: enrollment.id,
+                            date: Date.today,
+                            student_action_type_id: 29,
+                            comment: assignment.title
+                            )
+    end
+  end
+
 	def require_teacher
 	  return true if current_teacher?
 	  redirect_to root_path and return false
