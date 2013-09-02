@@ -16,15 +16,21 @@ class Course < ActiveRecord::Base
   after_create :build_assignment_categories
 
   def calculate_student_percentage(student)
-    if assignment_categories.select { |category| category.submissions.length == 0 }.length == 5
+    @total_num_categories = assignment_categories.length
+    if assignment_categories.select { |category| category.submissions.length == 0 }.length == @total_num_categories
       return 1
     else
       @total_earned = 0
       active_categories = assignment_categories.select { |category| category.weight > 0 }.select { |category| category.submissions.length > 0 }
+      @raw_total_weight = 0
       active_categories.each do |category|
-        @total_earned += category.total(student)
+        @raw_total_weight += category.weight
+      end
+      active_categories.each do |category|
+        @total_earned += ((category.earned(student).to_f) / (category.worth(student).to_f)) * ((category.weight.to_f) / (@raw_total_weight.to_f))
       end
       @total_earned
+      student.enrollments.where(:course_id => self.id).first.current_grade = @total_earned
     end
   end
 

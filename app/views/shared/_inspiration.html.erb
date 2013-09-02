@@ -1,5 +1,3 @@
-<div class="inspiration">
 	<% @inspiration = Inspiration.all.sample %>
 <h4><%= @inspiration.body %></h4>
 <p><%= "-#{@inspiration.source}" if @inspiration.source %></p>
-</div>

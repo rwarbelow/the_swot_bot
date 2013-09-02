@@ -49,7 +49,7 @@ SwotBot::Application.routes.draw do
       resources :submissions
       resources :grades
     end
-
+    resources :announcements
     resources :assignments do
       resources :submissions
     end
