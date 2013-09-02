@@ -27,3 +27,28 @@
     <%= button_to "Send Weekly Email", teachers_weekly_email_path, :method => "post", :class => "btn" %>
   </div>
 </div>
+
+<div>
+  <h3>Create Announcement</h3>
+  <%= form_for Announcement.new, :url => teachers_announcements_path do |f| %>
+
+    <%= f.hidden_field :teacher_id, value: current_teacher.id %>
+
+    <%= f.label :title, "Announcement Title" %>
+    <%= f.text_field :title %>
+
+    <%= f.label :body, "Text" %>
+    <%= f.text_area :body %>
+
+    <%= f.label :expiration_date, "Expiration Date" %>
+    <%= f.text_field :expiration_date, placeholder: "YYYY-MM-DD" %>
+
+    <%= f.submit value="Submit" %>
+  <% end %>
+</div>
+
+<div class="teacher-dashboard-announcements">
+  <%= render 'shared/announcements' %>
+</div>
+
+
