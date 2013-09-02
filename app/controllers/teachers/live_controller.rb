@@ -1,8 +1,9 @@
 class Teachers::LiveController < Teachers::BaseController
 
   def classroom
+    # @course = Course.find(params[:course_id])
     @course = current_teacher.courses.find(params[:course_id])
-    @students = @course.students.all
+    @students = @course.students.all.sort_by { |student| student.first_name }
     @attendance = student_attendance(@students)
 
     respond_to do |format|

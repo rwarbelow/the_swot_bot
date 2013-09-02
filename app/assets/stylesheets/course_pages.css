@@ -17,3 +17,22 @@
 .class-edit-form-container .dk_container {
   margin-right: 20px;
 }
+
+.teacher-course-show-container {
+  margin-top: 50px;
+  margin-bottom: 50px;  
+}
+
+.teacher-course-show-nav {
+  margin-bottom: 50px;
+}
+
+.teacher-course-show-nav a {
+  margin-right: 20px;
+  font-size: 1.4em;
+}
+
+.add-assignment-link {
+  font-size: 1.3em;
+  margin-top: 20px;
+}
