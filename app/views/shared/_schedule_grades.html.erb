@@ -20,7 +20,9 @@
       <td><%= ((@student.enrollments.where('course_id = ?', course.id).first.current_grade) * 100).round(1) %>%</td>
       <td><%= (@student.enrollments.where('course_id = ?', course.id).first.letter_grade) %></td>
       <td><%= course.teacher.first_name %> <%= course.teacher.last_name %></td>
-      <td><%= course.teacher.email %></td>
+      <td><%= mail_to "#{course.teacher.email}" do %>
+        <%= course.teacher.email %>
+      <% end %></td>  
       <% cellnumbers = course.teacher.phone_numbers.select {|number| number.kind == "cell"} %>
       <% if cellnumbers.length > 0 %>
       <td><%= cellnumbers.first.number %></td>

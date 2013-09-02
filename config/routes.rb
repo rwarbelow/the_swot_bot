@@ -19,8 +19,10 @@ SwotBot::Application.routes.draw do
 
   namespace 'teachers' do
     get 'daily_summary', to: 'dashboard#daily_summary'
+    get 'scholar_hour_enrollment', to: 'scholar_hours#generate_scholar_hour_list'
     get '/weekly_email', to: 'email#weekly_email'
     post '/send_student_email', to: 'email#send_student_email'
+    resources :scholar_hours
     resources :profiles do
       post '/add_phone_number', :to => 'profiles#add_phone_number'
       delete '/delete_phone_number', :to => 'profiles#delete_phone_number'
