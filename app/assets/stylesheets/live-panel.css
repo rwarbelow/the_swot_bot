@@ -39,6 +39,14 @@
   opacity: 0.75;
 }
 
+.missing-assignment {
+  width: 52px;
+  height: 52px;
+  padding: 10px;
+  background-color: #F1C40F;
+  opacity: 0.75;
+}
+
 .icon-container {
   width: 550px;
   float: left;
@@ -46,11 +54,11 @@
   margin-right: 10px;
 }
 
-.submit-button-container, .attendance-button-container{
+.submit-button-container, .attendance-button-container, .assignments-due{
   width: 180px;
   float: right;
   font-size: 2.4em;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .initials {
@@ -67,11 +75,11 @@
 }
 
 .red-list {
-  margin-top: 40px;
+  margin-top: 13px;
 }
 
 .green-list {
-  margin-top: 40px;
+  margin-top: 13px;
 }
 
 .other-function-container {
@@ -82,6 +90,7 @@
 }
 
 .grid-container {
+  position: relative;
   float:left;
   margin-top: 30px;
 }
@@ -102,7 +111,35 @@
 }
 
 .live-view-container .btn {
+  margin-top: 5px;
+  height: 54px;
+  width: 100%;
+}
+
+.back-button-assignments {
+  margin-bottom: 30px;
+  line-height: 30px;
+}
+
+.assignments-due .btn {
   margin-top: 8px;
   height: 54px;
   width: 100%;
 }
+
+.confirm-message {
+  position: absolute;
+  bottom: 18px;
+  left: 10px;
+  width: 90%;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 1.5em;
+  padding: 10px;
+  background-color: #2ECC71;
+  opacity: 0.75;
+  border: 1px solid #2ECC71;
+  border-radius: 7px;
+}
+

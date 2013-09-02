@@ -5,6 +5,7 @@ class Teachers::LiveController < Teachers::BaseController
     @course = current_teacher.courses.find(params[:course_id])
     @students = @course.students.all.sort_by { |student| student.first_name }
     @attendance = student_attendance(@students)
+    @assignments_due = @course.assignments.where(:due_date => Date.today)
 
     respond_to do |format|
       format.json { render json: @attendance }
@@ -22,7 +23,11 @@ class Teachers::LiveController < Teachers::BaseController
     tardy_students = params[:tardy]
     present_students = params[:on_time]
 
-    save_action(action.name, student_ids, course_id) if student_ids
+    assignment_id = params[:assignment_id]
+
+    save_action(action.name, student_ids, course_id) if action
+
+    save_assignments(student_ids, course_id, assignment_id) if assignment_id
     
     # this is brittle code -- everyone could be tardy and then those tardinesses would not be saved
     save_attendance(absent_students, tardy_students, present_students, course_id) if present_students
