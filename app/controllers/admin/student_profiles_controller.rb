@@ -49,4 +49,12 @@ class Admin::StudentProfilesController < Admin::BaseController
   def index
     @students = Student.all.sort! {|x, y| x.last_name <=> y.last_name}
   end
+
+  def import
+    Student.import(params[:file])
+    redirect_to admin_root_url, flash[:success] = "Products imported."
+  end
+
+  def csv_importer
+  end
 end
