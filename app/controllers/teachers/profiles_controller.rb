@@ -26,7 +26,7 @@ class Teachers::ProfilesController < Teachers::BaseController
     @teacher = current_teacher
     if @teacher.update_attributes(params[:teacher])
       flash[:success] = "Profile updated"
-      redirect_to teacher_path(@teacher)
+      redirect_to teachers_profile_path(@teacher)
     else
       @errors = @teacher.errors.full_messages
       render 'edit'
@@ -58,6 +58,19 @@ class Teachers::ProfilesController < Teachers::BaseController
     @phone_number.destroy
     flash[:success] = "#{number} deleted"
     redirect_to edit_teachers_profile_path(current_teacher)
+  end
+
+  def update_identity
+    @user = current_user
+    @user.update_attributes(params[:identity])
+    if @user.save
+      redirect_to edit_teachers_profile_path(current_teacher)
+    else
+    @teacher = current_teacher
+    @user = current_user
+      flash[:identity_errors] = @user.errors.full_messages
+      render 'teachers/profiles/edit'
+    end
   end
 
 end
