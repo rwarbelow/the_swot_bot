@@ -19,7 +19,7 @@
 
 <div >
   <%= render 'shared/error_messages' %>
-  <%= form_for @user, url: admin_identity_path(@user) do |f| %>
+  <%= form_for @user, url: students_update_identity_path(@user) do |f| %>
 
     <%= f.label :email, "New Password" %>
 
