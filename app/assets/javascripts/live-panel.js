@@ -2,10 +2,18 @@ $(document).ready(function() {
 
   $('.other-function-container').hide();
   $('.attendance-container').hide();
+  $('.assignments-container').hide();
 
   $('.behavior-container .student-icon').click(function() {
       $(this).toggleClass('active');
   });
+
+  function confirmMessage(message) {
+    $('<p class="confirm-message">'+message+'</p>').insertBefore('.icon-container').fadeOut(2000, function(){
+      $(this).remove();
+    });
+
+  }
 
 // ==============FRONT PAGE BEHAVIOR ACTIONS=====================
 
@@ -23,8 +31,11 @@ $(document).ready(function() {
     var dataToSend = {action_name: submit_action,
                       student_ids : data, 
                       course_id: course_id}
+    // console.log(dataToSend);                  
            
     $.post(url, dataToSend);
+  
+    confirmMessage("Student Behaviors Updated");
     $('.student-icon').removeClass('active');
     data = [];
   });
@@ -32,7 +43,6 @@ $(document).ready(function() {
 // ==================OTHER BEHAVIOR ACTIONS========================
 
   $('#other').click(function() {
-    var clicked = $('.active').text();
     
     $('.grid-container').hide();
     $('.behavior-container').hide();
@@ -45,15 +55,16 @@ $(document).ready(function() {
       $('.active').each(function(){
         data.push($(this).data('id'));
       });
-      console.log(data);
+      // console.log(data);
       var url = ('/live_class');
       var course_id = $('#course-id data').attr('id');
       var dataToSend = {action_name: submit_action,
                         student_ids : data,
                         course_id: course_id }
+      console.log(dataToSend);
 
       $.post(url, dataToSend);
-
+      confirmMessage("Student Behaviors Updated");
       $('.other-function-container').hide();
       $('.grid-container').show();
       $('.behavior-container').show();
@@ -74,7 +85,7 @@ $(document).ready(function() {
     var on_time;
     var tardy;
     var absent;
-    // var currentIcon;
+    var icon;
 
     // get the current attendance from db (json)
     //set the classes for each icon to the attendance status
@@ -86,7 +97,6 @@ $(document).ready(function() {
       
       function set_class(status_array, class_name){
         $.each(status_array, function(i, v){
-          // icon = $('li .attendance-container').find("[data-id='" + v + "']");
           icon = $(".attendance-container [data-id='" + v + "']");
           icon.removeClass();
           icon.addClass('student-icon '+class_name+'')
@@ -150,9 +160,52 @@ $(document).ready(function() {
                     }
 
       $.post(url, dataToSend);
+      confirmMessage("Student Attendance Updated");
       $('.attendance-container').hide();
       $('.behavior-container').show();
     });
+  });
+
+// ===================ASSIGNMENT ACTIONS======================
+
+  $('#assignments').click(function(){
+
+    $('.behavior-container').hide();
+    $('.assignments-container').show().find('.student-icon').addClass('complete');
+
+    $('.assignments-container .student-icon').click(function() {
+      $(this).toggleClass('missing-assignment');
+    });
+
+    $('.assignment-button').click(function(){
+      // var submit_action = $(this).attr('id');
+      var data = [];
+      
+      $('.missing-assignment').each(function(){
+        data.push($(this).data('id'));
+      });
+      // console.log(data);
+      var url = ('/live_class');
+      var course_id = $('#course-id data').attr('id');
+      var assignment_id = $(this).parent().find('data').data('assignmentid');
+      var dataToSend = {
+                        student_ids : data,
+                        assignment_id: assignment_id,
+                        course_id: course_id
+                        }
+      console.log(dataToSend);
+
+      $.post(url, dataToSend);
+      confirmMessage("Student Assignments Updated");
+      $('.assignments-container').hide();
+      $('.grid-container').show();
+      $('.behavior-container').show();
+      $('.student-icon').removeClass('missing-assignment');
+      data = [];
+    });
+
+
+
   });
 
 // =====================MASTERY ACTIONS======================
