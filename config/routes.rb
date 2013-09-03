@@ -75,10 +75,10 @@ SwotBot::Application.routes.draw do
 end
 
  namespace 'admin' do
-  resources :identities
   resources :guardian_profiles
   resources :student_profiles
   resources :teacher_profiles
+  root :to => "dashboard#index"
  end
 
 resources :messages
