@@ -32,7 +32,7 @@ class Student < ActiveRecord::Base
 		aggregate_student_behavior_hash(student_actions_array)
 	end
 
-	def aggregate_student_behavior_hash(student_actions_array) 
+	def aggregate_student_behavior_hash(student_actions_array)
 		@student_actions_hash = Hash.new(0)
 		student_actions_array.each do |n|
 			@student_actions_hash[n] +=1
@@ -72,7 +72,25 @@ class Student < ActiveRecord::Base
 		end
 		return missing_assignments_score
 	end
-  
+
+  def self.import(file)
+    CSV.foreach(file.path,headers:true) do |row|
+    hash = row.to_hash
+    student = Student.create!(
+      :gender => hash["gender"],
+      :birthday => hash["birthday"],
+      :ccsd_id => hash["ccsd_id"],
+      :grade_level => hash["grade_level"])
+
+    student.build_identity(
+      :password => 'password',
+      :first_name => hash["first_name"],
+      :last_name => hash["last_name"],
+      :username => "#{hash["first_name"]}#{hash["last_name"]}")
+    student.save
+    end
+  end
+
   protected
 
   def generate_registration_code
@@ -86,5 +104,4 @@ class Student < ActiveRecord::Base
   def enrolled_in? course
     courses.find(course.id)
   end
-
 end

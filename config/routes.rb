@@ -76,8 +76,12 @@ end
 
  namespace 'admin' do
   resources :guardian_profiles
-  resources :student_profiles
+  resources :student_profiles do
+    collection { post :import }
+  end
   resources :teacher_profiles
+
+  get '/csv_importer', :to => 'student_profiles#csv_importer'
   root :to => "dashboard#index"
  end
 
