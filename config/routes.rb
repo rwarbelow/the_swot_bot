@@ -1,6 +1,10 @@
+class AuthConstraint
+  def matches?(request)
+     request.session[:user_id].present?
+   end
+end
+
 SwotBot::Application.routes.draw do
-
-
   namespace 'students' do
     resources :goals do
       post '/complete', to: 'goals#complete'
@@ -98,5 +102,7 @@ get '/login', to: 'sessions#new'
 post '/login', to: 'sessions#create'
 delete '/logout', to: 'sessions#destroy'
 
-root :to => 'sessions#new'
+root :to => 'home#index', :constraints => AuthConstraint.new
+
+root :to =>'sessions#new'
 end
