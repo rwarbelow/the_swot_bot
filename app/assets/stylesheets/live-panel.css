@@ -19,7 +19,7 @@
 
 .live-view-container {
   display: inline-block;
-  margin-left: -80px;
+  margin-left: -90px;
 }
 
 .student-icon {
@@ -28,8 +28,8 @@
   width: 52px;
   height: 52px;
   padding: 10px;
-  margin-bottom: 10px;
-  margin-left: 15px;
+  margin-bottom: 16px;
+  margin-left: 16px;
   float: left;
   border-radius: 6px;
 }
@@ -162,4 +162,34 @@
   border-radius: 7px;
 }
 
+.positive-count {
+  background-color: white;
+  width: 14px;
+  text-align: center;
+  border-radius: 15px;
+  color: #2ECC71;
+  margin-right: 0px;
+  height: 16px;
+  font-size: 0.9em;
+  font-weight: 800;
+  float: left;
+  padding: 1.5px;
+  padding-top: 0px;
+  border: 1px solid #CCCCCC;   
+}
 
+.negative-count {
+  background-color: white;
+  width: 14px;
+  text-align: center;
+  border-radius: 15px;
+  color: #E74C3C;
+  margin-right: 0px;
+  font-weight: 800;
+  height: 16px;
+  float: right;
+  font-size: 0.9em; 
+  padding: 1.5px;
+  padding-top: 0px;
+  border: 1px solid #CCCCCC;   
+}
