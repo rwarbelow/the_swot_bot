@@ -15,6 +15,7 @@ SwotBot::Application.routes.draw do
       resources :grades
       get '/student_report', to: 'reports#student_report'
     end
+    put 'profile/:id/identity', :to => 'profiles#update_identity', :as => :update_identity
     get 'profile',      to: 'profiles#show',   :as => :profile
     get 'profile/edit', to: 'profiles#edit',   :as => :edit_profile
     put 'profile',      to: 'profiles#update', :as => :update_profile
