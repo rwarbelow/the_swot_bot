@@ -52,7 +52,7 @@ class Admin::StudentProfilesController < Admin::BaseController
 
   def import
     Student.import(params[:file])
-    redirect_to admin_root_url, flash[:success] = "Products imported."
+    redirect_to admin_root_url
   end
 
   def csv_importer
