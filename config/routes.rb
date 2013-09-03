@@ -18,6 +18,7 @@ SwotBot::Application.routes.draw do
   end
 
   namespace 'teachers' do
+    put '/update_identity/:identity_id', :to => 'profiles#update_identity'
     get 'daily_summary', to: 'dashboard#daily_summary'
     get 'scholar_hour_enrollment', to: 'scholar_hours#generate_scholar_hour_list'
     get '/weekly_email', to: 'email#weekly_email'
@@ -61,7 +62,7 @@ SwotBot::Application.routes.draw do
   end
 
   namespace 'guardians' do
-    post '/update_identity/:identity_id', :to => 'profiles#update_identity'
+    put '/update_identity/:identity_id', :to => 'profiles#update_identity'
     resources :profiles do
       post '/add_student', :to => 'profiles#add_student'
       post '/add_phone_number', :to => 'profiles#add_phone_number'
