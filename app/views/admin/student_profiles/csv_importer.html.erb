@@ -1,0 +1,6 @@
+<h2>Import Students from CSV</h2>
+
+<%= form_tag import_admin_student_profiles_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
