@@ -1,4 +1,4 @@
-class Teachers::GuardianProfilesController < Teachers::BaseController
+class Admin::GuardianProfilesController < Admin::BaseController
   def new
     @guardian = Guardian.new
   end
@@ -6,21 +6,29 @@ class Teachers::GuardianProfilesController < Teachers::BaseController
   def create
     registration_code = params[:guardian][:registration_code]
     ccsd_id = params[:guardian][:ccsd_id]
-    if student = Student.where(:registration_code => registration_code, :ccsd_id => ccsd_id).first
+    if @student = Student.where(:registration_code => registration_code, :ccsd_id => ccsd_id).first
       @guardian = Guardian.new(params[:guardian])
-      if @guardian.save
-        session[:new_guardian_id] = @guardian.id
-        Guardianship.create(:student_id => student.id,
-                            :guardian_id => @guardian.id,
-                            :relationship_to_student => params[:guardian][:relationship_to_student])
-        redirect_to new_identity_path
-      else
-        @errors = @guardian.errors.full_messages
-        flash[:errors] = @errors
+      @identity = @guardian.build_identity(params[:identity])
+
+      begin
+        Guardian.transaction do
+          @guardian.save!
+          @identity.guardian_id = @guardian.id
+          @identity.save!
+          @guardian.reload
+          @guardianship = Guardianship.create(:student_id => @student.id,
+                          :guardian_id => @guardian.id,
+                          :relationship_to_student => params[:guardian][:relationship_to_student])
+          session[:new_guardian_id] = @guardian.id
+          session[:user_id] = @identity.id
+        end
+        redirect_to guardians_root_path
+      rescue ActiveRecord::RecordInvalid => invalid
+        flash[:errors] = @guardian.errors.full_messages + @identity.errors.full_messages
         render 'new'
       end
     else
-      flash[:errors] = "Registration code or Student ID invalid."
+      flash[:errors] = ["Registration code or Student ID invalid."]
       render 'new'
     end
   end
