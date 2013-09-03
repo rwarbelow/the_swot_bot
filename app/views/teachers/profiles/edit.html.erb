@@ -14,7 +14,7 @@
 
 <h1>Edit User Information</h1>
 <div>
-  <%= form_for @user do |f| %>
+  <%= form_for @user, url: teachers_path(current_user) do |f| %>
 
     <%= f.label :username %>
     <%= f.text_field :username %><br />
