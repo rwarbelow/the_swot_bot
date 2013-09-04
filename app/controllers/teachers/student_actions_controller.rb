@@ -18,7 +18,7 @@ class Teachers::StudentActionsController < Teachers::BaseController
   end
 
   def index
-    @courses = current_teacher.courses
+    @courses = current_teacher.courses.includes(:subject,:student_actions)
   end
 
   def edit
