@@ -91,6 +91,7 @@
   font-size: 0.8em;
   text-align: center;
   line-height: 1.1em;
+  height: 25px;
 }
 
 .red-list {
@@ -175,7 +176,7 @@
   float: left;
   padding: 1.5px;
   padding-top: 0px;
-  border: 1px solid #CCCCCC;   
+  border: 1px solid #CCCCCC; 
 }
 
 .negative-count {
