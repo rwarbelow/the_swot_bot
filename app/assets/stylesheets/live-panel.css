@@ -1,3 +1,22 @@
+.selectors {
+  width: 100px;
+  height: 40px;
+}
+.select-all, .deselect-all {
+  float: left;
+  width: 40px !important;
+  height: 40px !important;
+  font-size: 1.8em;
+  text-align: center;
+  background-color: #ECF0F1;
+  border: 1px solid #ECF0F1;
+  border-radius: 8px;
+}
+
+.select-all {
+  margin-right: 20px;
+}
+
 .live-view-container {
   display: inline-block;
   margin-left: -80px;
@@ -142,4 +161,5 @@
   border: 1px solid #2ECC71;
   border-radius: 7px;
 }
+
 

@@ -12,9 +12,18 @@ $(document).ready(function() {
     $('<p class="confirm-message">'+message+'</p>').insertBefore('.icon-container').fadeOut(2000, function(){
       $(this).remove();
     });
-
   }
 
+ $('.swipe').addSwipeEvents().
+  bind('swiperight', function(evt, swiperight) {
+    $('.student-icon').removeClass('active');
+    $('.student-icon').addClass('active');
+  })
+
+ $('.swipe').addSwipeEvents().
+  bind('swipeleft', function(evt, swipeleft) {
+    $('.student-icon').removeClass('active');
+  })
 // ==============FRONT PAGE BEHAVIOR ACTIONS=====================
 
   $('.behavior-container .submit-button').click(function(event) {
