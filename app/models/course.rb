@@ -17,11 +17,11 @@ class Course < ActiveRecord::Base
 
   def calculate_student_percentage(student)
     @total_num_categories = assignment_categories.length
-    if assignment_categories.select { |category| category.submissions.length == 0 }.length == @total_num_categories
+    if assignment_categories.includes(:submissions).select { |category| category.submissions.length == 0 }.length == @total_num_categories
       return 1
     else
       @total_earned = 0
-      active_categories = assignment_categories.select { |category| category.weight > 0 }.select { |category| category.submissions.length > 0 }
+      active_categories = assignment_categories.includes(:submissions).select { |category| category.weight > 0 }.select { |category| category.submissions.length > 0 }
       @raw_total_weight = 0
       active_categories.each do |category|
         @raw_total_weight += category.weight
