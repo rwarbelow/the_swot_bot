@@ -1,5 +1,10 @@
 <%= link_to('Back', :back) %>
-
+<h1><%= @course.subject.name %>, period <%= @course.period %></h1>
+<div class="flash">
+    <% if flash[:success_message] %>
+      <%= flash[:success_message] %>
+    <% end %>
+</div>
 <div class="errors">
   <% if flash[:enrollment_errors] %>
     <% flash[:enrollment_errors].each do |error| %>
@@ -13,6 +18,7 @@
     <th>First Name</th>
     <th>Last Name</th>
     <th>More Information</th>
+    <th>Remove from Course</th>
   </thead>
   <% @students.each do |student| %>
   <tr>
@@ -20,6 +26,7 @@
     <td><%= student.first_name %></td>
     <td><%= student.last_name %></td>
     <td><%= link_to "More", teachers_student_profile_path(student) %></td>
+    <td><%= link_to "Remove", teachers_course_enrollment_path(@course, Enrollment.find_by_student_id_and_course_id(student.id, @course.id)), method: "delete" %></td>
   </tr>
   <% end %>
 </table>
