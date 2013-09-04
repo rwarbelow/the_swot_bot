@@ -27,6 +27,7 @@ module ReportGenerator
         page.item(:end_date).value(end_date.strftime("%b %e, %Y"))
 
         course_actions.each_with_index do |course_data, index|
+          page.item("grade#{index}").value(course_data[:grade])
           page.item("mw#{index}").value(course_data[:missing_work].length)
           page.item("class#{index}").value(course_data[:course].subject.name)
           course_data[:actions].each do |action_name, actions|
