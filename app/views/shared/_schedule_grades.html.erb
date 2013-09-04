@@ -9,7 +9,7 @@
       <th>Email</th>
       <th>Cell #</th>
     </thead>
-    <% @student.courses.order("period ASC").each do |course| %>
+    <% @student.courses.includes(:subject, :teacher => [:identity, :phone_numbers]).order("period ASC").each do |course| %>
     <tr>
       <td><%= course.period %></td>
       <% if current_student? %>

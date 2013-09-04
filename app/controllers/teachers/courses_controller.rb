@@ -44,21 +44,21 @@
   end
 
   def show
-    @course = Course.find(params[:id])
-    @students = @course.students
+    @course = Course.includes(:subject).find(params[:id])
+    @students = @course.students.includes(:identity)
   end
 
   def index
-    @courses = Course.order(params[:sort])
+    @courses = Course.includes(:subject).order(params[:sort])
   end
 
   def courseload
-    @courses = current_teacher.courses
+    @courses = current_teacher.courses.includes(:subject)
   end
 
   def roster
     @course = Course.find(params[:course_id])
-    @students = @course.students
+    @students = @course.students.includes(:identity)
   end
 
   def student_record

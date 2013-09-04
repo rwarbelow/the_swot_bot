@@ -14,7 +14,7 @@
        <th>Email</th>
       <th>Cell #</th>
     </thead>
-    <% @student.courses.order("period ASC").each do |course| %>
+    <% @student.courses.includes(:subject, :teacher => [:identity, :phone_numbers]).order("period ASC").each do |course| %>
     <tr>
       <td><%= course.period %></td>
       <td><%= link_to course.subject.name, guardians_student_course_path(@student, course)%></td>

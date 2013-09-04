@@ -12,7 +12,7 @@
 		<th>Tardy</th>
 		<th>Absent</th>
 	</thead>
-	<% Student.all.sort!{ |a, b| a.last_name <=> b.last_name}.each do |student| %>
+	<% Student.includes(:identity, :student_actions).all.sort!{ |a, b| a.last_name <=> b.last_name}.each do |student| %>
 	<tr>
 		<td><%= student.ccsd_id %></td>
 		<td><%= link_to "#{student.first_name} #{student.last_name}", teachers_student_profile_path(student) %></td>
