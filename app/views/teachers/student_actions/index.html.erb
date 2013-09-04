@@ -1,6 +1,6 @@
 <%= link_to 'Back', :back %>
 <div id="collapse" >
-	<% current_teacher.courses.each do |course| %>
+	<% @courses.each do |course| %>
 	  <h2>Period <%= course.period %> <%= course.subject.name %></h2>
 	  <div>
     	<% if course.student_actions.select{ |a| a.date == Date.today }.length > 0 %>
