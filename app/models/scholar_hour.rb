@@ -26,9 +26,9 @@ class ScholarHour < ActiveRecord::Base
 					@student_ids_scholar_hour << [student.id, "5 Deductions"]
 				end
 		  end
-		  if student.missing_assignments(@student_actions_hash) >= 1
-		  	(student.missing_assignments(@student_actions_hash)).times do 
-					@student_ids_scholar_hour << [student.id, "Missing Assignment"]
+		  @num_missing = student.missing_assignments(@student_actions_hash)
+		  if @num_missing >= 1
+					@student_ids_scholar_hour << [student.id, "#{@num_missing} Missing Assignment(s)"]
 				end 
 		  end
 		  if @student_actions_hash[2] >= 1
