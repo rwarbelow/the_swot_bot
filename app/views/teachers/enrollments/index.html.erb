@@ -1,11 +1,15 @@
-<%= form_tag teachers_course_enrollments_path, :method => :post do %>
-  <ul>
-  <% for student in @students.sort! { |a,b| a.last_name <=> b.last_name } %>
-    <li>
-      <%= check_box_tag "student_ids[]", student.id %>
-      <%= student.first_name %> <%= student.last_name %>, Grade <%= student.grade_level %>, CCSD ID <%= student.ccsd_id %>
-    </li>
-  <% end %>
-  </ul>
-  <%= submit_tag "Add selected students to course" %>
-<% end %>
+<h1><%= @course.subject.name %>, period <%= @course.period %></h1>
+<div class="enroll">
+	<h4>Select students to enroll in course</h4>
+	<%= form_tag teachers_course_enrollments_path, :method => :post do %>
+	  <ul>
+	  <% for student in @not_enrolled_students.sort! { |a,b| a.last_name <=> b.last_name } %>
+	    <li>
+	      <%= check_box_tag "student_ids[]", student.id %>
+	      <%= student.first_name %> <%= student.last_name %>, Grade <%= student.grade_level %>, CCSD ID <%= student.ccsd_id %>
+	    </li>
+	  <% end %>
+	  </ul>
+	  <%= submit_tag "Add selected students to course" %>
+	<% end %>
+</div>

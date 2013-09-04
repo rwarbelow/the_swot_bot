@@ -1,7 +1,9 @@
 class Teachers::EnrollmentsController < Teachers::BaseController
 
   def index
-    @students = Student.all
+    @course = Course.find(params[:course_id])
+    @enrolled_students = @course.students
+    @not_enrolled_students = Student.all - @enrolled_students
   end
 
   def create
@@ -13,6 +15,14 @@ class Teachers::EnrollmentsController < Teachers::BaseController
     end
     flash[:enrollment_errors] = errors
     redirect_to teachers_course_roster_path(@course)
+  end
+
+  def destroy
+    course = Course.find(params[:course_id])
+    @enrollment = Enrollment.find(params[:id])
+    flash[:success_message] = "#{@enrollment.student.first_name} #{@enrollment.student.last_name} removed from #{course.subject.name}, period #{course.period}."
+    @enrollment.destroy
+    redirect_to teachers_course_roster_path(course)
   end
 
 end
