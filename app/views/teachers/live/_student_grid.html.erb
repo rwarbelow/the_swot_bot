@@ -9,6 +9,12 @@
           <div class="full-name">
             <%= student.first_name %> <%= student.last_name %>
           </div>
+          <div class="positive-count">
+            <%= student.positive(student.collect_student_actions) %>
+          </div>
+          <div class="negative-count">
+            <%= student.negative(student.collect_student_actions) %>
+          </div>
         </li>
       <% end %>
 
