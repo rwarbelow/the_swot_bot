@@ -14,27 +14,47 @@ $(document).ready(function() {
     });
   }
 
+  function adjustIconValues(icon, action) {
+    var positive_count = icon.find('.positive-count').html();
+    var negative_count = icon.find('.negative-count').html();
+
+    if(action.hasClass('positive-action')){
+      var new_positive_count = (parseInt(positive_count) + 1)
+      icon.find('.positive-count').html(new_positive_count);
+    }
+    if(action.hasClass('negative-action')){
+      var new_negative_count = (parseInt(negative_count) + 1)
+      icon.find('.negative-count').html(new_negative_count);
+    }
+  }
+
+
+
  $('.swipe').addSwipeEvents().
   bind('swiperight', function(evt, swiperight) {
     $('.student-icon').removeClass('active');
     $('.student-icon').addClass('active');
-  })
+  });
 
  $('.swipe').addSwipeEvents().
   bind('swipeleft', function(evt, swipeleft) {
     $('.student-icon').removeClass('active');
-  })
+  });
+
 // ==============FRONT PAGE BEHAVIOR ACTIONS=====================
 
   $('.behavior-container .submit-button').click(function(event) {
     var submit_action = $(this).attr('id'); 
     var data = [];
+    var button_pushed = $(this);
 
     $('.active').each(function(){
       data.push($(this).data('id')); // Student ID
+      adjustIconValues($(this), button_pushed);
+      // console.log(this);
     });
 
-    console.log(data);
+    // console.log(data);
     var course_id = $('#course-id data').attr('id');
     var url = ('/live_class');
     var dataToSend = {action_name: submit_action,
@@ -60,9 +80,11 @@ $(document).ready(function() {
     $('.other-function').click(function(){
       var submit_action = $(this).attr('id');
       var data = [];
+      var button_pushed = $(this);
       
       $('.active').each(function(){
         data.push($(this).data('id'));
+        adjustIconValues($(this), button_pushed);
       });
       // console.log(data);
       var url = ('/live_class');
@@ -181,6 +203,7 @@ $(document).ready(function() {
 
     $('.behavior-container').hide();
     $('.assignments-container').show().find('.student-icon').addClass('complete');
+    $('.assignments-container .student-icon').addClass('missing-assignment');
 
     $('.assignments-container .student-icon').click(function() {
       $(this).toggleClass('missing-assignment');
