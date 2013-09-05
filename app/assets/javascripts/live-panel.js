@@ -48,7 +48,7 @@ $(document).ready(function() {
     var data = [];
     var button_pushed = $(this);
 
-    $('.active').each(function(){
+    $('.behavior-container .active').each(function(){
       data.push($(this).data('id')); // Student ID
       adjustIconValues($(this), button_pushed);
       // console.log(this);
@@ -82,7 +82,7 @@ $(document).ready(function() {
       var data = [];
       var button_pushed = $(this);
       
-      $('.active').each(function(){
+      $('.behavior-container .active').each(function(){
         data.push($(this).data('id'));
         adjustIconValues($(this), button_pushed);
       });
