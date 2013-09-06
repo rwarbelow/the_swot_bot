@@ -17,9 +17,9 @@ class StudentAction < ActiveRecord::Base
   #  end
   def self.week_report(from=Date.current)
   	if from.friday?
-      last_week_report()
+      current_week_report()
     else
-    	current_week_report()
+    	last_week_report()
     end
   end
 
