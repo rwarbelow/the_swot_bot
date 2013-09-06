@@ -4,7 +4,7 @@ $(document).ready(function() {
   $('.attendance-container').hide();
   $('.assignments-container').hide();
 
-  $('.sortable').sortable();
+  // $('.sortable').sortable();
 
   $('.behavior-container .student-icon').click(function() {
       $(this).toggleClass('active');
