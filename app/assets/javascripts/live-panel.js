@@ -4,6 +4,8 @@ $(document).ready(function() {
   $('.attendance-container').hide();
   $('.assignments-container').hide();
 
+  $('.sortable').sortable();
+
   $('.behavior-container .student-icon').click(function() {
       $(this).toggleClass('active');
   });
@@ -28,7 +30,7 @@ $(document).ready(function() {
     }
   }
 
-
+// ===============IPAD SPECIFIC EVENTS====================
 
  $('.swipe').addSwipeEvents().
   bind('swiperight', function(evt, swiperight) {
