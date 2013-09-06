@@ -4,8 +4,6 @@ class Teachers::ScholarHoursController < Teachers::BaseController
   	@new_scholar_hours = ScholarHour.where(date_assigned: Date.today, status: "Not Complete")
   	@old_scholar_hours = ScholarHour.where(status: "Not Complete") - @new_scholar_hours
   	@completed_scholar_hours = ScholarHour.where(status: "Complete")
-  	p "*"*80
-  	p @completed_scholar_hours
   end
 
   def generate_scholar_hour_list

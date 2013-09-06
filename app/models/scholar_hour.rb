@@ -30,14 +30,15 @@ class ScholarHour < ActiveRecord::Base
 			if @num_missing >= 1
 				@student_ids_scholar_hour << [student.id, "#{@num_missing} Missing Assignment(s)"]
 			end 
+			if @student_actions_hash[2] >= 1
+				@student_ids_scholar_hour << [student.id, "Tardy to #{@student_actions_hash[2]} class(es)"]
+			end
+			if @student_actions_hash[3] >= 1
+				@student_ids_scholar_hour << [student.id, "Absent from #{@student_actions_hash[3]} class(es)"]
+			end
 		end
-		if @student_actions_hash[2] >= 1
-			@student_ids_scholar_hour << [student.id, "Tardy"]
-		end
-		if @student_actions_hash[3] >= 1
-			@student_ids_scholar_hour << [student.id, "Absent"]
-		end
+			p "*"*80
+			p @student_ids_scholar_hour
 	end
-	@student_ids_scholar_hour
 end
 
