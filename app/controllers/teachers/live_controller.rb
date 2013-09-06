@@ -5,10 +5,11 @@ class Teachers::LiveController < Teachers::BaseController
     @course = current_teacher.courses.find(params[:course_id])
     @students = @course.students.includes(:identity).all.sort_by { |student| student.first_name }
     @attendance = student_attendance(@students)
+    @assignments = student_assignments(@students)
     @assignments_due = @course.assignments.where(:due_date => Date.today)
 
     respond_to do |format|
-      format.json { render json: @attendance }
+      format.json { render json: { attendance: @attendance, assignments: @assignments } }
       format.html
     end
   end
