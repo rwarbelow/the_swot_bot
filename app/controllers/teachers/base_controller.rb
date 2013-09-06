@@ -32,6 +32,24 @@ class Teachers::BaseController < ApplicationController
     attendance
   end
 
+  def student_assignments(students)
+    missing_assignments = []
+
+    students.each do |student|
+      missing_assignments << student.student_actions.where(student_action_type_id: 29, date: Date.today).first
+    end
+
+    assignments = {}
+    missing_assignment_ids = []
+
+    missing_assignments.compact.each do |student_action|
+      missing_assignment_ids << student_action.enrollment.student_id
+    end
+
+    assignments[:missing_assignments] = missing_assignment_ids
+    p assignments
+  end
+
   #TODO: Move this into model
   def save_action(action, student_ids, course_id)
 
