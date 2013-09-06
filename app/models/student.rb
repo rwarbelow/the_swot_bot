@@ -25,11 +25,11 @@ class Student < ActiveRecord::Base
 	has_many :scholar_hours
 
 	def collect_student_actions
-		student_actions_array = []
-		self.student_actions.select {|action| action.date == Date.today}.each do |action|
-			student_actions_array << action.student_action_type_id
+		@student_actions_array = []
+		self.student_actions.select {|action| action.date == (Date.today)}.each do |action|
+			@student_actions_array << action.student_action_type_id
 		end
-		aggregate_student_behavior_hash(student_actions_array)
+		aggregate_student_behavior_hash(@student_actions_array)
 	end
 
 	def aggregate_student_behavior_hash(student_actions_array)
