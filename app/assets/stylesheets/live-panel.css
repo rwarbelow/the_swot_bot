@@ -34,7 +34,7 @@
   border-radius: 6px;
 }
 
-.active, .on_time {
+.active, .on_time, .complete {
   width: 52px;
   height: 52px;
   padding: 10px;

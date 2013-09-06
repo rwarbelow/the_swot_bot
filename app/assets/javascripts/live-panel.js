@@ -4,6 +4,8 @@ $(document).ready(function() {
   $('.attendance-container').hide();
   $('.assignments-container').hide();
 
+  $('.sortable').sortable();
+
   $('.behavior-container .student-icon').click(function() {
       $(this).toggleClass('active');
   });
@@ -28,7 +30,7 @@ $(document).ready(function() {
     }
   }
 
-
+// ===============IPAD SPECIFIC EVENTS====================
 
  $('.swipe').addSwipeEvents().
   bind('swiperight', function(evt, swiperight) {
@@ -92,7 +94,7 @@ $(document).ready(function() {
       var dataToSend = {action_name: submit_action,
                         student_ids : data,
                         course_id: course_id }
-      console.log(dataToSend);
+      // console.log(dataToSend);
 
       $.post(url, dataToSend);
       confirmMessage("Student Behaviors Updated");
@@ -122,9 +124,9 @@ $(document).ready(function() {
     //set the classes for each icon to the attendance status
     $.get(get_url, function(response){
       // console.log(response);
-      on_time = response.on_time
-      tardy = response.tardy
-      absent = response.absent
+      on_time = response.attendance.on_time
+      tardy = response.attendance.tardy
+      absent = response.attendance.absent
       
       function set_class(status_array, class_name){
         $.each(status_array, function(i, v){
@@ -202,11 +204,32 @@ $(document).ready(function() {
   $('#assignments').click(function(){
 
     $('.behavior-container').hide();
-    $('.assignments-container').show().find('.student-icon').addClass('complete');
+    $('.assignments-container').show();
     $('.assignments-container .student-icon').addClass('missing-assignment');
+    $('.assignments-container .student-icon').addClass('complete').removeClass('missing-assignment');
+
+    var course_id = $('#course-id data').attr('id');
+    var get_url = '/teachers/courses/'+course_id+'/liveclass'
+
+    $.get(get_url, function(response){
+      // console.log(response);
+      missing_assignments = response.assignments.missing_assignments;
+      console.log(missing_assignments);
+      
+      function set_class(status_array){
+        $.each(status_array, function(i, v){
+          icon = $(".assignments-container [data-id='" + v + "']");
+          icon.removeClass();
+          icon.addClass('student-icon missing-assignment')
+        });
+      }
+
+      set_class(missing_assignments);
+    }, 'json');
 
     $('.assignments-container .student-icon').click(function() {
       $(this).toggleClass('missing-assignment');
+      $(this).toggleClass('complete');
     });
 
     $('.assignment-button').click(function(){
@@ -225,7 +248,7 @@ $(document).ready(function() {
                         assignment_id: assignment_id,
                         course_id: course_id
                         }
-      console.log(dataToSend);
+      // console.log(dataToSend);
 
       $.post(url, dataToSend);
       confirmMessage("Student Assignments Updated");
@@ -235,9 +258,6 @@ $(document).ready(function() {
       $('.student-icon').removeClass('missing-assignment');
       data = [];
     });
-
-
-
   });
 
 // =====================MASTERY ACTIONS======================
