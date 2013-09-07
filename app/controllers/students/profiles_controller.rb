@@ -20,16 +20,18 @@ class Students::ProfilesController < Students::BaseController
       redirect_to students_profile_path
     else
       @errors = @student.errors.full_messages
+      @student = current_student
       render 'edit'
     end
   end
 
   def update_identity
-    @user = Identity.find(params[:id])
+    @user = current_student.identity
     if @user.update_attributes(params[:identity])
       flash[:success] = "Profile updated"
       redirect_to profile_path
     else
+      @user = current_student.identity
       @errors = @user.errors.full_messages
       render 'edit'
     end
