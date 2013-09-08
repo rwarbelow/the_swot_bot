@@ -1,10 +1,10 @@
 <h2>Tasks</h2>
-<%= link_to "Import Student CSV", admin_csv_importer_path %>
+<%= link_to "Import Student CSV", admin_csv_importer_path, :class => "button button-flat" %> <br> <br>
 
 <% if @new_scholar_hours.length == 0 %>
-	<%= button_to "Generate Scholar Hours", teachers_scholar_hour_enrollment_path, method: "get" %>
-<% else %>
+	<%= button_to "Generate Scholar Hours", teachers_scholar_hour_enrollment_path, method: "get", :class => "button button-flat" %>
+<% end %>
 
-<%= link_to "Create Class", new_teachers_course_path, :class => "button button-flat" %>
+<%= link_to "Create Class", new_teachers_course_path, :class => "button button-flat" %> <br> <br>
 
-<%= button_to "Send Weekly Email", teachers_weekly_email_path, :method => "post", :class => "btn" %>
+<%= button_to "Send Weekly Email", teachers_weekly_email_path, :method => "post", :class => "button button-flat" %> <br>
