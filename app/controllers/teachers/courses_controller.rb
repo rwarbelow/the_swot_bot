@@ -6,7 +6,6 @@
 
   def create
     @course = Course.new(params[:course])
-    @course.teacher_id = current_teacher.id
     if @course.save
       redirect_to teachers_course_path(@course)
     else
