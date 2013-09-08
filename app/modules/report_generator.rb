@@ -60,7 +60,7 @@ module ReportGenerator
     course_actions = []
     missing_work_array = []
     courses.each do |course|
-      grade = (course.enrollments.find_by_student_id(student.id).current_grade * 100).round(0)
+      grade = ((student.calculate_percent(course)) * 100).round(1)
       actions = course.enrollments.where(student_id:student.id).first.student_actions.week_report.group_by {|action| action.student_action_type.name}
       course.enrollments.where(student_id:student.id).first.student_actions.week_report.each do |action|
         missing_work_array << action if action.student_action_type.student_action_category_id == 4
