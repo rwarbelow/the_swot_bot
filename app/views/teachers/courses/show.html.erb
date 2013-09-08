@@ -67,8 +67,8 @@
       <tr>
         <td><%= student.ccsd_id %></td>
         <td><%= link_to "#{student.first_name} #{student.last_name}", teachers_course_student_record_path(@course, student) %></td>
-        <td><%= ((@course.calculate_student_percentage(student)) * 100).round(1)%>%</td>
-        <td><%= (@course.calculate_student_grade(student)) %></td>
+        <td><%= ((@percent = student.calculate_percent(@course)) * 100).round(1)%>%</td>
+        <td><%= student.enrollments.where(:course_id => @course.id).first.letter_grade %></td>
       </tr>
       <% end %>
     </table>

@@ -10,7 +10,7 @@ class Assignment < ActiveRecord::Base
 
 	belongs_to :course
 	belongs_to :assignment_category
-	has_many 	 :submissions
+	has_many 	 :submissions, dependent: :destroy
 
 	def valid_date
 	  errors.add(:due_date, "Date must be for current school year") if due_date && due_date < Date.parse("2013-08-25")

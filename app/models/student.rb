@@ -91,6 +91,32 @@ class Student < ActiveRecord::Base
     end
   end
 
+  def calculate_percent(course)
+  	course_category_submissions = self.find_submissions(course)
+  	categories_hash = AssignmentCategory.calculate_category_points(course_category_submissions)
+  	Course.calculate_student_percent(categories_hash)
+    self.enrollments.where(:course_id => course.id).first.current_grade = Course.calculate_student_percent(categories_hash)
+  end
+
+  def find_submissions(course)
+  	@course_category_submissions = Hash.new([])
+  	@course_submissions = []
+  	self.submissions.each do |submission|
+  		@course_submissions << submission if submission.assignment.course_id == course.id
+  	end
+  	@course_submissions.each do |submission|
+  		cat = "#{submission.assignment.assignment_category.name}"
+  		weight = submission.assignment.assignment_category.weight
+  		@course_category_submissions[[cat, weight]] = []
+  	end
+  	self.submissions.each do |submission|
+  		cat = "#{submission.assignment.assignment_category.name}"
+  		weight = submission.assignment.assignment_category.weight
+  	  @course_category_submissions[[cat, weight]] << [submission.points_earned, submission.assignment.maximum_points] if submission.assignment.course_id == course.id && submission.assignment.due_date < Date.today
+  	end
+  	@course_category_submissions
+  end
+
   protected
 
   def generate_registration_code
