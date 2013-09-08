@@ -1,9 +1,5 @@
 <%= link_to "Back", :back %>
 
-<% if @new_scholar_hours.length == 0 %>
-	<%= button_to "Generate Scholar Hours", teachers_scholar_hour_enrollment_path, method: "get" %>
-<% else %>
-
 <h1>New Scholar Hours for <%= Date.today.strftime("%D") %></h1>
 
 <table>
