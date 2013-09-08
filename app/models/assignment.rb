@@ -11,6 +11,7 @@ class Assignment < ActiveRecord::Base
 	belongs_to :course
 	belongs_to :assignment_category
 	has_many 	 :submissions, dependent: :destroy
+	before_destroy :remove_submissions
 
 	def valid_date
 	  errors.add(:due_date, "Date must be for current school year") if due_date && due_date < Date.parse("2013-08-25")
@@ -20,6 +21,12 @@ class Assignment < ActiveRecord::Base
 		(earned.to_f / maximum_points.to_f)
 	end
 
+	def remove_submissions
+		self.submissions.each do |submission|
+			submission.destroy
+		end
+	end
+		
 	def calculate_grade(earned)
 		if calculate_percent(earned)
 			case calculate_percent(earned)

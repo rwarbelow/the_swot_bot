@@ -26,7 +26,7 @@ class Student < ActiveRecord::Base
 
 	def collect_student_actions
 		@student_actions_array = []
-		self.student_actions.select {|action| action.date == (Date.today)}.each do |action|
+		self.student_actions.todays_actions.each do |action|
 			@student_actions_array << action.student_action_type_id
 		end
 		aggregate_student_behavior_hash(@student_actions_array)
@@ -95,7 +95,6 @@ class Student < ActiveRecord::Base
   	course_category_submissions = self.find_submissions(course)
   	categories_hash = AssignmentCategory.calculate_category_points(course_category_submissions)
   	Course.calculate_student_percent(categories_hash)
-    self.enrollments.where(:course_id => course.id).first.current_grade = Course.calculate_student_percent(categories_hash)
   end
 
   def find_submissions(course)

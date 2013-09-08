@@ -5,8 +5,8 @@ class Submission < ActiveRecord::Base
 	validates :assignment_id, :presence => true
 	validates :points_earned, :presence => true
 
-	belongs_to :assignment
-	belongs_to :student 
+	belongs_to :assignment, dependent: :destroy
+	belongs_to :student
 
   delegate :title, :description, :to => :assignment
 end

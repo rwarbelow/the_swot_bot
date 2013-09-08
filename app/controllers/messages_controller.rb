@@ -37,12 +37,20 @@ class MessagesController < ApplicationController
 
   def show_received
     @message = Message.find(params[:id])
-    render '/messages/show_received'
+    if @message.target_id == current_user.id
+      render '/messages/show_received'
+    else
+      redirect_to messages_path
+    end
   end
 
   def show_sent
     @message = Message.find(params[:id])
-    render '/messages/show_sent'
+    if @message.author_id == current_user.id
+      render '/messages/show_sent'
+    else
+      redirect_to messages_path
+    end
   end
 
 end

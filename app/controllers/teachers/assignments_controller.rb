@@ -41,7 +41,7 @@ class Teachers::AssignmentsController < Teachers::BaseController
   def destroy
     @assignment = Assignment.find(params[:id])
     @course = @assignment.course
-    @assignment.delete
+    @assignment.destroy
     redirect_to teachers_course_path(@course)
   end
 

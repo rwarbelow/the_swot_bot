@@ -29,6 +29,7 @@ SwotBot::Application.routes.draw do
     get '/weekly_email', to: 'email#weekly_email'
     post '/send_student_email', to: 'email#send_student_email'
     resources :scholar_hours
+    get 'scholar_hour/print', to: 'scholar_hours#print'
     resources :profiles do
       post '/add_phone_number', :to => 'profiles#add_phone_number'
       delete '/delete_phone_number', :to => 'profiles#delete_phone_number'

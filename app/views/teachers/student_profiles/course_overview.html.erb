@@ -3,7 +3,7 @@
 <h1><%= @student.first_name %> <%= @student.last_name %>: <%=@course.subject.name%></h1>
 
 <% if @student.calculate_percent(@course) >= 0 %>
-  <h2>Current Overall Grade: <%= ((@student.enrollments.where('course_id = ?', @course.id).first.current_grade) * 100).round(1) %>% (<%= (@student.enrollments.where('course_id = ?', @course.id).first.letter_grade) %>)</h2>
+  <h2>Current Overall Grade: <%= ((@percent = @student.calculate_percent(@course)) * 100).round(1) %>% (<%= Course.letter_grade(@percent) %>)</h2>
 <% end %>
 
 <h3>Assignments</h3>
@@ -21,12 +21,12 @@
     <% @assignments.each do |assignment| %>
       <tr>
         <td><%= assignment.title.capitalize %></td>
-        <td><%= assignment.assignment_category.name.captitalize %></td>
+        <td><%= assignment.assignment_category.name.capitalize %></td>
         <td><%= assignment.due_date.strftime("%D") %></td>
         <td><%= @max = assignment.maximum_points %></td>
         <td><%= @earned = assignment.submissions.find_by_student_id(@student.id).points_earned if assignment.submissions.find_by_student_id(@student.id) %></td>
-        <td><%= assignment.calculate_percent(@earned) *100 %>%</td>
-        <td><%= assignment.calculate_grade(@earned) %></td>
+        <td><%= "#{(assignment.calculate_percent(@earned) *100)} %" if assignment.submissions.find_by_student_id(@student.id) %></td>
+        <td><%= assignment.calculate_grade(@earned) if assignment.submissions.find_by_student_id(@student.id) %></td>
       </tr>
     <% end %>
   </table>
