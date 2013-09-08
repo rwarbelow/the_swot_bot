@@ -95,7 +95,6 @@ class Student < ActiveRecord::Base
   	course_category_submissions = self.find_submissions(course)
   	categories_hash = AssignmentCategory.calculate_category_points(course_category_submissions)
   	Course.calculate_student_percent(categories_hash)
-    self.enrollments.where(:course_id => course.id).first.current_grade = Course.calculate_student_percent(categories_hash)
   end
 
   def find_submissions(course)

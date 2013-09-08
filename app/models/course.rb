@@ -20,16 +20,32 @@ class Course < ActiveRecord::Base
     @total_earned = 0
     categories_points_hash.each do |cat_points|
       @total_weight += cat_points[0][1]
-      p @total_weight
       if cat_points[1][1] != 0
         category_percent = ((cat_points[1][0].to_f / cat_points[1][1].to_f) * cat_points[0][1]).round(2)
+        @total_earned += category_percent
       end
-      @total_earned += category_percent
     end
     if @total_weight != 0
       (@total_earned / @total_weight).round(2)
     else
       1
+    end
+  end
+
+  def self.letter_grade(percent)
+    case percent
+    when 0.90...Float::INFINITY
+      return "A"
+    when 0.80...0.90
+      return "B"
+    when 0.70...0.80
+      return "C"
+    when 0.60...0.70
+      return "D"
+    when 0...0.60
+      return "F"
+    else
+      return ""
     end
   end
 
