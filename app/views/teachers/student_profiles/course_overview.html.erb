@@ -21,7 +21,7 @@
     <% @assignments.each do |assignment| %>
       <tr>
         <td><%= assignment.title.capitalize %></td>
-        <td><%= assignment.assignment_category.name.captitalize %></td>
+        <td><%= assignment.assignment_category.name.capitalize %></td>
         <td><%= assignment.due_date.strftime("%D") %></td>
         <td><%= @max = assignment.maximum_points %></td>
         <td><%= @earned = assignment.submissions.find_by_student_id(@student.id).points_earned if assignment.submissions.find_by_student_id(@student.id) %></td>
