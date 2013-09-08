@@ -1,24 +1,25 @@
 <%= link_to "Back to Inbox", messages_path %>
+<% if current_user.id == @message.author_id %>
+	<h1><%= @message.subject %></h1>
+	<table>
+		<thead>
+			<th>Date</th>
+			<th>Time</th>
+			<th>To</th>
+		</thead>
+		<tr>
+			<td><%= @message.created_at.strftime("%a, %b %e, %G") %></td>
+			<td><%= @message.created_at.strftime("%r") %></td>
+			<td><%= Identity.find(@message.target_id).first_name %> <%= Identity.find(@message.target_id).last_name %></td>
+		</tr>
+	</table>
 
-<h1><%= @message.subject %></h1>
-<table>
-	<thead>
-		<th>Date</th>
-		<th>Time</th>
-		<th>To</th>
-	</thead>
-	<tr>
-		<td><%= @message.created_at.strftime("%a, %b %e, %G") %></td>
-		<td><%= @message.created_at.strftime("%r") %></td>
-		<td><%= Identity.find(@message.target_id).first_name %> <%= Identity.find(@message.target_id).last_name %></td>
-	</tr>
-</table>
-
-<br>
-<table>
-	<thead>
-		<th>Message</th>
-	</thead>
-	<tr><td><%= @message.body %></td></tr>
-</table>
-<br>
+	<br>
+	<table>
+		<thead>
+			<th>Message</th>
+		</thead>
+		<tr><td><%= @message.body %></td></tr>
+	</table>
+	<br>
+<% end %>

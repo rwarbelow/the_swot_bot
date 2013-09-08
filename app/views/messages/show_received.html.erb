@@ -1,42 +1,43 @@
 <%= link_to "Back to Inbox", messages_path %>
+<% if current_user.id == @message.target_id %>
+	<h1><%= @message.subject %></h1>
+	<table>
+		<thead>
+			<th>Date</th>
+			<th>Time</th>
+			<th>From</th>
+		</thead>
+		<tr class="message-timestamps">
+			<td><%= @message.created_at.strftime("%a, %b %e, %G") %></td>
+			<td><%= @message.created_at.strftime("%r") %></td>
+			<td><%= Identity.find(@message.author_id).first_name %> <%= Identity.find(@message.author_id).last_name %></td>
+		</tr>
+	</table>
+	<br>
+	<table>
+		<thead>
+			<th>Message</th>
+		</thead>
+		<tr><td class="message-body"><%= @message.body %></td></tr>
+	</table>
+	<br>
 
-<h1><%= @message.subject %></h1>
-<table>
-	<thead>
-		<th>Date</th>
-		<th>Time</th>
-		<th>From</th>
-	</thead>
-	<tr class="message-timestamps">
-		<td><%= @message.created_at.strftime("%a, %b %e, %G") %></td>
-		<td><%= @message.created_at.strftime("%r") %></td>
-		<td><%= Identity.find(@message.author_id).first_name %> <%= Identity.find(@message.author_id).last_name %></td>
-	</tr>
-</table>
-<br>
-<table>
-	<thead>
-		<th>Message</th>
-	</thead>
-	<tr><td class="message-body"><%= @message.body %></td></tr>
-</table>
-<br>
+	<div>
+		<h2>Reply to this message</h2>
+		<%= form_for Message.new, url: messages_path, method: "post" do |f| %>
 
-<div>
-	<h2>Reply to this message</h2>
-	<%= form_for Message.new, url: messages_path, method: "post" do |f| %>
+		  <p>To: <%= Identity.find(@message.author_id).first_name %> <%= Identity.find(@message.author_id).last_name %></p>
+		  <%= f.hidden_field(:to, value: @message.author_id) %>
 
-	  <p>To: <%= Identity.find(@message.author_id).first_name %> <%= Identity.find(@message.author_id).last_name %></p>
-	  <%= f.hidden_field(:to, value: @message.author_id) %>
+		  <p>Subject: Re: <%= @message.subject%> </p>
+		  <%= f.hidden_field(:subject, value: "Re: #{@message.subject}") %>
 
-	  <p>Subject: Re: <%= @message.subject%> </p>
-	  <%= f.hidden_field(:subject, value: "Re: #{@message.subject}") %>
+		  <%= f.label :body %>
+		  <%= f.text_area :body, :class => "reply-body" %><br>
 
-	  <%= f.label :body %>
-	  <%= f.text_area :body, :class => "reply-body" %><br>
-
-	  <%= f.submit %>
-	<% end %>
-</div>
+		  <%= f.submit %>
+		<% end %>
+	</div>
+<% end %>
 
 
