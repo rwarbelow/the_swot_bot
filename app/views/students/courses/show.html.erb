@@ -2,7 +2,7 @@
 
 <h1><%=@course.subject.name%></h1>
 
-<% if @course.calculate_student_percentage(current_student) > 0 %>
+<% if current_student.calculate_percent(@course) >= 0 %>
   <h1>Current Overall Grade: <%= ((current_student.enrollments.where('course_id = ?', @course.id).first.current_grade) * 100).round(1) %>% (<%= (current_student.enrollments.where('course_id = ?', @course.id).first.letter_grade) %>)</h1>
 <% end %>
 
@@ -12,6 +12,7 @@
     <table>
       <thead>
         <th>Assignment</th>
+        <th>Category</th>
         <th>Due Date</th>
         <th>Score</th>
         <th>Percent</th>
@@ -19,8 +20,9 @@
       </thead>
       <% @assignments.each do |assignment| %>
         <tr>
-          <td><%= assignment.title %></td>
-          <td><%= assignment.due_date %></td>
+          <td><%= assignment.title.capitalize %></td>
+          <td><%= assignment.assignment_category.name.capitalize %></td>
+          <td><%= assignment.due_date.strftime("%D") %></td>
         <% if assignment.submissions.where('student_id = ?', current_student.id).length > 0 %>
           <td><%= assignment.submissions.where('student_id = ?', current_student.id).first.points_earned %> / <%= assignment.maximum_points %></td>
           <td><%= assignment.calculate_percent(assignment.submissions.where('student_id = ?', current_student.id).first.points_earned).round(1)*100%>%</td>
