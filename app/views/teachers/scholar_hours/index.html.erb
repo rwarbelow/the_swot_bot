@@ -1,27 +1,27 @@
 <%= link_to "Back", :back %>
-
-<h1>New Scholar Hours for <%= Date.today.strftime("%D") %></h1>
-
-<table>
-	<thead>
-		<th>Student Name</th>
-		<th>Reason</th>
-		<th>Date Assigned</th>
-		<th>Status</th>
-		<th></th>
-		<th></th>
-	</thead>
-	<% @new_scholar_hours.each do |scholarhour| %>
-		<tr>
-			<td><%= link_to "#{scholarhour.student.first_name} #{scholarhour.student.last_name}", teachers_student_profile_path(scholarhour.student_id) %></td>
-			<td><%= scholarhour.reason %></td>
-			<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
-			<td><%= scholarhour.status %></td>
-			<td><%= button_to "Complete", teachers_scholar_hour_path(scholarhour), method: "put" %></td>
-			<td><%= button_to "Delete", teachers_scholar_hour_path(scholarhour), method: "delete" %></td> 
-		</tr>
-	<% end %>
-</table>
+<%= link_to "Print List", teachers_scholar_hour_print_path %>
+<% if @new_scholar_hours.length != 0 %>
+	<h1>New Scholar Hours for <%= Date.today.strftime("%D") %></h1>
+	<table>
+		<thead>
+			<th>Student Name</th>
+			<th>Reason</th>
+			<th>Date Assigned</th>
+			<th>Status</th>
+			<th></th>
+			<th></th>
+		</thead>
+		<% @new_scholar_hours.each do |scholarhour| %>
+			<tr>
+				<td><%= link_to "#{scholarhour.student.first_name} #{scholarhour.student.last_name}", teachers_student_profile_path(scholarhour.student_id) %></td>
+				<td><%= scholarhour.reason %></td>
+				<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
+				<td><%= scholarhour.status %></td>
+				<td><%= button_to "Complete", teachers_scholar_hour_path(scholarhour), method: "put" %></td>
+				<td><%= button_to "Delete", teachers_scholar_hour_path(scholarhour), method: "delete" %></td> 
+			</tr>
+		<% end %>
+	</table>
 <% end %>
 <br>
 <% if @old_scholar_hours.length > 0 %>

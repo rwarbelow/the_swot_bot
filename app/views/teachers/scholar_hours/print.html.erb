@@ -1,0 +1,42 @@
+<h1>Scholar Hours for <%= Date.today.strftime("%A, %D") %></h1>
+
+<% if @old_scholar_hours.length > 0 %>
+	<table>
+		<thead>
+			<th>Student Name</th>
+			<th>Reason</th>
+			<th>Date Assigned</th>
+			<th>Status</th>
+		</thead>
+		<% @old_scholar_hours.each do |scholarhour| %>
+			<tr>
+				<td><%= "#{scholarhour.student.first_name} #{scholarhour.student.last_name}" %></td>
+				<td><%= scholarhour.reason %></td>
+				<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
+				<td><%= scholarhour.status %></td>
+			</tr>
+		<% end %>
+	</table>
+<% end %>
+<br>
+
+<% if @new_scholar_hours.length != 0 %>
+	<h2>Added Today</h2>
+	<table>
+		<thead>
+			<th>Student Name</th>
+			<th>Reason</th>
+			<th>Date Assigned</th>
+			<th>Status</th>
+		</thead>
+		<% @new_scholar_hours.each do |scholarhour| %>
+			<tr>
+				<td><%= "#{scholarhour.student.first_name} #{scholarhour.student.last_name}" %></td>
+				<td><%= scholarhour.reason %></td>
+				<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
+				<td><%= scholarhour.status %></td>
+			</tr>
+		<% end %>
+	</table>
+<% end %>
+
