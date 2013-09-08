@@ -21,12 +21,12 @@ class Course < ActiveRecord::Base
     categories_points_hash.each do |cat_points|
       @total_weight += cat_points[0][1]
       if cat_points[1][1] != 0
-        category_percent = ((cat_points[1][0].to_f / cat_points[1][1].to_f) * cat_points[0][1]).round(2)
+        category_percent = ((cat_points[1][0].to_f / cat_points[1][1].to_f) * cat_points[0][1]).round(4)
         @total_earned += category_percent
       end
     end
     if @total_weight != 0
-      (@total_earned / @total_weight).round(2)
+      (@total_earned / @total_weight).round(3)
     else
       1
     end
