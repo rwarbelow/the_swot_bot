@@ -31,7 +31,7 @@ module ReportGenerator
           page.item("mw#{index}").value(course_data[:missing_work].length)
           page.item("class#{index}").value(course_data[:course].subject.name)
           course_data[:actions].each do |action_name, actions|
-            unless action_name == "missing-work"
+            unless action_name == "missing-assignment"
               report.list("course#{index}").add_row do |row|
                 row.item(:key).value(action_name)
                 row.item(:val).value(actions.count)
@@ -61,11 +61,11 @@ module ReportGenerator
     missing_work_array = []
     courses.each do |course|
       grade = ((student.calculate_percent(course)) * 100).round(1)
-      actions = course.enrollments.where(student_id:student.id).first.student_actions.week_report.group_by {|action| action.student_action_type.name}
-      course.enrollments.where(student_id:student.id).first.student_actions.week_report.each do |action|
-        missing_work_array << action if action.student_action_type.student_action_category_id == 4
+      actions = course.enrollments.where(student_id:student.id).first.student_actions.group_by {|action| action.student_action_type.name}
+      course.enrollments.where(student_id:student.id).first.student_actions.each do |action|
+        missing_work_array << action if action.student_action_type.name == "missing-assignment"
       end
-      course_actions << {course: course, actions: actions, grade: grade, missing_work: missing_work_array }
+      course_actions << {course: course, actions: actions, grade: grade, missing_work: missing_work_array.length }
     end
     course_actions
   end
