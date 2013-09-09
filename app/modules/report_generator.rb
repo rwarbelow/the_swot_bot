@@ -28,7 +28,7 @@ module ReportGenerator
 
         course_actions.each_with_index do |course_data, index|
           page.item("grade#{index}").value(course_data[:grade])
-          page.item("mw#{index}").value(course_data[:missing_work].length)
+          page.item("mw#{index}").value(course_data[:missing_work])
           page.item("class#{index}").value(course_data[:course].subject.name)
           course_data[:actions].each do |action_name, actions|
             unless action_name == "missing-assignment"
