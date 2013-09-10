@@ -17,3 +17,8 @@
 
 .DS_Store
 /certs
+
+# Ignore Twilio and Send Grid tokens. 
+
+/config/send_grid.yml
+/config/twilio.yml

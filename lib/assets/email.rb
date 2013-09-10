@@ -10,7 +10,7 @@ class Email
   def ping  
     uri = URI.parse('https://console.cloud-elements.com/elements/api-v1/sendgrid/ping')  
 
-    uri.query = parameterize(:elementToken => '0967313f714ec4c12971a5adfbf51d1e')  
+    uri.query = parameterize(:elementToken => SEND_GRID_CONFIG['token'])  
 
     response, parsedResponse = invokeElement(uri)  
 
@@ -29,7 +29,7 @@ class Email
 
     args = Hash.new  
 
-    args[:elementToken] = '0967313f714ec4c12971a5adfbf51d1e'  
+    args[:elementToken] = SEND_GRID_CONFIG['token']  
     #args[:days] = "10"                                 # This is optional  
     #args[:startDate] = "MM-dd-yyyy HH:mm:ss"           # This is optional  
     #args[:endDate] = "MM-dd-yyyy HH:mm:ss"             # This is optional  
@@ -91,11 +91,11 @@ class Email
     #message[:callback] = 'Your Call Back URL if you wish to be notified.'          #This is optional  
 
     json[:message] = message                            #This is required  
-    json[:elementToken] = '0967313f714ec4c12971a5adfbf51d1e'  
+    json[:elementToken] = SEND_GRID_CONFIG['token']  
 
     uri = URI.parse('https://console.cloud-elements.com/elements/api-v1/sendgrid/send')  
 
-    uri.query = parameterize(:elementToken => '0967313f714ec4c12971a5adfbf51d1e')  
+    uri.query = parameterize(:elementToken => SEND_GRID_CONFIG['token'])  
 
     http = Net::HTTP.new(uri.host, uri.port)  
     http.use_ssl = (uri.scheme == 'https')  
@@ -125,7 +125,7 @@ class Email
   def messageDetails(messageId)  
 
     args = Hash.new  
-    args[:elementToken] = '0967313f714ec4c12971a5adfbf51d1e'  
+    args[:elementToken] = SEND_GRID_CONFIG['token']  
     args[:messageId] = messageId                            # This is required  
 
     uri = URI.parse('https://console.cloud-elements.com/elements/api-v1/sendgrid/details')  
@@ -164,7 +164,7 @@ class Email
     args[:pageNumber] = "1"                                  #This is optional  
     args[:pageSize] = "10"                                   #This is optional  
 
-    args[:elementToken] = '0967313f714ec4c12971a5adfbf51d1e'  
+    args[:elementToken] = SEND_GRID_CONFIG['token']  
 
     uri = URI.parse('https://console.cloud-elements.com/elements/api-v1/sendgrid/search')  
 
