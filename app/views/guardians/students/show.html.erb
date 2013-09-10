@@ -1,5 +1,5 @@
 <h1><%= @student.first_name %> <%= @student.last_name %> (<%= @student.ccsd_id %>)</h1>
-<%= link_to "Student Report", guardians_student_report_path(:ccsd_id => @student.ccsd_id) %>
+<%= link_to "SWOT Report (Use CCSD ID for password)", guardians_student_report_path(:ccsd_id => @student.ccsd_id) %>
 <div id="accordion">
   <h3>Class Schedule</h3>
 <div class="schedule-grades">
