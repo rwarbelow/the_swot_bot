@@ -19,7 +19,7 @@
     <td><%= assignment.title %></td>
     <% if assignment.submissions.where('student_id = ?', @student.id).length > 0 %>
       <td><%= (@earned = assignment.submissions.where('student_id = ?', @student.id).first.points_earned) %> / <%= assignment.maximum_points %></td>
-      <td><%= "#{(assignment.calculate_percent(@earned) *100)} %" if assignment.submissions.find_by_student_id(@student.id) %></td>
+      <td><%= "#{((assignment.calculate_percent(@earned).round(2)) *100)} %" if assignment.submissions.find_by_student_id(@student.id) %></td>
       <td><%= assignment.calculate_grade(@earned) if assignment.submissions.find_by_student_id(@student.id) %></td>
     <% end %>
   </tr>
