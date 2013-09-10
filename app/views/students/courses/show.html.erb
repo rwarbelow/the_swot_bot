@@ -43,7 +43,7 @@
       <th>Action</th>
       <th>Comments</th>
     </thead>
-    <% @actions.limit(25).sort!{ |a, b| b.id <=> a.id }.each do |action| %>
+    <% @actions.limit(25).order('date DESC').sort!{ |a, b| b.id <=> a.id }.each do |action| %>
       <tr>
         <td><%= action.date.strftime("%a, %m/%d") %></td> 
         <td><%= action.enrollment.course.teacher.last_name %></td>
