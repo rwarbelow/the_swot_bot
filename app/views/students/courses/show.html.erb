@@ -25,7 +25,7 @@
           <td><%= assignment.due_date.strftime("%D") %></td>
           <% if assignment.submissions.where('student_id = ?', current_student.id).length > 0 %>
             <td><%= assignment.submissions.where('student_id = ?', current_student.id).first.points_earned %> / <%= assignment.maximum_points %></td>
-            <td><%= assignment.calculate_percent(assignment.submissions.where('student_id = ?', current_student.id).first.points_earned).round(1)*100%>%</td>
+            <td><%= assignment.calculate_percent(assignment.submissions.where('student_id = ?', current_student.id).first.points_earned).round(2)*100%>%</td>
             <td><%= assignment.calculate_grade(assignment.submissions.where('student_id = ?', current_student.id).first.points_earned) %></td>
           <% end %>
         </tr>
@@ -45,7 +45,7 @@
     </thead>
     <% @actions.limit(25).sort!{ |a, b| b.id <=> a.id }.each do |action| %>
       <tr>
-        <td><%= action.date %></td> 
+        <td><%= action.date.strftime("%a, %m/%d") %></td> 
         <td><%= action.enrollment.course.teacher.last_name %></td>
         <td><%= action.student_action_type.name %></td>
         <td><% if action.comment %> 

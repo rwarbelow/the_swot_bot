@@ -12,35 +12,34 @@
   <li>Guardian Registration Code: <%= @student.registration_code %> </li>
   <br>
   <h2>Guardians</h2>
-  <% @student.guardians.each do |guardian| %> 
   <table>
     <thead>
-      <th><%= guardian.guardianships.where(student_id: @student.id).first.relationship_to_student %></th>
-      <th></th>
+      <th>Relationship</th>
+      <th>Name</th>
       <th>Username</th>
       <th>Email Address</th>
       <th>Phone Numbers</th>
     </thead>
-
-    <tr>
-      <td><%= guardian.first_name %></td> 
-      <td><%= guardian.last_name %></td>
-      <td><%= guardian.username %></td>
-      <td><%= guardian.email %></td>
-      <% guardian.phone_numbers.each do |number| %>
-      <td>
-      <table>
-        <tr>
-          <td><%= number.kind %></td>
-          <td><%= number.number %></td>
-        </tr>
-      </table>
-      </td>
-      <br>
-      <% end %>
-    </tr>
+    <% @student.guardians.each do |guardian| %> 
+      <tr>
+        <td><%= guardian.guardianships.where(student_id: @student.id).first.relationship_to_student.capitalize %></td>
+        <td><%= guardian.first_name %> <%= guardian.last_name %></td> 
+        <td><%= guardian.username %></td>
+        <td><%= guardian.email %></td>
+        <% guardian.phone_numbers.each do |number| %>
+        <td>
+        <table>
+          <tr>
+            <td><%= number.kind %></td>
+            <td><%= number.number %></td>
+          </tr>
+        </table>
+        </td>
+        <br>
+        <% end %>
+      </tr>
+    <% end %>
   </table>
-  <% end %>
 </ul><br>
 
 <h3>Course Schedule</h3>
@@ -49,17 +48,19 @@
 </div>
 <br>
 
-<h3>Today's Actions</h3>
+<h3>Recent Actions</h3>
 <table>
   <thead>
+    <th>Date</th>
     <th>Period</th>
     <th>Course</th>
     <th>Action</th>
     <th>Comments</th>
   </thead>
   <tr>
-<% @student.student_actions.where(date: Date.today).sort!{ |a, b| b.id <=> a.id }.each do |action| %>
+<% @student.student_actions.limit(30).sort!{ |a, b| b.id <=> a.id }.each do |action| %>
   <tr>
+    <td><%= action.date.strftime("%a, %m/%d") %></td>
     <td><%= action.enrollment.course.period %></td>
     <td><%= action.enrollment.course.subject.name %></td>
     <td><%= action.student_action_type.name %></td>
@@ -80,7 +81,7 @@
   </thead>
     <% @student.goals.sort! { |a, b| b.status <=> a.status }.each do |goal| %>
       <tr>
-        <td><%= goal.created_at.strftime("%b %d, %Y") %></td>
+        <td><%= goal.created_at.strftime("%a, %m/%d") %></td>
         <td><%= goal.goal %></td>
         <td><%= goal.status == "Complete" ? "Yes" : "No" %></td>
       </tr>
