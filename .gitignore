@@ -22,3 +22,5 @@
 
 /config/send_grid.yml
 /config/twilio.yml
+/config/initializers/twilio.rb
+/config/initializers/send_grid.rb
