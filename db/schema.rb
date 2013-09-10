@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130901221058) do
+ActiveRecord::Schema.define(:version => 20130910050740) do
 
   create_table "admins", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -98,6 +98,9 @@ ActiveRecord::Schema.define(:version => 20130901221058) do
     t.integer  "admin_id"
   end
 
+  add_index "identities", ["first_name"], :name => "index_identities_on_first_name"
+  add_index "identities", ["last_name"], :name => "index_identities_on_last_name"
+
   create_table "inspirations", :force => true do |t|
     t.string   "body"
     t.string   "source"
@@ -153,6 +156,9 @@ ActiveRecord::Schema.define(:version => 20130901221058) do
     t.datetime "updated_at",                 :null => false
   end
 
+  add_index "student_action_types", ["name"], :name => "index_student_action_types_on_name"
+  add_index "student_action_types", ["value"], :name => "index_student_action_types_on_value"
+
   create_table "student_actions", :force => true do |t|
     t.integer  "enrollment_id"
     t.integer  "student_action_type_id"
@@ -161,6 +167,8 @@ ActiveRecord::Schema.define(:version => 20130901221058) do
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
   end
+
+  add_index "student_actions", ["date"], :name => "index_student_actions_on_date"
 
   create_table "students", :force => true do |t|
     t.string   "gender",            :null => false
