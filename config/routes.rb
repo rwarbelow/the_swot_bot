@@ -82,6 +82,7 @@ SwotBot::Application.routes.draw do
 end
 
  namespace 'admin' do
+  get 'guardian_registration', :to => 'guardian_profiles#generate_reg_cards'
   resources :guardian_profiles
   resources :student_profiles do
     collection { post :import }
