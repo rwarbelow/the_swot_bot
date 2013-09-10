@@ -14,7 +14,6 @@
     <div id="tabs-1">
     	<h3>Inbox</h3>
       <% if @received_messages.length > 0 %>
-  	<% @received_messages.reverse.each do |message| %>
   		<table>
   			<thead>
   				<th>Date</th>
@@ -22,14 +21,15 @@
   				<th>From</th>
   				<th>Subject</th>
   			</thead>
-  			<tr>
-  				<td><%= message.created_at.strftime("%D") %></td>
-  				<td><%= message.created_at.strftime("%l:%M %p") %></td>
-  				<td><%= Identity.find(message.author_id).first_name %> <%= Identity.find(message.author_id).last_name %></td>
-  				<td><%= link_to message.subject, show_received_path(message) %></td>
-  			</tr>
+        <% @received_messages.reverse.each do |message| %>
+    			<tr>
+    				<td><%= message.created_at.strftime("%D") %></td>
+    				<td><%= message.created_at.strftime("%l:%M %p") %></td>
+    				<td><%= Identity.find(message.author_id).first_name %> <%= Identity.find(message.author_id).last_name %></td>
+    				<td><%= link_to message.subject, show_received_path(message) %></td>
+    			</tr>
+        <% end %>
   		</table>
-  	<% end %>
   <% else %>
   	<h5 class="box-empty">Inbox Empty</h5>
   <% end %>
@@ -37,7 +37,6 @@
     <div id="tabs-2">
   	<h3>Outbox</h3>
       <% if @sent_messages.length > 0 %>
-  	<% @sent_messages.reverse.each do |message| %>
   		<table>
   			<thead>
   				<th>Date</th>
@@ -45,14 +44,15 @@
   				<th>To</th>
   				<th>Subject</th>
   			</thead>
+        <% @sent_messages.reverse.each do |message| %>
   			<tr>
   				<td><%= message.created_at.strftime("%D") %></td>
   				<td><%= message.created_at.strftime("%l:%M %p") %></td>
   				<td><%= Identity.find(message.target_id).first_name %> <%= Identity.find(message.target_id).last_name %></td>
   				<td><%= link_to (message.subject ? message.subject : "No Subject"), show_sent_path(message) %></td>
   			</tr>
+        <% end %>
   		</table>
-  	<% end %>
   <% else %>
   	<h5 class="box-empty">No Sent Mail</h5>
   <% end %>
