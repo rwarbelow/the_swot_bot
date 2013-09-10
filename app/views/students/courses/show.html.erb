@@ -23,10 +23,10 @@
           <td><%= assignment.title.capitalize %></td>
           <td><%= assignment.assignment_category.name.capitalize %></td>
           <td><%= assignment.due_date.strftime("%D") %></td>
-        <% if assignment.submissions.where('student_id = ?', current_student.id).length > 0 %>
-          <td><%= assignment.submissions.where('student_id = ?', current_student.id).first.points_earned %> / <%= assignment.maximum_points %></td>
-          <td><%= assignment.calculate_percent(assignment.submissions.where('student_id = ?', current_student.id).first.points_earned).round(1)*100%>%</td>
-          <td><%= assignment.calculate_grade(assignment.submissions.where('student_id = ?', current_student.id).first.points_earned) %></td>
+          <% if assignment.submissions.where('student_id = ?', current_student.id).length > 0 %>
+            <td><%= assignment.submissions.where('student_id = ?', current_student.id).first.points_earned %> / <%= assignment.maximum_points %></td>
+            <td><%= assignment.calculate_percent(assignment.submissions.where('student_id = ?', current_student.id).first.points_earned).round(1)*100%>%</td>
+            <td><%= assignment.calculate_grade(assignment.submissions.where('student_id = ?', current_student.id).first.points_earned) %></td>
           <% end %>
         </tr>
       <% end %>
@@ -36,7 +36,6 @@
 
 <h3>Recent Actions</h3>
 <div class="recent-actions">
-  <% @actions.limit(25).sort!{ |a, b| b.id <=> a.id }.each do |action| %>
   <table>
     <thead>
       <th>Date</th>
@@ -44,16 +43,17 @@
       <th>Action</th>
       <th>Comments</th>
     </thead>
-    <tr>
-      <td><%= action.date %></td> 
-      <td><%= action.enrollment.course.teacher.last_name %></td>
-      <td><%= action.student_action_type.name %></td>
-      <td><% if action.comment %> 
-        <%= action.comment %>
-        <% end %>
-      </td>
-    </tr>
+    <% @actions.limit(25).sort!{ |a, b| b.id <=> a.id }.each do |action| %>
+      <tr>
+        <td><%= action.date %></td> 
+        <td><%= action.enrollment.course.teacher.last_name %></td>
+        <td><%= action.student_action_type.name %></td>
+        <td><% if action.comment %> 
+          <%= action.comment %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
   </table>
-  <% end %>
 </div>
 </div>
