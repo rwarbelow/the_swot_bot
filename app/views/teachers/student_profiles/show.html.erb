@@ -58,7 +58,7 @@
     <th>Comments</th>
   </thead>
   <tr>
-<% @student.student_actions.limit(30).sort!{ |a, b| b.id <=> a.id }.each do |action| %>
+<% @student.student_actions.limit(30).order('date DESC').sort!{ |a, b| b.id <=> a.id }.each do |action| %>
   <tr>
     <td><%= action.date.strftime("%a, %m/%d") %></td>
     <td><%= action.enrollment.course.period %></td>
