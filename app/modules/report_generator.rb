@@ -40,15 +40,15 @@ module ReportGenerator
             end
           end
         end
+        @security_settings = {:user_password  => student.ccsd_id,
+                              :owner_password => :random,
+                              :permissions => { :print_document  => true,
+                                                :modify_contents => false,
+                                                :copy_contents   => true}}
       end
     end
-    security_settings = {:user_password  => 'student.ccsd_id',
-                         :owner_password => :random,
-                            :permissions => { :print_document  => true,
-                                              :modify_contents => false,
-                                              :copy_contents   => true}}
     if password == true
-      send_data report.generate(filename: 'swot_report.pdf',security: security_settings)
+      send_data report.generate(filename: 'swot_report.pdf',security: @security_settings)
     else
       send_data report.generate(filename: 'swot_report.pdf')
     end

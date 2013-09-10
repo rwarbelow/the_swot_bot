@@ -1,0 +1,33 @@
+<% @students.each do |student| %>
+<div>
+<div style="padding-top: 10px">
+	<h1 style="text-align: center">SWOTBot Guardian Registration Instructions</h1>
+	<p style="text-align: center">http://swotbot.theswotteam.org</p>
+	<h2 style="text-align: center"><%= student.first_name %> <%= student.last_name %> (Registration Code: <%= student.registration_code %>)</h2>
+<table>
+		<tr>
+			<td><strong style="font-size: 1.4em">Step 1: Visit SWOTBot</strong><p>Visit swotbot.theswotteam.org and click "Create Guardian Account"</p></td>
+			<td><div style="border: 1px solid black; padding: 5px; text-align: center"><%= image_tag("guardian_registration_screen.png", size: "150x150") %></div></td>
+		</tr>
+		<tr>
+			<td><strong style="font-size: 1.4em">Step 2: Register</strong><p>Enter information and click "Submit"</p></td>
+			<td><div style="border: 1px solid black; padding: 10px; text-align: center"><%= image_tag("guardian_signup.png", size: "140x190") %></div></td>
+		</tr>
+		<tr>
+			<td><strong style="font-size: 1.4em">Step 3: Add Cell Phone Number</strong><p>Click "Profile" on the sidebar. Click "Edit Your Profile", then enter a phone number and click "Add Phone Number"</p></td>
+			<td><div style="border: 1px solid black; padding: 10px"><%= image_tag("add_phone_number.png", size: "200x140") %></div></td>
+		</tr>
+	</table>
+	<br>
+	<hr>
+	<br>
+	<h3>What can I use the SWOTBot for?</h3>
+	<ul>
+		<li>View student grades online</li>
+		<li>View student behavior online </li>
+		<li>Check missing assignents and behavior summary by text message (coming soon!)</li>
+		<li>Contact teachers through in-app messaging system</li>
+	</ul>
+</div>
+</div>
+<% end %>
