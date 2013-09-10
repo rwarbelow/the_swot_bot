@@ -41,4 +41,10 @@ class Admin::GuardianProfilesController < Admin::BaseController
       redirect_to error_url
     end
   end
+
+  def generate_reg_cards
+    @students = Student.all.sort! { |a, b| a.last_name <=> b.last_name }
+    render 'admin/guardian_profiles/generate_reg_cards', layout: false
+  end
+
 end
