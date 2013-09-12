@@ -89,7 +89,7 @@ class Guardians::ProfilesController < Guardians::BaseController
     @guardian = current_guardian
     if Student.exists?(:ccsd_id => ccsd_id, :registration_code => registration_code)
       @student = Student.where(:registration_code => registration_code, :ccsd_id => ccsd_id).first
-      @guardianship = Guardianship.new(:student_id => student.id,
+      @guardianship = Guardianship.new(:student_id => @student.id,
                           :guardian_id => @guardian.id,
                           :relationship_to_student => params[:guardianship][:relationship_to_student])
       if @guardianship.save
