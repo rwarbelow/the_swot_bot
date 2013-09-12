@@ -104,7 +104,6 @@ class Sms
 		absent = student_actions_hash[3]
 		positive = positive(student_actions_hash)
 		negative = negative(student_actions_hash)
-		mastery = mastery(student_actions_hash)
 		missing_assignments = missing_assignments(student_actions_hash)
 		text_body =
 <<-EOS
@@ -115,9 +114,6 @@ On time: #{on_time}, Tardy: #{tardy}, Absent: #{absent}
 
 Behavior
 Positive: #{positive}, Negative: #{negative}
-
-Daily Objectives Mastered
-#{mastery}
 
 Missing Assignments
 #{missing_assignments}
