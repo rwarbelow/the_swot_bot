@@ -9,7 +9,7 @@ class TextMessage
   
     uri = URI.parse('https://console.cloud-elements.com/elements/api-v1/twilio/ping')  
   
-    uri.query = parameterize(:elementToken => TWILIO_CONFIG['token'])  
+    uri.query = parameterize(:elementToken => ENV['CE_TWILIO_TOKEN'])  
   
     response, parsedResponse = invokeElement(uri)  
   
@@ -32,7 +32,7 @@ class TextMessage
   
     args = Hash.new  
   
-    args[:elementToken] = TWILIO_CONFIG['token']  
+    args[:elementToken] = ENV['CE_TWILIO_TOKEN']  
     #args[:days] = "10"                         # This is optional  
     #args[:startDate] = "MM-dd-yyyy HH:mm:ss"           # This is optional  
     #args[:endDate] = "MM-dd-yyyy HH:mm:ss"         # This is optional  
@@ -101,11 +101,11 @@ class TextMessage
     #message[:callback] = 'Your Call Back URL if you wish to be notified.'              #This is optional  
   
     json[:message] = message                                    #This is required  
-    json[:elementToken] = TWILIO_CONFIG['token']  
+    json[:elementToken] = ENV['CE_TWILIO_TOKEN']  
   
     uri = URI.parse('https://console.cloud-elements.com/elements/api-v1/twilio/send')  
   
-    uri.query = parameterize(:elementToken => TWILIO_CONFIG['token'])  
+    uri.query = parameterize(:elementToken => ENV['CE_TWILIO_TOKEN'])  
   
     http = Net::HTTP.new(uri.host, uri.port)  
     http.use_ssl = (uri.scheme == 'https')  
@@ -139,7 +139,7 @@ class TextMessage
   def messageDetails(messageId)  
   
     args = Hash.new  
-    args[:elementToken] = TWILIO_CONFIG['token']  
+    args[:elementToken] = ENV['CE_TWILIO_TOKEN']  
     args[:messageId] = messageId                               # This is required  
   
     uri = URI.parse('https://console.cloud-elements.com/elements/api-v1/twilio/details')  
@@ -178,7 +178,7 @@ class TextMessage
     args[:pageNumber] = "1"                                     #This is optional  
     args[:pageSize] = "10"                                      #This is optional  
   
-    args[:elementToken] = TWILIO_CONFIG['token']  
+    args[:elementToken] = ENV['CE_TWILIO_TOKEN']  
   
     uri = URI.parse('https://console.cloud-elements.com/elements/api-v1/twilio/search')  
   
