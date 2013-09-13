@@ -20,8 +20,8 @@
       </thead>
       <% @assignments.each do |assignment| %>
         <tr>
-          <td><%= assignment.title.capitalize %></td>
-          <td><%= assignment.assignment_category.name.capitalize %></td>
+          <td><%= assignment.title.titleize %></td>
+          <td><%= assignment.assignment_category.name.titleize %></td>
           <td><%= assignment.due_date.strftime("%D") %></td>
           <% if assignment.submissions.where('student_id = ?', current_student.id).length > 0 %>
             <td><%= assignment.submissions.where('student_id = ?', current_student.id).first.points_earned %> / <%= assignment.maximum_points %></td>
