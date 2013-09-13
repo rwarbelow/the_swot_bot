@@ -12,7 +12,10 @@ class Guardian < ActiveRecord::Base
   has_many :phone_numbers, :as => :phone_numberable
 
   def self.valid_number?(phone_number)
-  	guardian = PhoneNumber.find_by_number(phone_number).phone_numberable
-    return guardian
+    if guardian = PhoneNumber.find_by_number(phone_number).phone_numberable
+      return guardian
+    else
+      false
+    end
   end
 end
