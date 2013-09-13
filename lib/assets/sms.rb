@@ -20,7 +20,8 @@ class Sms
 	end
 
 	def	initiate_response
-		if guardian = Guardian.valid_number?(phone_number)
+		if Guardian.valid_number?(phone_number)
+			guardian = PhoneNumber.find_by_number(phone_number).phone_numberable
 			check_student_guardian_relationship(guardian, ccsd_id)
 		else
 			error_reply
