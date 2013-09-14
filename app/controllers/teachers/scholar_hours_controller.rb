@@ -22,11 +22,11 @@ class Teachers::ScholarHoursController < Teachers::BaseController
   	redirect_to teachers_scholar_hours_path
   end
 
-  def update
-  	@scholarhour = ScholarHour.find(params[:id])
-  	@scholarhour.date_served = Date.today
-  	@scholarhour.status = "Complete"
-  	@scholarhour.save
+  def complete
+  	@scholar_hour = ScholarHour.find(params[:id])
+  	@scholar_hour.date_served = Date.today
+  	@scholar_hour.status = "Complete"
+  	@scholar_hour.save
   	redirect_to teachers_scholar_hours_path
   end
 
@@ -34,5 +34,16 @@ class Teachers::ScholarHoursController < Teachers::BaseController
     @new_scholar_hours = ScholarHour.where(date_assigned: Date.today, status: "Not Complete").sort! {|a, b| a.student.last_name <=> b.student.last_name}
     @old_scholar_hours = (ScholarHour.where(status: "Not Complete") - @new_scholar_hours).sort! {|a, b| a.student.last_name <=> b.student.last_name}
     render 'teachers/scholar_hours/print', layout: false
+  end
+
+  def edit
+    @scholar_hour = ScholarHour.find(params[:id])
+  end
+
+  def update
+    @scholar_hour = ScholarHour.find(params[:id])
+    @scholar_hour.update_attributes(params[:scholar_hour])
+    @scholar_hour.save
+    redirect_to teachers_scholar_hours_path
   end
 end
