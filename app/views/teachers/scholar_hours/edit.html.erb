@@ -12,11 +12,9 @@
     <%= f.label :comments %>
     <%= f.text_area :comments %><br/>
 
-    <% if @scholar_hour.status == "Complete" %>
-	    <%= f.label :status %>
-	    <%= f.select :status, [ ['Complete','Complete'],
-	                          ['Not Complete','Not Complete']] %><br/>
-    <% end %>
+    <%= f.label :status %>
+    <%= f.select :status, [ ['Complete','Complete'],
+	                          ['Not Complete','Not Complete']], value: @scholar_hour.status %><br/>
 
     <%= f.submit value="Update Scholar Hour" %>
   <% end %>
