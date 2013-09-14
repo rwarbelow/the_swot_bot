@@ -23,13 +23,14 @@ class Teachers::StudentActionsController < Teachers::BaseController
 
   def edit
     @student_action = StudentAction.find(params[:id])
+    session[:last_page] = request.env['HTTP_REFERER'] || teachers_livestream_path
   end
 
   def update
     @student_action = StudentAction.find(params[:id])
     if @student_action.update_attributes(params[:student_action])
       flash[:success] = "Action updated!"
-      redirect_to teachers_livestream_path
+      redirect_to session[:last_page]
     else
       flash[:action_errors] = @student_action.errors.full_messages
       render 'edit'
@@ -41,10 +42,11 @@ class Teachers::StudentActionsController < Teachers::BaseController
   end
 
   def destroy
+    session[:last_page] = request.env['HTTP_REFERER'] || teachers_livestream_path
     @action = StudentAction.find(params[:id])
     @course = Course.find(@action.enrollment.course_id)
     flash[:delete_confirmation] = "#{@action.student_action_type.name} deleted for #{@action.enrollment.student.first_name}"
     @action.delete
-    redirect_to teachers_course_history_actions_path(@course)
+    redirect_to session[:last_page]
   end
 end
