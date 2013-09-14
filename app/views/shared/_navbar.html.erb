@@ -30,6 +30,13 @@
             :class => "#{'current' if current_page?(teachers_root_path)} button button-flat" %>
         </li>
 
+        <%if current_admin?%>
+          <li><%= link_to "Admin Panel",
+            admin_root_path,
+            :class => "#{'current' if current_page?(admin_root_path)} button button-flat" %>
+          </li>
+        <%end%>
+
         <li><%= link_to "Action Feed",
             teachers_livestream_path,
             :class => "#{'current' if current_page?(teachers_livestream_path)} button button-flat" %>
@@ -51,6 +58,12 @@
             teachers_daily_summary_path,
             :id => "daily_summary",
             :class => "#{'current' if current_page?(teachers_daily_summary_path)} button button-flat" %>
+        </li>
+
+        <li><%= link_to "Scholar Hours",
+            teachers_scholar_hours_path,
+            :id => "scholar_hours",
+            :class => "#{'current' if current_page?(teachers_scholar_hours_path)} button button-flat" %>
         </li>
 
       <% end %>
@@ -78,11 +91,6 @@
           :class => "#{'current' if current_page?(logout_path)} button button-flat" %>
       </li>
 
-      <%if current_admin?%>
-        <li><%= link_to "ADMIN",
-          admin_root_path,
-          :class => "#{'current' if current_page?(admin_root_path)} button button-flat" %></li>
-      <%end%>
   </ul>
 </nav>
 <% end %>
