@@ -1,0 +1,23 @@
+<h2>Edit Scholar Hour</h2>
+
+<div class="form-container">
+  <%= form_for @scholar_hour, url: teachers_scholar_hour_path(@scholar_hour) do |f| %>
+		<p><%= @scholar_hour.student.first_name %> <%= @scholar_hour.student.last_name %></p>
+    <%= f.label :reason %>
+    <%= f.text_field :reason %><br/>
+
+		<%= f.label :date_assigned %>
+    <%= f.text_field :date_assigned, value: @scholar_hour.date_assigned, placeholder: "YYYY-MM-DD" %><br/>
+
+    <%= f.label :comments %>
+    <%= f.text_area :comments %><br/>
+
+    <% if @scholar_hour.status == "Complete" %>
+	    <%= f.label :status %>
+	    <%= f.select :status, [ ['Complete','Complete'],
+	                          ['Not Complete','Not Complete']] %><br/>
+    <% end %>
+
+    <%= f.submit value="Update Scholar Hour" %>
+  <% end %>
+</div>
