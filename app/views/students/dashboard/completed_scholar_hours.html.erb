@@ -1,0 +1,21 @@
+<%= link_to "Back", students_root_path %>
+
+<h2>Completed Scholar Hours</h2>
+<table>
+  <thead>
+    <th>Date Assigned</th>
+    <th>Date Completed</th>
+    <th>Reason</th>
+    <th>Status</th>
+    <th>Comments</th>
+  </thead>
+  <% @completed_scholar_hours.sort!{ |a, b| b.date_served <=> a.date_served }.each do |scholar_hour| %>
+  <tr>
+    <td><%= scholar_hour.date_assigned.strftime("%a, %m/%d")  %></td>
+    <td><%= scholar_hour.date_served.strftime("%a, %m/%d")  %></td>
+    <td><%= scholar_hour.reason %></td>
+    <td><%= scholar_hour.status %></td>
+    <td><%= scholar_hour.comments %></td>
+  </tr>
+<% end %>
+</table>
