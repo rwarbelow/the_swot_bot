@@ -6,6 +6,7 @@ end
 
 SwotBot::Application.routes.draw do
   namespace 'students' do
+    get '/completed_scholar_hours', to: 'dashboard#completed_scholar_hours'
     resources :goals do
       post '/complete', to: 'goals#complete'
     end
@@ -30,6 +31,7 @@ SwotBot::Application.routes.draw do
     post '/send_student_email', to: 'email#send_student_email'
     resources :scholar_hours
     get 'scholar_hour/print', to: 'scholar_hours#print'
+    put 'complete_scholar_hour/:id', to: 'scholar_hours#complete', as: :complete_scholar_hour
     resources :profiles do
       post '/add_phone_number', :to => 'profiles#add_phone_number'
       delete '/delete_phone_number', :to => 'profiles#delete_phone_number'
