@@ -7,7 +7,8 @@
 			<th>Student Name</th>
 			<th>Reason</th>
 			<th>Date Assigned</th>
-			<th>Status</th>
+			<th>Comment</th>
+			<th></th>
 			<th></th>
 			<th></th>
 		</thead>
@@ -16,9 +17,10 @@
 				<td><%= link_to "#{scholarhour.student.first_name} #{scholarhour.student.last_name}", teachers_student_profile_path(scholarhour.student_id) %></td>
 				<td><%= scholarhour.reason %></td>
 				<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
-				<td><%= scholarhour.status %></td>
-				<td><%= button_to "Complete", teachers_scholar_hour_path(scholarhour), method: "put" %></td>
+				<td><%= (scholarhour.comments.nil? or scholarhour.comments == "") ? "(none)" : scholarhour.comments %></td>
+				<td><%= button_to "Complete", teachers_complete_scholar_hour_path(scholarhour), method: "put" %></td>
 				<td><%= button_to "Delete", teachers_scholar_hour_path(scholarhour), method: "delete" %></td> 
+				<td><%= button_to "Edit", edit_teachers_scholar_hour_path(scholarhour), method: "get", action: "edit" %></td>
 			</tr>
 		<% end %>
 	</table>
@@ -31,7 +33,8 @@
 			<th>Student Name</th>
 			<th>Reason</th>
 			<th>Date Assigned</th>
-			<th>Status</th>
+			<th>Comment</th>
+			<th></th>
 			<th></th>
 		</thead>
 		<% @old_scholar_hours.each do |scholarhour| %>
@@ -39,9 +42,10 @@
 				<td><%= link_to "#{scholarhour.student.first_name} #{scholarhour.student.last_name}", teachers_student_profile_path(scholarhour.student_id) %></td>
 				<td><%= scholarhour.reason %></td>
 				<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
-				<td><%= scholarhour.status %></td>
-				<td><%= button_to "Complete", teachers_scholar_hour_path(scholarhour), method: "put" %></td>
+				<td><%= (scholarhour.comments.nil? or scholarhour.comments == "") ? "(none)" : scholarhour.comments %></td>
+				<td><%= button_to "Complete", teachers_complete_scholar_hour_path(scholarhour), method: "put" %></td>
 				<td><%= button_to "Delete", teachers_scholar_hour_path(scholarhour), method: "delete" %></td> 
+				<td><%= button_to "Edit", edit_teachers_scholar_hour_path(scholarhour), method: "get", action: "edit" %></td>
 			</tr>
 		<% end %>
 	</table>
@@ -55,7 +59,7 @@
 			<th>Reason</th>
 			<th>Date Assigned</th>
 			<th>Date Completed</th>
-			<th></th>
+			<th>Comments</th>
 		</thead>
 		<% @completed_scholar_hours.each do |scholarhour| %>
 			<tr>
@@ -63,6 +67,8 @@
 				<td><%= scholarhour.reason %></td>
 				<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
 				<td><%= scholarhour.date_served.strftime("%a, %m/%d") %></td>
+				<td><%= (scholarhour.comments.nil? or scholarhour.comments == "") ? "(none)" : scholarhour.comments %></td>
+				<td><%= button_to "Edit", edit_teachers_scholar_hour_path(scholarhour), method: "get", action: "edit" %></td>
 			</tr>
 		<% end %>
 	</table>

@@ -27,15 +27,7 @@
         <td><%= guardian.username %></td>
         <td><%= guardian.email %></td>
         <% guardian.phone_numbers.each do |number| %>
-        <td>
-        <table>
-          <tr>
-            <td><%= number.kind %></td>
-            <td><%= number.number %></td>
-          </tr>
-        </table>
-        </td>
-        <br>
+          <td><%= number.number %> (<%= number.kind %>)</td>
         <% end %>
       </tr>
     <% end %>
@@ -49,26 +41,41 @@
 <br>
 
 <h3>Recent Actions</h3>
-<table>
-  <thead>
-    <th>Date</th>
-    <th>Period</th>
-    <th>Course</th>
-    <th>Action</th>
-    <th>Comments</th>
-  </thead>
-  <tr>
-<% @student.student_actions.limit(30).order('date DESC').sort!{ |a, b| b.id <=> a.id }.each do |action| %>
-  <tr>
-    <td><%= action.date.strftime("%a, %m/%d") %></td>
-    <td><%= action.enrollment.course.period %></td>
-    <td><%= action.enrollment.course.subject.name %></td>
-    <td><%= action.student_action_type.name %></td>
-    <td><%= action.comment %></td>
+<% if @student.student_actions.length > 0 %>
+  <table>
+    <thead>
+      <th>Date</th>
+      <th>Period</th>
+      <th>Course</th>
+      <th>Action</th>
+      <th>Comments</th>
+      <th></th>
+    </thead>
+    <tr>
+  <% @student.student_actions.limit(30).order('date DESC').sort!{ |a, b| b.id <=> a.id }.each do |action| %>
+    <tr>
+      <td><%= action.date.strftime("%a, %m/%d") %></td>
+      <td><%= action.enrollment.course.period %></td>
+      <td><%= action.enrollment.course.subject.name %></td>
+      <td><%= action.student_action_type.name %></td>
+      <td><%= action.comment %></td>
+      <% if current_teacher.id == action.enrollment.course.teacher_id %>
+        <td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
+      <% else %>
+        <td></td>
+      <% end %>
+      <% if current_teacher.id == action.enrollment.course.teacher_id %>
+        <td><%= link_to "Delete", teachers_student_action_path(action), :method => "delete" %></td>
+      <% else %>
+        <td></td>
+      <% end %>
+    </tr>
+  <% end %>
   </tr>
+  </table>
+<% else %>
+  <p>No recent actions.</p>
 <% end %>
-</tr>
-</table>
 <br>
 
 <h3><%= @student.first_name %>'s Goals</h3>

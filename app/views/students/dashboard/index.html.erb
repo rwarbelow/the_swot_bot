@@ -4,7 +4,6 @@
 </div>
 <br>
 <h1>Welcome, <%= current_user.first_name %>!</h1>
-
 <div>
 	<h3>Goals</h3>
 	  <% if flash[:goal_completed] %>
@@ -46,32 +45,38 @@
 <div>
   <%= render 'shared/announcements' %>
 </div>
+<br>
 
+<h2>Scholar Hours</h2>
+<% if @incomplete_scholar_hours.length > 0 %>
   <div>
-  <h3>Upcoming Due Dates</h3>
-  <% if @assignments.length == 0 %>
-    <p>No upcoming assignments.</p>
-  <% else %>
     <table>
       <thead>
-        <th>Period</th>
-        <th>Course</th>
-        <th>Assignment</th>
-        <th>Due Date</th>
+        <th>Date Assigned</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Comments</th>
       </thead>
-      <% @assignments.each do |assignment| %>
+    <% @incomplete_scholar_hours.each do |scholar_hour| %>
       <tr>
-        <td><%= assignment.course.period %></td>
-        <td><%= assignment.course.subject.name %></td>
-        <td><%= assignment.title %></td>
-        <td><%= assignment.due_date %></td>
+        <td><%= scholar_hour.date_assigned.strftime("%a, %m/%d")  %></td>
+        <td><%= scholar_hour.reason %></td>
+        <td><%= scholar_hour.status %></td>
+        <td><%= scholar_hour.comments %></td>
       </tr>
-      <% end %>
+    <% end %>
     </table>
-  <% end %>
-</div>
-
-<h2><%= @student.first_name %> <%= @student.last_name %> </h2>
+  </div>
+  <% else %>
+  <p>You do not owe any scholar hours.</p>
+<% end %>
+<% if @completed_scholar_hours.length > 0 %>
+  <%= link_to "View completed scholar hours", students_completed_scholar_hours_path %>
+  <div class='inactive-completed'>
+  </div>
+<% end %>
+<br>
+<h2>Schedule</h2>
 <div>
   <%= render '/shared/schedule_grades' %>
 </div>

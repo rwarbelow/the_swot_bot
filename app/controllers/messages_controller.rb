@@ -13,7 +13,8 @@ class MessagesController < ApplicationController
 
   def create
   	@message = Message.create(:author_id => current_user.id, :target_id => (Identity.find(params[:message][:to]).id), :body => params[:message][:body], :subject => params[:message][:subject])
-  	if @message.save
+  	@message.subject = "(No Subject)" if @message.subject == ""
+    if @message.save
       flash[:message_sent] = "Your message has been delivered to #{Identity.find(@message.target_id).first_name} #{Identity.find(@message.target_id).last_name}!"
       redirect_to messages_path
     else
@@ -24,8 +25,8 @@ class MessagesController < ApplicationController
 
   def index
     @message = Message.new
-    @received_messages = Message.where(:target_id => current_user.id)
-    @sent_messages = Message.where(:author_id => current_user.id)
+    @received_messages = Message.where(:target_id => current_user.id).where("created_at > ?", (Date.today - 31))
+    @sent_messages = Message.where(:author_id => current_user.id).where("created_at > ?", (Date.today - 31))
   end
 
   def destroy
