@@ -1,5 +1,5 @@
 class ScholarHour < ActiveRecord::Base
-	attr_accessible :student_id, :reason, :date_assigned, :date_served, :status
+	attr_accessible :student_id, :reason, :date_assigned, :date_served, :status, :comments
 
 	validates :student_id, :presence => true
 	validates :reason, :presence => true
@@ -37,8 +37,6 @@ class ScholarHour < ActiveRecord::Base
 				@student_ids_scholar_hour << [student.id, "Absent from #{@student_actions_hash[3]} class(es)"]
 			end
 		end
-			p "*"*80
-			p @student_ids_scholar_hour
 	end
 end
 
