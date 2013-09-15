@@ -37,6 +37,7 @@ class ScholarHour < ActiveRecord::Base
 				@student_ids_scholar_hour << [student.id, "Absent from #{@student_actions_hash[3]} class(es)"]
 			end
 		end
+		@student_ids_scholar_hour
 	end
 end
 
