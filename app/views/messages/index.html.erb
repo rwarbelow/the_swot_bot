@@ -72,8 +72,8 @@
   		  <% teachers_array = Teacher.includes(:identity).all.map { |recipient| ["#{recipient.first_name} #{recipient.last_name}", recipient.identity.id] } %>
   		  <%= f.select(:to, teachers_array, {:include_blank => 'Select a teacher'}) %><br />	
     <% elsif current_teacher? %>
-  	  <% teachers_array = (Teacher.includes(:identity).all + Student.includes(:identity).all + Guardian.includes(:identity).all).sort! {|a, b| a.last_name <=> b.last_name }.map { |recipient| ["#{recipient.first_name} #{recipient.last_name}", recipient.identity.id] } %>
-  		  <%= f.select(:to, teachers_array, {:include_blank => 'Select a recipient'}) %><br />
+  	  <% students_array = (Teacher.includes(:identity).all + Student.includes(:identity).all + Guardian.includes(:identity).all).sort! {|a, b| a.last_name <=> b.last_name }.map { |recipient| ["#{recipient.first_name} #{recipient.last_name}", recipient.identity.id] } %>
+  		  <%= f.select(:to, students_array, {:include_blank => 'Select a recipient'}) %><br />
   	  <% end %>
 
   	<%= f.label :subject %>

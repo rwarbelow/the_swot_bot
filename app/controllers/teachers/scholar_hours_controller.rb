@@ -6,6 +6,19 @@ class Teachers::ScholarHoursController < Teachers::BaseController
   	@completed_scholar_hours = ScholarHour.where(status: "Complete").sort! {|a, b| a.student.last_name <=> b.student.last_name}
   end
 
+  def new
+    @scholar_hour = ScholarHour.new
+  end
+
+  def create
+    @scholar_hour = ScholarHour.new(params[:scholar_hour])
+    if @scholar_hour.save
+      redirect_to teachers_scholar_hours_path
+    else
+      flash[:scholar_hour_errors] = @scholar_hour.errors.full_messages
+    end
+  end
+
   def generate_scholar_hour_list
   	@student_ids = ScholarHour.find_daily_student_list
   	@student_ids.each do |student|
@@ -45,5 +58,9 @@ class Teachers::ScholarHoursController < Teachers::BaseController
     @scholar_hour.update_attributes(params[:scholar_hour])
     @scholar_hour.save
     redirect_to teachers_scholar_hours_path
+  end
+
+  def completed_scholar_hours
+    @completed_scholar_hours = ScholarHour.where(status: "Complete").sort! {|a, b| a.student.last_name <=> b.student.last_name}
   end
 end
