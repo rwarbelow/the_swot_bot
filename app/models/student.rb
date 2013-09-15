@@ -111,7 +111,7 @@ class Student < ActiveRecord::Base
   	self.submissions.each do |submission|
   		cat = "#{submission.assignment.assignment_category.name}"
   		weight = submission.assignment.assignment_category.weight
-  	  @course_category_submissions[[cat, weight]] << [submission.points_earned, submission.assignment.maximum_points] if submission.assignment.course_id == course.id && submission.assignment.due_date <= Date.today
+  	  @course_category_submissions[[cat, weight]] << [submission.points_earned, submission.assignment.maximum_points] if submission.assignment.course_id == course.id
   	end
   	@course_category_submissions
   end
