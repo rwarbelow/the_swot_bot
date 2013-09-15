@@ -1,9 +1,7 @@
 <h2>Tasks</h2>
 <%= link_to "Import Student CSV", admin_csv_importer_path, :class => "button button-flat" %> <br> <br>
 
-<% if @new_scholar_hours.length == 0 %>
-	<%= button_to "Generate Scholar Hours", teachers_scholar_hour_enrollment_path, method: "get", :class => "button button-flat" %>
-<% end %>
+<%= button_to "Generate Scholar Hours", teachers_scholar_hour_enrollment_path, method: "get", :class => "button button-flat" %>
 
 <%= link_to "Create Class", new_teachers_course_path, :class => "button button-flat" %> <br> <br>
 

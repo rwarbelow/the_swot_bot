@@ -24,6 +24,7 @@ SwotBot::Application.routes.draw do
   end
 
   namespace 'teachers' do
+    get '/completed_scholar_hours', to: 'scholar_hours#completed_scholar_hours'
     put '/update_identity/:identity_id', :to => 'profiles#update_identity'
     get 'daily_summary', to: 'dashboard#daily_summary'
     get 'scholar_hour_enrollment', to: 'scholar_hours#generate_scholar_hour_list'

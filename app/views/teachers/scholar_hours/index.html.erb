@@ -1,75 +1,62 @@
-<%= link_to "Back", :back %>
-<%= link_to "Print List", teachers_scholar_hour_print_path %>
-<% if @new_scholar_hours.length != 0 %>
-	<h1>New Scholar Hours for <%= Date.today.strftime("%D") %></h1>
-	<table>
-		<thead>
-			<th>Student Name</th>
-			<th>Reason</th>
-			<th>Date Assigned</th>
-			<th>Comment</th>
-			<th></th>
-			<th></th>
-			<th></th>
-		</thead>
-		<% @new_scholar_hours.each do |scholarhour| %>
-			<tr>
-				<td><%= link_to "#{scholarhour.student.first_name} #{scholarhour.student.last_name}", teachers_student_profile_path(scholarhour.student_id) %></td>
-				<td><%= scholarhour.reason %></td>
-				<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
-				<td><%= (scholarhour.comments.nil? or scholarhour.comments == "") ? "(none)" : scholarhour.comments %></td>
-				<td><%= button_to "Complete", teachers_complete_scholar_hour_path(scholarhour), method: "put" %></td>
-				<td><%= button_to "Delete", teachers_scholar_hour_path(scholarhour), method: "delete" %></td> 
-				<td><%= button_to "Edit", edit_teachers_scholar_hour_path(scholarhour), method: "get", action: "edit" %></td>
-			</tr>
-		<% end %>
-	</table>
-<% end %>
-<br>
-<% if @old_scholar_hours.length > 0 %>
-	<h1>Old Scholar Hours </h1>
-	<table>
-		<thead>
-			<th>Student Name</th>
-			<th>Reason</th>
-			<th>Date Assigned</th>
-			<th>Comment</th>
-			<th></th>
-			<th></th>
-		</thead>
-		<% @old_scholar_hours.each do |scholarhour| %>
-			<tr>
-				<td><%= link_to "#{scholarhour.student.first_name} #{scholarhour.student.last_name}", teachers_student_profile_path(scholarhour.student_id) %></td>
-				<td><%= scholarhour.reason %></td>
-				<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
-				<td><%= (scholarhour.comments.nil? or scholarhour.comments == "") ? "(none)" : scholarhour.comments %></td>
-				<td><%= button_to "Complete", teachers_complete_scholar_hour_path(scholarhour), method: "put" %></td>
-				<td><%= button_to "Delete", teachers_scholar_hour_path(scholarhour), method: "delete" %></td> 
-				<td><%= button_to "Edit", edit_teachers_scholar_hour_path(scholarhour), method: "get", action: "edit" %></td>
-			</tr>
-		<% end %>
-	</table>
-<% end %>
-<br>
-<% if @completed_scholar_hours.length > 0 %>
-	<h1>Completed Scholar Hours </h1>
-	<table>
-		<thead>
-			<th>Student Name</th>
-			<th>Reason</th>
-			<th>Date Assigned</th>
-			<th>Date Completed</th>
-			<th>Comments</th>
-		</thead>
-		<% @completed_scholar_hours.each do |scholarhour| %>
-			<tr>
-				<td><%= link_to "#{scholarhour.student.first_name} #{scholarhour.student.last_name}", teachers_student_profile_path(scholarhour.student_id) %></td>
-				<td><%= scholarhour.reason %></td>
-				<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
-				<td><%= scholarhour.date_served.strftime("%a, %m/%d") %></td>
-				<td><%= (scholarhour.comments.nil? or scholarhour.comments == "") ? "(none)" : scholarhour.comments %></td>
-				<td><%= button_to "Edit", edit_teachers_scholar_hour_path(scholarhour), method: "get", action: "edit" %></td>
-			</tr>
-		<% end %>
-	</table>
-<% end %>
+<%= link_to "Back", :back  %>
+<div class="buttons-in-line">
+	<%= button_to "Print List", teachers_scholar_hour_print_path, method: "get", :class => "btn in-line"  %>
+	<%= button_to "Add Custom Scholar Hour", new_teachers_scholar_hour_path, method: "get", :class => "btn in-line"  %>
+</div>
+<br><br>
+<div class="scholar-hours">
+	<% if @new_scholar_hours.length != 0 %>
+		<h1>New Scholar Hours for <%= Date.today.strftime("%D") %></h1>
+		<table>
+			<thead>
+				<th>Student Name</th>
+				<th>Reason</th>
+				<th>Date Assigned</th>
+				<th>Comment</th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</thead>
+			<% @new_scholar_hours.each do |scholarhour| %>
+				<tr>
+					<td><%= link_to "#{scholarhour.student.first_name} #{scholarhour.student.last_name}", teachers_student_profile_path(scholarhour.student_id) %></td>
+					<td><%= scholarhour.reason %></td>
+					<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
+					<td><%= (scholarhour.comments.nil? or scholarhour.comments == "") ? "(none)" : scholarhour.comments %></td>
+					<td><%= button_to "Complete", teachers_complete_scholar_hour_path(scholarhour), method: "put" %></td>
+					<td><%= button_to "Delete", teachers_scholar_hour_path(scholarhour), method: "delete" %></td> 
+					<td><%= button_to "Edit", edit_teachers_scholar_hour_path(scholarhour), method: "get", action: "edit" %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% end %>
+	<br>
+	<% if @old_scholar_hours.length > 0 %>
+		<h1>Old Scholar Hours </h1>
+		<table>
+			<thead>
+				<th>Student Name</th>
+				<th>Reason</th>
+				<th>Date Assigned</th>
+				<th>Comment</th>
+				<th></th>
+				<th></th>
+			</thead>
+			<% @old_scholar_hours.each do |scholarhour| %>
+				<tr>
+					<td><%= link_to "#{scholarhour.student.first_name} #{scholarhour.student.last_name}", teachers_student_profile_path(scholarhour.student_id) %></td>
+					<td><%= scholarhour.reason %></td>
+					<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
+					<td><%= (scholarhour.comments.nil? or scholarhour.comments == "") ? "(none)" : scholarhour.comments %></td>
+					<td><%= button_to "Complete", teachers_complete_scholar_hour_path(scholarhour), method: "put" %></td>
+					<td><%= button_to "Delete", teachers_scholar_hour_path(scholarhour), method: "delete" %></td> 
+					<td><%= button_to "Edit", edit_teachers_scholar_hour_path(scholarhour), method: "get", action: "edit" %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% end %>
+	<br>
+	<% if @completed_scholar_hours.length > 0 %>
+	<%= button_to "View Completed Scholar Hours", teachers_completed_scholar_hours_path, class: "btn", method: :get %>
+	<% end %>
+</div>
