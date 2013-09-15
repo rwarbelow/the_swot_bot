@@ -1,5 +1,9 @@
 <%= link_to 'Back', :back %>
-<h2>Actions for Period <%= @course.period %> <%= @course.subject.name %></h2>
+<h2>Recent Actions for Period <%= @course.period %> <%= @course.subject.name %></h2>
+  <%= form_tag teachers_course_history_actions_path(@course), method: :get do %>
+    <%= text_field_tag :number, nil, :placeholder => "# of previous days" %>
+    <%= submit_tag "Show Actions", class: 'button' %>
+  <% end %>
 <%if @course.teacher_id == current_teacher.id%>
 <%= link_to "Add Actions", new_teachers_student_action_path(:course_id => @course.id) %>
 <%end%>
@@ -15,7 +19,7 @@
        <th>Student Name</th>
        <th>Action</th>
      </thead>
-     <% @course.student_actions.sort! { |a,b| b.date <=> a.date }.each do |action| %>
+     <% @course.student_actions.where('date > ?', (Date.today - @number)).sort! { |a,b| b.date <=> a.date }.each do |action| %>
        <tr>
         <%if @course.teacher_id == current_teacher.id%>
            <td><%= link_to "Delete", teachers_student_action_path(action), :method => "delete" %></td>

@@ -39,6 +39,7 @@ class Teachers::StudentActionsController < Teachers::BaseController
 
   def course_history
     @course = Course.find(params[:id])
+    @number = params[:number].nil? ? 2 : params[:number].to_i
   end
 
   def destroy
