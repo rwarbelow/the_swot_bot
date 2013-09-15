@@ -8,7 +8,6 @@ class Teachers::SubmissionsController < Teachers::BaseController
     @assignment = Assignment.find(params[:assignment_id])
     course = Course.find(@assignment.course_id)
     ids_scores = params[:students].zip(params[:scores])
-    p ids_scores
     ids_scores.each do |score|
       student = Student.find(score[0])
       points = score[1]
