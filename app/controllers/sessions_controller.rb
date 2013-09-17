@@ -10,6 +10,9 @@ class SessionsController < ApplicationController
   	@user = Identity.where(:username => params[:identity][:username].downcase).first
   	if @user && @user.authenticate(params[:identity][:password])
   		session[:user_id] = @user.id
+      @user.login_counter += 1
+      @user.password = params[:identity][:password]
+      @user.save
       dashboard
     else
       @user = Identity.new

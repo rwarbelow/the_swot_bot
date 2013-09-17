@@ -1,0 +1,16 @@
+<%= link_to "Back", :back %>
+<h1>Student Login Stats</h1>
+<table>
+	<thead>
+		<th>Name</th>
+		<th>Login Count</th>
+		<th>Last Login</th>
+	</thead>
+<% @students.sort! { |a, b| a.last_name <=> b.last_name }.each do |student| %>
+	<tr>
+		<td><%= link_to "#{student.first_name} #{student.last_name}", teachers_student_profile_path(student.id) %></td>
+		<td><%= student.identity.login_counter %></td>
+		<td><%= student.identity.updated_at.strftime("%a, %m/%d") %></td>
+	</tr>
+<% end %>
+</table>

@@ -87,6 +87,8 @@ end
  namespace 'admin' do
   get 'guardian_registration', :to => 'guardian_profiles#generate_reg_cards'
   resources :guardian_profiles
+  get 'guardian_logins', :to => 'dashboard#guardian_logins', :as => 'guardian_logins'
+  get 'student_logins', :to => 'dashboard#student_logins', :as => 'student_logins'
   resources :student_profiles do
     collection { post :import }
   end
