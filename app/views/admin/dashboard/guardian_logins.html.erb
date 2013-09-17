@@ -1,0 +1,20 @@
+<%= link_to "Back", :back %>
+<h1>Guardian Login Stats</h1>
+<table>
+	<thead>
+		<th>Name</th>
+		<th>Student(s)</th>
+		<th>Login Count</th>
+		<th>Last Login</th>
+	</thead>
+<% @guardians.sort! { |a, b| a.last_name <=> b.last_name }.each do |guardian| %>
+	<tr>
+		<td><%= guardian.first_name %> <%= guardian.last_name %></td>
+		<td><% guardian.students.each do |student| %>
+			<%= student.first_name %> <%= student.last_name %>
+		<% end %></td>
+		<td><%= guardian.identity.login_counter %></td>
+		<td><%= guardian.identity.updated_at.strftime("%a, %m/%d") %></td>
+	</tr>
+<% end %>
+</table>

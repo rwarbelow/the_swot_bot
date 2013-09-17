@@ -10,6 +10,8 @@
   <li>CCSD ID: <%= @student.ccsd_id %> </li>
   <li>Grade Level: <%= @student.grade_level %> </li>
   <li>Guardian Registration Code: <%= @student.registration_code %> </li>
+  <li>Last Login: <%= @student.identity.updated_at.strftime("%a, %m/%d") %></li>
+  <li>Total Logins: <%= @student.identity.login_counter %></li>
   <br>
   <h2>Guardians</h2>
   <table>
