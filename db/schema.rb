@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130914194809) do
+ActiveRecord::Schema.define(:version => 20130917044905) do
 
   create_table "admins", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -86,16 +86,17 @@ ActiveRecord::Schema.define(:version => 20130914194809) do
   end
 
   create_table "identities", :force => true do |t|
-    t.string   "username",        :null => false
-    t.string   "password_digest", :null => false
-    t.string   "first_name",      :null => false
-    t.string   "last_name",       :null => false
+    t.string   "username",                       :null => false
+    t.string   "password_digest",                :null => false
+    t.string   "first_name",                     :null => false
+    t.string   "last_name",                      :null => false
     t.integer  "student_id"
     t.integer  "teacher_id"
     t.integer  "guardian_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "admin_id"
+    t.integer  "login_counter",   :default => 0
   end
 
   add_index "identities", ["first_name"], :name => "index_identities_on_first_name"
