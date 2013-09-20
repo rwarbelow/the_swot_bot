@@ -1,5 +1,9 @@
 <%= link_to('Back', :back) %>
-<h2 class="chalk"><%= @student.first_name %> <%= @student.last_name %></h2>
+<h2 class="chalk"><%= @student.first_name %> <%= @student.last_name %><div class="bank-balance-teacher-view">
+  <div style="font-size: 19px;text-decoration:underline;">Bank Balance</div>
+  <%= number_to_currency(@student.bank_balance, strip_insignificant_zeros: true) %>
+</div></h2>
+
 <%= link_to "Student Report", teachers_student_report_path(:ccsd_id => @student.ccsd_id) %>
 <ul>
   <li>Username: <%= @student.username %> </li>
@@ -43,6 +47,10 @@
 <br>
 
 <h3>Recent Actions</h3>
+<%= form_tag teachers_student_profile_path, method: :get do %>
+    <%= text_field_tag :number, nil, :placeholder => "# of previous days" %>
+    <%= submit_tag "Show", class: 'button' %>
+  <% end %>
 <% if @student.student_actions.length > 0 %>
   <table>
     <thead>
@@ -54,7 +62,7 @@
       <th></th>
     </thead>
     <tr>
-  <% @student.student_actions.limit(30).order('date DESC').sort!{ |a, b| b.id <=> a.id }.each do |action| %>
+  <% @student_actions.order('date DESC').sort!{ |a, b| b.id <=> a.id }.each do |action| %>
     <tr>
       <td><%= action.date.strftime("%a, %m/%d") %></td>
       <td><%= action.enrollment.course.period %></td>

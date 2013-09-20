@@ -45,6 +45,9 @@ class Teachers::StudentActionsController < Teachers::BaseController
   def destroy
     session[:last_page] = request.env['HTTP_REFERER'] || teachers_livestream_path
     @action = StudentAction.find(params[:id])
+    student = @action.enrollment.student
+    student.bank_balance += (@action.student_action_type.value.to_i * -1)
+    student.save
     @course = Course.find(@action.enrollment.course_id)
     flash[:delete_confirmation] = "#{@action.student_action_type.name} deleted for #{@action.enrollment.student.first_name}"
     @action.delete
