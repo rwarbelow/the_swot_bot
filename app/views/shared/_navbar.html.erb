@@ -3,6 +3,12 @@
   <nav class="nav">
     <ul>
       <% if current_student? %>
+        <%= link_to(students_bank_account_path, :style => 'text-decoration: none') do %>
+          <div class="bank-balance">
+            <div style="font-size: 19px;text-decoration:underline;">Bank Balance</div>
+            <%= number_to_currency(current_student.bank_balance, strip_insignificant_zeros: true) %>
+          </div>
+        <% end %>
         <li><%= link_to "Dashboard",
             students_root_path,
             :id => "",

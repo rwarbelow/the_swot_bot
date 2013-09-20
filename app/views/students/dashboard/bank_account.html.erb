@@ -1,0 +1,23 @@
+<h1>Bank Account History: Past <%= @number %> day(s)</h1>
+<%= form_tag students_bank_account_path, method: :get do %>
+    <%= text_field_tag :number, nil, :placeholder => "# of previous days" %>
+    <%= submit_tag "Show", class: 'button' %>
+  <% end %>
+<table>
+	<thead>
+		<th>Date</th>
+		<th>Action</th>
+		<th>Class</th>
+		<th>$ Amount</th>
+	</thead>
+	<tbody>
+		<% @student_actions.sort! { |a, b| b.date <=> a.date }.each do |action| %>
+		<tr>
+			<td><%= action.date.strftime("%a, %m/%d") %></td>
+			<td><%= action.student_action_type.name %></td>
+			<td><%= action.enrollment.course.subject.name %></td>
+			<td><%= number_to_currency(action.student_action_type.value, strip_insignificant_zeros: true) %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

@@ -11,4 +11,8 @@ class Students::DashboardController < Students::BaseController
     @completed_scholar_hours = ScholarHour.where(student_id: current_student.id).where(status: "Complete")
   end
 
+  def bank_account
+    @number = params[:number].nil? ? 1 : params[:number].to_i
+    @student_actions = current_student.student_actions.where('date > ?', (Date.today - @number))
+  end
 end

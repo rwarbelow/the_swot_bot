@@ -1,6 +1,8 @@
 class Teachers::StudentProfilesController < Teachers::BaseController
   def show
     @student = Student.find(params[:id])
+    @number = params[:number].nil? ? 3 : params[:number].to_i
+    @student_actions = @student.student_actions.where('date >= ?', Date.today - @number)
   end
 
   def edit

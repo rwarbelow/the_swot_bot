@@ -20,6 +20,7 @@ SwotBot::Application.routes.draw do
     get 'profile',      to: 'profiles#show',   :as => :profile
     get 'profile/edit', to: 'profiles#edit',   :as => :edit_profile
     put 'profile',      to: 'profiles#update', :as => :update_profile
+    get 'bank_account', to: 'dashboard#bank_account', :as => :bank_account
     root :to => "dashboard#index"
   end
 
