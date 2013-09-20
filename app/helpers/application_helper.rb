@@ -50,4 +50,11 @@ module ApplicationHelper
       Date.commercial(Date.today.year, Date.today.cweek, 5)
     end
   end
+
+  def sortable(column, title = nil)
+    title ||= column.titleize
+    css_class = column == sort_column ? "current desc" : nil
+    direction = "desc"
+    link_to title, {:sort => column, :direction => direction}, {:class => css_class}
+  end
 end
