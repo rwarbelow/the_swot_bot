@@ -24,7 +24,22 @@
 	color: white;
 	text-align: center;
 	left:3px;
-	position-top:-90px;
+	margin-bottom: 30px;
+	margin-right: 5px;
+}
+
+.bank-balance-teacher-view {
+	border-radius: 5px;
+	font-size: 56px;
+	width: 170px;
+	padding: 10px;
+	font-weight: bold;
+	height: 90px;
+	background-color: #4599FF;
+	color: white;
+	text-align: center;
 	margin-bottom: 10px;
 	margin-right: 5px;
+	float: right;
+	margin-right: 5%;
 }
