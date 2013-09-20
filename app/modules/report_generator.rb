@@ -34,10 +34,10 @@ module ReportGenerator
             unless action_name == "missing-assignment"
               report.list("course#{index}").add_row do |row|
                 if BAD_ACTIONS.include?(action_name)
-                  row.item(:key).value("#{action_name}(negative)")
+                  row.item(:key).value("- #{action_name}")
                   row.item(:val).value(actions.count)
                 else
-                  row.item(:key).value(action_name)
+                  row.item(:key).value("+ #{action_name}")
                   row.item(:val).value(actions.count)
                 end
                 row.item(:key).style(:color, 'red') if BAD_ACTIONS.include?(action_name)
