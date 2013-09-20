@@ -3,7 +3,7 @@ class Student < ActiveRecord::Base
 
 	before_create :generate_registration_code
 
-	attr_accessible :gender, :birthday, :address, :ccsd_id, :grade_level, :email, :address_line_1, :address_line_2, :address_city, :address_state, :address_zip_code
+	attr_accessible :gender, :birthday, :address, :ccsd_id, :grade_level, :email, :address_line_1, :address_line_2, :address_city, :address_state, :address_zip_code, :bank_balance
   attr_accessor :address_line_1, :address_line_2, :address_city, :address_state, :address_zip_code
 
 	validates :gender, :presence => true

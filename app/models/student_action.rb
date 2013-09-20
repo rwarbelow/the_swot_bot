@@ -8,6 +8,7 @@ class StudentAction < ActiveRecord::Base
 	belongs_to :student_action_type
 
   before_save :set_default_date
+  after_create :update_bank_balance
 
   # e.g.
   #  from = Date.parse '2013-01-01'
@@ -21,6 +22,12 @@ class StudentAction < ActiveRecord::Base
     else
     	last_week_report()
     end
+  end
+
+  def update_bank_balance
+    student = self.enrollment.student
+    student.bank_balance += self.student_action_type.value.to_i
+    student.save
   end
 
   # maybe something like this:
