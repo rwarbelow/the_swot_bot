@@ -56,9 +56,9 @@ ActiveRecord::Schema.define(:version => 20130920040009) do
   create_table "deposits", :force => true do |t|
     t.integer  "student_id"
     t.integer  "amount"
+    t.text     "comments"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.text     "comments"
     t.integer  "student_balance"
   end
 
@@ -128,7 +128,6 @@ ActiveRecord::Schema.define(:version => 20130920040009) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "subject"
-    t.integer  "thread_id"
   end
 
   create_table "phone_numbers", :force => true do |t|
