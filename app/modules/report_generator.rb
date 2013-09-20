@@ -22,9 +22,9 @@ module ReportGenerator
       course_actions = generate_course_data(student)
       report.start_new_page do |page|
         page.item(:student_name).value(student.full_name)
-        page.item(:ccsd_id).value(student.ccsd_id)
-        page.item(:start_date).value(start_date.strftime("%b %e, %Y"))
-        page.item(:end_date).value(end_date.strftime("%b %e, %Y"))
+        page.item(:ccsd_id).value("CCSD_ID: #{student.ccsd_id}")
+        page.item(:date).value("#{start_date.strftime("%b. %e, %Y")} - #{end_date.strftime("%b. %e, %Y")}")
+        page.item(:bank_balance).value("Bank Balance: $#{student.bank_balance}")
 
         course_actions.each_with_index do |course_data, index|
           page.item("grade#{index}").value(course_data[:grade])
@@ -33,8 +33,13 @@ module ReportGenerator
           course_data[:actions].each do |action_name, actions|
             unless action_name == "missing-assignment"
               report.list("course#{index}").add_row do |row|
-                row.item(:key).value(action_name)
-                row.item(:val).value(actions.count)
+                if BAD_ACTIONS.include?(action_name)
+                  row.item(:key).value("#{action_name}(negative)")
+                  row.item(:val).value(actions.count)
+                else
+                  row.item(:key).value(action_name)
+                  row.item(:val).value(actions.count)
+                end
                 row.item(:key).style(:color, 'red') if BAD_ACTIONS.include?(action_name)
               end
             end
@@ -58,8 +63,8 @@ module ReportGenerator
   def generate_course_data(student)
     courses = student.courses
     course_actions = []
-    missing_work_array = []
     courses.each do |course|
+    missing_work_array = []
       grade = ((student.calculate_percent(course)) * 100).round(1)
       actions = course.enrollments.where(student_id:student.id).first.student_actions.week_report.group_by {|action| action.student_action_type.name}
       course.enrollments.where(student_id:student.id).first.student_actions.week_report.each do |action|
