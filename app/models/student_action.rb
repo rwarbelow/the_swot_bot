@@ -47,13 +47,13 @@ class StudentAction < ActiveRecord::Base
   # insetad of           StudentAction.previous_week.report
 
   # rename -> current_week
-	def self.current_week_report(start_date = Date.commercial(Date.today.year, Date.today.cweek, 1), end_date = Date.commercial(Date.today.year, Date.today.cweek, 5))
-		where("student_actions.created_at between ? and ?", start_date, end_date)
+	def self.current_week_report(start_week = Date.commercial(Date.today.year, Date.today.cweek, 1), end_week = Date.commercial(Date.today.year, Date.today.cweek, 5))
+		where("student_actions.created_at between ? and ?", start_week, end_week)
 	end
 
   # rename -> previous_week
-  def self.last_week_report(start_date = Date.commercial(Date.today.year, Date.today.cweek-1, 1), end_date = Date.commercial(Date.today.year, Date.today.cweek-1, 5))
-  	where("student_actions.created_at between ? and ?", start_date, end_date)
+  def self.last_week_report(start_week = Date.commercial(Date.today.year, Date.today.cweek-1, 1), end_week = Date.commercial(Date.today.year, Date.today.cweek-1, 5))
+  	where("student_actions.created_at between ? and ?", start_week, end_week)
   end
 
   def self.todays_actions
