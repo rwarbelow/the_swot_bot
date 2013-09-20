@@ -3,14 +3,15 @@
 <table>
 	<thead>
 		<th>Student ID</th>
-		<th>Student Name</th>
+		<th><%= sortable "Name" %></th>
 		<th>Positive</th>
 		<th>Negative</th>
 		<th>Missing Work</th>
 		<th>Tardy</th>
 		<th>Absent</th>
+		<th><%= sortable "bank_balance" %></th>
 	</thead>
-	<% @students.each do |student| %>
+	<% for student in @students  %>
 	<tr>
 		<td><%= student.ccsd_id %></td>
 		<td><%= link_to "#{student.first_name} #{student.last_name}", teachers_student_profile_path(student) %></td>
@@ -30,7 +31,9 @@
 
 		<% @absent = @student_actions_hash[3] %>
 		<td class=<%="#{'negative' if @absent >= 1 }" %>><%= @absent %>  </td>
+		<td><%= student.bank_balance %></td>
 
 	</tr>
 	<% end %>
 </table>
+
