@@ -18,3 +18,5 @@
 .DS_Store
 /certs
 
+config/initializers/twilio.rb
+config/twilio.yml
