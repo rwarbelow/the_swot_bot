@@ -1,11 +1,7 @@
 class Students::ReportsController < Students::BaseController
-  def student_report
-  	 @student = Student.first
-     @courses = @student.courses
-     @student_actions_array = []
-     @courses.each do |course|
-       @student_actions_array << course.enrollments.where(student_id:@student.id).first.student_actions.group_by {|action| action.student_action_type.name}
-  	 end
-    render :layout => false
-  end
+  def swot_report
+	 students = Student.where(:ccsd_id => params[:ccsd_id])
+
+		new_report(students)
+	end
 end
