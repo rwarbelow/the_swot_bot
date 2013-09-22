@@ -6,18 +6,22 @@
 <table>
 	<thead>
 		<th>Date</th>
+		<th>$ Amount</th>
 		<th>Action</th>
 		<th>Class</th>
-		<th>$ Amount</th>
+		<th>Comment</th>
 	</thead>
 	<tbody>
 		<% @student_actions.sort! { |a, b| b.date <=> a.date }.each do |action| %>
 		<tr>
-			<td><%= action.date.strftime("%a, %m/%d") %></td>
-			<td><%= action.student_action_type.name %></td>
-			<td><%= action.enrollment.course.subject.name %></td>
-			<td><%= number_to_currency(action.student_action_type.value, strip_insignificant_zeros: true) %></td>
+			<% @value = action.student_action_type.value.to_i  %>
+			<%= content_tag(:td, action.date.strftime("%a, %m/%d"), :class => (@value > 0 ? 'positive' : 'negative')) %>
+			<%= content_tag(:td, number_to_currency(@value, strip_insignificant_zeros: true), :class => (@value > 0 ? 'positive' : 'negative')) %>
+			<%= content_tag(:td, action.student_action_type.name, :class => (@value > 0 ? 'positive' : 'negative')) %>
+			<%= content_tag(:td, action.enrollment.course.subject.name, :class => (@value > 0 ? 'positive' : 'negative')) %>
+			<%= content_tag(:td, action.comment, :class => (@value > 0 ? 'positive' : 'negative')) %>
 		</tr>
+
 		<% end %>
 	</tbody>
 </table>
