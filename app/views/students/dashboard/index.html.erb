@@ -4,6 +4,7 @@
 </div>
 <br>
 <h1>Welcome, <%= current_user.first_name %>!</h1>
+<%= link_to "View your SWOT Report (use your CCSD ID for password)", students_swot_report_path(:ccsd_id => @student.ccsd_id) %>
 <div>
 	<h3>Goals</h3>
 	  <% if flash[:goal_completed] %>
