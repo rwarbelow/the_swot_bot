@@ -1,16 +1,13 @@
 <h1>All Students</h1>
 
-<p>Click on table headers to sort</p>
-
 <table>
   <thead>
-    <th>See Student Info</th>
-    <th><%= link_to "CCSD ID", :sort => "ccsd_id" %></th>
-    <th>First Name</th>
-    <th><%= link_to "Last Name", teachers_student_profiles_path %></th>
+    <th>Edit</th>
+    <th>CCSD ID</th>
+    <th>Name</th>
     <th>Username</th>
-    <th><%= link_to "Birthday", :sort => "birthday" %></th>
-    <th><%= link_to "Grade", :sort => "grade_level" %></th>
+    <th>Birthday</th>
+    <th>Grade</th>
     <th>Registration Code</th>
     <th>Guardian 1</th>
     <th>Guardian 2</th>
@@ -20,10 +17,9 @@
   </thead>
   <% @students.each do |student| %>
   <tr>
-    <td><%= link_to "More", teachers_student_profile_path(student) %></td>
+    <td><%= link_to "Edit", edit_admin_student_profile_path(student.id) %></td>
     <td><%= student.ccsd_id %></td>
-    <td><%= student.first_name %></td>
-    <td><%= student.last_name %></td>
+    <td><%= link_to "#{student.first_name} #{student.last_name}", teachers_student_profile_path(student.id)%> </td>
     <td><%= student.username %></td>
     <td><%= student.birthday %></td>
     <td><%= student.grade_level %></td>

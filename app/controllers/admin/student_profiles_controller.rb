@@ -5,21 +5,28 @@ class Admin::StudentProfilesController < Admin::BaseController
 
   def edit
     @student = Student.find(params[:id])
-    @user = @student.identity
-    if @student && @student.id == current_user.student.id
-      render 'students/students/edit'
-    else
-      redirect_to error_url
-    end
+    @identity = @student.identity
+    render 'admin/student_profiles/edit'
   end
 
   def update
     @student = Student.find(params[:id])
-    if @student.update_attributes(params[:student])
+    @identity = @student.identity
+    @identity.update_attributes(:first_name => params[:identity][:first_name], 
+                                  :last_name => params[:identity][:last_name],
+                                  :username => params[:identity][:username],
+                                  :password => params[:identity][:password],
+                                  :password_confirmation => params[:identity][:password_confirmation])
+    @student.update_attributes(:birthday => params[:student][:birthday], 
+                                  :gender => params[:student][:gender],
+                                  :grade_level => params[:student][:grade_level],
+                                  :ccsd_id => params[:student][:ccsd_id],
+                                  :email => params[:student][:email])
+    if @identity.save && @student.save
       flash[:success] = "Profile updated"
-      redirect_to student_path
+      redirect_to admin_student_profiles_path
     else
-      @errors = @student.errors.full_messages
+      @errors = @identity.errors.full_messages
       render 'edit'
     end
   end
@@ -29,20 +36,22 @@ class Admin::StudentProfilesController < Admin::BaseController
   end
 
   def create
-    birthday = "#{params[:student]['birthday(1i)']}-#{params[:student]['birthday(2i)']}-#{params[:student]['birthday(3i)']}"
     address = "#{params[:student][:address_line_1]} #{params[:student][:address_line_2]} #{params[:student][:address_city]} #{params[:student][:address_state]} #{params[:student][:address_zip_code]}"
-    @student = Student.new(:gender => params[:student][:gender],
-                           :birthday => birthday,
-                           :address => address,
-                           :ccsd_id => params[:student][:ccsd_id],
-                           :grade_level => params[:student][:grade_level])
-    if @student.save!
-      session[:new_student_id] = @student.id
-      redirect_to new_identity_path
-    else
-      @errors = @student.errors.full_messages
-      flash[:errors] = @errors
-      render 'new'
+    @student = Student.new(params[:student])
+    @student.address = address
+    @identity = @student.build_identity(params[:identity])
+    begin
+      Student.transaction do
+        @student.save!
+        @identity.student_id = @student.id
+        @identity.save!
+        @student.reload
+        @identity.reload
+      end
+      redirect_to admin_student_profiles_path
+      rescue ActiveRecord::RecordInvalid => invalid
+        flash[:errors] = @student.errors.full_messages + @identity.errors.full_messages
+        render 'new'
     end
   end
 
