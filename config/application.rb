@@ -72,5 +72,8 @@ module SwotBot
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    #add gradebook.css to precompile list to work in production
+    config.assets.precompile += ['gradebook.css']
   end
 end
