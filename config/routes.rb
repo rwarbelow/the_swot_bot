@@ -50,6 +50,7 @@ SwotBot::Application.routes.draw do
       get '/course_history/:id', :to => 'student_actions#course_history', as: :course_history_actions
     end
     resources :courses do
+      get 'print_gradebook', :to => 'courses#print_gradebook', as: :print_gradebook
       get '/student_record/:student_id', :to => 'courses#student_record', as: :student_record
       get '/liveclass', :to => 'live#classroom'
       get '/roster', :to => 'courses#roster'

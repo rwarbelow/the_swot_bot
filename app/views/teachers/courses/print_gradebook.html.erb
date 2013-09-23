@@ -1,0 +1,34 @@
+<head>
+	<%= stylesheet_link_tag "gradebook", :media => "all" %>
+</head>
+
+<h1>Period <%= @course.period %> <%= @course.subject.name %> (<%= @course.teacher.last_name %>)</h1>
+
+<% if @course.assignments.length > 0 and @course.students.length > 0 %>
+	<table class="gradebook">
+		<thead>
+			<tr>
+				<th></th>
+				<% @course.assignments.each do |assignment| %>
+					<th class='rotated_cell'>
+	        	<div class='rotate_text'><%= assignment.title[0..17] %> <%= assignment.due_date.strftime("%m/%e") %> (Max: <%= assignment.maximum_points %>) </div>
+	        </th>
+	      <% end %>
+			</tr>
+
+		</thead>
+		<% for student in @course.students.sort! { |a, b| a.last_name <=> b.last_name} %>
+		  <tr>
+		    <th><%= student.first_name %> <%= student.last_name %></th>
+		    <% for assignment in @course.assignments %>
+		      <% @submission = Submission.find_by_student_id_and_assignment_id(student.id, assignment.id) %>
+		      <td class="cell"><%= @submission.nil? ? "N/A" : "#{@submission.points_earned} (#{(@submission.points_earned / assignment.maximum_points * 100).round(0)}%)" %></td>
+		    <% end %>
+		  </tr>
+		<% end %>
+	</table>
+<% else %>
+	<p>Course is missing students and/or assignments.</p>
+<% end %>
+
+
