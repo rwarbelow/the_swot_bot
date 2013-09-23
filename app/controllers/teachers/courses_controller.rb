@@ -64,4 +64,10 @@
     @student = Student.find(params[:student_id])
     @course = Course.find(params[:course_id])
   end
+
+  def print_gradebook
+    @course = Course.find(params[:course_id])
+    render :layout => false
+  end
+
 end
