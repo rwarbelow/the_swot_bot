@@ -1,0 +1,34 @@
+<h1>All Students</h1>
+
+<table>
+  <thead>
+    <th>Edit</th>
+    <th>CCSD ID</th>
+    <th>Name</th>
+    <th>Username</th>
+    <th>Birthday</th>
+    <th>Grade</th>
+    <th>Registration Code</th>
+    <th>Guardian 1</th>
+    <th>Guardian 2</th>
+    <th>Guardian 3</th>
+    <th>Guardian 4</th>
+    <th></th>
+  </thead>
+  <% @students.each do |student| %>
+  <tr>
+    <td><%= link_to "Edit", edit_admin_student_profile_path(student.id) %></td>
+    <td><%= student.ccsd_id %></td>
+    <td><%= link_to "#{student.first_name} #{student.last_name}", teachers_student_profile_path(student.id)%> </td>
+    <td><%= student.username %></td>
+    <td><%= student.birthday %></td>
+    <td><%= student.grade_level %></td>
+    <td><%= student.registration_code %></td>
+    <% student.guardians.each do |guardian| %>
+    <td><%= guardian.first_name%> <%= guardian.last_name %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+

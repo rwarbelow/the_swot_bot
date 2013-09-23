@@ -3,7 +3,11 @@
 
 <%= button_to "Generate Scholar Hours", teachers_scholar_hour_enrollment_path, method: "get", :class => "button button-flat" %>
 
-<%= link_to "Create Class", new_teachers_course_path, :class => "button button-flat" %> <br> <br>
+<%= link_to "Create New Course", new_teachers_course_path, :class => "button button-flat" %> <br> <br>
+
+<%= link_to "Create New Student", new_admin_student_profile_path, :class => "button button-flat" %> <br> <br>
+
+<%= link_to "All Students Enrolled", admin_student_profiles_path, :class => "button button-flat" %> <br> <br>
 
 <%= button_to "Send Weekly Email", teachers_weekly_email_path, :method => "post", :class => "button button-flat" %>
 

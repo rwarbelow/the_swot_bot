@@ -1,0 +1,79 @@
+<h1>Create New Student Account</h1>
+  <br>
+      <div class="error">
+      <% if flash[:errors] %>
+        <% flash[:errors].each do |error| %>
+          <%= error %>
+        <% end %>
+      <% end %>
+      </div>
+      <%= form_tag :action => 'create', :url => admin_student_profiles_path, :method => 'POST' %>
+      <table>
+        <tr>
+          <td><%= label :first_name, "First Name" %></td>
+          <td><%= text_field :identity, :first_name, placeholder: "firstname" %></td>
+        </tr>
+        <tr>
+          <td><%= label :last_name, "Last Name" %></td>
+          <td><%= text_field :identity, :last_name, placeholder: "lastname" %></td>
+        </tr>
+        <tr>
+          <td><%= label :birthday, "Birthday" %></td>
+          <td><%= text_field :student, :birthday, placeholder: "YYYY-MM-DD" %></td>
+        </tr>
+        <tr>
+          <td><%= label :gender, "Gender" %></td>
+          <td><%= select :student, :gender, [ ['Male','male'],
+                            ['Female', 'female']]%></td>
+        </tr>
+        <tr>
+          <td><%= label :grade_level, "Grade Level" %></td>
+          <td><%= select :student, :grade_level, [[7,7],
+                                [8,8]]%></td>
+        </tr>
+        <tr>
+          <td><%= label :username, "Username" %></td>
+          <td><%= text_field :identity, :username, placeholder: "username" %></td>
+        </tr>
+        <tr>
+          <td><%= label :password, "Password" %></td>
+          <td><%= password_field :identity, :password, placeholder: "********" %></td>
+        </tr>
+        <tr>
+          <td><%= label :password_confirmation, "Confirm Password" %></td>
+          <td><%= password_field :identity, :password_confirmation, placeholder: "********" %></td>
+        </tr>
+        <tr>
+          <td><%= label :ccsd_id, "Student CCSD ID" %></td>
+          <td><%= text_field :student, :ccsd_id, placeholder: "1234567" %></td>
+        </tr>
+        <tr>
+          <td><%= label :address_line_1, "Street Address" %></td>
+          <td><%= text_field :student, :address_line_1, placeholder: "1139 North Linn Lane" %></td>
+        </tr>
+        <tr>
+          <td><%= label :address_line_2, "Apartment Number (optional)" %></td>
+          <td><%= text_field :student, :address_line_2  %></td>
+        </tr>
+        <tr>
+          <td><%= label :address_city, "City" %></td>
+          <td><%= text_field :student, :address_city, value: "Las Vegas" %></td>
+        </tr>
+        <tr>
+          <td><%= label :address_state, "State" %></td>
+          <td><%= text_field :student, :address_state, value: "Nevada" %></td>
+        </tr>
+        <tr>
+          <td><%= label :address_zip_code, "Zip Code" %></td>
+          <td><%= text_field :student, :address_zip_code, placeholder: "99999" %></td>
+        </tr>
+        <tr>
+          <td><%= label :email, "Email Address" %></td>
+          <td><%= text_field :student, :email, placeholder: "example@email.com" %></td>
+        </tr>
+
+      </table>
+
+      <div class="next-button">
+        <%= submit_tag value="Create", :class => "pure-button" %>
+      </div>
