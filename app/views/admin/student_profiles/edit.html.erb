@@ -1,0 +1,57 @@
+<h1>Edit Student Account</h1>
+  <br>
+      <div class="error">
+      <% if flash[:errors] %>
+        <% flash[:errors].each do |error| %>
+          <%= error %>
+        <% end %>
+      <% end %>
+      </div>
+      <%= form_tag(admin_student_profile_path(@student), method: "put") %>
+      <table>
+        <tr>
+          <td><%= label :first_name, "First Name" %></td>
+          <td><%= text_field :identity, :first_name, value: @identity.first_name %></td>
+        </tr>
+        <tr>
+          <td><%= label :last_name, "Birthday" %></td>
+          <td><%= text_field :identity, :last_name, value: @identity.last_name %></td>
+        </tr>
+        <tr>
+          <td><%= label :birthday, "Birthday" %></td>
+          <td><%= text_field :student, :birthday, value: @student.birthday %></td>
+        </tr>
+        <tr>
+          <td><%= label :gender, "Gender" %></td>
+          <td><%= select :student, :gender, [ ['Male','male'],
+                            ['Female', 'female']], value: @student.gender%></td>
+        </tr>
+        <tr>
+          <td><%= label :grade_level, "Grade Level" %></td>
+          <td><%= select :student, :grade_level, [[7,7],
+                                [8,8]], value: @student.grade_level %></td>
+        </tr>
+        <tr>
+          <td><%= label :username, "Username" %></td>
+          <td><%= text_field :identity, :username, value: @identity.username %></td>
+        </tr>
+        <tr>
+          <td><%= label :password, "Password" %></td>
+          <td><%= password_field :identity, :password, placeholder: "********" %></td>
+        </tr>
+        <tr>
+          <td><%= label :password_confirmation, "Confirm Password" %></td>
+          <td><%= password_field :identity, :password_confirmation, placeholder: "********" %></td>
+        </tr>
+        <tr>
+          <td><%= label :ccsd_id, "Student CCSD ID" %></td>
+          <td><%= text_field :student, :ccsd_id, value: @student.ccsd_id %></td>
+        </tr>
+        <tr>
+          <td><%= label :email, "Email Address" %></td>
+          <td><%= text_field :student, :email, value: @student.email %></td>
+        </tr>
+
+      </table>
+
+        <%= submit_tag value="Update" %>
