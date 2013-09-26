@@ -39,9 +39,9 @@
         <th>Action</th>
         <th>Comments</th>
       </thead>
-    <% @actions.each do |action| %>
+    <% @actions[0..40].each do |action| %>
       <tr>
-        <td><%= action.date %></td> 
+        <td><%= action.date.strftime("%a, %m/%d") %></td> 
         <td><%= action.student_action_type.name %></td>
         <td><% if action.comment %> 
           <%= action.student_action_type.name %>
