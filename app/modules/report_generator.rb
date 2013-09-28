@@ -71,7 +71,7 @@ module ReportGenerator
       course.enrollments.where(student_id:student.id).first.student_actions.week_report.each do |action|
         missing_work_array << action if action.student_action_type.name == "missing-assignment"
       end
-      course_actions << {course: course, actions: actions, grade: (grade * 100).round(1), missing_work: missing_work_array.length, letter_grade: letter_grade}
+      course_actions << {course: course, actions: actions, grade: grade, missing_work: missing_work_array.length, letter_grade: letter_grade}
     end
     course_actions
   end
