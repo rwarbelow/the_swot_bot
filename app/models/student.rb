@@ -94,7 +94,8 @@ class Student < ActiveRecord::Base
   def calculate_percent(course)
   	course_category_submissions = self.find_submissions(course)
   	categories_hash = AssignmentCategory.calculate_category_points(course_category_submissions)
-  	Course.calculate_student_percent(categories_hash)
+  	percent = Course.calculate_student_percent(categories_hash)
+  	(percent * 100).round(1)
   end
 
   def find_submissions(course)
