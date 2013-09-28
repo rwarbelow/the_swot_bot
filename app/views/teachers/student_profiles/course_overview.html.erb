@@ -3,7 +3,7 @@
 <h1><%= @student.first_name %> <%= @student.last_name %>: <%=@course.subject.name%></h1>
 
 <% if @student.calculate_percent(@course) >= 0 %>
-  <h2>Current Overall Grade: <%= ((@percent = @student.calculate_percent(@course)) * 100).round(1) %>% (<%= Course.letter_grade(@percent) %>)</h2>
+  <h2>Current Overall Grade: <%= (@percent = @student.calculate_percent(@course)) %>% (<%= Course.letter_grade(@percent) %>)</h2>
 <% end %>
 
 <h3>Assignments</h3>

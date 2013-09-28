@@ -1,6 +1,6 @@
 <%= link_to "Back", :back %>
 <div class="guardian-student-action-container">
-  <h1><%= @course.subject.name %>, Period <%= @course.period %> (<%= ((@percent = ((@student.calculate_percent(@course)))) * 100).round(1)%>% <%= (Course.letter_grade(@percent)) %>)</h1>
+  <h1><%= @course.subject.name %>, Period <%= @course.period %> <%= @percent = @student.calculate_percent(@course)%>% <%= Course.letter_grade(@percent) %></h1>
   <h3>Teacher: <%= @course.teacher.last_name %></h3>
 <div class="assignments">
   <h3>Assignments</h3>

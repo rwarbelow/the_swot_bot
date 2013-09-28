@@ -34,15 +34,15 @@ class Course < ActiveRecord::Base
 
   def self.letter_grade(percent)
     case percent
-    when 0.90...Float::INFINITY
+    when 90...Float::INFINITY
       return "A"
-    when 0.80...0.90
+    when 80...90
       return "B"
-    when 0.70...0.80
+    when 70...80
       return "C"
-    when 0.60...0.70
+    when 60...70
       return "D"
-    when 0...0.60
+    when 0...60
       return "F"
     else
       return ""
