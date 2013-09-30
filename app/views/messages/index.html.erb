@@ -9,6 +9,7 @@
         <li><a href="#tabs-1">Received Messages</a></li>
         <li><a href="#tabs-2">Sent Messages</a></li>
         <li><a href="#tabs-3">New Message</a></li>
+        <li><a href="#tabs-4">SMS Message</a></li>
       </ul>
     </div>
     <div id="tabs-1">
@@ -86,5 +87,11 @@
   <% end %>
 
     </div>
+    <% if current_teacher? %>
+      <div id="tabs-4">
+        <h3>SMS</h3>
+        <%= render partial: 'sms_form' %>
+      </div>
+    <% end %>
   </div>
 </div> 

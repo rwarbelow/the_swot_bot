@@ -117,6 +117,14 @@ class Student < ActiveRecord::Base
   	@course_category_submissions
   end
 
+  def full_name
+  	"#{last_name}, #{first_name}"
+  end
+
+  def textable_guardians?
+  	guardians.map {|g| g.textable_numbers.count }.reduce(:+) > 0
+  end
+
   protected
 
   def generate_registration_code
