@@ -5,6 +5,8 @@ class PhoneNumber < ActiveRecord::Base
 
 	before_save :strip_number
 
+  scope :textable, -> { where(kind: 'cell') }
+
 	def strip_number
 		self.number.gsub!(/[^\d]/, '')
 	end
