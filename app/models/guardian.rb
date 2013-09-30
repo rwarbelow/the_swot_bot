@@ -18,4 +18,8 @@ class Guardian < ActiveRecord::Base
       false
     end
   end
+
+  def textable_numbers
+    phone_numbers.textable
+  end
 end
