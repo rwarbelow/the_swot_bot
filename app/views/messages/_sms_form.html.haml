@@ -1,0 +1,13 @@
+= form_for :sms, url: broadcast_sms_path do |f|
+	= f.text_area 'body', rows: 4,  placeholder: "Please limit texts to 160 characters. Also, please use ASCII characters only. Thank you."
+
+	- current_teacher.courses.each do |course|
+
+		%h4= course.subject_name
+		%ul
+			- course.students.each do |student|
+				- if student.textable_guardians?
+					%li
+						= check_box_tag "sms[student_ids][#{student.id}]"
+						= student.full_name
+	= f.submit 'Send SMS Text', class: 'btn btn-primary'

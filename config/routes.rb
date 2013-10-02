@@ -105,6 +105,11 @@ get '/received_message/:id', :to => 'messages#show_received', :as => 'show_recei
 get '/sent_message/:id', :to => 'messages#show_sent', :as => 'show_sent'
 
 post "/callbacks/cloud_elements", to: "callbacks#cloud_elements"
+
+resources :sms, as: :sms, only: [] do
+  post "broadcast", on: :collection
+end
+
 get '/live_class', to: 'live#classroom'
 post '/live_class', to: 'teachers/live#create_action'
 get '/error', to: 'home#909error', as: :error

@@ -15,6 +15,8 @@ class Course < ActiveRecord::Base
 	belongs_to :subject
   after_create :build_assignment_categories
 
+  delegate :name, to: :subject, prefix: true, allow_nil: true
+
   def self.calculate_student_percent(categories_points_hash)
     @total_weight = 0
     @total_earned = 0
