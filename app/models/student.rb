@@ -122,7 +122,7 @@ class Student < ActiveRecord::Base
   end
 
   def textable_guardians?
-  	guardians.map {|g| g.textable_numbers.count }.reduce(:+) > 0
+  	guardians.map {|g| g.textable_numbers.count }.reduce(0,:+) > 0
   end
 
   protected
