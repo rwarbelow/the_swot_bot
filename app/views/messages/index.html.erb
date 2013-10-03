@@ -9,7 +9,9 @@
         <li><a href="#tabs-1">Received Messages</a></li>
         <li><a href="#tabs-2">Sent Messages</a></li>
         <li><a href="#tabs-3">New Message</a></li>
-        <li><a href="#tabs-4">SMS Message</a></li>
+	<% if current_teacher? %>
+          <li><a href="#tabs-4">SMS Message</a></li>
+	<% end %>
       </ul>
     </div>
     <div id="tabs-1">
