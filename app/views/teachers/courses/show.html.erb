@@ -68,7 +68,7 @@
       <tr>
         <td><%= student.ccsd_id %></td>
         <td><%= link_to "#{student.first_name} #{student.last_name}", teachers_course_student_record_path(@course, student) %></td>
-        <td><%= @percent = student.calculate_percent(@course)%>%</td>
+        <td><%= @percent = student.grade_in(@course).round(1) %>%</td>
         <td><%= (Course.letter_grade(@percent)) %></td>
       </tr>
       <% end %>
