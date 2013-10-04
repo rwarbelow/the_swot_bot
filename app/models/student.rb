@@ -91,30 +91,8 @@ class Student < ActiveRecord::Base
     end
   end
 
-  def calculate_percent(course)
-  	course_category_submissions = self.find_submissions(course)
-  	categories_hash = AssignmentCategory.calculate_category_points(course_category_submissions)
-  	percent = Course.calculate_student_percent(categories_hash)
-  	(percent * 100).round(1)
-  end
-
-  def find_submissions(course)
-  	@course_category_submissions = Hash.new([])
-  	@course_submissions = []
-  	self.submissions.each do |submission|
-  		@course_submissions << submission if submission.assignment.course_id == course.id
-  	end
-  	@course_submissions.each do |submission|
-  		cat = "#{submission.assignment.assignment_category.name}"
-  		weight = submission.assignment.assignment_category.weight
-  		@course_category_submissions[[cat, weight]] = []
-  	end
-  	self.submissions.each do |submission|
-  		cat = "#{submission.assignment.assignment_category.name}"
-  		weight = submission.assignment.assignment_category.weight
-  	  @course_category_submissions[[cat, weight]] << [submission.points_earned, submission.assignment.maximum_points] if submission.assignment.course_id == course.id
-  	end
-  	@course_category_submissions
+  def grade_in(course)
+    GradeCalculator.new(student: self, course: course).grade
   end
 
   def full_name
