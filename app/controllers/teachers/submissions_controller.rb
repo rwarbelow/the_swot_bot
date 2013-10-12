@@ -16,7 +16,7 @@ class Teachers::SubmissionsController < Teachers::BaseController
         submission.points_earned = points
         submission.save
         enrollment = Enrollment.find_by_course_id_and_student_id(@assignment.course_id, student.id)
-        enrollment.current_grade = student.calculate_percent(course)
+        enrollment.current_grade = student.grade_in(course)
         enrollment.save
         errors << "#{Student.find(score[0]).first_name} #{Student.find(score[0]).last_name} : #{submission.errors.full_messages.first}" unless submission.save
       end

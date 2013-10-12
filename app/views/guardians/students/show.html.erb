@@ -18,7 +18,7 @@
     <tr>
       <td><%= course.period %></td>
       <td><%= link_to course.subject.name, guardians_student_course_path(@student, course)%></td>
-      <td><%= @percent = @student.calculate_percent(course)%>%</td>
+      <td><%= @percent = @student.grade_in(course)%>%</td>
       <td><%= Course.letter_grade(@percent) %></td>
       <td><%= course.teacher.first_name %> <%= course.teacher.last_name %></td>
       <td><%= mail_to "#{course.teacher.email}" do %>
