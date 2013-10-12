@@ -17,23 +17,6 @@ class Course < ActiveRecord::Base
 
   delegate :name, to: :subject, prefix: true, allow_nil: true
 
-  def self.calculate_student_percent(categories_points_hash)
-    @total_weight = 0
-    @total_earned = 0
-    categories_points_hash.each do |cat_points|
-      @total_weight += cat_points[0][1]
-      if cat_points[1][1] != 0
-        category_percent = ((cat_points[1][0].to_f / cat_points[1][1].to_f) * cat_points[0][1])
-        @total_earned += category_percent
-      end
-    end
-    if @total_weight != 0
-      (@total_earned / @total_weight)
-    else
-      1
-    end
-  end
-
   def self.letter_grade(percent)
     case percent
     when 90...Float::INFINITY
