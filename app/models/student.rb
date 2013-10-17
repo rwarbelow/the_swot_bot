@@ -92,7 +92,8 @@ class Student < ActiveRecord::Base
   end
 
   def grade_in(course)
-    GradeCalculator.new(student: self, course: course).grade
+    grade = GradeCalculator.new(student: self, course: course).grade
+    (0...100).include?(grade) ? grade.round(1) : grade
   end
 
   def full_name
