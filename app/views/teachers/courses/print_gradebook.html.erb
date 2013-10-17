@@ -22,7 +22,7 @@
 		    <th><%= student.first_name %> <%= student.last_name %></th>
 		    <% for assignment in @course.assignments %>
 		      <% @submission = Submission.find_by_student_id_and_assignment_id(student.id, assignment.id) %>
-		      <td class="cell"><%= @submission.nil? ? "N/A" : "#{@submission.points_earned} (#{(@submission.points_earned / assignment.maximum_points * 100).round(0)}%)" %></td>
+		      <td class="cell"><%= @submission.nil? ? "N/A" : "#{@submission.points_earned} (#{(@submission.points_earned / assignment.maximum_points * 100).round(1)}%)" %></td>
 		    <% end %>
 		  </tr>
 		<% end %>
