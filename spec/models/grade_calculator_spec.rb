@@ -30,12 +30,16 @@ describe GradeCalculator do
 
   it "can retrieve all cumulative scores for a student in a course" do
     gc = GradeCalculator.new(student: @student, course: @course)
-    # gc.cumulative_scores_by_category.size.should eq(@course.assignment_categories.count)
     gc.cumulative_scores_by_category.each do |cumulative_score|
       cumulative_score.should respond_to :category
       cumulative_score.should respond_to :weight
       cumulative_score.should respond_to :max_points
       cumulative_score.should respond_to :earned_points
     end
+  end
+
+  it "gives the student a 100% if there are no assignments" do
+    gc = GradeCalculator.new(student: @student, course: FactoryGirl.create(:course))
+    gc.grade.should eq(100)
   end
 end

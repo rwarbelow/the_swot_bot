@@ -2,7 +2,7 @@
 
 <h1><%=@course.subject.name%></h1>
 
-<% if current_student.calculate_percent(@course) >= 0 %>
+<% if current_student.grade_in(@course) >= 0 %>
   <h1>Current Overall Grade: <%= @percent = current_student.grade_in(@course)%>% <%= Course.letter_grade(@percent) %></h1>
 <% end %>
 
@@ -25,7 +25,7 @@
           <td><%= assignment.due_date.strftime("%D") %></td>
           <% if assignment.submissions.where('student_id = ?', current_student.id).length > 0 %>
             <td><%= assignment.submissions.where('student_id = ?', current_student.id).first.points_earned %> / <%= assignment.maximum_points %></td>
-            <td><%= (assignment.calculate_percent(assignment.submissions.where('student_id = ?', current_student.id).first.points_earned)*100).round(2)%>%</td>
+            <td><%= (assignment.calculate_percent(assignment.submissions.where('student_id = ?', current_student.id).first.points_earned)*100).round(1)%>%</td>
             <td><%= assignment.calculate_grade(assignment.submissions.where('student_id = ?', current_student.id).first.points_earned) %></td>
           <% end %>
         </tr>

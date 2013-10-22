@@ -8,16 +8,18 @@ class GradeCalculator
 
   def grade
     (total_points / total_weight) * 100
+  rescue ZeroDivisionError
+    100
   end
 
   def total_points
     cumulative_scores_by_category.map do |categorized_grade|
       (categorized_grade.earned_points.to_f / categorized_grade.max_points.to_f) * categorized_grade.weight.to_f
-    end.reduce(:+)
+    end.reduce(0, :+)
   end
 
   def total_weight
-    cumulative_scores_by_category.map {|categorized_grade| categorized_grade.weight.to_f }.reduce(:+)
+    cumulative_scores_by_category.map {|categorized_grade| categorized_grade.weight.to_f }.reduce(0, :+)
   end
 
   def cumulative_scores_by_category

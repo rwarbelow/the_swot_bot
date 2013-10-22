@@ -19,7 +19,7 @@
         <td><%= assignment.due_date %></td>
     <% if assignment.submissions.where('student_id = ?', @student.id).length > 0 %>
       <td><%= assignment.submissions.where('student_id = ?', @student.id).first.points_earned %> / <%= assignment.maximum_points %></td>
-      <td><%= (assignment.calculate_percent(assignment.submissions.where('student_id = ?', @student.id).first.points_earned)*100).round(2)%>%</td>
+      <td><%= (assignment.calculate_percent(assignment.submissions.where('student_id = ?', @student.id).first.points_earned)*100).round(1)%>%</td>
       <td><%= assignment.calculate_grade(assignment.submissions.where('student_id = ?', @student.id).first.points_earned) %></td>
     <% end %>
       </tr>
