@@ -8,6 +8,7 @@ class Enrollment < ActiveRecord::Base
 	belongs_to :course
 	belongs_to :student
 	has_many 	 :student_actions
+  has_many   :attendances
 
 	def period_uniqueness
 		return unless self.course_id

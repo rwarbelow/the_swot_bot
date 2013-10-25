@@ -3,8 +3,8 @@ class Teachers::LiveController < Teachers::BaseController
   def classroom
     # @course = Course.find(params[:course_id])
     @course = current_teacher.courses.find(params[:course_id])
-    @students = @course.students.includes(:identity).all.sort_by { |student| student.first_name }
-    @attendance = student_attendance(@students)
+    @students = @course.students.includes(:identity).order("identities.first_name")
+    @attendance = student_attendance(@students, @course)
     @assignments = student_assignments(@students)
     @assignments_due = @course.assignments.where(:due_date => Date.today)
 

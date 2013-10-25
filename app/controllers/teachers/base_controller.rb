@@ -2,34 +2,14 @@ class Teachers::BaseController < ApplicationController
 	before_filter :require_teacher
 
   #TODO: Move this into model & refactor
-  def student_attendance(students)
-    on_time, tardy, absent = [], [], []
-
+  def student_attendance(students, course)
+    attendances = {'on-time' => [], 'tardy' => [], 'absent' => []}
     students.each do |student|
-      on_time << student.student_actions.where(student_action_type_id: 1, date: Date.today).first
-      tardy << student.student_actions.where(student_action_type_id: 2, date: Date.today).first
-      absent << student.student_actions.where(student_action_type_id: 3, date: Date.today).first
+      enrollment = Enrollment.where(course_id: course.id, student_id: student.id).first
+      attendance = Attendance.where(enrollment_id: enrollment.id, date: Date.today).first_or_initialize(status_id: 1)
+      attendances[Attendance::STUDENT_ACTION_STATUS_NAMES[Attendance::STATUS_IDS[attendance.status_id]]] << student.id
     end
-
-    attendance = {}
-    on_time_ids, tardy_ids, absent_ids = [], [], []
-
-    on_time.compact.each do |student_action|
-      on_time_ids << student_action.enrollment.student_id
-    end
-
-    tardy.compact.each do |student_action|
-      tardy_ids << student_action.enrollment.student_id
-    end
-
-    absent.compact.each do |student_action|
-      absent_ids << student_action.enrollment.student_id
-    end
-
-    attendance[:on_time] = on_time_ids
-    attendance[:tardy] = tardy_ids
-    attendance[:absent] = absent_ids
-    attendance
+    attendances
   end
 
   def student_assignments(students)
@@ -88,9 +68,7 @@ class Teachers::BaseController < ApplicationController
   end
 
   def save_attendance(absent_students, tardy_students, present_students, course_id)
-    save_action("absent", absent_students, course_id)
-    save_action("tardy", tardy_students, course_id)
-    save_action("on-time", present_students, course_id)
+    Attendance.save_for_student_ids(present_students, tardy_students, absent_students, course_id)
   end
 
   def save_assignments(student_ids, course_id, assignment_id)
