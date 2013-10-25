@@ -54,6 +54,7 @@ SwotBot::Application.routes.draw do
       get '/student_record/:student_id', :to => 'courses#student_record', as: :student_record
       get '/liveclass', :to => 'live#classroom'
       get '/roster', :to => 'courses#roster'
+      get 'attendance', on: :member
       resources :assignments
       resources :assignment_categories
       post '/update_categories', :to => 'assignment_categories#update_all'

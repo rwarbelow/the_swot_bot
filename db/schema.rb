@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130920040009) do
+ActiveRecord::Schema.define(:version => 20131024033350) do
 
   create_table "admins", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(:version => 20130920040009) do
     t.integer  "maximum_points",         :default => 100, :null => false
     t.integer  "assignment_category_id"
   end
+
+  create_table "attendances", :force => true do |t|
+    t.integer  "enrollment_id"
+    t.integer  "status_id"
+    t.date     "date"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "attendances", ["enrollment_id"], :name => "index_attendances_on_enrollment_id"
 
   create_table "courses", :force => true do |t|
     t.integer  "teacher_id"

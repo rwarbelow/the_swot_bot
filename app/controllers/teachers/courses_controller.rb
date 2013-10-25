@@ -1,5 +1,4 @@
- class Teachers::CoursesController < Teachers::BaseController
-
+class Teachers::CoursesController < Teachers::BaseController
   def new
     @course = Course.new
   end
@@ -70,4 +69,22 @@
     render :layout => false
   end
 
+  def attendance
+    @course = Course.find(params[:id])
+    @date_span = 15.days
+    @date_range = date_params
+    @students = @course.students
+    respond_to do |format|
+      format.html
+      format.csv
+    end
+  end
+
+  private
+
+  def date_params
+    from = Date.parse(params[:from]) rescue Date.today - @date_span
+    to = Date.parse(params[:to]) rescue Date.today
+    from..to
+  end
 end
