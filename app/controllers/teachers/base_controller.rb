@@ -88,9 +88,7 @@ class Teachers::BaseController < ApplicationController
   end
 
   def save_attendance(absent_students, tardy_students, present_students, course_id)
-    save_action("absent", absent_students, course_id)
-    save_action("tardy", tardy_students, course_id)
-    save_action("on-time", present_students, course_id)
+    Attendance.save_for_student_ids(present_students, tardy_students, absent_students, course_id)
   end
 
   def save_assignments(student_ids, course_id, assignment_id)
