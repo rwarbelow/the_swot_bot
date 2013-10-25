@@ -36,3 +36,18 @@
   font-size: 1.3em;
   margin-top: 20px;
 }
+
+input.datepicker {
+  width: 90px;
+  margin-right: 10px;
+  color: black;
+}
+
+.form-inline .btn {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.form-inline label {
+  margin-left: 5px;
+}

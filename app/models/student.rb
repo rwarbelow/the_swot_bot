@@ -104,6 +104,12 @@ class Student < ActiveRecord::Base
   	guardians.map {|g| g.textable_numbers.count }.reduce(0,:+) > 0
   end
 
+  def attendance_in(course, date_range)
+    Attendance.joins(:enrollment => :course)
+      .where(enrollments: {course_id: course.id, student_id: self.id}, date: date_range)
+      .each_with_object({}) {|attendance, h| h[attendance.date] = Attendance::STATUS_IDS[attendance.status_id] }
+  end
+
   protected
 
   def generate_registration_code

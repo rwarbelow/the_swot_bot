@@ -1,8 +1,9 @@
 require 'faker'
 
 FactoryGirl.define do
-  factory :teacher do |f|
-  	f.title { Faker::Lorem.word }
-  	f.email { Faker::Internet.email }
+  factory :teacher do
+    title { Faker::Lorem.word }
+    email { Faker::Internet.email }
+    identity
   end
 end

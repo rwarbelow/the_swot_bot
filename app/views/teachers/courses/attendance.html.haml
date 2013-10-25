@@ -1,0 +1,32 @@
+%h1
+  = link_to @course.subject.name, teachers_course_path(@course)
+  \- Attendance
+
+- flash.each do |name, msg|
+  = content_tag :div, msg, class: name
+
+= form_tag attendance_teachers_course_path(@course, '_' => Time.now.to_i), method: :get, class: 'form-inline' do
+  = label_tag 'From'
+  = text_field_tag 'from', @date_range.first, class: 'datepicker disabled'
+  = label_tag 'To'
+  = text_field_tag 'to', @date_range.last, class: 'datepicker disabled'
+  = submit_tag 'Update', class: 'btn btn-primary'
+  = link_to 'Export to CSV', attendance_teachers_course_path(@course, format: :csv, from: @date_range.first, to: @date_range.last), class: 'btn btn-primary', id: 'csv-export-btn'
+-#.pagination-centered
+  %ul.pager
+    %li= link_to "<< 15 Days", attendance_teachers_course_path(@course, from: @date_range.first - @date_span, to: @date_range.last - @date_span)
+    %li= link_to "Export to CSV", attendance_teachers_course_path(@course, from: @date_range.first, to: @date_range.last, format: :csv)
+    %li= link_to "15 Days >>", attendance_teachers_course_path(@course, from: @date_range.first + @date_span, to: @date_range.last + @date_span)
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Student Name
+      - @date_range.each do |date|
+        %th=l date, format: :short
+  %tbody
+    - @students.each do |student|
+      %tr
+        %td= student.full_name
+        - attendances = student.attendance_in(@course, @date_range)
+        - @date_range.each do |date|
+          %td{class: attendance_class(attendances[date])}= attendance_name(attendances[date])

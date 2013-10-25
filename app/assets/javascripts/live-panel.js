@@ -124,7 +124,7 @@ $(document).ready(function() {
     //set the classes for each icon to the attendance status
     $.get(get_url, function(response){
       // console.log(response);
-      on_time = response.attendance.on_time
+      on_time = response.attendance['on-time']
       tardy = response.attendance.tardy
       absent = response.attendance.absent
       

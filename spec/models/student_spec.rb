@@ -17,7 +17,6 @@ describe Student do
 	it { should have_many(:guardians) }
 	it { should have_many(:teachers) }
 	it { should have_many(:courses) }
-	it { should have_many(:assignments) }
 	it { should have_many(:submissions) }
 	it { should have_many(:student_actions) }
 	it { should have_many(:phone_numbers) }

@@ -104,6 +104,8 @@ GEM
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (4.0.5)
+      railties (>= 3.1.0)
     json (1.8.0)
     launchy (2.3.0)
       addressable (~> 2.3)
@@ -240,6 +242,7 @@ DEPENDENCIES
   guard-spork
   haml-rails
   jquery-rails
+  jquery-ui-rails (~> 4)
   launchy
   newrelic_rpm
   pg
