@@ -49,6 +49,7 @@ describe Teachers::LiveController do
 
       post :create_action, {course_id: @course.id}.merge(attendance_data), session
       Attendance.where(status_id: Attendance::STATUSES['present']).count.should eq(6)
+      Attendance.where(status_id: Attendance::STATUSES['present']).map {|attendance| attendance.enrollment }.compact.count.should eq(6)
       Attendance.count.should eq(6)
     end
   end

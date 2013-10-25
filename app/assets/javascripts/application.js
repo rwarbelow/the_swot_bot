@@ -12,5 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.datepicker
 //= require flat-ui
 //= require_tree .
+
+$(document).ready(function() {
+  $('.datepicker').datepicker({
+    dateFormat: 'yy-mm-dd',
+    showOn: "button",
+    buttonImage: "/assets/calendar-small.png",
+    buttonImageOnly: true
+  });
+  $('.datepicker').on('change', function() {
+    $('#csv-export-btn').hide();
+  });
+});

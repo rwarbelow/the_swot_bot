@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Teachers::CoursesController do
-  let(:course) { FactoryGirl.create :course }
+  let(:course) { FactoryGirl.create :course, students: FactoryGirl.create_list(:student, 5) }
   let(:current_user) { course.teacher }
 
   def session
@@ -15,7 +15,7 @@ describe Teachers::CoursesController do
 
   it 'assigns the students in the course' do
     get :attendance, {id: course.id}, session
-    assigns(:students).should eq(course.students)
+    assigns(:students).should match_array(course.students)
   end
 
   it 'by default, assigns the current month as the date range' do

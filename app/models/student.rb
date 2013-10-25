@@ -107,7 +107,7 @@ class Student < ActiveRecord::Base
   def attendance_in(course, date_range)
     Attendance.joins(:enrollment => :course)
       .where(enrollments: {course_id: course.id, student_id: self.id}, date: date_range)
-      .each_with_object({}) {|attendance, h| puts attendance.inspect; h[attendance.date] = Attendance::STATUS_IDS[attendance.status_id] }
+      .each_with_object({}) {|attendance, h| h[attendance.date] = Attendance::STATUS_IDS[attendance.status_id] }
   end
 
   protected

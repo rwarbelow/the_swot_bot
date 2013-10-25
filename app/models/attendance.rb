@@ -18,7 +18,7 @@ class Attendance < ActiveRecord::Base
 
   def self.save_for_student_ids(present_students, tardy_students, absent_students, course_id)
     [present_students, tardy_students, absent_students].each_with_index do |students, i|
-      Enrollment.where(id: Array(students)).each do |enrollment|
+      Enrollment.where(student_id: Array(students), course_id: course_id).each do |enrollment|
         attendance = where(enrollment_id: enrollment.id, date: Date.today).first_or_create(status_id: i+1)
         attendance.status_id = i+1
         attendance.save if attendance.status_id_changed?

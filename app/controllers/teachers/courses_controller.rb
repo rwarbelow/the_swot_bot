@@ -73,7 +73,8 @@ class Teachers::CoursesController < Teachers::BaseController
     @course = Course.find(params[:id])
     @date_span = 15.days
     @date_range = date_params
-    @students = @course.students
+    @students = @course.students.includes(:identity).order("identities.last_name")
+
     respond_to do |format|
       format.html
       format.csv
@@ -85,6 +86,11 @@ class Teachers::CoursesController < Teachers::BaseController
   def date_params
     from = Date.parse(params[:from]) rescue Date.today - @date_span
     to = Date.parse(params[:to]) rescue Date.today
+    if from > to
+      flash.now[:error] = "Please specify a FROM date that is before the TO date"
+      from = Date.today - @date_span
+      to = Date.today
+    end
     from..to
   end
 end

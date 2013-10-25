@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131024033350) do
+ActiveRecord::Schema.define(:version => 20131025053655) do
 
   create_table "admins", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -62,18 +62,6 @@ ActiveRecord::Schema.define(:version => 20131024033350) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  create_table "deposits", :force => true do |t|
-    t.integer  "student_id"
-    t.integer  "amount"
-    t.text     "comments"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.integer  "student_balance"
-  end
-
-  add_index "deposits", ["amount"], :name => "index_deposits_on_amount"
-  add_index "deposits", ["student_id"], :name => "index_deposits_on_student_id"
 
   create_table "enrollments", :force => true do |t|
     t.integer  "student_id"
@@ -190,7 +178,6 @@ ActiveRecord::Schema.define(:version => 20131024033350) do
     t.date     "date",                   :null => false
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
-    t.integer  "deposit_id"
   end
 
   add_index "student_actions", ["date"], :name => "index_student_actions_on_date"
@@ -215,9 +202,9 @@ ActiveRecord::Schema.define(:version => 20131024033350) do
   end
 
   create_table "submissions", :force => true do |t|
-    t.integer  "student_id",                     :null => false
-    t.integer  "assignment_id",                  :null => false
-    t.float    "points_earned", :default => 0.0, :null => false
+    t.integer  "student_id",                   :null => false
+    t.integer  "assignment_id",                :null => false
+    t.integer  "points_earned", :default => 0, :null => false
     t.datetime "created_at"
   end
 
