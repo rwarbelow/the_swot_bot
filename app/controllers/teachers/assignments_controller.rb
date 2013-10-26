@@ -2,7 +2,7 @@ class Teachers::AssignmentsController < Teachers::BaseController
 
   def index
     @course = Course.find(params[:course_id])
-    @assignments = @course.assignments.sort! { |a,b| a.due_date <=> b.due_date }
+    @assignments = @course.assignments.current.sort! { |a,b| a.due_date <=> b.due_date }
   end
 
   def create
@@ -13,7 +13,7 @@ class Teachers::AssignmentsController < Teachers::BaseController
       redirect_to teachers_course_path(@course)
     else
       flash[:assignment_errors] = @assignment.errors.full_messages
-      @assignments = @course.assignments
+      @assignments = @course.assignments.current.sort! { |a,b| a.due_date <=> b.due_date }
       render 'teachers/assignments/index'
     end
   end

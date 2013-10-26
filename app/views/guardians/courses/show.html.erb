@@ -5,53 +5,11 @@
 <div class="assignments">
   <h3>Assignments</h3>
   <% if @assignments.length > 0 %>
-    <table>
-      <thead>
-        <th>Assignment</th>
-        <th>Due Date</th>
-        <th>Score</th>
-        <th>Percent</th>
-        <th>Grade</th>
-      </thead>
-    <% @assignments.each do |assignment| %>
-      <tr>
-        <td><%= assignment.title %></td>
-        <td><%= assignment.due_date %></td>
-    <% if assignment.submissions.where('student_id = ?', @student.id).length > 0 %>
-      <td><%= assignment.submissions.where('student_id = ?', @student.id).first.points_earned %> / <%= assignment.maximum_points %></td>
-      <td><%= (assignment.calculate_percent(assignment.submissions.where('student_id = ?', @student.id).first.points_earned)*100).round(1)%>%</td>
-      <td><%= assignment.calculate_grade(assignment.submissions.where('student_id = ?', @student.id).first.points_earned) %></td>
-    <% end %>
-      </tr>
-    <% end %>
-    </table>
+    <%= render '/shared/student_assignment_submissions', :assignments => @assignments %>
   <% else %>
     <p>No assignments.</p>
   <% end %>
 </div>
 
-<h3>Recent Actions</h3>
-<div class="recent-actions">
-  <% if @actions.length > 0 %>
-    <table>
-      <thead>
-        <th>Date</th>
-        <th>Action</th>
-        <th>Comments</th>
-      </thead>
-    <% @actions[0..40].each do |action| %>
-      <tr>
-        <td><%= action.date.strftime("%a, %m/%d") %></td> 
-        <td><%= action.student_action_type.name %></td>
-        <td><% if action.comment %> 
-          <%= action.student_action_type.name %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-    </table>
-  <% else %>
-    <p>No recent actions</p>
-  <% end %>
-</div>
-</div>
+<%= render '/shared/student_actions', :student_actions => @student_actions %>
+  

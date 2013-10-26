@@ -62,10 +62,12 @@ class Teachers::CoursesController < Teachers::BaseController
   def student_record
     @student = Student.find(params[:student_id])
     @course = Course.find(params[:course_id])
+    @assignments = @course.assignments.current.sort! { |a,b| a.due_date <=> b.due_date }
   end
 
   def print_gradebook
     @course = Course.find(params[:course_id])
+    @assignments = @course.assignments.current.sort! { |a,b| a.due_date <=> b.due_date }
     render :layout => false
   end
 

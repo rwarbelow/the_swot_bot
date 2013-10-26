@@ -1,0 +1,28 @@
+<h3>Assignments</h3>
+<div class="assignments">
+  <% if @assignments.length > 0 %>
+		<table>
+		  <thead>
+		    <th>Due Date</th>
+		    <th>Assignment</th>
+		    <th>Category</th>
+		    <th>Score</th>
+		    <th>Percent</th>
+		    <th>Grade</th>
+		  </thead>
+		  <% @assignments.each do |assignment| %>
+			<tr>
+				<td><%= assignment.due_date.strftime("%a, %b %e") %></td>
+				<td><%= assignment.title.titleize %></td>
+				<td><%= assignment.assignment_category.name.titleize %></td>
+				<td><%= @earned = assignment.submissions.current.find_by_student_id(@student.id).points_earned if assignment.submissions.current.find_by_student_id(@student.id) %>/<%= assignment.maximum_points %></td>
+				<td><%= "#{((assignment.calculate_percent(@earned)) *100).round(1)} %" if assignment.submissions.current.find_by_student_id(@student.id) %></td>
+				<td><%= assignment.calculate_grade(@earned) if assignment.submissions.current.find_by_student_id(@student.id) %></td>
+			</tr>
+		<% end %>
+	</table>
+	<% else %>
+	  <p>No current assignments</p>
+<% end %>
+</div>
+  

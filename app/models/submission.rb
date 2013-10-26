@@ -9,4 +9,17 @@ class Submission < ActiveRecord::Base
 	belongs_to :student
 
   delegate :title, :description, :to => :assignment
+
+  def self.by_student(student_id)
+  	where('student_id = ?', student_id)
+  end
+
+  # add_index :submissions, :archived
+  def self.current
+  	where(archived: false)
+  end
+
+  def self.archived
+  	where(archived: true)
+  end
 end

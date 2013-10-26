@@ -1,59 +1,11 @@
 <%= link_to "Back", :back %>
 
 <h1><%=@course.subject.name%></h1>
-
 <% if current_student.grade_in(@course) >= 0 %>
   <h1>Current Overall Grade: <%= @percent = current_student.grade_in(@course)%>% <%= Course.letter_grade(@percent) %></h1>
 <% end %>
 
-<h3>Assignments</h3>
-<div class="assignments">
-  <% if @assignments.length > 0 %>
-    <table>
-      <thead>
-        <th>Assignment</th>
-        <th>Category</th>
-        <th>Due Date</th>
-        <th>Score</th>
-        <th>Percent</th>
-        <th>Grade</th>
-      </thead>
-      <% @assignments.each do |assignment| %>
-        <tr>
-          <td><%= assignment.title.titleize %></td>
-          <td><%= assignment.assignment_category.name.titleize %></td>
-          <td><%= assignment.due_date.strftime("%D") %></td>
-          <% if assignment.submissions.where('student_id = ?', current_student.id).length > 0 %>
-            <td><%= assignment.submissions.where('student_id = ?', current_student.id).first.points_earned %> / <%= assignment.maximum_points %></td>
-            <td><%= (assignment.calculate_percent(assignment.submissions.where('student_id = ?', current_student.id).first.points_earned)*100).round(1)%>%</td>
-            <td><%= assignment.calculate_grade(assignment.submissions.where('student_id = ?', current_student.id).first.points_earned) %></td>
-          <% end %>
-        </tr>
-      <% end %>
-    </table>
-  <% end %>
-</div>
+<%= render '/shared/student_assignment_submissions', :assignments => @assignments %>
 
-<h3>Recent Actions</h3>
-<div class="recent-actions">
-  <table>
-    <thead>
-      <th>Date</th>
-      <th>Teacher</th>
-      <th>Action</th>
-      <th>Comments</th>
-    </thead>
-    <% @actions.limit(25).order('date DESC').sort!{ |a, b| b.id <=> a.id }.each do |action| %>
-      <tr>
-        <td><%= action.date.strftime("%a, %m/%d") %></td> 
-        <td><%= action.enrollment.course.teacher.last_name %></td>
-        <td><%= action.student_action_type.name %></td>
-        <td><% if action.comment %> 
-          <%= action.comment %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
-</div>
-</div>
+<%= render '/shared/student_actions', :student_actions => @student_actions %>
+

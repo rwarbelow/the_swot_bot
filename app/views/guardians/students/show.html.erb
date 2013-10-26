@@ -32,27 +32,3 @@
     <% end %>
   </table>
 </div>
-
-<div>
-  <h3>Upcoming Due Dates</h3>
-  <% if @assignments.length == 0 %>
-    <p>No upcoming assignments.</p>
-  <% else %>
-    <table>
-      <thead>
-        <th>Period</th>
-        <th>Course</th>
-        <th>Assignment</th>
-        <th>Due Date</th>
-      </thead>
-      <% @assignments.each do |assignment| %>
-      <tr>
-        <td><%= assignment.course.period %></td>
-        <td><%= assignment.course.subject.name %></td>
-        <td><%= assignment.title %></td>
-        <td><%= assignment.due_date %></td>
-      </tr>
-      <% end %>
-    </table>
-  <% end %>
-</div>

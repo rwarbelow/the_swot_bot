@@ -1,27 +1,6 @@
 <h1>Bank Account History: Past <%= @number %> day(s)</h1>
 <%= form_tag students_bank_account_path, method: :get do %>
-    <%= text_field_tag :number, nil, :placeholder => "# of previous days" %>
-    <%= submit_tag "Show", class: 'button' %>
-  <% end %>
-<table>
-	<thead>
-		<th>Date</th>
-		<th>$ Amount</th>
-		<th>Action</th>
-		<th>Class</th>
-		<th>Comment</th>
-	</thead>
-	<tbody>
-		<% @student_actions.sort! { |a, b| b.date <=> a.date }.each do |action| %>
-		<tr>
-			<% @value = action.student_action_type.value.to_i  %>
-			<%= content_tag(:td, action.date.strftime("%a, %m/%d"), :class => (@value > 0 ? 'positive' : 'negative')) %>
-			<%= content_tag(:td, number_to_currency(@value, strip_insignificant_zeros: true), :class => (@value > 0 ? 'positive' : 'negative')) %>
-			<%= content_tag(:td, action.student_action_type.name, :class => (@value > 0 ? 'positive' : 'negative')) %>
-			<%= content_tag(:td, action.enrollment.course.subject.name, :class => (@value > 0 ? 'positive' : 'negative')) %>
-			<%= content_tag(:td, action.comment, :class => (@value > 0 ? 'positive' : 'negative')) %>
-		</tr>
-
-		<% end %>
-	</tbody>
-</table>
+  <%= text_field_tag :number, nil, :placeholder => "# of previous days" %>
+  <%= submit_tag "Show", class: 'button' %>
+<% end %>
+<%= render '/shared/student_actions', :student_actions => @student_actions %>
