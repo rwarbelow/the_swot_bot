@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131025053655) do
+ActiveRecord::Schema.define(:version => 20131026001733) do
 
   create_table "admins", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -40,10 +40,17 @@ ActiveRecord::Schema.define(:version => 20131025053655) do
     t.string   "title"
     t.text     "description"
     t.datetime "created_at"
-    t.date     "due_date",                                :null => false
-    t.integer  "maximum_points",         :default => 100, :null => false
+    t.date     "due_date",                                  :null => false
+    t.integer  "maximum_points",         :default => 100,   :null => false
     t.integer  "assignment_category_id"
+    t.boolean  "archived",               :default => false
+    t.string   "term"
   end
+
+  add_index "assignments", ["archived"], :name => "index_assignments_on_archived"
+  add_index "assignments", ["course_id"], :name => "index_assignments_on_course_id"
+  add_index "assignments", ["due_date"], :name => "index_assignments_on_due_date"
+  add_index "assignments", ["term"], :name => "index_assignments_on_term"
 
   create_table "attendances", :force => true do |t|
     t.integer  "enrollment_id"
@@ -62,6 +69,18 @@ ActiveRecord::Schema.define(:version => 20131025053655) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "deposits", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "amount"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.text     "comments"
+    t.integer  "student_balance"
+  end
+
+  add_index "deposits", ["amount"], :name => "index_deposits_on_amount"
+  add_index "deposits", ["student_id"], :name => "index_deposits_on_student_id"
 
   create_table "enrollments", :force => true do |t|
     t.integer  "student_id"
@@ -126,6 +145,7 @@ ActiveRecord::Schema.define(:version => 20131025053655) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "subject"
+    t.integer  "thread_id"
   end
 
   create_table "phone_numbers", :force => true do |t|
@@ -178,6 +198,7 @@ ActiveRecord::Schema.define(:version => 20131025053655) do
     t.date     "date",                   :null => false
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+    t.integer  "deposit_id"
   end
 
   add_index "student_actions", ["date"], :name => "index_student_actions_on_date"
@@ -202,11 +223,16 @@ ActiveRecord::Schema.define(:version => 20131025053655) do
   end
 
   create_table "submissions", :force => true do |t|
-    t.integer  "student_id",                   :null => false
-    t.integer  "assignment_id",                :null => false
-    t.integer  "points_earned", :default => 0, :null => false
+    t.integer  "student_id",                       :null => false
+    t.integer  "assignment_id",                    :null => false
+    t.float    "points_earned", :default => 0.0,   :null => false
     t.datetime "created_at"
+    t.boolean  "archived",      :default => false
+    t.string   "term"
   end
+
+  add_index "submissions", ["archived"], :name => "index_submissions_on_archived"
+  add_index "submissions", ["term"], :name => "index_submissions_on_term"
 
   create_table "teachers", :force => true do |t|
     t.string   "title",      :null => false

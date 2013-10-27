@@ -8,15 +8,14 @@ class Teachers::ScholarHoursController < Teachers::BaseController
 
   def new
     @scholar_hour = ScholarHour.new
+    @students = Student.all.sort! { |a, b| a.last_name <=> b.last_name }
   end
 
   def create
-    @scholar_hour = ScholarHour.new(params[:scholar_hour])
-    if @scholar_hour.save
-      redirect_to teachers_scholar_hours_path
-    else
-      flash[:scholar_hour_errors] = @scholar_hour.errors.full_messages
+    params[:student_ids].each do |student_id|
+      ScholarHour.create!(student_id: student_id, reason: params[:reason], date_assigned: params[:date_assigned], comments: params[:comments])
     end
+    redirect_to teachers_scholar_hours_path
   end
 
   def generate_scholar_hour_list

@@ -27,7 +27,7 @@
         <th></th>
         <th></th>
       </thead>
-      <% @course.assignments.sort! { |a, b| a.id <=> b.id }.each do |assignment| %>
+      <% @course.assignments.current.sort! { |a, b| a.id <=> b.id }.each do |assignment| %>
       <tr>
         <td><%= assignment.due_date %></td>
         <td><%= assignment.assignment_category.name %></td>

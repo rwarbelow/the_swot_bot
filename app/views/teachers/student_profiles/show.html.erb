@@ -45,47 +45,11 @@
   <%= render '/shared/schedule_grades' %>
 </div>
 <br>
-
-<h3>Recent Actions</h3>
 <%= form_tag teachers_student_profile_path, method: :get do %>
     <%= text_field_tag :number, nil, :placeholder => "# of previous days" %>
     <%= submit_tag "Show", class: 'button' %>
   <% end %>
-<% if @student.student_actions.length > 0 %>
-  <table>
-    <thead>
-      <th>Date</th>
-      <th>Period</th>
-      <th>Course</th>
-      <th>Action</th>
-      <th>Comments</th>
-      <th></th>
-    </thead>
-    <tr>
-  <% @student_actions.order('date DESC').sort!{ |a, b| b.id <=> a.id }.each do |action| %>
-    <tr>
-      <td><%= action.date.strftime("%a, %m/%d") %></td>
-      <td><%= action.enrollment.course.period %></td>
-      <td><%= action.enrollment.course.subject.name %></td>
-      <td><%= action.student_action_type.name %></td>
-      <td><%= action.comment %></td>
-      <% if current_teacher.id == action.enrollment.course.teacher_id %>
-        <td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
-      <% else %>
-        <td></td>
-      <% end %>
-      <% if current_teacher.id == action.enrollment.course.teacher_id %>
-        <td><%= link_to "Delete", teachers_student_action_path(action), :method => "delete" %></td>
-      <% else %>
-        <td></td>
-      <% end %>
-    </tr>
-  <% end %>
-  </tr>
-  </table>
-<% else %>
-  <p>No recent actions.</p>
-<% end %>
+<%= render '/shared/student_actions', :student_actions => @student_actions, days_path: method(:teachers_student_profile_path) %>
 <br>
 
 <h3><%= @student.first_name %>'s Goals</h3>

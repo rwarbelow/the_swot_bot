@@ -1,0 +1,40 @@
+<h3>Recent Actions</h3>
+<div class="recent-actions">
+  <% if @student_actions.length > 0 %>
+		<table>
+			<thead>
+				<th>Date</th>
+				<th>$ Amount</th>
+				<th>Action</th>
+				<th>Class</th>
+				<th>Comment</th>
+			</thead>
+			<tbody>
+				<% @student_actions.sort! { |a, b| b.date <=> a.date }.each do |action| %>
+					<tr>
+						<% @value = action.student_action_type.value.to_i %>
+						<%= content_tag(:td, action.date.strftime("%a, %m/%d"), :class => (@value > 0 ? 'positive' : 'negative')) %>
+						<%= content_tag(:td, number_to_currency(@value, strip_insignificant_zeros: true), :class => (@value > 0 ? 'positive' : 'negative')) %>
+						<%= content_tag(:td, action.student_action_type.name, :class => (@value > 0 ? 'positive' : 'negative')) %>
+						<%= content_tag(:td, action.enrollment.course.subject.name, :class => (@value > 0 ? 'positive' : 'negative')) %>
+						<%= content_tag(:td, action.comment, :class => (@value > 0 ? 'positive' : 'negative')) %>
+						<% if current_teacher %>
+							<% if current_teacher.id == action.enrollment.course.teacher_id %>
+				        <td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
+				      <% else %>
+				        <td></td>
+				      <% end %>
+				      <% if current_teacher.id == action.enrollment.course.teacher_id %>
+				        <td><%= link_to "Delete", teachers_student_action_path(action), :method => "delete" %></td>
+				      <% else %>
+				        <td></td>
+				      <% end %>
+			      <% end %>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	<% else %>
+	  <p>No recent actions</p>
+	<% end %>
+</div>

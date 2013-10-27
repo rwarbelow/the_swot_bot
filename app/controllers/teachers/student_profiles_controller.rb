@@ -68,8 +68,9 @@ class Teachers::StudentProfilesController < Teachers::BaseController
   def course_overview
     @student = Student.find(params[:student_profile_id])
     @course = Course.find(params[:course_id])
-    @assignments = @course.assignments
+    @assignments = @course.assignments.current.sort! { |a,b| a.due_date <=> b.due_date }
     enrollment = Enrollment.where(:student_id => @student.id, :course_id => params[:course_id]).first
-    @actions = StudentAction.where(:enrollment_id => enrollment.id)
+    @number = params[:number].nil? ? 1 : params[:number].to_i
+    @student_actions = @student.student_actions.where('date > ?', (Date.today - @number))
   end
 end

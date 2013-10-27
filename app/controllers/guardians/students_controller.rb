@@ -1,12 +1,7 @@
 class Guardians::StudentsController < Guardians::BaseController
   def show
     @student = current_guardian.students.find(params[:id])
-    @actions = @student.student_actions.find(:all, :order => "id ASC")
-    @assignments = []
-    @student.courses.includes(:assignments).each do |course|
-      course.assignments.each do |assignment|
-        @assignments << assignment if assignment.due_date > Date.today
-      end
-    end
+    @number = params[:number].nil? ? 1 : params[:number].to_i
+    @student_actions = @student.student_actions.where('date > ?', (Date.today - @number))
   end
 end

@@ -3,25 +3,5 @@
 <h1><%= @student.first_name %> <%= @student.last_name %>'s Grades for <%= @course.subject.name %> <%= @percent = @student.grade_in(@course) %>%</h1>
 <%= link_to "See Student Info", teachers_student_profile_path(@student) %>
 
-<table>
-  <thead>
-    <th>Due Date</th>
-    <th>Category</th>
-    <th>Title</th>
-		<th>Score</th>
-		<th>Percent</th>
-		<th>Grade</th>
-  </thead>
-  <% @course.assignments.sort! { |a, b| a.due_date <=> b.due_date }.each do |assignment| %>
-  <tr>
-    <td><%= assignment.due_date %></td>
-    <td><%= assignment.assignment_category.name %></td>
-    <td><%= assignment.title %></td>
-    <% if assignment.submissions.where('student_id = ?', @student.id).length > 0 %>
-      <td><%= (@earned = assignment.submissions.where('student_id = ?', @student.id).first.points_earned) %> / <%= assignment.maximum_points %></td>
-      <td><%= "#{((assignment.calculate_percent(@earned)) *100).round(1)} %" if assignment.submissions.find_by_student_id(@student.id) %></td>
-      <td><%= assignment.calculate_grade(@earned) if assignment.submissions.find_by_student_id(@student.id) %></td>
-    <% end %>
-  </tr>
-  <% end %>
-</table>
+<%= render '/shared/student_assignment_submissions', :assignments => @assignments %>
+

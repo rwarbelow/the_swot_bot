@@ -26,6 +26,14 @@ class Assignment < ActiveRecord::Base
 			submission.destroy
 		end
 	end
+
+	def self.current
+		where(archived: false)
+	end
+
+	def self.archived
+		where(archived: true)
+	end
 		
 	def calculate_grade(earned)
 		if calculate_percent(earned)

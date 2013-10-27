@@ -1,21 +1,21 @@
-<h2>Edit Scholar Hour</h2>
-
-<div class="form-container">
-  <%= form_for @scholar_hour, url: teachers_scholar_hours_path do |f| %>
-    <% students_array = Student.all.sort! {|a, b| a.last_name <=> b.last_name }.map { |student| ["#{student.first_name} #{student.last_name}", student.id] } %>
-    <%= f.select(:student_id, students_array, {:include_blank => 'Select a student'}) %><br />
-
-    <%= f.label :reason %>
-    <%= f.text_field :reason %><br/>
-
-		<%= f.label :date_assigned %>
-    <%= f.text_field :date_assigned, value: @scholar_hour.date_assigned, placeholder: "YYYY-MM-DD" %><br/>
-
-    <%= f.label :comments %>
-    <%= f.text_area :comments %><br/>
-
-    <%= f.hidden_field :status, value: "Not Complete" %> <br/>
-
-    <%= f.submit value="Create Scholar Hour" %>
+<h2>Create Custom Scholar Hours</h2>
+<%= form_tag teachers_scholar_hours_path, :method => :post do %>
+  <ul>
+  <% for student in @students.map { |student| ["#{student.first_name} #{student.last_name}", student.id] } %>
+    <li>
+      <%= check_box_tag "student_ids[]", student[1] %>
+      <%= student[0] %>
+    </li>
   <% end %>
-</div>
+  <%= label_tag :reason %>
+      <%= text_field_tag :reason %> <br>
+      <%= label_tag :date_assigned %>
+      <%= text_field_tag :date_assigned, Date.today.strftime("%Y-%m-%e") %> <br>
+      <%= label_tag :comments %>
+      <%= text_area_tag :comments %>
+      <%= hidden_field_tag :status, value: "Not Complete" %>
+  </ul>
+  <%= submit_tag "Create scholar hour" %>
+<% end %>
+
+
