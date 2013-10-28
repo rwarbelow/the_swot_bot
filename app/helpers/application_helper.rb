@@ -36,19 +36,19 @@ module ApplicationHelper
   end
 
   def start_date
-    # if Time.now.wday != 5
-      # Date.commercial(Date.today.year, Date.today.cweek-1, 1)
-    # else
+    if Time.now.wday != 5
+      Date.commercial(Date.today.year, Date.today.cweek-1, 1)
+    else
       Date.commercial(Date.today.year, Date.today.cweek, 1)
-    # end
+    end
   end
 
   def end_date
-    # if Time.now.wday != 5
-      # Date.commercial(Date.today.year, Date.today.cweek-1, 5)
-    # else
+    if Time.now.wday != 5
+      Date.commercial(Date.today.year, Date.today.cweek-1, 5)
+    else
       Date.commercial(Date.today.year, Date.today.cweek, 5)
-    # end
+    end
   end
 
   def sortable(column, title = nil)
