@@ -1,4 +1,8 @@
 <h3>Recent Actions</h3>
+<%= form_tag @path, method: :get do %>
+  <%= text_field_tag :number, nil, :placeholder => "# of previous days" %>
+  <%= submit_tag "Show", class: 'button' %>
+<% end %>
 <div class="recent-actions">
   <% if @student_actions.length > 0 %>
 		<table>

@@ -2,6 +2,11 @@
 <% if current_user %>
   <nav class="nav">
     <ul>
+      <li><%= form_tag change_term_path, method: :get do %>
+        <%= select :term, :term_id, Term.all.collect {|t| [t.name, t.id]}, :selected => session[:term_id] %>
+            <%= submit_tag "Change" %>
+            <% end %>
+        </li>
       <% if current_student? %>
         <%= link_to(students_bank_account_path, :style => 'text-decoration: none') do %>
           <div class="bank-balance">

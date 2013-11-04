@@ -1,0 +1,21 @@
+<h3>Completed Goals</h3>
+<% if @completed_goals.length > 0 %>
+		<table>
+		<thead>
+			<th>Created</th>
+			<th>Goal</th>
+			<th>Completed</th>
+		</thead>
+		<% if @completed_goals.length > 0 %>
+			<% @completed_goals.sort!{ |a, b| b.id <=> a.id }.each do |goal| %>
+				<tr>
+					<td><%= goal.created_at.strftime("%b %d, %Y") %></td>
+					<td><%= goal.goal %></td>
+					<td><%= goal.updated_at.strftime("%b %d, %Y") %></td>
+				</tr>
+			<% end %>
+			<% end %>
+		</table>
+<% else %>
+	<p>No Completed Goals</p>
+<% end %>
