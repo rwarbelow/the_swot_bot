@@ -1,5 +1,5 @@
 class Assignment < ActiveRecord::Base
-  attr_accessible :course_id, :title, :description, :due_date, :maximum_points, :assignment_category_id
+  attr_accessible :course_id, :title, :description, :due_date, :maximum_points, :assignment_category_id, :term_id
 
 	validates :course_id, :presence => true
 	validates :title, :presence => true
@@ -10,8 +10,13 @@ class Assignment < ActiveRecord::Base
 
 	belongs_to :course
 	belongs_to :assignment_category
+	belongs_to :term
 	has_many 	 :submissions, dependent: :destroy
 	before_destroy :remove_submissions
+
+	def self.by_term(term_id)
+		where(term_id: term_id)
+	end
 
 	def valid_date
 	  errors.add(:due_date, "Date must be for current school year") if due_date && due_date < Date.parse("2013-08-25")

@@ -44,6 +44,7 @@ class Teachers::CoursesController < Teachers::BaseController
   def show
     @course = Course.includes(:subject).find(params[:id])
     @students = @course.students.includes(:identity)
+    @assignments = @course.assignments.by_term(session[:term_id].to_i)
   end
 
   def index
@@ -62,12 +63,16 @@ class Teachers::CoursesController < Teachers::BaseController
   def student_record
     @student = Student.find(params[:student_id])
     @course = Course.find(params[:course_id])
-    @assignments = @course.assignments.current.sort! { |a,b| a.due_date <=> b.due_date }
+    @enrollment = Enrollment.where(:student_id => @student.id, :course_id => @course.id).first
+    @assignments = @course.assignments.by_term(session[:term_id]).sort! { |a,b| a.due_date <=> b.due_date }
+    @number = params[:number].nil? ? 3 : params[:number].to_i
+    @student_actions = @enrollment.student_actions.where('date > ?', (Date.today - @number))
   end
 
   def print_gradebook
     @course = Course.find(params[:course_id])
-    @assignments = @course.assignments.current.sort! { |a,b| a.due_date <=> b.due_date }
+    @assignments = @course.assignments.by_term(session[:term_id]).sort! { |a,b| a.due_date <=> b.due_date }
+    @term = Term.find(session[:term_id])
     render :layout => false
   end
 
