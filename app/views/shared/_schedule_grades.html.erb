@@ -1,4 +1,5 @@
   <div class="schedule-grades">
+  <h3>Course Schedule</h3>
   <table>
     <thead>
       <th>Period</th>
@@ -16,8 +17,10 @@
         <td><%= link_to course.subject.name, students_course_path(course)%></td>
       <% elsif current_teacher? %>
         <td><%= link_to course.subject.name, teachers_student_profile_course_overview_path(@student.id, course.id)%></td>
+      <% elsif current_guardian? %>
+        <td><%= link_to course.subject.name, guardians_student_course_path(@student.id, course.id) %></td>
       <% end %>  
-      <td><%= @percent = @student.grade_in(course)%>%</td>
+      <td><%= @percent = @student.grade_in(course, session[:term_id])%>%</td>
       <td><%= (Course.letter_grade(@percent)) %></td>
       <td><%= course.teacher.first_name %> <%= course.teacher.last_name %></td>
       <td><%= mail_to "#{course.teacher.email}" do %>
