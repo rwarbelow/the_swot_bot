@@ -2,7 +2,9 @@ class Teachers::AssignmentsController < Teachers::BaseController
 
   def index
     @course = Course.find(params[:course_id])
-    @assignments = @course.assignments.current.sort! { |a,b| a.due_date <=> b.due_date }
+    @assignments = @course.assignments.by_term(session[:term_id]).sort! { |a,b| a.due_date <=> b.due_date }
+    @term_array = Term.all.map { |term| ["#{term.name}", term.id] }
+    @category_array = @course.assignment_categories.map { |category| ["#{category.name}", category.id] } 
   end
 
   def create
@@ -13,7 +15,7 @@ class Teachers::AssignmentsController < Teachers::BaseController
       redirect_to teachers_course_path(@course)
     else
       flash[:assignment_errors] = @assignment.errors.full_messages
-      @assignments = @course.assignments.current.sort! { |a,b| a.due_date <=> b.due_date }
+      @assignments = @course.assignments.by_term(session[:term_id]).sort! { |a,b| a.due_date <=> b.due_date }
       render 'teachers/assignments/index'
     end
   end

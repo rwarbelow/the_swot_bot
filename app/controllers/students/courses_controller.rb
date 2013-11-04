@@ -8,11 +8,15 @@ class Students::CoursesController < Students::BaseController
   end
 
   def show
-    @assignments = Assignment.current.where(:course_id => params[:id]).sort! { |a,b| a.due_date <=> b.due_date }
-    enrollment = Enrollment.where(:student_id => current_student.id, :course_id => params[:id]).first
-    @student_actions = current_student.student_actions.where('date > ?', (Date.today - 20))  
+    @course = Course.find(params[:id])
+    enrollment = Enrollment.where(:student_id => current_student.id, :course_id => @course.id).first
     @student = current_student
+    @enrollment = Enrollment.where(:student_id => current_student.id, :course_id => @course.id).first
+    @assignments = @course.assignments.by_term(session[:term_id]).sort! { |a,b| a.due_date <=> b.due_date }
+    @number = params[:number].nil? ? 20 : params[:number].to_i
+    @student_actions = @enrollment.student_actions.where('date > ?', (Date.today - @number))
   end
+
   private
 
   def must_be_a_student

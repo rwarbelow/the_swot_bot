@@ -4,6 +4,7 @@ class GradeCalculator
   def initialize(options = {})
     @student = options[:student]
     @course = options[:course]
+    @term = options[:term_id]
   end
 
   def grade
@@ -23,7 +24,7 @@ class GradeCalculator
   end
 
   def cumulative_scores_by_category
-    @cumulative_scores ||= Assignment.current.joins(:assignment_category, :submissions, :course)
+    @cumulative_scores ||= Assignment.by_term(@term).joins(:assignment_category, :submissions, :course)
       .select("assignment_categories.name category, assignment_categories.weight weight, SUM(assignments.maximum_points) max_points, SUM(submissions.points_earned) earned_points")
       .where(course_id: course.id, submissions: {student_id: student.id})
       .group("assignment_categories.name, assignment_categories.weight")

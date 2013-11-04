@@ -7,6 +7,7 @@ class Submission < ActiveRecord::Base
 
 	belongs_to :assignment, dependent: :destroy
 	belongs_to :student
+  belongs_to :term
 
   delegate :title, :description, :to => :assignment
 
@@ -14,7 +15,6 @@ class Submission < ActiveRecord::Base
   	where('student_id = ?', student_id)
   end
 
-  # add_index :submissions, :archived
   def self.current
   	where(archived: false)
   end
@@ -22,4 +22,9 @@ class Submission < ActiveRecord::Base
   def self.archived
   	where(archived: true)
   end
+
+  def self.by_term(term_id)
+    where(term_id: term_id)
+  end
+
 end
