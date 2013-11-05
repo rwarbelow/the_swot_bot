@@ -1,15 +1,7 @@
 <%= link_to('Back', :back) %>
 
-<h1><%= @student.first_name %> <%= @student.last_name %>: <%=@course.subject.name%></h1>
-
-<% if @student.grade_in(@course) >= 0 %>
-  <h2>Current Overall Grade: <%= (@percent = @student.grade_in(@course)) %>% (<%= Course.letter_grade(@percent) %>)</h2>
-<% end %>
+<%= render '/shared/student_course_header', :student => @student, :course => @course %>
 
 <%= render '/shared/student_assignment_submissions', :assignments => @assignments %>
 
-<%= form_tag teachers_student_profile_course_overview_path, method: :get do %>
-    <%= text_field_tag :number, nil, :placeholder => "# of previous days" %>
-    <%= submit_tag "Show", class: 'button' %>
-  <% end %>
-<%= render '/shared/student_actions', :student_actions => @student_actions, days_path: method(:teachers_student_profile_path) %>
+<%= render '/shared/student_actions', :student_actions => @student_actions, path: teachers_student_profile_course_overview_path %>

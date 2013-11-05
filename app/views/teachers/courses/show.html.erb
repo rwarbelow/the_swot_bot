@@ -11,10 +11,10 @@
     <%end%>
   </nav>
 
-<div id="collapse" >
+<div>
   <h2 class="open">Assignments for <%= @course.subject.name %> (Period <%= @course.period %>)</h2>
   <div id="assignment-preview-5">
-    <% if @course.assignments.length > 0 %>
+    <% if @assignments.length > 0 %>
     <table>
       <thead>
         <th>Due Date</th>
@@ -27,7 +27,7 @@
         <th></th>
         <th></th>
       </thead>
-      <% @course.assignments.current.sort! { |a, b| a.id <=> b.id }.each do |assignment| %>
+      <% @assignments.sort! { |a, b| a.id <=> b.id }.each do |assignment| %>
       <tr>
         <td><%= assignment.due_date %></td>
         <td><%= assignment.assignment_category.name %></td>
@@ -69,7 +69,7 @@
       <tr>
         <td><%= student.ccsd_id %></td>
         <td><%= link_to "#{student.first_name} #{student.last_name}", teachers_course_student_record_path(@course, student) %></td>
-        <td><%= @percent = student.grade_in(@course) %>%</td>
+        <td><%= @percent = student.grade_in(@course,session[:term_id]) %>%</td>
         <td><%= (Course.letter_grade(@percent)) %></td>
       </tr>
       <% end %>

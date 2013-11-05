@@ -1,85 +1,59 @@
 <%if current_student == current_user.student %>
-<div class="inspiration">
-  <%= render '/shared/inspiration' %>
-</div>
-<br>
-<h1>Welcome, <%= current_user.first_name %>!</h1>
-<%= link_to "View your SWOT Report (use your CCSD ID for password)", students_swot_report_path(:ccsd_id => @student.ccsd_id) %>
-<div>
-	<h3>Goals</h3>
-	  <% if flash[:goal_completed] %>
-    <div class="flash"><%= flash[:goal_completed] %></div>
-  <% end %>
-    <% if @completed_goals.length > 0 %>
-  <%= link_to "See Completed Goals", students_goals_path %>
-  <% end %>
-	<% if @goals.length > 0 %>
-	<table>
-		<thead>
-			<th>Created On</th>
-			<th>Goal</th>
-		</thead>
-			<% @goals.each do |goal| %>
-				<tr>
-					<td><%= goal.created_at.strftime("%b %d") %></td>
-					<td><%= goal.goal %></td>
-					<td><%= button_to "Complete", students_goal_complete_path(goal), :class => "btn" %></td>
-					<td><%= button_to "Edit", edit_students_goal_path(goal), :method => 'get', :class => "btn" %></td>
-					<td><%= button_to "Delete", students_goal_path(goal), :method => "delete", :class => "btn" %></td>
-				</tr>
-			<% end %>
-		</table>
-	<% else %>
-		<p>No Current Goals</p>
-	<% end %>
-		<%= form_for Goal.new, url: students_goals_path do |f| %>
-  	<% if flash[:goal_errors] %>
-    	<% flash[:goal_errors].each do |error| %>
-				<%= error %>
-			<% end %>
-		<% end %>
-  	<%= f.text_field :goal %>
-  	<%= f.submit "Add Goal" %>
-  <% end %>
+  <div class="inspiration">
+    <%= render '/shared/inspiration' %>
   </div>
-
-<div>
-  <%= render 'shared/announcements' %>
-</div>
-<br>
-
-<h2>Scholar Hours</h2>
-<% if @incomplete_scholar_hours.length > 0 %>
+  <br>
+  <h1>Welcome, <%= current_user.first_name %>!</h1>
+  <%= link_to "View your SWOT Report (use your CCSD ID for password)", students_swot_report_path(:ccsd_id => @student.ccsd_id) %> <br> <br>
   <div>
-    <table>
-      <thead>
-        <th>Date Assigned</th>
-        <th>Reason</th>
-        <th>Status</th>
-        <th>Comments</th>
-      </thead>
-    <% @incomplete_scholar_hours.each do |scholar_hour| %>
-      <tr>
-        <td><%= scholar_hour.date_assigned.strftime("%a, %m/%d")  %></td>
-        <td><%= scholar_hour.reason %></td>
-        <td><%= scholar_hour.status %></td>
-        <td><%= scholar_hour.comments %></td>
-      </tr>
+    <% if flash[:goal_completed] %>
+      <div class="flash"><%= flash[:goal_completed] %></div>
     <% end %>
-    </table>
+    <%= render '/shared/student_incomplete_goals', :incompleted_goals => @incompleted_goals %>
+    <% if @completed_goals.length > 0 %>
+      <%= link_to "See Completed Goals", students_goals_path %>
+    <% end %>
+  	<%= form_for Goal.new, url: students_goals_path do |f| %>
+    	<% if flash[:goal_errors] %>
+      	<% flash[:goal_errors].each do |error| %>
+  				<%= error %>
+  			<% end %>
+  		<% end %>
+    	<%= f.text_field :goal %>
+    	<%= f.submit "Add Goal" %>
+    <% end %>
   </div>
-  <% else %>
-  <p>You do not owe any scholar hours.</p>
-<% end %>
-<% if @completed_scholar_hours.length > 0 %>
-  <%= link_to "View completed scholar hours", students_completed_scholar_hours_path %>
-  <div class='inactive-completed'>
-  </div>
-<% end %>
-<br>
-<h2>Schedule</h2>
-<div>
-  <%= render '/shared/schedule_grades' %>
-</div>
+  <br>
+  <%= render 'shared/announcements' %>
+  <br>
 
+  <h2>Scholar Hours</h2>
+  <% if @incomplete_scholar_hours.length > 0 %>
+    <div>
+      <table>
+        <thead>
+          <th>Date Assigned</th>
+          <th>Reason</th>
+          <th>Status</th>
+          <th>Comments</th>
+        </thead>
+        
+      <% @incomplete_scholar_hours.each do |scholar_hour| %>
+        <tr>
+          <td><%= scholar_hour.date_assigned.strftime("%a, %m/%d")  %></td>
+          <td><%= scholar_hour.reason %></td>
+          <td><%= scholar_hour.status %></td>
+          <td><%= scholar_hour.comments %></td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+  <% else %>
+    <p>You do not owe any scholar hours.</p>
+  <% end %>
+  <% if @completed_scholar_hours.length > 0 %>
+    <%= link_to "View completed scholar hours", students_completed_scholar_hours_path %>
+  <% end %>
+  <br>
+  <%= render '/shared/schedule_grades' %>
 <%end%>

@@ -65,7 +65,7 @@ module ReportGenerator
     course_actions = []
     courses.each do |course|
     missing_work_array = []
-      grade = student.grade_in(course)
+      grade = student.grade_in(course, session[:term_id])
       letter_grade = Course.letter_grade(grade)
       actions = course.enrollments.where(student_id:student.id).first.student_actions.week_report.group_by {|action| action.student_action_type.name}
       course.enrollments.where(student_id:student.id).first.student_actions.week_report.each do |action|

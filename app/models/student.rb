@@ -91,8 +91,8 @@ class Student < ActiveRecord::Base
     end
   end
 
-  def grade_in(course)
-    grade = GradeCalculator.new(student: self, course: course).grade
+  def grade_in(course, term_id)
+    grade = GradeCalculator.new(student: self, course: course, term_id: term_id).grade
     (0...100).include?(grade) ? grade.round(1) : grade
   end
 
