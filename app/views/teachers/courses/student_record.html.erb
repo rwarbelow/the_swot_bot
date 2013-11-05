@@ -1,7 +1,9 @@
 <%= link_to('Back', :back) %>
 
-<h1><%= @student.first_name %> <%= @student.last_name %>'s Grades for <%= @course.subject.name %> <%= @percent = @student.grade_in(@course) %>%</h1>
+<%= render '/shared/student_course_header', :student => @student, :course => @course %>
+
 <%= link_to "See Student Info", teachers_student_profile_path(@student) %>
 
 <%= render '/shared/student_assignment_submissions', :assignments => @assignments %>
 
+<%= render '/shared/student_actions', :student_actions => @student.student_actions, :student => @student, :path => teachers_course_history_actions_path(@course) %>

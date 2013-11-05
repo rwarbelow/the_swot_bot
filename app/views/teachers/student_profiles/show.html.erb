@@ -1,8 +1,12 @@
 <%= link_to('Back', :back) %>
-<h2 class="chalk"><%= @student.first_name %> <%= @student.last_name %><div class="bank-balance-teacher-view">
-  <div style="font-size: 19px;text-decoration:underline;">Bank Balance</div>
-  <%= number_to_currency(@student.bank_balance, strip_insignificant_zeros: true) %>
-</div></h2>
+<h2 class="chalk"><%= @student.first_name %> <%= @student.last_name %>
+  <div class="bank-balance-teacher-view">
+    <div style="font-size: 19px;text-decoration:underline;">
+      Bank Balance
+    </div>
+    <%= number_to_currency(@student.bank_balance, strip_insignificant_zeros: true) %>
+  </div>
+</h2>
 
 <%= link_to "Student Report", teachers_student_report_path(:ccsd_id => @student.ccsd_id) %>
 <ul>
@@ -39,39 +43,14 @@
     <% end %>
   </table>
 </ul><br>
-
-<h3>Course Schedule</h3>
-<div>
-  <%= render '/shared/schedule_grades' %>
-</div>
+<%= render '/shared/schedule_grades' %>
 <br>
-<%= form_tag teachers_student_profile_path, method: :get do %>
-    <%= text_field_tag :number, nil, :placeholder => "# of previous days" %>
-    <%= submit_tag "Show", class: 'button' %>
-  <% end %>
-<%= render '/shared/student_actions', :student_actions => @student_actions, days_path: method(:teachers_student_profile_path) %>
+<%= render '/shared/student_actions', :student_actions => @student_actions, path: teachers_student_profile_path %>
 <br>
+<%= render '/shared/student_incomplete_goals', :incompleted_goals => @incompleted_goals, :student => @student %>
+<br>
+<%= render '/shared/student_completed_goals', :completed_goals => @completed_goals, :student => @student %>
 
-<h3><%= @student.first_name %>'s Goals</h3>
-<% if @student.goals.length > 0 %>
-  <table>
-  <thead>
-    <th>Created</th>
-    <th>Goal</th>
-    <th>Completed?</th>
-  </thead>
-    <% @student.goals.sort! { |a, b| b.status <=> a.status }.each do |goal| %>
-      <tr>
-        <td><%= goal.created_at.strftime("%a, %m/%d") %></td>
-        <td><%= goal.goal %></td>
-        <td><%= goal.status == "Complete" ? "Yes" : "No" %></td>
-      </tr>
-      <% end %>
-    <% else %>
-    <p>No goals</p>
-    <% end %>
-  </table>
-  <br>
 
 
 

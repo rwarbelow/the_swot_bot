@@ -12,6 +12,7 @@ class Students::GoalsController < Students::BaseController
   end
 
   def index
+    @student = current_student
     @completed_goals = Goal.all.select{ |goal| goal.student_id == current_student.id && goal.status == "Complete"}
   end
 
