@@ -12,7 +12,7 @@
 					<% if current_student? %>
 					<td><%= button_to "Complete", students_goal_complete_path(goal), :class => "btn" %></td>
 					<td><%= button_to "Edit", edit_students_goal_path(goal), :method => 'get', :class => "btn" %></td>
-					<td><%= button_to "Delete", students_goal_path(goal), :method => "delete", :class => "btn" %></td>
+					<td><%= button_to "Delete", students_goal_path(goal), :method => "delete", :class => "btn", :confirm=>'Are you sure?' %></td>
 					<% end %>
 				</tr>
 			<% end %>

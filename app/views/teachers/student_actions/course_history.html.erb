@@ -24,7 +24,7 @@
        <tr>
        <% @value = action.student_action_type.value.to_i %>
         <%if @course.teacher_id == current_teacher.id%>
-           <td><%= link_to "Delete", teachers_student_action_path(action), :method => "delete" %></td>
+           <td><%= link_to "Delete", teachers_student_action_path(action), :method => "delete", :confirm=>'Are you sure?' %></td>
            <td><%= link_to "Edit", edit_teachers_student_action_path(action) %></td>
          <%end%>
          <%= content_tag(:td, action.date.strftime("%a, %m/%d"), :class => (@value > 0 ? 'positive' : 'negative')) %>
