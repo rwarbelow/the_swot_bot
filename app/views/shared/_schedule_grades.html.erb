@@ -15,13 +15,13 @@
     <tr>
       <td><%= course.period %></td>
       <% if current_student? %>
-        <td><%= link_to course.subject.name, students_course_path(course)%></td>
+        <td><%= link_to course.subject.name, students_course_path(course.id)%></td>
       <% elsif current_teacher? %>
         <td><%= link_to course.subject.name, teachers_student_profile_course_overview_path(@student.id, course.id)%></td>
       <% elsif current_guardian? %>
-        <td><%= link_to course.subject.name, guardians_student_course_path(course) %></td>
+        <td><%= link_to course.subject.name, guardians_student_course_path(@student.id, course.id) %></td>
       <% end %>  
-      <td><%= @percent = @student.grade_in(course)%>%</td>
+      <td><%= @percent = @student.grade_in(course, session[:term_id])%>%</td>
       <td><%= @grade = (Course.letter_grade(@percent)) %></td>
       <% if (current_student? or current_guardian?) %>
         <td> <% if (@grade == 'A' or @grade == 'B') %>
