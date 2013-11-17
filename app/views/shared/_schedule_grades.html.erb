@@ -35,9 +35,7 @@
           <% end %>
         </td>
       <% end %>
-      <td><%= mail_to "#{course.teacher.first_name} #{course.teacher.last_name}" do %>
-        <%= course.teacher.email %>
-      <% end %></td>  
+      <td><%= mail_to course.teacher.email, "#{course.teacher.first_name} #{course.teacher.last_name}" %></td>  
       <% cellnumbers = course.teacher.phone_numbers.select {|number| number.kind == "cell"} %>
       <% if cellnumbers.length > 0 %>
       <td><%= cellnumbers.first.number %></td>
