@@ -1,34 +1,6 @@
 <h1><%= @student.first_name %> <%= @student.last_name %> (<%= @student.ccsd_id %>)</h1>
 <%= link_to "SWOT Report (Use CCSD ID for password)", guardians_student_report_path(:ccsd_id => @student.ccsd_id) %>
-<div id="accordion">
-  <h3>Class Schedule</h3>
-<div class="schedule-grades">
-
-  <table>
-    <thead>
-      <th>Period</th>
-      <th>Subject</th>
-      <th>Current Percent</th>
-      <th>Current Grade</th>
-      <th>Teacher</th>
-       <th>Email</th>
-      <th>Cell #</th>
-    </thead>
-    <% @student.courses.includes(:subject, :teacher => [:identity, :phone_numbers]).order("period ASC").each do |course| %>
-    <tr>
-      <td><%= course.period %></td>
-      <td><%= link_to course.subject.name, guardians_student_course_path(@student, course)%></td>
-      <td><%= @percent = @student.grade_in(course)%>%</td>
-      <td><%= Course.letter_grade(@percent) %></td>
-      <td><%= course.teacher.first_name %> <%= course.teacher.last_name %></td>
-      <td><%= mail_to "#{course.teacher.email}" do %>
-      <%= course.teacher.email %>
-      <% end %></td>
-      <% cellnumbers = course.teacher.phone_numbers.select {|number| number.kind == "cell"} %>
-      <% if cellnumbers.length > 0 %>
-      <td><%= cellnumbers.first.number %></td>
-      <% end %>
-    </tr>
-    <% end %>
-  </table>
+<h2>Schedule</h2>
+<div>
+  <%= render '/shared/schedule_grades' %>
 </div>
