@@ -24,7 +24,7 @@
 					<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
 					<td><%= (scholarhour.comments.nil? or scholarhour.comments == "") ? "(none)" : scholarhour.comments %></td>
 					<td><%= button_to "Complete", teachers_complete_scholar_hour_path(scholarhour), method: "put" %></td>
-					<td><%= button_to "Delete", teachers_scholar_hour_path(scholarhour), method: "delete" %></td> 
+					<td><%= button_to "Delete", teachers_scholar_hour_path(scholarhour), method: "delete", :confirm=>'Are you sure?' %></td> 
 					<td><%= button_to "Edit", edit_teachers_scholar_hour_path(scholarhour), method: "get", action: "edit" %></td>
 				</tr>
 			<% end %>
@@ -49,7 +49,7 @@
 					<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
 					<td><%= (scholarhour.comments.nil? or scholarhour.comments == "") ? "(none)" : scholarhour.comments %></td>
 					<td><%= button_to "Complete", teachers_complete_scholar_hour_path(scholarhour), method: "put" %></td>
-					<td><%= button_to "Delete", teachers_scholar_hour_path(scholarhour), method: "delete" %></td> 
+					<td><%= button_to "Delete", teachers_scholar_hour_path(scholarhour), method: "delete", :confirm=>'Are you sure?' %></td> 
 					<td><%= button_to "Edit", edit_teachers_scholar_hour_path(scholarhour), method: "get", action: "edit" %></td>
 				</tr>
 			<% end %>

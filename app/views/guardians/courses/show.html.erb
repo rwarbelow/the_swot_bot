@@ -1,15 +1,8 @@
 <%= link_to "Back", :back %>
 <div class="guardian-student-action-container">
-  <h1><%= @course.subject.name %>, Period <%= @course.period %> <%= @percent = @student.grade_in(@course)%>% <%= Course.letter_grade(@percent) %></h1>
+  <%= render '/shared/student_course_header', :student => @student, :course => @course %>
   <h3>Teacher: <%= @course.teacher.last_name %></h3>
-<div class="assignments">
-  <h3>Assignments</h3>
-  <% if @assignments.length > 0 %>
-    <%= render '/shared/student_assignment_submissions', :assignments => @assignments %>
-  <% else %>
-    <p>No assignments.</p>
-  <% end %>
-</div>
+<%= render '/shared/student_assignment_submissions', :assignments => @assignments %>
 
 <%= render '/shared/student_actions', :student_actions => @student_actions %>
   

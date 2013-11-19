@@ -1,9 +1,6 @@
 <%= link_to "Back", :back %>
 
-<h1><%=@course.subject.name%></h1>
-<% if current_student.grade_in(@course) >= 0 %>
-  <h1>Current Overall Grade: <%= @percent = current_student.grade_in(@course)%>% <%= Course.letter_grade(@percent) %></h1>
-<% end %>
+<%= render '/shared/student_course_header', :student => current_student, :course => @course %>
 
 <%= render '/shared/student_assignment_submissions', :assignments => @assignments %>
 

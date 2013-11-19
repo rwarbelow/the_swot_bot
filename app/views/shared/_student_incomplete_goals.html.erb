@@ -1,0 +1,22 @@
+<h3>In-Progress Goals</h3>
+<% if @incompleted_goals.length > 0 %>
+	<table>
+		<thead>
+			<th>Created On</th>
+			<th>Goal</th>
+		</thead>
+			<% @incompleted_goals.each do |goal| %>
+				<tr>
+					<td><%= goal.created_at.strftime("%b %d") %></td>
+					<td><%= goal.goal %></td>
+					<% if current_student? %>
+					<td><%= button_to "Complete", students_goal_complete_path(goal), :class => "btn" %></td>
+					<td><%= button_to "Edit", edit_students_goal_path(goal), :method => 'get', :class => "btn" %></td>
+					<td><%= button_to "Delete", students_goal_path(goal), :method => "delete", :class => "btn", :confirm=>'Are you sure?' %></td>
+					<% end %>
+				</tr>
+			<% end %>
+		</table>
+	<% else %>
+		<p>No Current Goals</p>
+	<% end %>

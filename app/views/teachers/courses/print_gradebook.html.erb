@@ -3,6 +3,7 @@
 </head>
 
 <h1>Period <%= @course.period %> <%= @course.subject.name %> (<%= @course.teacher.last_name %>)</h1>
+<h3>Term: <%= @term.name %></h3>
 
 <% if @assignments.length > 0 and @course.students.length > 0 %>
 	<table class="gradebook">
@@ -22,7 +23,7 @@
 		    <th><%= student.first_name %> <%= student.last_name %></th>
 		    <% for assignment in @assignments %>
 		      <% @submission = Submission.find_by_student_id_and_assignment_id(student.id, assignment.id) %>
-		      <td class="cell"><%= @submission.nil? ? "N/A" : "#{@submission.points_earned} (#{(@submission.points_earned / assignment.maximum_points * 100).round(1)}%)" %></td>
+		      <td class="cell"><%= @submission.nil? ? "N/A" : "#{@submission.points_earned} (#{((@submission.points_earned / assignment.maximum_points)*100).round(0)}%)" %></td>
 		    <% end %>
 		  </tr>
 		<% end %>

@@ -1,0 +1,3 @@
+<h1><%= @student.first_name %> <%= @student.last_name %> <%= (@percent = @student.grade_in(@course,session[:term_id])) %>% <%= Course.letter_grade(@percent) %></h1>
+<h4><%=@course.subject.name%> period <%= @course.period %>, <%= Term.find(session[:term_id]).name %></h4>
+

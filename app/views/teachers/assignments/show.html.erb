@@ -32,7 +32,7 @@
     <% @assignment.course.students.sort!{ |a, b| a.last_name <=> b.last_name }.each do |student| %>
     <tr>
       <td><%= "#{student.first_name} #{student.last_name}, #{student.ccsd_id}" %></td>
-      <td><%= text_field_tag "scores[]", (student.submissions.current.where(:assignment_id => @assignment.id).first.points_earned if student.submissions.current.where(:assignment_id => @assignment.id).length > 0) %></td>
+      <td><%= text_field_tag "scores[]", (student.submissions.by_term(session[:term_id]).where(:assignment_id => @assignment.id).first.points_earned if student.submissions.by_term(session[:term_id]).where(:assignment_id => @assignment.id).length > 0) %></td>
       <%= hidden_field_tag "students[]", student.id %> 
       </tr>
       <br>  

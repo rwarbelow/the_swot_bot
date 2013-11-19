@@ -111,6 +111,7 @@ resources :sms, as: :sms, only: [] do
   post "broadcast", on: :collection
 end
 
+get '/change_term', to: 'terms#change_term', :as => "change_term"
 get '/live_class', to: 'live#classroom'
 post '/live_class', to: 'teachers/live#create_action'
 get '/error', to: 'home#909error', as: :error

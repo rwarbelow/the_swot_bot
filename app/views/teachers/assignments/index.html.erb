@@ -22,8 +22,10 @@
     <%= f.label :due_date, "Due Date" %><br>
     <%= f.text_field :due_date, placeholder: "YYYY-MM-DD" %><br>
 
-    <% category_array = @course.assignment_categories.map { |category| ["#{category.name}", category.id] } %>
-        <%= f.select(:assignment_category_id, category_array, {:include_blank => 'Select gradebook category'}) %><br />
+    <%= f.select(:assignment_category_id, @category_array, {:include_blank => 'Select gradebook category'}) %><br /> <br>
+    
+    <%= f.label :due_date, "Term" %>
+    <%= f.select(:term_id, @term_array, {:selected => session[:term_id]}) %><br />
 
     <%= f.submit %>
   <% end %>

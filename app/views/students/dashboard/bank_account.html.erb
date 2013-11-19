@@ -1,6 +1,2 @@
 <h1>Bank Account History: Past <%= @number %> day(s)</h1>
-<%= form_tag students_bank_account_path, method: :get do %>
-  <%= text_field_tag :number, nil, :placeholder => "# of previous days" %>
-  <%= submit_tag "Show", class: 'button' %>
-<% end %>
-<%= render '/shared/student_actions', :student_actions => @student_actions %>
+<%= render '/shared/student_actions', :student_actions => @student_actions, :student => current_student, :path => students_bank_account_path %>

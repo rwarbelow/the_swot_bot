@@ -1,4 +1,8 @@
 <h3>Recent Actions</h3>
+<%= form_tag @path, method: :get do %>
+  <%= text_field_tag :number, nil, :placeholder => "# of previous days" %>
+  <%= submit_tag "Show", class: 'button' %>
+<% end %>
 <div class="recent-actions">
   <% if @student_actions.length > 0 %>
 		<table>
@@ -25,7 +29,7 @@
 				        <td></td>
 				      <% end %>
 				      <% if current_teacher.id == action.enrollment.course.teacher_id %>
-				        <td><%= link_to "Delete", teachers_student_action_path(action), :method => "delete" %></td>
+				        <td><%= link_to "Delete", teachers_student_action_path(action), :method => "delete", :confirm=>'Are you sure?' %></td>
 				      <% else %>
 				        <td></td>
 				      <% end %>

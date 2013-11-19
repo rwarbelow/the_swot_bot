@@ -40,6 +40,7 @@ class Teachers::StudentActionsController < Teachers::BaseController
   def course_history
     @course = Course.find(params[:id])
     @number = params[:number].nil? ? 2 : params[:number].to_i
+    @student_actions = @course.student_actions.where('date > ?', (Date.today - @number)).sort! { |a,b| b.date <=> a.date }
   end
 
   def destroy

@@ -1,6 +1,14 @@
-<h1><%= @student.first_name %> <%= @student.last_name %> (<%= @student.ccsd_id %>)</h1>
 <%= link_to "SWOT Report (Use CCSD ID for password)", guardians_student_report_path(:ccsd_id => @student.ccsd_id) %>
-<h2>Schedule</h2>
-<div>
-  <%= render '/shared/schedule_grades' %>
-</div>
+<h1><%= @student.first_name %> <%= @student.last_name %>  (<%= @student.ccsd_id %>)
+  <div class="bank-balance-teacher-view">
+    <div style="font-size: 19px;text-decoration:underline;">
+      Bank Balance
+    </div>
+    <%= number_to_currency(@student.bank_balance, strip_insignificant_zeros: true) %>
+  </div>
+</h1>
+<%= render '/shared/schedule_grades', :student => @student %>
+<br>
+<br>
+
+<%= render '/shared/student_actions', :student_actions => @student.student_actions, :student => @student, :path => guardians_student_path(@student.id) %>

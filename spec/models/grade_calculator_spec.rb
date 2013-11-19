@@ -5,6 +5,7 @@ describe GradeCalculator do
     @course = FactoryGirl.create :course
     @student = FactoryGirl.create :student, courses: [@course]
     @assignments = FactoryGirl.create_list(:assignment, 5, course: @course)
+    @term = 2
     @assignments.each {|assignment| assignment.submissions.create student_id: @student.id}
   end
 

@@ -3,6 +3,8 @@ class Teachers::StudentProfilesController < Teachers::BaseController
     @student = Student.find(params[:id])
     @number = params[:number].nil? ? 3 : params[:number].to_i
     @student_actions = @student.student_actions.where('date >= ?', Date.today - @number)
+    @incompleted_goals = Goal.all.select{ |goal| goal.student_id == @student.id && goal.status == "In Progress"}
+    @completed_goals = Goal.all.select{ |goal| goal.student_id == @student.id && goal.status == "Complete"}
   end
 
   def edit
@@ -68,7 +70,7 @@ class Teachers::StudentProfilesController < Teachers::BaseController
   def course_overview
     @student = Student.find(params[:student_profile_id])
     @course = Course.find(params[:course_id])
-    @assignments = @course.assignments.current.sort! { |a,b| a.due_date <=> b.due_date }
+    @assignments = @course.assignments.by_term(session[:term_id]).sort! { |a,b| a.due_date <=> b.due_date }
     enrollment = Enrollment.where(:student_id => @student.id, :course_id => params[:course_id]).first
     @number = params[:number].nil? ? 1 : params[:number].to_i
     @student_actions = @student.student_actions.where('date > ?', (Date.today - @number))

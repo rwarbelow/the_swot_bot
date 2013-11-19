@@ -36,3 +36,6 @@ color: lightgray;
 background: #fff;
 }
 
+select {
+  width: 160px;
+}

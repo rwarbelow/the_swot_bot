@@ -15,29 +15,27 @@
     <tr>
       <td><%= course.period %></td>
       <% if current_student? %>
-        <td><%= link_to course.subject.name, students_course_path(course)%></td>
+        <td><%= link_to course.subject.name, students_course_path(course.id)%></td>
       <% elsif current_teacher? %>
         <td><%= link_to course.subject.name, teachers_student_profile_course_overview_path(@student.id, course.id)%></td>
       <% elsif current_guardian? %>
-        <td><%= link_to course.subject.name, guardians_student_course_path(course) %></td>
+        <td><%= link_to course.subject.name, guardians_student_course_path(@student.id, course.id) %></td>
       <% end %>  
-      <td><%= @percent = @student.grade_in(course)%>%</td>
+      <td><%= @percent = @student.grade_in(course, session[:term_id])%>%</td>
       <td><%= @grade = (Course.letter_grade(@percent)) %></td>
       <% if (current_student? or current_guardian?) %>
         <td> <% if (@grade == 'A' or @grade == 'B') %>
           <%= link_to(image_tag('http://www.summerbounce.ca/wp-content/uploads/2012/11/facebook-logo-small.png'), 
             "https://www.facebook.com/dialog/feed?
-            app_id=185923904932368
-            &picture=https://swotbot.theswotteam.org/assets/Robot-f58ff52ce2cacc23456944e4a9b8b8f1.png
+            app_id=#{ENV['FACEBOOK_APP_ID']}
+            &picture=https://swotbot-staging.herokuapp.com/assets/robot_says.png
             &link=https://swotbot.theswotteam.org
             &display=popup&name=#{@student.first_name}%20has%20#{@percent}%%20(#{@grade})%20in%20#{course.subject.name}! 
             &redirect_uri=https://swotbot.theswotteam.org")%>
           <% end %>
         </td>
       <% end %>
-      <td><%= mail_to "#{course.teacher.first_name} #{course.teacher.last_name}" do %>
-        <%= course.teacher.email %>
-      <% end %></td>  
+      <td><%= mail_to course.teacher.email, "#{course.teacher.first_name} #{course.teacher.last_name}" %></td>  
       <% cellnumbers = course.teacher.phone_numbers.select {|number| number.kind == "cell"} %>
       <% if cellnumbers.length > 0 %>
       <td><%= cellnumbers.first.number %></td>
