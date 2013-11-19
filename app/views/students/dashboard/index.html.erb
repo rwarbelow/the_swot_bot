@@ -26,6 +26,8 @@
   <br>
   <%= render 'shared/announcements' %>
   <br>
+  <%= render '/shared/schedule_grades' %>
+  <br>
   <h2>Scholar Hours</h2>
   <% if @incomplete_scholar_hours.length > 0 %>
     <div>
@@ -54,5 +56,4 @@
     <%= link_to "View completed scholar hours", students_completed_scholar_hours_path %>
   <% end %>
   <br>
-  <%= render '/shared/schedule_grades' %>
 <%end%>
