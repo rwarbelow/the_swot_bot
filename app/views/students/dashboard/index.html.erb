@@ -4,7 +4,16 @@
   </div>
   <br>
   <h1>Welcome, <%= current_user.first_name %>!</h1>
-  <%= link_to "View your SWOT Report (use your CCSD ID for password)", students_swot_report_path(:ccsd_id => @student.ccsd_id) %> <br> <br>
+  <% if @bonuses >= 5 %>
+  <%= link_to(image_tag("facebook_bonuses_share.png"), 
+            "https://www.facebook.com/dialog/feed?
+            app_id=#{ENV['FACEBOOK_APP_ID']}
+            &picture=https://swotbot-staging.herokuapp.com/assets/robot_says.png
+            &link=https://swotbot.theswotteam.org
+            &display=popup&name=#{@student.first_name}%20earned%20#{@bonuses}%20bonuses%20today! 
+            &redirect_uri=https://swotbot.theswotteam.org")%>
+  <% end %><br> <br>
+  <%= link_to image_tag("view_swot_report.png"), students_swot_report_path(:ccsd_id => @student.ccsd_id) %> <br> <br>
   <div>
     <% if flash[:goal_completed] %>
       <div class="flash"><%= flash[:goal_completed] %></div>
