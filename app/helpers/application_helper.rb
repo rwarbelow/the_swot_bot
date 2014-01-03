@@ -39,16 +39,18 @@ module ApplicationHelper
     # if Time.now.wday != 5
       # Date.commercial(Date.today.year, Date.today.cweek-1, 1)
     # else
-    Date.commercial(Date.today.year, Date.today.cweek, 1)
+    # Date.commercial(Date.today.year, Date.today.cweek, 1)
     # end
+    DateTime.new(2013,12,16)
   end
 
   def end_date
     # if Time.now.wday != 5
       # Date.commercial(Date.today.year, Date.today.cweek-1, 5)
     # else
-    Date.commercial(Date.today.year, Date.today.cweek, 5)
+    # Date.commercial(Date.today.year, Date.today.cweek, 5)
     # end
+    DateTime.new(2013,12,20)
   end
 
   def sortable(column, title = nil)

@@ -10,13 +10,13 @@ class StudentAction < ActiveRecord::Base
   before_save :set_default_date
   after_create :update_bank_balance
 
-  def self.week_report(from=Date.current)
-  	if from.wednesday? || from.friday? || from.saturday? || from.sunday?
-      current_week_report()
-    else
-    	last_week_report()
-    end
-  end
+  # def self.week_report(from=Date.current)
+  # 	if from.wednesday? || from.friday? || from.saturday? || from.sunday?
+  #     current_week_report()
+  #   else
+  #   	last_week_report()
+  #   end
+  # end
 
   def update_bank_balance
     student = self.enrollment.student
@@ -24,9 +24,13 @@ class StudentAction < ActiveRecord::Base
     student.save
   end
 
-	def self.current_week_report(start_week = Date.commercial(Date.today.year, Date.today.cweek, 1), end_week = Date.commercial(Date.today.year, Date.today.cweek, 6))
-		where("student_actions.created_at between ? and ?", start_week, end_week)
-	end
+	# def self.current_week_report(start_week = Date.commercial(Date.today.year, Date.today.cweek, 1), end_week = Date.commercial(Date.today.year, Date.today.cweek, 6))
+	# 	where("student_actions.created_at between ? and ?", start_week, end_week)
+	# end
+
+  def self.week_report(start_week = DateTime.new(2013,12,16), end_week = DateTime.new(2013,12,20))
+    where("student_actions.created_at between ? and ?", start_week, end_week)
+  end
 
   # rename -> previous_week
   def self.last_week_report(start_week = Date.commercial(Date.today.year, Date.today.cweek-1, 1), end_week = Date.commercial(Date.today.year, Date.today.cweek-1, 6))
