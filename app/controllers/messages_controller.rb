@@ -25,8 +25,8 @@ class MessagesController < ApplicationController
 
   def index
     @message = Message.new
-    @received_messages = Message.where(:target_id => current_user.id).where("created_at > ?", (Date.today - 31))
-    @sent_messages = Message.where(:author_id => current_user.id).where("created_at > ?", (Date.today - 31))
+    @received_messages = Message.where(:target_id => current_user.id).where("created_at > ?", (Date.today - 31)).sort! { |a,b| a.created_at <=> b.created_at }
+    @sent_messages = Message.where(:author_id => current_user.id).where("created_at > ?", (Date.today - 31)).sort! { |a,b| a.created_at <=> b.created_at }
   end
 
   def destroy
