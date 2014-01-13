@@ -35,19 +35,19 @@ module ApplicationHelper
     !!current_guardian
   end
 
-  def start_date
-    if Time.now.wday != 5
-      Date.commercial(Date.today.year, Date.today.cweek-1, 1)
-    else
+  def start_date from=Date.current
+    if from.friday? || from.saturday? || from.sunday?
       Date.commercial(Date.today.year, Date.today.cweek, 1)
+    else
+      Date.commercial(Date.today.year, Date.today.cweek-1, 1)
     end
   end
 
-  def end_date
-    if Time.now.wday != 5
-      Date.commercial(Date.today.year, Date.today.cweek-1, 5)
-    else
+  def end_date from=Date.current
+    if from.friday? || from.saturday? || from.sunday?
       Date.commercial(Date.today.year, Date.today.cweek, 5)
+    else
+      Date.commercial(Date.today.year, Date.today.cweek-1, 5)
     end
   end
 

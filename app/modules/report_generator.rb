@@ -53,7 +53,7 @@ module ReportGenerator
       end
     end
     if password == true
-      send_data report.generate(filename: 'swot_report.pdf',security: @security_settings)
+      send_data report.generate(filename: 'swot_report.pdf', security: @security_settings)
     else
       send_data report.generate(filename: 'swot_report.pdf')
     end
@@ -64,7 +64,7 @@ module ReportGenerator
     courses = student.courses
     course_actions = []
     courses.each do |course|
-    missing_work_array = []
+      missing_work_array = []
       grade = student.grade_in(course, session[:term_id])
       letter_grade = Course.letter_grade(grade)
       actions = course.enrollments.where(student_id:student.id).first.student_actions.week_report.group_by {|action| action.student_action_type.name}
