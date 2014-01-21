@@ -13,8 +13,7 @@
 		<tr>
 			<td><%= link_to "#{scholarhour.student.first_name} #{scholarhour.student.last_name}", teachers_student_profile_path(scholarhour.student_id) %></td>
 			<td><%= scholarhour.reason %></td>
-			<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") if scholarhour.date_served %></td>
-			<td><%= scholarhour.date_served.strftime("%a, %m/%d") if scholarhour.date_served %></td>
+			
 			<td><%= (scholarhour.comments.nil? or scholarhour.comments == "") ? "(none)" : scholarhour.comments %></td>
 			<td><%= button_to "Edit", edit_teachers_scholar_hour_path(scholarhour), method: "get", action: "edit" %></td>
 		</tr>
