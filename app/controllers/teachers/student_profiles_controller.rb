@@ -5,8 +5,9 @@ class Teachers::StudentProfilesController < Teachers::BaseController
     @student_actions = @student.student_actions.where('date >= ?', Date.today - @number)
     @incompleted_goals = Goal.all.select{ |goal| goal.student_id == @student.id && goal.status == "In Progress"}
     @completed_goals = Goal.all.select{ |goal| goal.student_id == @student.id && goal.status == "Complete"}
+    @scholar_hours = ScholarHour.where(student_id: @student.id).where(status: "Not Complete")
   end
-
+    
   def edit
     @student = Student.find(params[:id])
     @user = @student.identity

@@ -47,10 +47,9 @@
 <br>
 <%= render '/shared/student_actions', :student_actions => @student_actions, path: teachers_student_profile_path %>
 <br>
+<%= render '/shared/student_scholar_hours', :scholar_hours => @scholar_hours, :student => @student %>
+<br>
 <%= render '/shared/student_incomplete_goals', :incompleted_goals => @incompleted_goals, :student => @student %>
 <br>
 <%= render '/shared/student_completed_goals', :completed_goals => @completed_goals, :student => @student %>
-
-
-
 

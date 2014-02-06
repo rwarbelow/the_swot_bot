@@ -1,0 +1,22 @@
+<h3>Scholar Hours</h3>
+<% if @scholar_hours.length > 0 %>
+	<div>
+      <table>
+        <thead>
+          <th>Date Assigned</th>
+          <th>Reason</th>
+          <th>Status</th>
+          <th>Comments</th>
+        </thead>
+        
+      <% @scholar_hours.each do |scholar_hour| %>
+        <tr>
+          <td><%= scholar_hour.date_assigned.strftime("%a, %m/%d")  %></td>
+          <td><%= scholar_hour.reason %></td>
+          <td><%= scholar_hour.status %></td>
+          <td><%= scholar_hour.comments %></td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+<% end %>
