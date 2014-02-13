@@ -36,7 +36,7 @@ module ApplicationHelper
   end
 
   def start_date from=Date.current
-    if from.friday? || from.saturday? || from.sunday?
+    if from.thursday? || from.friday? || from.saturday? || from.sunday?
       Date.commercial(Date.today.year, Date.today.cweek, 1)
     else
       Date.commercial(Date.today.year, Date.today.cweek-1, 1)
@@ -44,7 +44,7 @@ module ApplicationHelper
   end
 
   def end_date from=Date.current
-    if from.friday? || from.saturday? || from.sunday?
+    if from.thursday? || from.friday? || from.saturday? || from.sunday?
       Date.commercial(Date.today.year, Date.today.cweek, 5)
     else
       Date.commercial(Date.today.year, Date.today.cweek-1, 5)

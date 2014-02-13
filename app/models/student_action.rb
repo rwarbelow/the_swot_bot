@@ -11,11 +11,11 @@ class StudentAction < ActiveRecord::Base
   after_create :update_bank_balance
 
   def self.week_report(from=Date.current)
-  	if from.friday? || from.saturday? || from.sunday?
+  	if from.thursday? from.friday? || from.saturday? || from.sunday?
       current_week_report()
     else
     	last_week_report()
-    end
+   end
   end
 
   def update_bank_balance
