@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140316034736) do
+ActiveRecord::Schema.define(:version => 20140316052441) do
 
   create_table "admins", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -208,6 +208,9 @@ ActiveRecord::Schema.define(:version => 20140316034736) do
     t.string   "comments"
   end
 
+  add_index "scholar_hours", ["date_assigned"], :name => "index_scholar_hours_on_date_assigned"
+  add_index "scholar_hours", ["status", "date_assigned", "student_id"], :name => "index_scholar_hours_on_status_and_date_assigned_and_student_id"
+  add_index "scholar_hours", ["student_id", "date_assigned"], :name => "index_scholar_hours_on_student_id_and_date_assigned"
   add_index "scholar_hours", ["student_id"], :name => "index_scholar_hours_on_student_id"
 
   create_table "student_action_categories", :force => true do |t|
