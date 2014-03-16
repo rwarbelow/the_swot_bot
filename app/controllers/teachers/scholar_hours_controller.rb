@@ -62,4 +62,14 @@ class Teachers::ScholarHoursController < Teachers::BaseController
   def completed_scholar_hours
     @completed_scholar_hours = ScholarHour.where(status: "Complete").sort! {|a, b| a.student.last_name <=> b.student.last_name}
   end
+
+  def multi_complete
+    params[:scholar_hour_ids].each do |s|
+      @scholar_hour = ScholarHour.find(s)
+      @scholar_hour.status = "Complete"
+      @scholar_hour.date_served = Date.today
+      @scholar_hour.save
+    end
+    redirect_to teachers_scholar_hours_path
+  end
 end
