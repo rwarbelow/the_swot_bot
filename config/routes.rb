@@ -34,6 +34,7 @@ SwotBot::Application.routes.draw do
     resources :scholar_hours
     get 'scholar_hour/print', to: 'scholar_hours#print'
     put 'complete_scholar_hour/:id', to: 'scholar_hours#complete', as: :complete_scholar_hour
+    put 'complete_multiple_scholar_hours', to: 'scholar_hours#multi_complete', as: :complete_multiple_scholar_hours
     resources :profiles do
       post '/add_phone_number', :to => 'profiles#add_phone_number'
       delete '/delete_phone_number', :to => 'profiles#delete_phone_number'

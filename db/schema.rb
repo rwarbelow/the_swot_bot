@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131104190948) do
+ActiveRecord::Schema.define(:version => 20140316034736) do
 
   create_table "admins", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -134,17 +134,21 @@ ActiveRecord::Schema.define(:version => 20131104190948) do
   add_index "guardianships", ["student_id", "guardian_id"], :name => "index_guardianships_on_student_id_and_guardian_id"
 
   create_table "identities", :force => true do |t|
-    t.string   "username",                       :null => false
-    t.string   "password_digest",                :null => false
-    t.string   "first_name",                     :null => false
-    t.string   "last_name",                      :null => false
+    t.string   "username",                        :null => false
+    t.string   "password_digest",                 :null => false
+    t.string   "first_name",                      :null => false
+    t.string   "last_name",                       :null => false
     t.integer  "student_id"
     t.integer  "teacher_id"
     t.integer  "guardian_id"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "admin_id"
-    t.integer  "login_counter",   :default => 0
+    t.integer  "login_counter",    :default => 0
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
   end
 
   add_index "identities", ["admin_id"], :name => "index_identities_on_admin_id"
