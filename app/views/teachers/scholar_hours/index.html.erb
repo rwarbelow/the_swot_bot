@@ -8,10 +8,12 @@
 </div>
 <br><br>
 <div class="scholar-hours">
+<%= form_tag teachers_complete_multiple_scholar_hours_path, method: :put do %>
 	<% if @new_scholar_hours.length != 0 %>
 		<h1>New Scholar Hours for <%= Date.today.strftime("%D") %></h1>
 		<table>
 			<thead>
+				<th></th>
 				<th>Student Name</th>
 				<th>Reason</th>
 				<th>Date Assigned</th>
@@ -22,6 +24,7 @@
 			</thead>
 			<% @new_scholar_hours.each do |scholarhour| %>
 				<tr>
+					<td><%= check_box_tag "scholar_hour_ids[]", scholarhour.id %></td>
 					<td><%= link_to "#{scholarhour.student.first_name} #{scholarhour.student.last_name}", teachers_student_profile_path(scholarhour.student_id) %></td>
 					<td><%= scholarhour.reason %></td>
 					<td><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
@@ -36,7 +39,6 @@
 	<br>
 	<% if @old_scholar_hours.length > 0 %>
 		<h1>Old Scholar Hours </h1>
-		<%= form_tag teachers_complete_multiple_scholar_hours_path, method: :put do %>
 		<table>
 			<thead>
 				<th></th>
