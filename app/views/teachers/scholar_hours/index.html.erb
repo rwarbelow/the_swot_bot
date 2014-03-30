@@ -7,6 +7,34 @@
 	<% end %>
 </div>
 <br><br>
+
+<div class="scholar-hours">
+	<%= form_tag teachers_complete_multiple_scholar_hours_path, method: :put do %>
+		<% @students_with_scholar_hours.each do |s| %>
+		<div class="scholar-hour-box">
+		<table class="wide-table">
+			<thead>
+				<h4><%= link_to s.full_name, teachers_student_profile_path(s) %></h4>
+			</thead>
+			<% s.not_completed_scholar_hours.each do |scholarhour| %>
+				<tr>
+						<td class="check-box"><%= check_box_tag "scholar_hour_ids[]", scholarhour.id %></td>
+						<td class="sh-date"><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
+						<td class="description"><%= scholarhour.reason %></td>
+						<td class="comment"><%= (scholarhour.comments.nil? or scholarhour.comments == "") ? "(none)" : scholarhour.comments %></td>
+						<td class="action-button"><%= button_to "Complete", teachers_complete_scholar_hour_path(scholarhour), method: "put", :class => "sh-button" %></td>
+						<td class="action-button"><%= button_to "Delete", teachers_scholar_hour_path(scholarhour), method: "delete", :confirm=>'Are you sure?', :class => "sh-button"  %></td>
+						<td class="action-button"><%= button_to "Edit", edit_teachers_scholar_hour_path(scholarhour), method: "get", action: "edit", :class => "sh-button"  %></td>
+					</tr>
+				<% end %>
+				</table>
+				</div>
+				<br><br>
+		<% end %>
+	<% end %>
+</div>
+
+---------------------
 <div class="scholar-hours">
 <%= form_tag teachers_complete_multiple_scholar_hours_path, method: :put do %>
 	<% if @new_scholar_hours.length != 0 %>

@@ -91,11 +91,15 @@
         </li>
       <% end %>
 
-
       <li><%= link_to "Messages",
           messages_path,
           :class => "#{'current' if current_page?(messages_path)} button button-flat" %></li>
 
+      <% if current_student? || current_teacher? %>
+          <li><%= link_to "Core Values",
+          'http://swotcorevalues.herokuapp.com/',
+          :class => "button button-flat" %></li>
+      <% end %>
 
       <li><%= link_to "Logout",
           logout_path, :method => "delete",
