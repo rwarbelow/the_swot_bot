@@ -108,7 +108,7 @@
       </li>
       <% if current_teacher? %>
               <li><%= form_tag teachers_change_student_path, method: :get do %>
-        <%= select_tag "student_id", options_from_collection_for_select(Student.all.sort! { |a, b| a.last_name <=> b.last_name }, :id, "full_name"),{multiple:false, :prompt => "Select a Student", :class => 'chosen-select'} %>
+        <%= select_tag "student_id", options_from_collection_for_select(Student.all.sort! { |a, b| a.last_name <=> b.last_name }, :id, "full_name"),{multiple:false, :prompt => "Select a Student"} %>
             <%= submit_tag "View Student" %>
             <% end %>
         </li>

@@ -45,10 +45,10 @@ swotbot.ico: swotbot-54955f478b356e514348136f79a1d46a.ico
 swotbot/index.ico: swotbot-54955f478b356e514348136f79a1d46a.ico
 view_swot_report.png: view_swot_report-d7cbbf9f3f842249aeede5a866dd86eb.png
 view_swot_report/index.png: view_swot_report-d7cbbf9f3f842249aeede5a866dd86eb.png
-application.js: application-8666bb7cf6e9cab9df0edf797062fcc9.js
-application/index.js: application-8666bb7cf6e9cab9df0edf797062fcc9.js
-application.css: application-7f035570a03e3f9e32cf2c6fc0b63efe.css
-application/index.css: application-7f035570a03e3f9e32cf2c6fc0b63efe.css
+application.js: application-8e5edbbb6680488e1f928cf79c6d1e64.js
+application/index.js: application-8e5edbbb6680488e1f928cf79c6d1e64.js
+application.css: application-4b3505cff77f741f2e9f30d7733ed866.css
+application/index.css: application-4b3505cff77f741f2e9f30d7733ed866.css
 gradebook.css: gradebook-e6563ef0a446d7367f3193c123f55ada.css
 gradebook/index.css: gradebook-e6563ef0a446d7367f3193c123f55ada.css
 jquery-ui/animated-overlay.gif: jquery-ui/animated-overlay-602eee4c79a4796b02bb6442948c9e28.gif
@@ -203,9 +203,5 @@ glyphicons-halflings-white.png: glyphicons-halflings-white-6cccd17a7aed91dbc0157
 glyphicons-halflings-white/index.png: glyphicons-halflings-white-6cccd17a7aed91dbc0157d343c68c0d9.png
 glyphicons-halflings.png: glyphicons-halflings-2851b489e8c39f8fad44fc10efb99c3e.png
 glyphicons-halflings/index.png: glyphicons-halflings-2851b489e8c39f8fad44fc10efb99c3e.png
-chosen-sprite.png: chosen-sprite-0b638291e3ab1e89592983b5810b9b79.png
-chosen-sprite/index.png: chosen-sprite-0b638291e3ab1e89592983b5810b9b79.png
-chosen-sprite@2x.png: chosen-sprite@2x-8fa0fb1eb347c8dc10a5381b22383ac6.png
-chosen-sprite@2x/index.png: chosen-sprite@2x-8fa0fb1eb347c8dc10a5381b22383ac6.png
 jquery.min.map: jquery.min-6336c5bca4c709e809647cdfcb484d0a.map
 jquery/index.min.map: jquery.min-6336c5bca4c709e809647cdfcb484d0a.map
