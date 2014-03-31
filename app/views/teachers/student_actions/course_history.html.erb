@@ -1,4 +1,4 @@
-<%= link_to 'Back', :back %>
+
 <h2>Recent Actions for Period <%= @course.period %> <%= @course.subject.name %></h2>
   <%= form_tag teachers_course_history_actions_path(@course), method: :get do %>
     <%= text_field_tag :number, nil, :placeholder => "# of previous days" %>

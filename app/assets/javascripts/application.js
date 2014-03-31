@@ -14,7 +14,12 @@
 //= require jquery_ujs
 //= require jquery.ui.datepicker
 //= require flat-ui
+//= require chosen-jquery
+//= require turbolinks
+//= require jquery.turbolinks
+//= require scholar_hours
 //= require_tree .
+
 
 $(document).ready(function() {
   $('.datepicker').datepicker({

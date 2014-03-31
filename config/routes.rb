@@ -39,6 +39,7 @@ SwotBot::Application.routes.draw do
       post '/add_phone_number', :to => 'profiles#add_phone_number'
       delete '/delete_phone_number', :to => 'profiles#delete_phone_number'
     end
+    get '/change_student', to: "student_profiles#change_student"
     resources :student_profiles do
       get '/identities', :to => 'student_profiles#identity', as: :teacher_student_identity
       get '/course_overview/:course_id', :to => 'student_profiles#course_overview', as: :course_overview

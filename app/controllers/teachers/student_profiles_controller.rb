@@ -18,6 +18,10 @@ class Teachers::StudentProfilesController < Teachers::BaseController
     end
   end
 
+  def change_student
+    redirect_to teachers_student_profile_path(params[:student_id])
+  end
+
   def update
     @student = Student.find(params[:id])
     if @student.update_attributes(params[:student])
