@@ -1,4 +1,3 @@
-<%= link_to 'Back', :back %>
 	<h1>Action Feed</h1>
 <% current_teacher.courses.each do |course| %>
 	<h3><%= link_to "Period #{course.period}: #{course.subject.name}", teachers_course_history_actions_path(course)%></h3>

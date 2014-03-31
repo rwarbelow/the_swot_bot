@@ -2,3 +2,72 @@
 	float: left;
 	margin-right: 20px;
 }
+
+.wide-table {
+	width: 100%;
+}
+
+
+.description {
+	width: 200px;
+}
+
+.comment {
+	width: 380px;
+}
+
+.sh-date {
+	width: 80px;
+}
+
+.action-button {
+	width: 35px;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+.scholar-hour-box {
+	border: 3px solid #999999;
+	padding: 10px;
+	border-radius: 5px;
+	margin-right: 50px;
+}
+
+.check-box {
+	width: 20px;
+	padding-left: 15px;
+}
+
+.sh-button {
+	margin-top: 15px;
+	margin-bottom: 0px;
+	background-color:#2ecc71;
+	border-radius: 10px;
+	text-indent:0;
+	border:1px solid #2ecc71;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	font-style:normal;
+	height:30px;
+	line-height:25px;
+	width:131px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #2ecc71;
+}
+.sh-button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fb9e25), color-stop(1, #ffc477) );
+	background:-moz-linear-gradient( center top, #fb9e25 5%, #ffc477 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fb9e25', endColorstr='#ffc477');
+	background-color:#fb9e25;
+
+}.sh-button:active {
+	position:relative;
+	top:1px;
+}
+
+input[type='checkbox'] {
+   width: 20px;
+   height: 20px;
+}

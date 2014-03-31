@@ -91,6 +91,10 @@ class Student < ActiveRecord::Base
     end
   end
 
+  def self.all_with_incomplete_scholar_hours
+  	Student.all.select { |s| s if s.not_completed_scholar_hours.length > 0 }
+  end
+
   def grade_in(course, term_id)
     grade = GradeCalculator.new(student: self, course: course, term_id: term_id).grade
     (0...100).include?(grade) ? grade.round(1) : grade
@@ -108,6 +112,14 @@ class Student < ActiveRecord::Base
     Attendance.joins(:enrollment => :course)
       .where(enrollments: {course_id: course.id, student_id: self.id}, date: date_range)
       .each_with_object({}) {|attendance, h| h[attendance.date] = Attendance::STATUS_IDS[attendance.status_id] }
+  end
+
+  def completed_scholar_hours
+  	scholar_hours.where(status: "Complete")
+  end
+
+  def not_completed_scholar_hours
+  	scholar_hours.where(status: "Not Complete")
   end
 
   protected

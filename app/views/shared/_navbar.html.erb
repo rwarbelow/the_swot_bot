@@ -4,9 +4,10 @@
     <ul>
       <li><%= form_tag change_term_path, method: :get do %>
         <%= select :term, :term_id, Term.all.collect {|t| [t.name, t.id]}, :selected => session[:term_id] %>
-            <%= submit_tag "Change" %>
+            <%= submit_tag "Change Term" %>
             <% end %>
         </li>
+        
       <% if current_student? %>
         <%= link_to(students_bank_account_path, :style => 'text-decoration: none') do %>
           <div class="bank-balance">
@@ -91,16 +92,27 @@
         </li>
       <% end %>
 
-
       <li><%= link_to "Messages",
           messages_path,
           :class => "#{'current' if current_page?(messages_path)} button button-flat" %></li>
 
+      <% if current_student? || current_teacher? %>
+          <li><%= link_to "Core Values",
+          'http://swotcorevalues.herokuapp.com/',
+          :class => "button button-flat" %></li>
+      <% end %>
 
       <li><%= link_to "Logout",
           logout_path, :method => "delete",
           :class => "#{'current' if current_page?(logout_path)} button button-flat" %>
       </li>
+      <% if current_teacher? %>
+              <li><%= form_tag teachers_change_student_path, method: :get do %>
+        <%= select_tag "student_id", options_from_collection_for_select(Student.all.sort! { |a, b| a.last_name <=> b.last_name }, :id, "full_name"),{multiple:false, :prompt => "Select a Student", :class => 'chosen-select'} %>
+            <%= submit_tag "View Student" %>
+            <% end %>
+        </li>
+      <% end %>
 
   </ul>
 </nav>
