@@ -1,0 +1,9 @@
+<div class="individual-scholar-hour_<%= scholarhour.id %> ">
+	<td class="check-box"><%= check_box_tag "scholar_hour_ids[]", scholarhour.id %></td>
+	<td class="sh-date"><%= scholarhour.date_assigned.strftime("%a, %m/%d") %></td>
+	<td class="description"><%= scholarhour.reason %></td>
+	<td class="comment"><%= (scholarhour.comments.nil? or scholarhour.comments == "") ? "(none)" : scholarhour.comments %></td>
+	<td class="action-button"><%= button_to "Complete", teachers_complete_scholar_hour_path(scholarhour), remote: true, method: "put", :class => "sh-button" %></td>
+	<td class="action-button"><%= button_to "Delete", teachers_scholar_hour_path(scholarhour), method: "delete", :confirm=>'Are you sure?', :class => "sh-button"  %></td>
+	<td class="action-button"><%= button_to "Edit", edit_teachers_scholar_hour_path(scholarhour), method: "get", action: "edit", :class => "sh-button"  %></td>
+</div>
