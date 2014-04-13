@@ -28,9 +28,13 @@ class Teachers::ScholarHoursController < Teachers::BaseController
   end
 
   def destroy
-  	@scholarhour = ScholarHour.find(params[:id])
-  	@scholarhour.delete
-  	redirect_to teachers_scholar_hours_path
+  	@scholar_hour = ScholarHour.find(params[:id])
+  	@scholar_hour.delete
+    respond_to do |format|
+      format.html { redirect_to teachers_scholar_hours_path }
+      format.js 
+    end
+  	
   end
 
   def complete
