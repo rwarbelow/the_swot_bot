@@ -1,0 +1,5 @@
+var scholarHourBox = $(".individual-scholar-hour_<%= @scholar_hour.id %>").closest('.scholar-hour-box');
+$(".individual-scholar-hour_<%= @scholar_hour.id %>").remove();
+if(scholarHourBox.find('tr').length == 0) {
+	scholarHourBox.remove();
+};

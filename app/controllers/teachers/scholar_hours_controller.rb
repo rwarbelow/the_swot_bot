@@ -28,9 +28,13 @@ class Teachers::ScholarHoursController < Teachers::BaseController
   end
 
   def destroy
-  	@scholarhour = ScholarHour.find(params[:id])
-  	@scholarhour.delete
-  	redirect_to teachers_scholar_hours_path
+  	@scholar_hour = ScholarHour.find(params[:id])
+  	@scholar_hour.delete
+    respond_to do |format|
+      format.html { redirect_to teachers_scholar_hours_path }
+      format.js 
+    end
+  	
   end
 
   def complete
@@ -38,7 +42,10 @@ class Teachers::ScholarHoursController < Teachers::BaseController
   	@scholar_hour.date_served = Date.today
   	@scholar_hour.status = "Complete"
   	@scholar_hour.save
-  	redirect_to teachers_scholar_hours_path
+    respond_to do |format|
+      format.html { redirect_to teachers_scholar_hours_path }
+      format.js
+    end
   end
 
   def print
