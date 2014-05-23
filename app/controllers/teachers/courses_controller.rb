@@ -88,6 +88,19 @@ class Teachers::CoursesController < Teachers::BaseController
     end
   end
 
+  def csv_gradebook
+    @course = Course.find(params[:course_id])
+    @teacher = @course.teacher
+    @assignment_categories = @course.assignment_category_names
+    @students = @course.students.includes(:identity).order("identities.last_name")
+    @assignments = @course.assignments
+
+    respond_to do |format|
+      format.html
+      format.csv
+    end
+  end
+
   private
 
   def date_params
