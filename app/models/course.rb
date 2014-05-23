@@ -34,6 +34,14 @@ class Course < ActiveRecord::Base
     end
   end
 
+  def assignment_category_names
+    categories = ""
+    self.assignment_categories.each do |ac|
+      categories << ac.name + ": #{ac.weight*100}% "
+    end
+    categories
+  end
+
   private
 
   def build_assignment_categories

@@ -11,7 +11,7 @@
 		<tr>
 			<td><%= course.period %></td>
 			<td><%= link_to course.subject.name, teachers_course_path(course) %></td>
-			<td><%= link_to "Print Gradebook", teachers_course_print_gradebook_path(course) %></td>
+			<td><%= link_to "Export Gradebook", teachers_course_csv_gradebook_path(course, format: :csv) %></td>
 			<td><%= link_to "SWOT Reports", teachers_course_report_path(:course => course.id) %></td>
 		</tr>
 		<% end %>
