@@ -1,5 +1,3 @@
-# response.headers["Content-Disposition"] = "attachment; filename=#{@teacher}-#{@course.subject.name}-#{@term.name}.csv"
-
 CSV.generate do |csv|
 	csv << ["#{@teacher.last_name} #{@course.subject.name}"]
 	csv << [@assignment_categories]
