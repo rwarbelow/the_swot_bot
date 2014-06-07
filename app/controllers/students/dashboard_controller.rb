@@ -9,7 +9,7 @@ class Students::DashboardController < Students::BaseController
   end
 
   def completed_scholar_hours
-    @completed_scholar_hours = ScholarHour.where(student_id: current_student.id).where(status: "Complete")
+    @completed_scholar_hours = ScholarHour.where(student_id: current_student.id).where(status: "Complete").sort!{ |a, b| b.date_served <=> a.date_served }
   end
 
   def bank_account

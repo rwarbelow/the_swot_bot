@@ -9,7 +9,7 @@
     <th>Status</th>
     <th>Comments</th>
   </thead>
-  <% @completed_scholar_hours.sort!{ |a, b| b.date_served <=> a.date_served }.each do |scholar_hour| %>
+  <% @completed_scholar_hours.each do |scholar_hour| %>
   <tr>
     <td><%= scholar_hour.date_assigned.strftime("%a, %m/%d")  %></td>
     <td><%= scholar_hour.date_served.strftime("%a, %m/%d")  %></td>
